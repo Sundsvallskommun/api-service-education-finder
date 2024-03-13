@@ -8,12 +8,12 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>se.sundsvall</groupId>
-	<artifactId>template-spring-boot</artifactId>
+	<artifactId>api-service-education-finder</artifactId>
 	<version>1.0</version>
-	<name>template</name>
+	<name>api-service-education-finder</name>
 	<properties>
 		<!-- Pipeline properties -->
-		<docker.image.name>ms-template</docker.image.name>
+		<docker.image.name>ms-education-finder</docker.image.name>
 		<published.container.port.test>xxx</published.container.port.test>
 		<published.container.port.production>xxx</published.container.port.production>
 	</properties>
