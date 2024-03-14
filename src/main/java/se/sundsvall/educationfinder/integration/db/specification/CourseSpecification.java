@@ -18,11 +18,12 @@ import se.sundsvall.educationfinder.api.model.Course;
 	@Spec(params = "url", path = "url", spec = EqualIgnoreCase.class),
 	@Spec(params = "credits", path = "credits", spec = EqualIgnoreCase.class),
 	@Spec(params = "scope", path = "scope", spec = EqualIgnoreCase.class),
+	@Spec(params = "start", path = "start", spec = Equal.class),
 	@Spec(params = "subjectCode", path = "subjectCode", spec = EqualIgnoreCase.class),
 	@Spec(params = "numberOfSeats", path = "numberOfSeats", spec = Equal.class),
-	@Spec(params = "endDate", path = "endDate", spec = Equal.class),
-	@Spec(params = "firstApplicationDate", path = "firstApplicationDate", spec = Equal.class),
-	@Spec(params = "lastApplicationDate", path = "lastApplicationDate", spec = Equal.class)
+	@Spec(params = "end", path = "endDate", spec = Equal.class),
+	@Spec(params = "earliestApplication", path = "earliestApplication", spec = Equal.class),
+	@Spec(params = "latestApplication", path = "latestApplication", spec = Equal.class)
 })
 public interface CourseSpecification extends Specification<Course> { // TODO: <---- Add real entity here
 }

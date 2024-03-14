@@ -4,8 +4,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_PROBLEM_JSON_VALUE;
 import static org.springframework.http.ResponseEntity.ok;
 
-import java.util.List;
-
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +19,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import se.sundsvall.educationfinder.api.model.Course;
+import se.sundsvall.educationfinder.api.model.PagedCoursesResponse;
 import se.sundsvall.educationfinder.integration.db.specification.CourseSpecification;
 
 @RestController
@@ -36,7 +34,7 @@ class CoursesResource {
 	@ApiResponse(responseCode = "404", description = "Not found", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
 	@ApiResponse(responseCode = "500", description = "Internal Server error", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
 	@Operation(summary = "Search course")
-	ResponseEntity<List<Course>> search(CourseSpecification specification, @ParameterObject Pageable pageable) {
-		return ok(List.of(Course.create()));
+	ResponseEntity<PagedCoursesResponse> search(CourseSpecification specification, @ParameterObject Pageable pageable) {
+		return ok(PagedCoursesResponse.create());
 	}
 }

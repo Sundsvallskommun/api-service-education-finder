@@ -21,6 +21,10 @@
 	</properties>
 	<dependencies>
 		<dependency>
+			<groupId>se.sundsvall.dept44</groupId>
+			<artifactId>dept44-models</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>net.kaczmarzyk</groupId>
 			<artifactId>specification-arg-resolver</artifactId>
 			<version>${specification-arg-resolver.version}</version>
