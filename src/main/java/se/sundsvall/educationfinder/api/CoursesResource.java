@@ -6,6 +6,8 @@ import static org.springframework.http.ResponseEntity.ok;
 
 import java.util.List;
 
+import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +36,7 @@ class CoursesResource {
 	@ApiResponse(responseCode = "404", description = "Not found", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
 	@ApiResponse(responseCode = "500", description = "Internal Server error", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
 	@Operation(summary = "Search course")
-	ResponseEntity<List<Course>> search(CourseSpecification specification) {
+	ResponseEntity<List<Course>> search(CourseSpecification specification, @ParameterObject Pageable pageable) {
 		return ok(List.of(Course.create()));
 	}
 }

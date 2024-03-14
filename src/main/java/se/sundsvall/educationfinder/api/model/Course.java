@@ -48,19 +48,19 @@ public class Course {
 
 	@Schema(description = "The course start date", example = "2020-08-31", accessMode = READ_ONLY)
 	@DateTimeFormat(iso = ISO.DATE)
-	private LocalDate startDate;
+	private LocalDate start;
 
 	@Schema(description = "The course end date", example = "2020-12-20", accessMode = READ_ONLY)
 	@DateTimeFormat(iso = ISO.DATE)
-	private LocalDate endDate;
+	private LocalDate end;
 
-	@Schema(description = "The course first application date", example = "2020-01-01", accessMode = READ_ONLY)
+	@Schema(description = "The earliest application date", example = "2020-01-01", accessMode = READ_ONLY)
 	@DateTimeFormat(iso = ISO.DATE)
-	private LocalDate firstApplicationDate;
+	private LocalDate earliestApplication;
 
-	@Schema(description = "The course last application date", example = "2020-04-15", accessMode = READ_ONLY)
+	@Schema(description = "The latest application date", example = "2020-04-15", accessMode = READ_ONLY)
 	@DateTimeFormat(iso = ISO.DATE)
-	private LocalDate lastApplicationDate;
+	private LocalDate latestApplication;
 
 	@Schema(description = "Recommended information",
 		example = "<![CDATA[ <p><a href=https://sundsvall.se/utbildning-och-forskola/vuxenutbildning/gymnasial--niva/studieformer-och-schema target=_blank>Läs&nbsp;om våra studieformer</a></p><p><br /><a href=https://www.csn.se/ target=_blank>Läs om studiemedel på&nbsp;www.csn.se</a><br />&nbsp;<br />Ditt antagningsbesked<br />Antagningsbesked skickas via e-post cirka två veckor före kursstart.&nbsp;<a href=https://sundsvall.alvis.se/>Se ditt antagningsbesked och följ din ansökan via Mina sidor</a>.</p> ]]>",
@@ -227,80 +227,79 @@ public class Course {
 		return this;
 	}
 
-	public LocalDate getStartDate() {
-		return startDate;
+	public LocalDate getStart() {
+		return start;
 	}
 
-	public void setStartDate(LocalDate startDate) {
-		this.startDate = startDate;
+	public void setStart(LocalDate start) {
+		this.start = start;
 	}
 
-	public Course withStartDate(LocalDate startDate) {
-		this.startDate = startDate;
+	public Course withStart(LocalDate start) {
+		this.start = start;
 		return this;
 	}
 
-	public LocalDate getEndDate() {
-		return endDate;
+	public LocalDate getEnd() {
+		return end;
 	}
 
-	public void setEndDate(LocalDate endDate) {
-		this.endDate = endDate;
+	public void setEnd(LocalDate end) {
+		this.end = end;
 	}
 
-	public Course withEndDate(LocalDate endDate) {
-		this.endDate = endDate;
+	public Course withEnd(LocalDate end) {
+		this.end = end;
 		return this;
 	}
 
-	public LocalDate getFirstApplicationDate() {
-		return firstApplicationDate;
+	public LocalDate getEarliestApplication() {
+		return earliestApplication;
 	}
 
-	public void setFirstApplicationDate(LocalDate firstApplicationDate) {
-		this.firstApplicationDate = firstApplicationDate;
+	public void setEarliestApplication(LocalDate earliestApplication) {
+		this.earliestApplication = earliestApplication;
 	}
 
-	public Course withFirstApplicationDate(LocalDate firstApplicationDate) {
-		this.firstApplicationDate = firstApplicationDate;
+	public Course withEarliestApplication(LocalDate earliestApplication) {
+		this.earliestApplication = earliestApplication;
 		return this;
 	}
 
-	public LocalDate getLastApplicationDate() {
-		return lastApplicationDate;
+	public LocalDate getLatestApplication() {
+		return latestApplication;
 	}
 
-	public void setLastApplicationDate(LocalDate lastApplicationDate) {
-		this.lastApplicationDate = lastApplicationDate;
+	public void setLatestApplication(LocalDate latestApplication) {
+		this.latestApplication = latestApplication;
 	}
 
-	public Course withLastApplicationDate(LocalDate lastApplicationDate) {
-		this.lastApplicationDate = lastApplicationDate;
+	public Course withLatestApplication(LocalDate latestApplication) {
+		this.latestApplication = latestApplication;
 		return this;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(code, credits, educationProvider, endDate, firstApplicationDate, lastApplicationDate, level, name, numberOfSeats, providerUrl, recommendedInformation, scope, startDate, studyLocation, subjectCode, url);
+		return Objects.hash(code, credits, earliestApplication, educationProvider, end, latestApplication, level, name, numberOfSeats, providerUrl, recommendedInformation, scope, start, studyLocation, subjectCode, url);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) { return true; }
 		if (!(obj instanceof final Course other)) { return false; }
-		return Objects.equals(code, other.code) && Objects.equals(credits, other.credits) && Objects.equals(educationProvider, other.educationProvider) && Objects.equals(endDate, other.endDate) && Objects.equals(firstApplicationDate,
-			other.firstApplicationDate) && Objects.equals(lastApplicationDate, other.lastApplicationDate) && Objects.equals(level, other.level) && Objects.equals(name, other.name) && Objects.equals(numberOfSeats, other.numberOfSeats) && Objects.equals(
-				providerUrl, other.providerUrl) && Objects.equals(recommendedInformation, other.recommendedInformation) && Objects.equals(scope, other.scope) && Objects.equals(startDate, other.startDate) && Objects.equals(studyLocation,
-					other.studyLocation) && Objects.equals(subjectCode, other.subjectCode) && Objects.equals(url, other.url);
+		return Objects.equals(code, other.code) && Objects.equals(credits, other.credits) && Objects.equals(earliestApplication, other.earliestApplication) && Objects.equals(educationProvider, other.educationProvider) && Objects.equals(end, other.end)
+			&& Objects.equals(latestApplication, other.latestApplication) && Objects.equals(level, other.level) && Objects.equals(name, other.name) && Objects.equals(numberOfSeats, other.numberOfSeats) && Objects.equals(providerUrl, other.providerUrl)
+			&& Objects.equals(recommendedInformation, other.recommendedInformation) && Objects.equals(scope, other.scope) && Objects.equals(start, other.start) && Objects.equals(studyLocation, other.studyLocation) && Objects.equals(subjectCode,
+				other.subjectCode) && Objects.equals(url, other.url);
 	}
 
 	@Override
 	public String toString() {
 		final StringBuilder builder = new StringBuilder();
 		builder.append("Course [code=").append(code).append(", name=").append(name).append(", educationProvider=").append(educationProvider).append(", providerUrl=").append(providerUrl).append(", level=").append(level).append(", url=").append(url).append(
-			", credits=").append(credits).append(", scope=").append(scope).append(", studyLocation=").append(studyLocation).append(", subjectCode=").append(subjectCode).append(", numberOfSeats=").append(numberOfSeats).append(", recommendedInformation=")
-			.append(recommendedInformation).append(", startDate=").append(startDate).append(", endDate=").append(endDate).append(", firstApplicationDate=").append(firstApplicationDate).append(", lastApplicationDate=").append(lastApplicationDate).append(
-				"]");
+			", credits=").append(credits).append(", scope=").append(scope).append(", studyLocation=").append(studyLocation).append(", subjectCode=").append(subjectCode).append(", numberOfSeats=").append(numberOfSeats).append(", start=").append(start)
+			.append(", end=").append(end).append(", earliestApplication=").append(earliestApplication).append(", latestApplication=").append(latestApplication).append(", recommendedInformation=").append(recommendedInformation).append("]");
 		return builder.toString();
 	}
 }
