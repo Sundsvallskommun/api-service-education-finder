@@ -16,13 +16,14 @@
 		<docker.image.name>ms-education-finder</docker.image.name>
 		<published.container.port.test>xxx</published.container.port.test>
 		<published.container.port.production>xxx</published.container.port.production>
+		<!-- Service properties -->
+		<specification-arg-resolver.version>3.1.0</specification-arg-resolver.version>
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
+			<groupId>net.kaczmarzyk</groupId>
+			<artifactId>specification-arg-resolver</artifactId>
+			<version>${specification-arg-resolver.version}</version>
 		</dependency>
 		<!-- Test -->
 		<dependency>
