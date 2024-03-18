@@ -1,12 +1,12 @@
 package se.sundsvall.educationfinder.api.model;
 
 import static io.swagger.v3.oas.annotations.media.Schema.AccessMode.READ_ONLY;
+import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -47,19 +47,19 @@ public class Course {
 	private Integer numberOfSeats;
 
 	@Schema(description = "The course start date", example = "2020-08-31", accessMode = READ_ONLY)
-	@DateTimeFormat(iso = ISO.DATE)
+	@DateTimeFormat(iso = DATE)
 	private LocalDate start;
 
 	@Schema(description = "The course end date", example = "2020-12-20", accessMode = READ_ONLY)
-	@DateTimeFormat(iso = ISO.DATE)
+	@DateTimeFormat(iso = DATE)
 	private LocalDate end;
 
 	@Schema(description = "The earliest application date", example = "2020-01-01", accessMode = READ_ONLY)
-	@DateTimeFormat(iso = ISO.DATE)
+	@DateTimeFormat(iso = DATE)
 	private LocalDate earliestApplication;
 
 	@Schema(description = "The latest application date", example = "2020-04-15", accessMode = READ_ONLY)
-	@DateTimeFormat(iso = ISO.DATE)
+	@DateTimeFormat(iso = DATE)
 	private LocalDate latestApplication;
 
 	@Schema(description = "Recommended information",

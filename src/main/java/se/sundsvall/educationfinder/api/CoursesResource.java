@@ -40,8 +40,8 @@ class CoursesResource {
 	@ApiResponse(responseCode = "400", description = "Bad request", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(oneOf = { Problem.class, ConstraintViolationProblem.class })))
 	@ApiResponse(responseCode = "404", description = "Not found", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
 	@ApiResponse(responseCode = "500", description = "Internal Server error", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
-	@Operation(summary = "Search course")
-	ResponseEntity<PagedCoursesResponse> search(CourseSpecification specification, @ParameterObject Pageable pageable) {
+	@Operation(summary = "Find course")
+	ResponseEntity<PagedCoursesResponse> find(CourseSpecification specification, @ParameterObject Pageable pageable) {
 		return ok(courseService.find(specification, pageable));
 	}
 }
