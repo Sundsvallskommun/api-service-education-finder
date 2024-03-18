@@ -1,4 +1,4 @@
-package se.sundsvall.educatuionfinder.api.model;
+package se.sundsvall.educationfinder.api.model;
 
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanEquals;
@@ -14,8 +14,6 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import se.sundsvall.dept44.models.api.paging.PagingMetaData;
-import se.sundsvall.educationfinder.api.model.Course;
-import se.sundsvall.educationfinder.api.model.PagedCoursesResponse;
 
 class PagedCoursesResponseTest {
 

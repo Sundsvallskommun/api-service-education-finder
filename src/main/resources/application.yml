@@ -1,6 +1,16 @@
 #========================================
 # General settings
 #========================================
+spring:
+  application:
+    name: api-education-finder
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
 logging:
   level:
     root: INFO
@@ -8,6 +18,3 @@ openapi:
   name: ${spring.application.name}
   title: ${spring.application.name}
   version: '@project.version@'
-spring:
-  application:
-    name: api-education-finder

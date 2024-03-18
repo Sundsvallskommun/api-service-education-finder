@@ -21,12 +21,19 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import se.sundsvall.educationfinder.api.model.PagedCoursesResponse;
 import se.sundsvall.educationfinder.integration.db.specification.CourseSpecification;
+import se.sundsvall.educationfinder.service.CourseService;
 
 @RestController
 @Validated
 @RequestMapping(path = "/courses")
 @Tag(name = "EducationFinder", description = "Education finder")
 class CoursesResource {
+
+	private final CourseService courseService;
+
+	CoursesResource(CourseService courseService) {
+		this.courseService = courseService;
+	}
 
 	@GetMapping(produces = { APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE })
 	@ApiResponse(responseCode = "200", description = "Successful operation", useReturnTypeSchema = true)
@@ -35,6 +42,6 @@ class CoursesResource {
 	@ApiResponse(responseCode = "500", description = "Internal Server error", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
 	@Operation(summary = "Search course")
 	ResponseEntity<PagedCoursesResponse> search(CourseSpecification specification, @ParameterObject Pageable pageable) {
-		return ok(PagedCoursesResponse.create());
+		return ok(courseService.find(specification, pageable));
 	}
 }

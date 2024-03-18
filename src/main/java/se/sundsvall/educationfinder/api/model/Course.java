@@ -31,11 +31,11 @@ public class Course {
 	@Schema(description = "The URL to the course", example = "https://sundsvall.alvis.se/hittakurser/kurs/38837", accessMode = READ_ONLY)
 	private String url;
 
-	@Schema(description = "Course credits", example = "100", accessMode = READ_ONLY)
-	private String credits;
+	@Schema(description = "Course credits", example = "150.0", accessMode = READ_ONLY)
+	private Double credits;
 
-	@Schema(description = "Course scope in percent", example = "100", accessMode = READ_ONLY)
-	private String scope;
+	@Schema(description = "Course scope in percent", example = "100.0", accessMode = READ_ONLY)
+	private Double scope;
 
 	@Schema(description = "Study location", example = "Sundsvall", accessMode = READ_ONLY)
 	private String studyLocation;
@@ -149,28 +149,28 @@ public class Course {
 		return this;
 	}
 
-	public String getCredits() {
+	public Double getCredits() {
 		return credits;
 	}
 
-	public void setCredits(String credits) {
+	public void setCredits(Double credits) {
 		this.credits = credits;
 	}
 
-	public Course withCredits(String credits) {
+	public Course withCredits(Double credits) {
 		this.credits = credits;
 		return this;
 	}
 
-	public String getScope() {
+	public Double getScope() {
 		return scope;
 	}
 
-	public void setScope(String scope) {
+	public void setScope(Double scope) {
 		this.scope = scope;
 	}
 
-	public Course withScope(String scope) {
+	public Course withScope(Double scope) {
 		this.scope = scope;
 		return this;
 	}
