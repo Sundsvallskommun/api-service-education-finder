@@ -1,6 +1,15 @@
 #========================================
 # Test profile settings (junit tests)
 #========================================
+spring:
+  datasource:
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+    url: jdbc:tc:sqlserver:2017-CU12:///
+  sql:
+    init:
+      data-locations: classpath:db/schema.sql, classpath:db/scripts/testdata.sql
+      encoding: utf-8
+      mode: always
 logging:
   level:
-    root: DEBUG
+    root: INFO

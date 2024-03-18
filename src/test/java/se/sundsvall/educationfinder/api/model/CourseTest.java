@@ -1,4 +1,4 @@
-package se.sundsvall.educatuionfinder.api.model;
+package se.sundsvall.educationfinder.api.model;
 
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanEquals;
@@ -16,8 +16,6 @@ import java.util.Random;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import se.sundsvall.educationfinder.api.model.Course;
 
 class CourseTest {
 
@@ -40,7 +38,7 @@ class CourseTest {
 	void testBuilderMethods() {
 
 		final var code = "code";
-		final var credits = "credits";
+		final var credits = 50.0;
 		final var educationProvider = "educationProvider";
 		final var end = LocalDate.now().plusDays(1);
 		final var earliestApplication = LocalDate.now().plusDays(2);
@@ -50,7 +48,7 @@ class CourseTest {
 		final var numberOfSeats = 1;
 		final var providerUrl = "providerUrl";
 		final var recommendedInformation = "recommendedInformation";
-		final var scope = "scope";
+		final var scope = 100.0;
 		final var start = LocalDate.now().plusDays(4);
 		final var studyLocation = "studyLocation";
 		final var subjectCode = "subjectCode";

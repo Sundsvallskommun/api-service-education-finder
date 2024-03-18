@@ -1,12 +1,12 @@
 package se.sundsvall.educationfinder.api.model;
 
 import static io.swagger.v3.oas.annotations.media.Schema.AccessMode.READ_ONLY;
+import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -22,20 +22,20 @@ public class Course {
 	@Schema(description = "Education provider", example = "Sundsvalls Kommun", accessMode = READ_ONLY)
 	private String educationProvider;
 
-	@Schema(description = "The URL to the education provider", example = "http://sundsvall.se/vuxenutbildning", accessMode = READ_ONLY)
+	@Schema(description = "Education provider URL", example = "http://sundsvall.se/vuxenutbildning", accessMode = READ_ONLY)
 	private String providerUrl;
 
 	@Schema(description = "Level", example = "gymnasial vuxenutbildning", accessMode = READ_ONLY)
 	private String level;
 
-	@Schema(description = "The URL to the course", example = "https://sundsvall.alvis.se/hittakurser/kurs/38837", accessMode = READ_ONLY)
+	@Schema(description = "Course URL", example = "https://sundsvall.alvis.se/hittakurser/kurs/38837", accessMode = READ_ONLY)
 	private String url;
 
-	@Schema(description = "Course credits", example = "100", accessMode = READ_ONLY)
-	private String credits;
+	@Schema(description = "Course credits", example = "150", accessMode = READ_ONLY)
+	private Double credits;
 
 	@Schema(description = "Course scope in percent", example = "100", accessMode = READ_ONLY)
-	private String scope;
+	private Double scope;
 
 	@Schema(description = "Study location", example = "Sundsvall", accessMode = READ_ONLY)
 	private String studyLocation;
@@ -46,20 +46,20 @@ public class Course {
 	@Schema(description = "Number of seats", example = "10", accessMode = READ_ONLY)
 	private Integer numberOfSeats;
 
-	@Schema(description = "The course start date", example = "2020-08-31", accessMode = READ_ONLY)
-	@DateTimeFormat(iso = ISO.DATE)
+	@Schema(description = "Course start date", example = "2020-08-31", accessMode = READ_ONLY)
+	@DateTimeFormat(iso = DATE)
 	private LocalDate start;
 
-	@Schema(description = "The course end date", example = "2020-12-20", accessMode = READ_ONLY)
-	@DateTimeFormat(iso = ISO.DATE)
+	@Schema(description = "Course end date", example = "2020-12-20", accessMode = READ_ONLY)
+	@DateTimeFormat(iso = DATE)
 	private LocalDate end;
 
-	@Schema(description = "The earliest application date", example = "2020-01-01", accessMode = READ_ONLY)
-	@DateTimeFormat(iso = ISO.DATE)
+	@Schema(description = "Earliest application date", example = "2020-01-01", accessMode = READ_ONLY)
+	@DateTimeFormat(iso = DATE)
 	private LocalDate earliestApplication;
 
-	@Schema(description = "The latest application date", example = "2020-04-15", accessMode = READ_ONLY)
-	@DateTimeFormat(iso = ISO.DATE)
+	@Schema(description = "Latest application date", example = "2020-04-15", accessMode = READ_ONLY)
+	@DateTimeFormat(iso = DATE)
 	private LocalDate latestApplication;
 
 	@Schema(description = "Recommended information",
@@ -149,28 +149,28 @@ public class Course {
 		return this;
 	}
 
-	public String getCredits() {
+	public Double getCredits() {
 		return credits;
 	}
 
-	public void setCredits(String credits) {
+	public void setCredits(Double credits) {
 		this.credits = credits;
 	}
 
-	public Course withCredits(String credits) {
+	public Course withCredits(Double credits) {
 		this.credits = credits;
 		return this;
 	}
 
-	public String getScope() {
+	public Double getScope() {
 		return scope;
 	}
 
-	public void setScope(String scope) {
+	public void setScope(Double scope) {
 		this.scope = scope;
 	}
 
-	public Course withScope(String scope) {
+	public Course withScope(Double scope) {
 		this.scope = scope;
 		return this;
 	}
