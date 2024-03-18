@@ -22,19 +22,19 @@ public class Course {
 	@Schema(description = "Education provider", example = "Sundsvalls Kommun", accessMode = READ_ONLY)
 	private String educationProvider;
 
-	@Schema(description = "The URL to the education provider", example = "http://sundsvall.se/vuxenutbildning", accessMode = READ_ONLY)
+	@Schema(description = "Education provider URL", example = "http://sundsvall.se/vuxenutbildning", accessMode = READ_ONLY)
 	private String providerUrl;
 
 	@Schema(description = "Level", example = "gymnasial vuxenutbildning", accessMode = READ_ONLY)
 	private String level;
 
-	@Schema(description = "The URL to the course", example = "https://sundsvall.alvis.se/hittakurser/kurs/38837", accessMode = READ_ONLY)
+	@Schema(description = "Course URL", example = "https://sundsvall.alvis.se/hittakurser/kurs/38837", accessMode = READ_ONLY)
 	private String url;
 
-	@Schema(description = "Course credits", example = "150.0", accessMode = READ_ONLY)
+	@Schema(description = "Course credits", example = "150", accessMode = READ_ONLY)
 	private Double credits;
 
-	@Schema(description = "Course scope in percent", example = "100.0", accessMode = READ_ONLY)
+	@Schema(description = "Course scope in percent", example = "100", accessMode = READ_ONLY)
 	private Double scope;
 
 	@Schema(description = "Study location", example = "Sundsvall", accessMode = READ_ONLY)
@@ -46,19 +46,19 @@ public class Course {
 	@Schema(description = "Number of seats", example = "10", accessMode = READ_ONLY)
 	private Integer numberOfSeats;
 
-	@Schema(description = "The course start date", example = "2020-08-31", accessMode = READ_ONLY)
+	@Schema(description = "Course start date", example = "2020-08-31", accessMode = READ_ONLY)
 	@DateTimeFormat(iso = DATE)
 	private LocalDate start;
 
-	@Schema(description = "The course end date", example = "2020-12-20", accessMode = READ_ONLY)
+	@Schema(description = "Course end date", example = "2020-12-20", accessMode = READ_ONLY)
 	@DateTimeFormat(iso = DATE)
 	private LocalDate end;
 
-	@Schema(description = "The earliest application date", example = "2020-01-01", accessMode = READ_ONLY)
+	@Schema(description = "Earliest application date", example = "2020-01-01", accessMode = READ_ONLY)
 	@DateTimeFormat(iso = DATE)
 	private LocalDate earliestApplication;
 
-	@Schema(description = "The latest application date", example = "2020-04-15", accessMode = READ_ONLY)
+	@Schema(description = "Latest application date", example = "2020-04-15", accessMode = READ_ONLY)
 	@DateTimeFormat(iso = DATE)
 	private LocalDate latestApplication;
 
