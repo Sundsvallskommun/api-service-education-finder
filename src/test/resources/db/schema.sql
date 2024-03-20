@@ -6,7 +6,7 @@ create schema api_vuxenutb;
 create table api_vuxenutb.KurserVuxenutbildning
 (
 	KurserVuxenutbildning_id bigint,
-	kurstillfälle_id bigint not null,
+	kurstillfalleId bigint not null,
 	Utbildningsanordnare varchar(4096),
 	UrlAnordnare varchar(4096),
 	Kurskod varchar(4096),

@@ -29,7 +29,7 @@ public final class CourseMapper {
 				.withCode(entity.getCode())
 				.withCredits(toDouble(entity.getCredits()))
 				.withEarliestApplication(entity.getEarliestApplication())
-				.withEducationProvider(entity.getEducationProvider())
+				.withProvider(entity.getProvider())
 				.withEnd(entity.getEnd())
 				.withLatestApplication(entity.getLatestApplication())
 				.withLevel(entity.getLevel())

@@ -201,4 +201,129 @@ class CoursesResourceTest {
 		assertThat(response.getMetadata().getTotalRecords()).isEqualTo(6);
 		assertThat(response.getMetadata().getTotalPages()).isEqualTo(1);
 	}
+
+	@Test
+	void findFilterValuesForCredits() {
+
+		// Act
+		final var response = webTestClient.get()
+			.uri("/courses/filters/credits/values")
+			.exchange()
+			.expectStatus().isOk()
+			.expectHeader().contentType(APPLICATION_JSON)
+			.expectBody(String[].class)
+			.returnResult()
+			.getResponseBody();
+
+		// Assert
+		assertThat(response)
+			.hasSize(19)
+			.containsExactly(
+				"0.0",
+				"50.0",
+				"100.0",
+				"150.0",
+				"200.0",
+				"300.0",
+				"325.0",
+				"350.0",
+				"400.0",
+				"415.0",
+				"430.0",
+				"450.0",
+				"500.0",
+				"600.0",
+				"1000.0",
+				"1200.0",
+				"1400.0",
+				"1450.0",
+				"1500.0");
+	}
+
+	@Test
+	void findFilterValuesForProvider() {
+
+		// Act
+		final var response = webTestClient.get()
+			.uri("/courses/filters/provider/values")
+			.exchange()
+			.expectStatus().isOk()
+			.expectHeader().contentType(APPLICATION_JSON)
+			.expectBody(String[].class)
+			.returnResult()
+			.getResponseBody();
+
+		// Assert
+		assertThat(response)
+			.hasSize(6)
+			.containsExactly(
+				"Härnösands kommun, Yrkeshögskolan",
+				"Kramfors kommun, Yrkeshögskolan Höga kusten",
+				"One Academy AB",
+				"Sundsvalls Kommun",
+				"Sundsvalls kommun, Vuxenutbildningen",
+				"YH Akademin AB");
+	}
+
+	@Test
+	void findFilterValuesForLevel() {
+
+		// Act
+		final var response = webTestClient.get()
+			.uri("/courses/filters/level/values")
+			.exchange()
+			.expectStatus().isOk()
+			.expectHeader().contentType(APPLICATION_JSON)
+			.expectBody(String[].class)
+			.returnResult()
+			.getResponseBody();
+
+		// Assert
+		assertThat(response)
+			.hasSize(5)
+			.containsExactly(
+				"grundläggande vuxenutbildning",
+				"gymnasial vuxenutbildning",
+				"Kommunal vuxenutbildning som anpassad utbildning på grundläggande nivå",
+				"Kommunal vuxenutbildning som anpassad utbildning på gymnasial nivå",
+				"yrkeshögskoleutbildning");
+	}
+
+	@Test
+	void findFilterValuesForScope() {
+
+		// Act
+		final var response = webTestClient.get()
+			.uri("/courses/filters/scope/values")
+			.exchange()
+			.expectStatus().isOk()
+			.expectHeader().contentType(APPLICATION_JSON)
+			.expectBody(String[].class)
+			.returnResult()
+			.getResponseBody();
+
+		// Assert
+		assertThat(response)
+			.hasSize(4)
+			.containsExactly("25.0", "50.0", "75.0", "100.0");
+	}
+
+	@Test
+	void findFilterValuesForStudyLocation() {
+
+		// Act
+		final var response = webTestClient.get()
+			.uri("/courses/filters/studyLocation/values")
+			.exchange()
+			.expectStatus().isOk()
+			.expectHeader().contentType(APPLICATION_JSON)
+			.expectBody(String[].class)
+			.returnResult()
+			.getResponseBody();
+
+		// Assert
+		assertThat(response)
+			.hasSize(5)
+			.containsExactly("HÄRNÖSAND", "KRAMFORS", "ÖRNSKÖLDSVIK", "ÖSTERSUND", "SUNDSVALL");
+	}
 }

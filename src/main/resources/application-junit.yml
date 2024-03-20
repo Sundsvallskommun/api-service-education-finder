@@ -10,6 +10,8 @@ spring:
       data-locations: classpath:db/schema.sql, classpath:db/scripts/testdata.sql
       encoding: utf-8
       mode: always
+  cache:
+    type: none
 logging:
   level:
     root: INFO

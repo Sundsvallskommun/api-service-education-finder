@@ -39,7 +39,7 @@ class CourseTest {
 
 		final var code = "code";
 		final var credits = 50.0;
-		final var educationProvider = "educationProvider";
+		final var provider = "provider";
 		final var end = LocalDate.now().plusDays(1);
 		final var earliestApplication = LocalDate.now().plusDays(2);
 		final var latestApplication = LocalDate.now().plusDays(4);
@@ -57,7 +57,7 @@ class CourseTest {
 		final var bean = Course.create()
 			.withCode(code)
 			.withCredits(credits)
-			.withEducationProvider(educationProvider)
+			.withProvider(provider)
 			.withEnd(end)
 			.withEarliestApplication(earliestApplication)
 			.withLatestApplication(latestApplication)
@@ -75,7 +75,7 @@ class CourseTest {
 		assertThat(bean).isNotNull().hasNoNullFieldsOrProperties();
 		assertThat(bean.getCode()).isEqualTo(code);
 		assertThat(bean.getCredits()).isEqualTo(credits);
-		assertThat(bean.getEducationProvider()).isEqualTo(educationProvider);
+		assertThat(bean.getProvider()).isEqualTo(provider);
 		assertThat(bean.getEnd()).isEqualTo(end);
 		assertThat(bean.getEarliestApplication()).isEqualTo(earliestApplication);
 		assertThat(bean.getLatestApplication()).isEqualTo(latestApplication);

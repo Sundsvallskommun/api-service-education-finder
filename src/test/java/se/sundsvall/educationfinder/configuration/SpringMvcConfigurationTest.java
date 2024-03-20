@@ -12,7 +12,7 @@ import se.sundsvall.educationfinder.Application;
 
 @SpringBootTest(classes = Application.class)
 @ActiveProfiles("junit")
-class SpecificationArgResolverConfigurationTest {
+class SpringMvcConfigurationTest {
 
 	@Autowired(required = false)
 	private SpecificationArgResolverSpringdocOperationCustomizer specificationArgResolverSpringdocOperationCustomizer;

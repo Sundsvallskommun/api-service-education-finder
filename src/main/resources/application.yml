@@ -11,6 +11,10 @@ spring:
       ddl-auto: none
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  cache:
+    cache-names: course-filters
+    caffeine:
+      spec: maximumSize=1000,expireAfterWrite=86400s
 logging:
   level:
     root: INFO
