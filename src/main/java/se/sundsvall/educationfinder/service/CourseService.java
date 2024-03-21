@@ -45,6 +45,7 @@ public class CourseService {
 			case STUDY_LOCATION -> courseRepository.findDistinctBy(StudyLocationProjection.class, Sort.by(STUDY_LOCATION)).stream()
 				.filter(Objects::nonNull)
 				.map(StudyLocationProjection::getStudyLocation)
+				.filter(StringUtils::isNotEmpty)
 				.map(StringUtils::upperCase)
 				.toList();
 			case PROVIDER -> courseRepository.findDistinctBy(ProviderProjection.class, Sort.by(PROVIDER)).stream()

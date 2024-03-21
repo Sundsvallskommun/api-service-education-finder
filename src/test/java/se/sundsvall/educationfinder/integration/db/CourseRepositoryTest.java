@@ -47,7 +47,7 @@ class CourseRepositoryTest {
 		// Assert
 		assertThat(result)
 			.extracting(StudyLocationProjection::getStudyLocation)
-			.containsExactly("Härnösand", "Kramfors", "Örnsköldsvik", "Östersund", "Sundsvall");
+			.containsExactly("Härnösand", "Kramfors", "Sundsvall", "Örnsköldsvik", "Östersund");
 	}
 
 	@Test
@@ -136,7 +136,7 @@ class CourseRepositoryTest {
 		final var pageRequest = PageRequest.of(0, 20, Sort.unsorted());
 
 		// Act
-		final var result = courseRepository.findAll((entity, cq, cb) -> cb.like(cb.lower(entity.get(STUDY_LOCATION)), searchWord.toLowerCase()), pageRequest);
+		final var result = courseRepository.findAll((entity, cq, cb) -> cb.like(cb.lower(entity.get(STUDY_LOCATION)), searchWord), pageRequest);
 
 		// Assert
 		assertThat(result).isNotNull();
