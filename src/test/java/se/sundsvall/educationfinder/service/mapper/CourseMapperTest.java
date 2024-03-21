@@ -22,7 +22,7 @@ class CourseMapperTest {
 
 	private final static String CODE = "code";
 	private final static BigDecimal CREDITS = new BigDecimal(50.0);
-	private final static String EDUCATION_PROVIDER = "educationProvider";
+	private final static String PROVIDER = "provider";
 	private final static LocalDate START = LocalDate.now();
 	private final static LocalDate END = LocalDate.now().plusDays(1);
 	private final static LocalDate EARLIEST_APPLICATION = LocalDate.now().plusDays(2);
@@ -53,7 +53,7 @@ class CourseMapperTest {
 				.withCode(CODE)
 				.withCredits(CREDITS.doubleValue())
 				.withEarliestApplication(EARLIEST_APPLICATION)
-				.withEducationProvider(EDUCATION_PROVIDER)
+				.withProvider(PROVIDER)
 				.withEnd(END)
 				.withLatestApplication(LATEST_APPLICATION)
 				.withLevel(LEVEL)
@@ -89,7 +89,7 @@ class CourseMapperTest {
 				.withCode(CODE)
 				.withCredits(CREDITS.doubleValue())
 				.withEarliestApplication(EARLIEST_APPLICATION)
-				.withEducationProvider(EDUCATION_PROVIDER)
+				.withProvider(PROVIDER)
 				.withEnd(END)
 				.withLatestApplication(LATEST_APPLICATION)
 				.withLevel(LEVEL)
@@ -138,7 +138,7 @@ class CourseMapperTest {
 				.withCode(CODE)
 				.withCredits(CREDITS.doubleValue())
 				.withEarliestApplication(EARLIEST_APPLICATION)
-				.withEducationProvider(EDUCATION_PROVIDER)
+				.withProvider(PROVIDER)
 				.withEnd(END)
 				.withLatestApplication(LATEST_APPLICATION)
 				.withLevel(LEVEL)
@@ -161,7 +161,7 @@ class CourseMapperTest {
 		return CourseEntity.create()
 			.withCode(CODE)
 			.withCredits(CREDITS)
-			.withEducationProvider(EDUCATION_PROVIDER)
+			.withProvider(PROVIDER)
 			.withEnd(END)
 			.withEarliestApplication(EARLIEST_APPLICATION)
 			.withLatestApplication(LATEST_APPLICATION)

@@ -17,7 +17,7 @@ import jakarta.persistence.Table;
 public class CourseEntity {
 
 	@Id
-	@Column(name = "kurstillfälle_id", insertable = false, updatable = false)
+	@Column(name = "kurstillfalleId", insertable = false, updatable = false)
 	private Long id;
 
 	@Column(name = "Kurskod", insertable = false, updatable = false)
@@ -27,7 +27,7 @@ public class CourseEntity {
 	private String name;
 
 	@Column(name = "Utbildningsanordnare", insertable = false, updatable = false)
-	private String educationProvider;
+	private String provider;
 
 	@Column(name = "UrlAnordnare", insertable = false, updatable = false)
 	private String providerUrl;
@@ -115,16 +115,16 @@ public class CourseEntity {
 		return this;
 	}
 
-	public String getEducationProvider() {
-		return educationProvider;
+	public String getProvider() {
+		return provider;
 	}
 
-	public void setEducationProvider(String educationProvider) {
-		this.educationProvider = educationProvider;
+	public void setProvider(String provider) {
+		this.provider = provider;
 	}
 
-	public CourseEntity withEducationProvider(String educationProvider) {
-		this.educationProvider = educationProvider;
+	public CourseEntity withProvider(String provider) {
+		this.provider = provider;
 		return this;
 	}
 
@@ -299,15 +299,15 @@ public class CourseEntity {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(code, credits, earliestApplication, educationProvider, end, id, latestApplication, level, name, numberOfSeats, providerUrl, recommendedInformation, scope, start, studyLocation, subjectCode, url);
+		return Objects.hash(code, credits, earliestApplication, end, id, latestApplication, level, name, numberOfSeats, provider, providerUrl, recommendedInformation, scope, start, studyLocation, subjectCode, url);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) { return true; }
 		if (!(obj instanceof final CourseEntity other)) { return false; }
-		return Objects.equals(code, other.code) && Objects.equals(credits, other.credits) && Objects.equals(earliestApplication, other.earliestApplication) && Objects.equals(educationProvider, other.educationProvider) && Objects.equals(end, other.end)
-			&& Objects.equals(id, other.id) && Objects.equals(latestApplication, other.latestApplication) && Objects.equals(level, other.level) && Objects.equals(name, other.name) && Objects.equals(numberOfSeats, other.numberOfSeats) && Objects.equals(
+		return Objects.equals(code, other.code) && Objects.equals(credits, other.credits) && Objects.equals(earliestApplication, other.earliestApplication) && Objects.equals(end, other.end) && Objects.equals(id, other.id) && Objects.equals(
+			latestApplication, other.latestApplication) && Objects.equals(level, other.level) && Objects.equals(name, other.name) && Objects.equals(numberOfSeats, other.numberOfSeats) && Objects.equals(provider, other.provider) && Objects.equals(
 				providerUrl, other.providerUrl) && Objects.equals(recommendedInformation, other.recommendedInformation) && Objects.equals(scope, other.scope) && Objects.equals(start, other.start) && Objects.equals(studyLocation, other.studyLocation)
 			&& Objects.equals(subjectCode, other.subjectCode) && Objects.equals(url, other.url);
 	}
@@ -315,10 +315,9 @@ public class CourseEntity {
 	@Override
 	public String toString() {
 		final StringBuilder builder = new StringBuilder();
-		builder.append("CourseEntity [id=").append(id).append(", code=").append(code).append(", name=").append(name).append(", educationProvider=").append(educationProvider).append(", providerUrl=").append(providerUrl).append(", level=").append(level)
-			.append(", url=").append(url).append(", credits=").append(credits).append(", scope=").append(scope).append(", studyLocation=").append(studyLocation).append(", subjectCode=").append(subjectCode).append(", numberOfSeats=").append(numberOfSeats)
-			.append(", start=").append(start).append(", end=").append(end).append(", earliestApplication=").append(earliestApplication).append(", latestApplication=").append(latestApplication).append(", recommendedInformation=").append(
-				recommendedInformation).append("]");
+		builder.append("CourseEntity [id=").append(id).append(", code=").append(code).append(", name=").append(name).append(", provider=").append(provider).append(", providerUrl=").append(providerUrl).append(", level=").append(level).append(", url=")
+			.append(url).append(", credits=").append(credits).append(", scope=").append(scope).append(", studyLocation=").append(studyLocation).append(", subjectCode=").append(subjectCode).append(", numberOfSeats=").append(numberOfSeats).append(", start=")
+			.append(start).append(", end=").append(end).append(", earliestApplication=").append(earliestApplication).append(", latestApplication=").append(latestApplication).append(", recommendedInformation=").append(recommendedInformation).append("]");
 		return builder.toString();
 	}
 }
