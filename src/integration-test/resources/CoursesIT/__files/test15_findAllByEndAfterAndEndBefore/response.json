@@ -1,0 +1,41 @@
+{
+	"courses": [
+		{
+			"code": "YH00585",
+			"name": "Mätningstekniker",
+			"provider": "Kramfors kommun, Yrkeshögskolan Höga kusten",
+			"providerUrl": "www.yhk.se",
+			"level": "yrkeshögskoleutbildning",
+			"url": "https://www.yhk.se/utbildningar/matningstekniker/",
+			"credits": 415.0,
+			"scope": 100.0,
+			"studyLocation": "Kramfors",
+			"subjectCode": "525580x",
+			"start": "2024-08-01",
+			"end": "2026-05-31",
+			"recommendedInformation": "För en mätningstekniker är oftast inte den ena dagen lik den andra. Mätnings- teknikern är den som både kan planera och driva mätningsarbeten i projektet och som har koll på att ritningar och mätdata sköts på rätt sätt och ser till att toleranser och krav efterhålls. En mätningstekniker kan jobba med t.ex. mark- och anläggningsjobb hus- utsättning, byggverksamhet, upp-datering av stomnät, kartor och fastigheter, projekteringsmätning och inmätningar.  Arbetet består till stor del av samarbete med kollegor och kontakter med andra entreprenörer, privatpersoner, företag och myndigheter. VEM ÄR DU?För att trivas som mätningstekniker bör du tycka om att jobba med utmaningar och är bra på att hantera snabba ändringar som kan uppstå i ett projekt. Du tycker det är roligt med problemlösning, teknik och beräkning och tror dig vara modig nog att kunna tänka nytt när det krävs.UTBILDNINGENS INNEHÅLLUtbildningen innehåller bland annat kurser inom geodetisk mätningsteknik, mark- och anläggningsteknik, kartteknik samt yrkesmatematik.I kurserna använder du avancerade digitala mätinstrument som totalstationer, scanner och GPS-stationer, man mäter både optiskt och med hjälp av satelliter för att samla in mätdata.Du bearbetar sedan informationen i datorer med tillhör- ande beräknings och grafiska program. Under de två åren blandas teoretisk utbildning med fältövningar och praktiska tillämpningar. Stora delar av utbildningen sker ute på arbetsplatser (LIA- Lärande i arbete).VAR FINNS JOBBEN?Mätningsteknikerns kompetens är högt efterfrågad och jobben finns hos konsultföretag, entreprenörer, kommuner men även hos statliga organisationer som exempelvis Lantmäteriet Trafikverket och Vattenfall. Gruvnäring, elbolag och skogsbolag är branscher och organisationer som har behov av mätningsteknisk kompetens.Efter avslutad utbildningen kommer du att kunna söka jobb som mätnings- tekniker, mätningsingenjör, kart- och mätingenjör, karttekniker och lantmäteritekniker.ETT FRAMTIDSYRKE!Det råder idag och under lång tid fram- över stor brist på utbildade mätnings- tekniker. Konsultföretag, som erbjuder tjänster inom mätteknik, har ökat markant i landet och flera företagsledare uttrycker önskemål om att kunna expandera om man hittar kompetent personal.BÄSTA LÄRAREN ÄR VERKLIGHETENUtbildningen är upplagd så att du som studerande skall få så bra förutsättningar som möjligt i din kommande yrkesroll, en stor del av utbildningen sker därför ute på olika företag i kursen Lärande i arbete (LIA). "
+		},
+		{
+			"code": "YH00593",
+			"name": "Specialiserad undersköterska i demensvård",
+			"provider": "Kramfors kommun, Yrkeshögskolan Höga kusten",
+			"providerUrl": "www.yhk.se",
+			"level": "yrkeshögskoleutbildning",
+			"url": "https://www.yhk.se",
+			"credits": 200.0,
+			"scope": 50.0,
+			"studyLocation": "Kramfors",
+			"subjectCode": "415723r",
+			"start": "2024-09-01",
+			"end": "2026-05-31",
+			"recommendedInformation": "Utbildningen vänder sig till dig som vill ha fördjupade kunskaper om demenssjuk-domar och dess konsekvenser för individen och närstående.Du har ett genuint intresse för arbete med människor och en vilja att utveckla dig själv och andra inom området.Utbildningens innehållAtt arbeta med personer med demens-sjukdom, kräver mycket av dig som vårdare.Med utbildningen stärks du i din roll genom att få fördjupade kunskaper."
+		}
+	],
+	"_meta": {
+		"page": 0,
+		"limit": 20,
+		"count": 2,
+		"totalRecords": 2,
+		"totalPages": 1
+	}
+}

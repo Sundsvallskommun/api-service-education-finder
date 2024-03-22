@@ -16,15 +16,15 @@ import se.sundsvall.educationfinder.api.converter.StringToCourseFilterConverter;
 @Configuration
 class SpringMvcConfiguration implements WebMvcConfigurer {
 
+	@Bean
+	SpecificationArgResolverSpringdocOperationCustomizer specificationArgResolverSpringdocOperationCustomizer() {
+		return new SpecificationArgResolverSpringdocOperationCustomizer();
+	}
+	
 	@Override
 	public void addArgumentResolvers(final List<HandlerMethodArgumentResolver> resolvers) {
 		resolvers.add(new SpecificationArgumentResolver());
 		resolvers.add(new PageableHandlerMethodArgumentResolver());
-	}
-
-	@Bean
-	SpecificationArgResolverSpringdocOperationCustomizer specificationArgResolverSpringdocOperationCustomizer() {
-		return new SpecificationArgResolverSpringdocOperationCustomizer();
 	}
 
 	@Override

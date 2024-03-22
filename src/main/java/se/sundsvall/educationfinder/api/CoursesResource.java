@@ -3,6 +3,8 @@ package se.sundsvall.educationfinder.api;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_PROBLEM_JSON_VALUE;
 import static org.springframework.http.ResponseEntity.ok;
+import static se.sundsvall.educationfinder.api.model.ApiConstants.FIND_COURSE_DESCRIPTION;
+import static se.sundsvall.educationfinder.api.model.ApiConstants.FIND_FILTER_VALUES_DESCRITPION;
 
 import java.util.List;
 
@@ -45,13 +47,14 @@ class CoursesResource {
 	}
 
 	@GetMapping
-	@Operation(summary = "Find course")
-	ResponseEntity<PagedCoursesResponse> find(CourseSpecification specification, @ParameterObject Pageable pageable) {
+	@Operation(summary = "Find course", description = FIND_COURSE_DESCRIPTION)
+	ResponseEntity<PagedCoursesResponse> find(
+		CourseSpecification specification, @ParameterObject Pageable pageable) {
 		return ok(courseService.find(specification, pageable));
 	}
 
 	@GetMapping(path = "/filters/{courseFilter}/values")
-	@Operation(summary = "Find available filter values")
+	@Operation(summary = "Find available filter values", description = FIND_FILTER_VALUES_DESCRITPION)
 	ResponseEntity<List<String>> findFilterValues(@Parameter(description = "The attribute name to get available values from") @PathVariable final CourseFilter courseFilter) {
 		return ok(courseService.findFilterValues(courseFilter));
 	}

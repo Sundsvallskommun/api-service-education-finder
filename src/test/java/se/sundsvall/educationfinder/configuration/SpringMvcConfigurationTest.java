@@ -18,7 +18,7 @@ class SpringMvcConfigurationTest {
 	private SpecificationArgResolverSpringdocOperationCustomizer specificationArgResolverSpringdocOperationCustomizer;
 
 	@Test
-	void testBean() {
+	void testSpecificationArgResolverSpringdocOperationCustomizer() {
 		assertThat(specificationArgResolverSpringdocOperationCustomizer).isNotNull();
 	}
 }

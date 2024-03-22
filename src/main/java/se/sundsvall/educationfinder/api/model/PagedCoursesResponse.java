@@ -14,11 +14,11 @@ import se.sundsvall.dept44.models.api.paging.PagingMetaData;
 @Schema(description = "Paged course response model", accessMode = READ_ONLY)
 public class PagedCoursesResponse {
 
-	@ArraySchema(schema = @Schema(implementation = Course.class))
+	@ArraySchema(schema = @Schema(implementation = Course.class, accessMode = READ_ONLY))
 	private List<Course> courses;
 
 	@JsonProperty("_meta")
-	@Schema(implementation = PagingMetaData.class)
+	@Schema(implementation = PagingMetaData.class, accessMode = READ_ONLY)
 	private PagingMetaData metadata;
 
 	public static PagedCoursesResponse create() {

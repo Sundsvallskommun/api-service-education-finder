@@ -162,14 +162,14 @@ class CoursesResourceTest {
 	}
 
 	@Test
-	void findAllOnSpecificStudyLocationAndNameAndEndLessThan() {
+	void findAllOnSpecificStudyLocationAndNameAndEndBefore() {
 
 		// Act
 		final var response = webTestClient.get()
 			.uri(builder -> builder.path("/courses")
 				.queryParam("studyLocation", "Sundsvall")
 				.queryParam("name", "vardags")
-				.queryParam("end", "2024-02-28")
+				.queryParam("endBefore", "2024-02-28")
 				.build())
 			.exchange()
 			.expectStatus().isOk()
@@ -193,14 +193,14 @@ class CoursesResourceTest {
 	}
 
 	@Test
-	void findAllOnSpecificStudyLocationAndNameAndStartGreaterThan() {
+	void findAllOnSpecificStudyLocationAndNameAndStartAfter() {
 
 		// Act
 		final var response = webTestClient.get()
 			.uri(builder -> builder.path("/courses")
 				.queryParam("studyLocation", "Sundsvall")
 				.queryParam("name", "vardags")
-				.queryParam("start", "2020-01-01")
+				.queryParam("startAfter", "2020-01-01")
 				.build())
 			.exchange()
 			.expectStatus().isOk()

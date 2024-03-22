@@ -143,4 +143,44 @@ class CoursesIT extends AbstractAppTest {
 			.withExpectedResponse(RESPONSE_FILE)
 			.sendRequestAndVerifyResponse();
 	}
+
+	@Test
+	void test14_findAllByStartAfterAndStartBefore() {
+		setupCall()
+			.withServicePath("/courses?startAfter=2024-12-31&startBefore=2025-01-02")
+			.withHttpMethod(GET)
+			.withExpectedResponseStatus(OK)
+			.withExpectedResponse(RESPONSE_FILE)
+			.sendRequestAndVerifyResponse();
+	}
+
+	@Test
+	void test15_findAllByEndAfterAndEndBefore() {
+		setupCall()
+			.withServicePath("/courses?endAfter=2026-05-30&endBefore=2026-06-15")
+			.withHttpMethod(GET)
+			.withExpectedResponseStatus(OK)
+			.withExpectedResponse(RESPONSE_FILE)
+			.sendRequestAndVerifyResponse();
+	}
+
+	@Test
+	void test16_findAllByEarliestApplicationAfterAndEarliestApplicationBefore() {
+		setupCall()
+			.withServicePath("/courses?earliestApplicationAfter=2023-03-20&earliestApplicationBefore=2023-03-25")
+			.withHttpMethod(GET)
+			.withExpectedResponseStatus(OK)
+			.withExpectedResponse(RESPONSE_FILE)
+			.sendRequestAndVerifyResponse();
+	}
+
+	@Test
+	void test17_findAllByLatestApplicationAfterAndLatestApplicationBefore() {
+		setupCall()
+			.withServicePath("/courses?latestApplicationAfter=2023-09-05&latestApplicationBefore=2023-09-15")
+			.withHttpMethod(GET)
+			.withExpectedResponseStatus(OK)
+			.withExpectedResponse(RESPONSE_FILE)
+			.sendRequestAndVerifyResponse();
+	}
 }
