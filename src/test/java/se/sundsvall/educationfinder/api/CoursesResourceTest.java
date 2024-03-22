@@ -103,6 +103,34 @@ class CoursesResourceTest {
 	}
 
 	@Test
+	void findAllOnSpecificCredits() {
+
+		// Act
+		final var response = webTestClient.get()
+			.uri(builder -> builder.path("/courses")
+				.queryParam("credits", "325")
+				.build())
+			.exchange()
+			.expectStatus().isOk()
+			.expectHeader().contentType(APPLICATION_JSON)
+			.expectBody(PagedCoursesResponse.class)
+			.returnResult()
+			.getResponseBody();
+
+		// Assert
+		assertThat(response).isNotNull();
+		assertThat(response.getCourses())
+			.hasSize(2)
+			.extracting(Course::getCredits).containsOnly(325.0);
+		assertThat(response.getCourses()).hasSize(2);
+		assertThat(response.getMetadata().getCount()).isEqualTo(2);
+		assertThat(response.getMetadata().getLimit()).isEqualTo(20);
+		assertThat(response.getMetadata().getPage()).isZero();
+		assertThat(response.getMetadata().getTotalRecords()).isEqualTo(2);
+		assertThat(response.getMetadata().getTotalPages()).isEqualTo(1);
+	}
+
+	@Test
 	void findAllOnSpecificStudyLocationAndName() {
 
 		// Act

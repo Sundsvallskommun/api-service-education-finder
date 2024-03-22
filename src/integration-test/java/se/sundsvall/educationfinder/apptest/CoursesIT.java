@@ -77,7 +77,7 @@ class CoursesIT extends AbstractAppTest {
 	@Test
 	void test07_findAllByCredits() {
 		setupCall()
-			.withServicePath("/courses?credits=150")
+			.withServicePath("/courses?credits=325")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
