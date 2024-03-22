@@ -103,6 +103,34 @@ class CoursesResourceTest {
 	}
 
 	@Test
+	void findAllOnSpecificCredits() {
+
+		// Act
+		final var response = webTestClient.get()
+			.uri(builder -> builder.path("/courses")
+				.queryParam("credits", "325")
+				.build())
+			.exchange()
+			.expectStatus().isOk()
+			.expectHeader().contentType(APPLICATION_JSON)
+			.expectBody(PagedCoursesResponse.class)
+			.returnResult()
+			.getResponseBody();
+
+		// Assert
+		assertThat(response).isNotNull();
+		assertThat(response.getCourses())
+			.hasSize(2)
+			.extracting(Course::getCredits).containsOnly(325.0);
+		assertThat(response.getCourses()).hasSize(2);
+		assertThat(response.getMetadata().getCount()).isEqualTo(2);
+		assertThat(response.getMetadata().getLimit()).isEqualTo(20);
+		assertThat(response.getMetadata().getPage()).isZero();
+		assertThat(response.getMetadata().getTotalRecords()).isEqualTo(2);
+		assertThat(response.getMetadata().getTotalPages()).isEqualTo(1);
+	}
+
+	@Test
 	void findAllOnSpecificStudyLocationAndName() {
 
 		// Act
@@ -155,15 +183,12 @@ class CoursesResourceTest {
 		assertThat(response.getCourses())
 			.extracting(Course::getName, Course::getStudyLocation, Course::getEnd)
 			.containsExactlyInAnyOrder(
-				tuple("Vardagsrutiner och vardagsmiljö", "Sundsvall", null),
-				tuple("Vardagsteknik", "Sundsvall", null),
-				tuple("Vardagsmatematik del 2", "Sundsvall", null),
 				tuple("Vardagsolyckor", "Sundsvall", LocalDate.of(2023, 11, 17)),
 				tuple("Vardagsolyckor", "Sundsvall", LocalDate.of(2023, 12, 22)));
-		assertThat(response.getMetadata().getCount()).isEqualTo(5);
+		assertThat(response.getMetadata().getCount()).isEqualTo(2);
 		assertThat(response.getMetadata().getLimit()).isEqualTo(20);
 		assertThat(response.getMetadata().getPage()).isZero();
-		assertThat(response.getMetadata().getTotalRecords()).isEqualTo(5);
+		assertThat(response.getMetadata().getTotalRecords()).isEqualTo(2);
 		assertThat(response.getMetadata().getTotalPages()).isEqualTo(1);
 	}
 
@@ -189,16 +214,13 @@ class CoursesResourceTest {
 		assertThat(response.getCourses())
 			.extracting(Course::getName, Course::getStudyLocation, Course::getStart)
 			.containsExactlyInAnyOrder(
-				tuple("Vardagsrutiner och vardagsmiljö", "Sundsvall", null),
-				tuple("Vardagsteknik", "Sundsvall", null),
-				tuple("Vardagsmatematik del 2", "Sundsvall", null),
 				tuple("Vardagsolyckor", "Sundsvall", LocalDate.of(2023, 10, 16)),
 				tuple("Vardagsolyckor", "Sundsvall", LocalDate.of(2023, 10, 16)),
 				tuple("Vardagsolyckor", "Sundsvall", LocalDate.of(2023, 10, 16)));
-		assertThat(response.getMetadata().getCount()).isEqualTo(6);
+		assertThat(response.getMetadata().getCount()).isEqualTo(3);
 		assertThat(response.getMetadata().getLimit()).isEqualTo(20);
 		assertThat(response.getMetadata().getPage()).isZero();
-		assertThat(response.getMetadata().getTotalRecords()).isEqualTo(6);
+		assertThat(response.getMetadata().getTotalRecords()).isEqualTo(3);
 		assertThat(response.getMetadata().getTotalPages()).isEqualTo(1);
 	}
 
@@ -324,6 +346,6 @@ class CoursesResourceTest {
 		// Assert
 		assertThat(response)
 			.hasSize(5)
-			.containsExactly("HÄRNÖSAND", "KRAMFORS", "ÖRNSKÖLDSVIK", "ÖSTERSUND", "SUNDSVALL");
+			.containsExactly("HÄRNÖSAND", "KRAMFORS", "SUNDSVALL", "ÖRNSKÖLDSVIK", "ÖSTERSUND");
 	}
 }
