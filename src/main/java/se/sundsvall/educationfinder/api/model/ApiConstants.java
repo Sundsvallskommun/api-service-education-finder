@@ -46,7 +46,7 @@ public final class ApiConstants {
 		- All date parameters are expected to be on the format: yyyy-MM-dd (example value: '2025-01-01')
 		""";
 
-	public static final String FIND_FILTER_VALUES_DESCRITPION = """
+	public static final String FIND_FILTER_VALUES_DESCRITPTION = """
 		Find available filter values (for use in the "Find course"-resource).
 		""";
 }
