@@ -4,11 +4,11 @@ import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.CO
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.CREDITS;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.EARLIEST_APPLICATION;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.END;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.INFORMATION;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.LATEST_APPLICATION;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.LEVEL;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.NAME;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.PROVIDER;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.RECOMMENDED_INFORMATION;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.SCOPE;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.START;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.STUDY_LOCATION;
@@ -44,7 +44,7 @@ import se.sundsvall.educationfinder.integration.db.model.CourseEntity;
 	@Spec(params = "latestApplication", path = LATEST_APPLICATION, spec = Equal.class),
 	@Spec(params = "latestApplicationBefore", path = LATEST_APPLICATION, spec = LessThan.class),
 	@Spec(params = "latestApplicationAfter", path = LATEST_APPLICATION, spec = GreaterThan.class),
-	@Spec(params = "recommendedInformation", path = RECOMMENDED_INFORMATION, spec = LikeIgnoreCase.class)
+	@Spec(params = "information", path = INFORMATION, spec = LikeIgnoreCase.class)
 })
 public interface CourseSpecification extends Specification<CourseEntity> {
 }

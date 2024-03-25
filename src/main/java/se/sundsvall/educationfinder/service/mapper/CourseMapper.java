@@ -36,7 +36,7 @@ public final class CourseMapper {
 				.withName(entity.getName())
 				.withNumberOfSeats(entity.getNumberOfSeats())
 				.withProviderUrl(entity.getProviderUrl())
-				.withRecommendedInformation(entity.getRecommendedInformation())
+				.withInformation(entity.getInformation())
 				.withScope(toDouble(entity.getScope()))
 				.withStart(entity.getStart())
 				.withStudyLocation(entity.getStudyLocation())

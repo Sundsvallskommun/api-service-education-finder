@@ -32,7 +32,7 @@ public final class ApiConstants {
 		- latestApplication: The course 'latest application' date. Parameter filter strategy: 'EQUAL'. Example value: '2025-01-01'
 		- latestApplicationBefore: A date that occurs before the course 'latest application' date. Parameter filter strategy: 'LESS-THAN'. Example value: '2020-01-01'
 		- latestApplicationAfter: A date that occurs after the course 'latest application' date. Parameter filter strategy: 'GREATER-THAN'. Example value: '2020-12-31'
-		- recommendedInformation: The course recommended information. Parameter filter strategy: 'LIKE-IGNORE-CASE'. Example value: 'utbildning till affärsutvecklare'
+		- information: The course information. Parameter filter strategy: 'LIKE-IGNORE-CASE'. Example value: 'utbildning till affärsutvecklare'
 
 		Parameter filter strategies:
 		- EQUAL: The parameter must have an exact match, case sensitive.
