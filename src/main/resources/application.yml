@@ -11,6 +11,12 @@ spring:
       ddl-auto: none
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      jakarta:
+        persistence:
+          schema-generation:
+            database:
+              action: validate       
   cache:
     cache-names: course-filters
     caffeine:
@@ -22,3 +28,4 @@ openapi:
   name: ${spring.application.name}
   title: ${spring.application.name}
   version: '@project.version@'
+  

@@ -22,10 +22,10 @@ public class Course {
 	@Schema(description = "Course provider", example = "Sundsvalls Kommun", accessMode = READ_ONLY)
 	private String provider;
 
-	@Schema(description = "Education provider URL", example = "http://sundsvall.se/vuxenutbildning", accessMode = READ_ONLY)
+	@Schema(description = "Course provider URL", example = "http://sundsvall.se/vuxenutbildning", accessMode = READ_ONLY)
 	private String providerUrl;
 
-	@Schema(description = "Level", example = "gymnasial vuxenutbildning", accessMode = READ_ONLY)
+	@Schema(description = "Course level", example = "gymnasial vuxenutbildning", accessMode = READ_ONLY)
 	private String level;
 
 	@Schema(description = "Course URL", example = "https://sundsvall.alvis.se/hittakurser/kurs/38837", accessMode = READ_ONLY)

@@ -59,6 +59,8 @@ public final class CourseMapper {
 	}
 
 	private static Double toDouble(BigDecimal bigDecimal) {
-		return Optional.ofNullable(bigDecimal).map(BigDecimal::doubleValue).orElse(null);
+		return Optional.ofNullable(bigDecimal)
+			.map(BigDecimal::doubleValue)
+			.orElse(null);
 	}
 }
