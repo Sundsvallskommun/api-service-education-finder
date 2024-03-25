@@ -135,9 +135,9 @@ class CoursesIT extends AbstractAppTest {
 	}
 
 	@Test
-	void test13_findAllByRecommendedInformation() {
+	void test13_findAllByInformation() {
 		setupCall()
-			.withServicePath("/courses?recommendedInformation=storkök")
+			.withServicePath("/courses?information=storkök")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)

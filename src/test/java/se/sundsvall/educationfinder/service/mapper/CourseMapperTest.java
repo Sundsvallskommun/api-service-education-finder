@@ -31,7 +31,7 @@ class CourseMapperTest {
 	private final static String NAME = "name";
 	private final static Integer NUMBER_OF_SEATS = 1;
 	private final static String PROVIDER_URL = "providerUrl";
-	private final static String RECOMMENDED_INFORMATION = "recommendedInformation";
+	private final static String INFORMATION = "information";
 	private final static BigDecimal SCOPE = new BigDecimal(100.0);
 	private final static String STUDY_LOCATION = "studyLocation";
 	private final static String SUBJECT_CODE = "subjectCode";
@@ -60,7 +60,7 @@ class CourseMapperTest {
 				.withName(NAME)
 				.withNumberOfSeats(NUMBER_OF_SEATS)
 				.withProviderUrl(PROVIDER_URL)
-				.withRecommendedInformation(RECOMMENDED_INFORMATION)
+				.withInformation(INFORMATION)
 				.withScope(SCOPE.doubleValue())
 				.withStart(START)
 				.withStudyLocation(STUDY_LOCATION)
@@ -96,7 +96,7 @@ class CourseMapperTest {
 				.withName(NAME)
 				.withNumberOfSeats(NUMBER_OF_SEATS)
 				.withProviderUrl(PROVIDER_URL)
-				.withRecommendedInformation(RECOMMENDED_INFORMATION)
+				.withInformation(INFORMATION)
 				.withScope(SCOPE.doubleValue())
 				.withStart(START)
 				.withStudyLocation(STUDY_LOCATION)
@@ -145,7 +145,7 @@ class CourseMapperTest {
 				.withName(NAME)
 				.withNumberOfSeats(NUMBER_OF_SEATS)
 				.withProviderUrl(PROVIDER_URL)
-				.withRecommendedInformation(RECOMMENDED_INFORMATION)
+				.withInformation(INFORMATION)
 				.withScope(SCOPE.doubleValue())
 				.withStart(START)
 				.withStudyLocation(STUDY_LOCATION)
@@ -169,7 +169,7 @@ class CourseMapperTest {
 			.withName(NAME)
 			.withNumberOfSeats(NUMBER_OF_SEATS)
 			.withProviderUrl(PROVIDER_URL)
-			.withRecommendedInformation(RECOMMENDED_INFORMATION)
+			.withInformation(INFORMATION)
 			.withScope(SCOPE)
 			.withStart(START)
 			.withStudyLocation(STUDY_LOCATION)

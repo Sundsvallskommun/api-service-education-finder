@@ -49,7 +49,7 @@ class CourseEntityTest {
 		final var name = "name";
 		final var numberOfSeats = 1;
 		final var providerUrl = "providerUrl";
-		final var recommendedInformation = "recommendedInformation";
+		final var information = "information";
 		final var scope = new BigDecimal(100.0);
 		final var start = LocalDate.now().plusDays(4);
 		final var studyLocation = "studyLocation";
@@ -68,7 +68,7 @@ class CourseEntityTest {
 			.withName(name)
 			.withNumberOfSeats(numberOfSeats)
 			.withProviderUrl(providerUrl)
-			.withRecommendedInformation(recommendedInformation)
+			.withInformation(information)
 			.withScope(scope)
 			.withStart(start)
 			.withStudyLocation(studyLocation)
@@ -87,7 +87,7 @@ class CourseEntityTest {
 		assertThat(bean.getName()).isEqualTo(name);
 		assertThat(bean.getNumberOfSeats()).isEqualTo(numberOfSeats);
 		assertThat(bean.getProviderUrl()).isEqualTo(providerUrl);
-		assertThat(bean.getRecommendedInformation()).isEqualTo(recommendedInformation);
+		assertThat(bean.getInformation()).isEqualTo(information);
 		assertThat(bean.getScope()).isEqualTo(scope);
 		assertThat(bean.getStart()).isEqualTo(start);
 		assertThat(bean.getStudyLocation()).isEqualTo(studyLocation);

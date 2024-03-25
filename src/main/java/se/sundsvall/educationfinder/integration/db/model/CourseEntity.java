@@ -70,7 +70,7 @@ public class CourseEntity {
 	private LocalDate latestApplication;
 
 	@Column(name = "RekommenderadInformation", insertable = false, updatable = false)
-	private String recommendedInformation;
+	private String information;
 
 	public static CourseEntity create() {
 		return new CourseEntity();
@@ -232,16 +232,16 @@ public class CourseEntity {
 		return this;
 	}
 
-	public String getRecommendedInformation() {
-		return recommendedInformation;
+	public String getInformation() {
+		return information;
 	}
 
-	public void setRecommendedInformation(String recommendedInformation) {
-		this.recommendedInformation = recommendedInformation;
+	public void setInformation(String information) {
+		this.information = information;
 	}
 
-	public CourseEntity withRecommendedInformation(String recommendedInformation) {
-		this.recommendedInformation = recommendedInformation;
+	public CourseEntity withInformation(String information) {
+		this.information = information;
 		return this;
 	}
 
@@ -299,17 +299,17 @@ public class CourseEntity {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(code, credits, earliestApplication, end, id, latestApplication, level, name, numberOfSeats, provider, providerUrl, recommendedInformation, scope, start, studyLocation, subjectCode, url);
+		return Objects.hash(code, credits, earliestApplication, end, id, information, latestApplication, level, name, numberOfSeats, provider, providerUrl, scope, start, studyLocation, subjectCode, url);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) { return true; }
 		if (!(obj instanceof final CourseEntity other)) { return false; }
-		return Objects.equals(code, other.code) && Objects.equals(credits, other.credits) && Objects.equals(earliestApplication, other.earliestApplication) && Objects.equals(end, other.end) && Objects.equals(id, other.id) && Objects.equals(
-			latestApplication, other.latestApplication) && Objects.equals(level, other.level) && Objects.equals(name, other.name) && Objects.equals(numberOfSeats, other.numberOfSeats) && Objects.equals(provider, other.provider) && Objects.equals(
-				providerUrl, other.providerUrl) && Objects.equals(recommendedInformation, other.recommendedInformation) && Objects.equals(scope, other.scope) && Objects.equals(start, other.start) && Objects.equals(studyLocation, other.studyLocation)
-			&& Objects.equals(subjectCode, other.subjectCode) && Objects.equals(url, other.url);
+		return Objects.equals(code, other.code) && Objects.equals(credits, other.credits) && Objects.equals(earliestApplication, other.earliestApplication) && Objects.equals(end, other.end) && Objects.equals(id, other.id) && Objects.equals(information,
+			other.information) && Objects.equals(latestApplication, other.latestApplication) && Objects.equals(level, other.level) && Objects.equals(name, other.name) && Objects.equals(numberOfSeats, other.numberOfSeats) && Objects.equals(provider,
+				other.provider) && Objects.equals(providerUrl, other.providerUrl) && Objects.equals(scope, other.scope) && Objects.equals(start, other.start) && Objects.equals(studyLocation, other.studyLocation) && Objects.equals(subjectCode,
+					other.subjectCode) && Objects.equals(url, other.url);
 	}
 
 	@Override
@@ -317,7 +317,7 @@ public class CourseEntity {
 		final StringBuilder builder = new StringBuilder();
 		builder.append("CourseEntity [id=").append(id).append(", code=").append(code).append(", name=").append(name).append(", provider=").append(provider).append(", providerUrl=").append(providerUrl).append(", level=").append(level).append(", url=")
 			.append(url).append(", credits=").append(credits).append(", scope=").append(scope).append(", studyLocation=").append(studyLocation).append(", subjectCode=").append(subjectCode).append(", numberOfSeats=").append(numberOfSeats).append(", start=")
-			.append(start).append(", end=").append(end).append(", earliestApplication=").append(earliestApplication).append(", latestApplication=").append(latestApplication).append(", recommendedInformation=").append(recommendedInformation).append("]");
+			.append(start).append(", end=").append(end).append(", earliestApplication=").append(earliestApplication).append(", latestApplication=").append(latestApplication).append(", information=").append(information).append("]");
 		return builder.toString();
 	}
 }
