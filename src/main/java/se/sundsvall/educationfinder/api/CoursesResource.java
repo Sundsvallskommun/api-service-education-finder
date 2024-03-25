@@ -48,8 +48,7 @@ class CoursesResource {
 
 	@GetMapping
 	@Operation(summary = "Find course", description = FIND_COURSE_DESCRIPTION)
-	ResponseEntity<PagedCoursesResponse> find(
-		CourseSpecification specification, @ParameterObject Pageable pageable) {
+	ResponseEntity<PagedCoursesResponse> find(CourseSpecification specification, @ParameterObject Pageable pageable) {
 		return ok(courseService.find(specification, pageable));
 	}
 

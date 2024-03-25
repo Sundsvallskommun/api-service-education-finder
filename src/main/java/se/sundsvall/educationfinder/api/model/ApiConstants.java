@@ -5,7 +5,7 @@ public final class ApiConstants {
 	private ApiConstants() {}
 
 	public static final String FIND_COURSE_DESCRIPTION = """
-		Find courses and apply filters to narrow your result.
+		Find courses and apply filters to narrow the result.
 
 		Pagination parameters:
 		- page: Zero-based page index (0..N)
@@ -35,9 +35,9 @@ public final class ApiConstants {
 		- recommendedInformation: The course recommended information. Parameter filter strategy: 'LIKE-IGNORE-CASE'. Example value: 'utbildning till affärsutvecklare'
 
 		Parameter filter strategies:
-		- EQUAL: The parameter must have an exact match.
+		- EQUAL: The parameter must have an exact match, case sensitive.
 		- EQUAL-IGNORE-CASE: The parameter must have an exact match, case insensitive.
-		- LIKE: The parameter value must occur somewhere in the searched attribute.
+		- LIKE: The parameter value must occur somewhere in the searched attribute, case sensitive.
 		- LIKE-IGNORE-CASE: The parameter value must occur somewhere in the searched attribute, case insensitive.
 		- GREATER-THAN: The parameter value must be greater than the searched attribute.
 		- LESS-THAN: The parameter value must be less than the searched attribute.
@@ -48,8 +48,5 @@ public final class ApiConstants {
 
 	public static final String FIND_FILTER_VALUES_DESCRITPION = """
 		Find available filter values (for use in the "Find course"-resource).
-
-		The filter values are fetched from the courses database and only suitable attributes will be available in the 'courseFilter'-parameter.
-		I.e. attributes with values that are more or less unique (like 'code', 'name' , etc) will not be available here.
 		""";
 }
