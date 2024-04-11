@@ -183,4 +183,35 @@ class CoursesIT extends AbstractAppTest {
 			.withExpectedResponse(RESPONSE_FILE)
 			.sendRequestAndVerifyResponse();
 	}
+
+	@Test
+	void test18_findAllBySearchStringMatchingCode() {
+		setupCall()
+			.withServicePath("/courses?searchString=SgrH")
+			.withHttpMethod(GET)
+			.withExpectedResponseStatus(OK)
+			.withExpectedResponse(RESPONSE_FILE)
+			.sendRequestAndVerifyResponse();
+	}
+
+	@Test
+	void test19_findAllBySearchStringMatchingName() {
+		setupCall()
+			.withServicePath("/courses?searchString=Läsa och skriva")
+			.withHttpMethod(GET)
+			.withExpectedResponseStatus(OK)
+			.withExpectedResponse(RESPONSE_FILE)
+			.sendRequestAndVerifyResponse();
+	}
+
+	@Test
+	void test20_findAllBySearchStringMatchingInformation() {
+		setupCall()
+			.withServicePath("/courses?searchString=för dig som har en intellektuell funktionsnedsättning eller förvärvad hjärnskada")
+			.withHttpMethod(GET)
+			.withExpectedResponseStatus(OK)
+			.withExpectedResponse(RESPONSE_FILE)
+			.sendRequestAndVerifyResponse();
+	}
+
 }

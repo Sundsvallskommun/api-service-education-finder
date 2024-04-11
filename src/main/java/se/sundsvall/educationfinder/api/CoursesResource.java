@@ -19,36 +19,37 @@ import org.springframework.web.bind.annotation.RestController;
 import org.zalando.problem.Problem;
 import org.zalando.problem.violations.ConstraintViolationProblem;
 
+import se.sundsvall.educationfinder.api.model.PagedCoursesResponse;
+import se.sundsvall.educationfinder.api.model.enums.CourseFilter;
+import se.sundsvall.educationfinder.integration.db.specification.CourseSpecification;
+import se.sundsvall.educationfinder.service.CourseService;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import se.sundsvall.educationfinder.api.model.PagedCoursesResponse;
-import se.sundsvall.educationfinder.api.model.enums.CourseFilter;
-import se.sundsvall.educationfinder.integration.db.specification.CourseSpecification;
-import se.sundsvall.educationfinder.service.CourseService;
 
 @RestController
 @Validated
-@RequestMapping(path = "/courses", produces = { APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE })
+@RequestMapping(path = "/courses", produces = {APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE})
 @Tag(name = "Courses", description = "Find courses")
 @ApiResponse(responseCode = "200", description = "Successful operation", useReturnTypeSchema = true)
-@ApiResponse(responseCode = "400", description = "Bad request", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(oneOf = { Problem.class, ConstraintViolationProblem.class })))
+@ApiResponse(responseCode = "400", description = "Bad request", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(oneOf = {Problem.class, ConstraintViolationProblem.class})))
 @ApiResponse(responseCode = "404", description = "Not found", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
 @ApiResponse(responseCode = "500", description = "Internal Server error", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
 class CoursesResource {
 
 	private final CourseService courseService;
 
-	CoursesResource(CourseService courseService) {
+	CoursesResource(final CourseService courseService) {
 		this.courseService = courseService;
 	}
 
 	@GetMapping
 	@Operation(summary = "Find course", description = FIND_COURSE_DESCRIPTION)
-	ResponseEntity<PagedCoursesResponse> find(CourseSpecification specification, @ParameterObject Pageable pageable) {
+	ResponseEntity<PagedCoursesResponse> find(final CourseSpecification specification, @ParameterObject final Pageable pageable) {
 		return ok(courseService.find(specification, pageable));
 	}
 
