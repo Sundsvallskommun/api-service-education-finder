@@ -15,16 +15,18 @@ import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.ST
 
 import org.springframework.data.jpa.domain.Specification;
 
+import se.sundsvall.educationfinder.integration.db.model.CourseEntity;
+
 import net.kaczmarzyk.spring.data.jpa.domain.Equal;
 import net.kaczmarzyk.spring.data.jpa.domain.EqualIgnoreCase;
 import net.kaczmarzyk.spring.data.jpa.domain.GreaterThan;
 import net.kaczmarzyk.spring.data.jpa.domain.LessThan;
 import net.kaczmarzyk.spring.data.jpa.domain.LikeIgnoreCase;
 import net.kaczmarzyk.spring.data.jpa.web.annotation.And;
+import net.kaczmarzyk.spring.data.jpa.web.annotation.Or;
 import net.kaczmarzyk.spring.data.jpa.web.annotation.Spec;
-import se.sundsvall.educationfinder.integration.db.model.CourseEntity;
 
-@And(value = {
+@And({
 	@Spec(params = "code", path = CODE, spec = EqualIgnoreCase.class),
 	@Spec(params = "name", path = NAME, spec = LikeIgnoreCase.class),
 	@Spec(params = "provider", path = PROVIDER, spec = LikeIgnoreCase.class),
@@ -45,6 +47,11 @@ import se.sundsvall.educationfinder.integration.db.model.CourseEntity;
 	@Spec(params = "latestApplicationBefore", path = LATEST_APPLICATION, spec = LessThan.class),
 	@Spec(params = "latestApplicationAfter", path = LATEST_APPLICATION, spec = GreaterThan.class),
 	@Spec(params = "information", path = INFORMATION, spec = LikeIgnoreCase.class)
+})
+@Or({
+	@Spec(params = "searchString", path = CODE, spec = LikeIgnoreCase.class),
+	@Spec(params = "searchString", path = NAME, spec = LikeIgnoreCase.class),
+	@Spec(params = "searchString", path = INFORMATION, spec = LikeIgnoreCase.class)
 })
 public interface CourseSpecification extends Specification<CourseEntity> {
 }

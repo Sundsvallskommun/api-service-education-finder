@@ -6,8 +6,12 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 import java.time.LocalDate;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -347,5 +351,36 @@ class CoursesResourceTest {
 		assertThat(response)
 			.hasSize(5)
 			.containsExactly("HÄRNÖSAND", "KRAMFORS", "SUNDSVALL", "ÖRNSKÖLDSVIK", "ÖSTERSUND");
+	}
+
+	private static Stream<Arguments> queryParameters() {
+		return Stream.of(
+			Arguments.of("Sundsvall", "vuxenutbildning", "matematik", 101),
+			Arguments.of("Sundsvall", "grundläggande", "kemi", 5),
+			Arguments.of("Kramfors", "yrkeshögskoleutbildning", "möbelsnickare", 3));
+	}
+
+	@ParameterizedTest
+	@MethodSource("queryParameters")
+	void findAllOnSpecificStudyLocationAndLevelWithCustomSearchString(final String studyLocation, final String level, final String searchString, final Integer matches) {
+
+		final var response = webTestClient.get()
+			.uri(builder -> builder.path("/courses")
+				.queryParam("studyLocation", studyLocation)
+				.queryParam("level", level)
+				.queryParam("searchString", searchString)
+				.build())
+			.exchange()
+			.expectStatus().isOk()
+			.expectHeader().contentType(APPLICATION_JSON)
+			.expectBody(PagedCoursesResponse.class)
+			.returnResult()
+			.getResponseBody();
+
+		assertThat(response).isNotNull();
+		assertThat(response.getMetadata().getLimit()).isEqualTo(20);
+		assertThat(response.getMetadata().getPage()).isZero();
+		assertThat(response.getMetadata().getTotalRecords()).isEqualTo(matches.longValue());
+		assertThat(response.getMetadata().getTotalPages()).isEqualTo((matches.longValue() / 20) + 1);
 	}
 }
