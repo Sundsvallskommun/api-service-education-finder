@@ -362,7 +362,7 @@ class CoursesResourceTest {
 
 	@ParameterizedTest
 	@MethodSource("queryParameters")
-	void findAllOnSpecificStudyLocationWithCustomSearchString(final String studyLocation, final String level, final String searchString, final Integer matches) {
+	void findAllOnSpecificStudyLocationAndLevelWithCustomSearchString(final String studyLocation, final String level, final String searchString, final Integer matches) {
 
 		final var response = webTestClient.get()
 			.uri(builder -> builder.path("/courses")

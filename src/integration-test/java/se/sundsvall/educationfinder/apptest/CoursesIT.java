@@ -214,4 +214,14 @@ class CoursesIT extends AbstractAppTest {
 			.sendRequestAndVerifyResponse();
 	}
 
+	@Test
+	void test21_findAllByStudyLocationAndSearchStringMatchingName() {
+		setupCall()
+			.withServicePath("/courses?studyLocation=Härnösand&searchString=Drifttekniker")
+			.withHttpMethod(GET)
+			.withExpectedResponseStatus(OK)
+			.withExpectedResponse(RESPONSE_FILE)
+			.sendRequestAndVerifyResponse();
+	}
+
 }
