@@ -3,8 +3,6 @@ package se.sundsvall.educationfinder.api;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.MediaType.APPLICATION_PROBLEM_JSON_VALUE;
 import static org.springframework.http.ResponseEntity.ok;
-import static se.sundsvall.educationfinder.api.model.ApiConstants.FIND_COURSE_DESCRIPTION;
-import static se.sundsvall.educationfinder.api.model.ApiConstants.FIND_FILTER_VALUES_DESCRITPTION;
 
 import java.util.List;
 
@@ -32,8 +30,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @Validated
-@RequestMapping(path = "/courses", produces = {APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE})
-@Tag(name = "Courses", description = "Get statistics")
+@RequestMapping(path = "/statistics", produces = {APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE})
+@Tag(name = "Statistics", description = "Get statistics")
 @ApiResponse(responseCode = "200", description = "Successful operation", useReturnTypeSchema = true)
 @ApiResponse(responseCode = "400", description = "Bad request", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(oneOf = {Problem.class, ConstraintViolationProblem.class})))
 @ApiResponse(responseCode = "404", description = "Not found", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
@@ -47,15 +45,16 @@ class StatisticsResource {
 	}
 
 	@GetMapping
-	@Operation(summary = "Find course", description = FIND_COURSE_DESCRIPTION)
+	@Operation(summary = "Get statistics based on given parameters")
 	ResponseEntity<Statistics> find(@ParameterObject final StatisticsParameters parameters) {
 		return ok().build();
 	}
 
 	@GetMapping(path = "/filters/{courseFilter}/values")
-	@Operation(summary = "Find available filter values", description = FIND_FILTER_VALUES_DESCRITPTION)
+	@Operation(summary = "Find available filter values")
 	ResponseEntity<List<String>> findFilterValues(@Parameter(description = "The attribute name to get available values from") @PathVariable final StatisticsFilter statisticsFilter) {
-		return ok().build();
+		var validValues = service.findStatisticsFilterValues(statisticsFilter);
+		return ok(validValues);
 	}
 
 }
