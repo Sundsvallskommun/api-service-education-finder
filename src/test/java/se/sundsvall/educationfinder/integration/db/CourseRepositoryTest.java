@@ -25,9 +25,9 @@ import se.sundsvall.educationfinder.integration.db.model.projection.ScopeProject
 import se.sundsvall.educationfinder.integration.db.model.projection.StudyLocationProjection;
 
 /**
- * DocumentRepository tests.
+ * CourseRepository tests.
  *
- * @see /src/test/resources/db/testdata-junit.sql for data setup.
+ * @see /src/test/resources/db/scripts/testdata.sql for data setup.
  */
 @DataJpaTest
 @Transactional

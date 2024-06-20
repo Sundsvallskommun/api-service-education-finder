@@ -16,7 +16,7 @@ public class SubjectEntity {
 	private Long id;
 
 	@Column(name = "AmnesId")
-	private Long subjectId;
+	private Integer subjectId;
 
 	@Column(name = "Amne")
 	private String subject;
@@ -27,8 +27,11 @@ public class SubjectEntity {
 	@Column(name = "Amneskyp")
 	private String educationForm;
 
+	@Column(name = "Amneskod")
+	private String subjectCode;
+
 	@Column(name = "OmradeId")
-	private Long categoryId;
+	private Integer categoryId;
 
 	@Column(name = "Omrade")
 	private String category;
@@ -37,7 +40,7 @@ public class SubjectEntity {
 	private String categoryEnglish;
 
 	@Column(name = "InriktningId")
-	private Long branchId;
+	private Integer branchId;
 
 	@Column(name = "Inriktning")
 	private String branch;
@@ -62,15 +65,15 @@ public class SubjectEntity {
 		return this;
 	}
 
-	public Long getSubjectId() {
+	public Integer getSubjectId() {
 		return subjectId;
 	}
 
-	public void setSubjectId(final Long subjectId) {
+	public void setSubjectId(final Integer subjectId) {
 		this.subjectId = subjectId;
 	}
 
-	public SubjectEntity withSubjectId(final Long subjectId) {
+	public SubjectEntity withSubjectId(final Integer subjectId) {
 		this.subjectId = subjectId;
 		return this;
 	}
@@ -114,15 +117,15 @@ public class SubjectEntity {
 		return this;
 	}
 
-	public Long getCategoryId() {
+	public Integer getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategoryId(final Long categoryId) {
+	public void setCategoryId(final Integer categoryId) {
 		this.categoryId = categoryId;
 	}
 
-	public SubjectEntity withCategoryId(final Long categoryId) {
+	public SubjectEntity withCategoryId(final Integer categoryId) {
 		this.categoryId = categoryId;
 		return this;
 	}
@@ -153,15 +156,15 @@ public class SubjectEntity {
 		return this;
 	}
 
-	public Long getBranchId() {
+	public Integer getBranchId() {
 		return branchId;
 	}
 
-	public void setBranchId(final Long branchId) {
+	public void setBranchId(final Integer branchId) {
 		this.branchId = branchId;
 	}
 
-	public SubjectEntity withBranchId(final Long branchId) {
+	public SubjectEntity withBranchId(final Integer branchId) {
 		this.branchId = branchId;
 		return this;
 	}
@@ -192,17 +195,17 @@ public class SubjectEntity {
 		return this;
 	}
 
-	@Override
-	public boolean equals(final Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		final SubjectEntity that = (SubjectEntity) o;
-		return Objects.equals(id, that.id) && Objects.equals(subjectId, that.subjectId) && Objects.equals(subject, that.subject) && Objects.equals(subjectEnglish, that.subjectEnglish) && Objects.equals(educationForm, that.educationForm) && Objects.equals(categoryId, that.categoryId) && Objects.equals(category, that.category) && Objects.equals(categoryEnglish, that.categoryEnglish) && Objects.equals(branchId, that.branchId) && Objects.equals(branch, that.branch) && Objects.equals(branchEnglish, that.branchEnglish);
+	public String getSubjectCode() {
+		return subjectCode;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id, subjectId, subject, subjectEnglish, educationForm, categoryId, category, categoryEnglish, branchId, branch, branchEnglish);
+	public void setSubjectCode(final String subjectCode) {
+		this.subjectCode = subjectCode;
+	}
+
+	public SubjectEntity withSubjectCode(final String subjectCode) {
+		this.subjectCode = subjectCode;
+		return this;
 	}
 
 	@Override
@@ -213,6 +216,7 @@ public class SubjectEntity {
 			", subject='" + subject + '\'' +
 			", subjectEnglish='" + subjectEnglish + '\'' +
 			", educationForm='" + educationForm + '\'' +
+			", subjectCode='" + subjectCode + '\'' +
 			", categoryId=" + categoryId +
 			", category='" + category + '\'' +
 			", categoryEnglish='" + categoryEnglish + '\'' +
@@ -220,5 +224,18 @@ public class SubjectEntity {
 			", branch='" + branch + '\'' +
 			", branchEnglish='" + branchEnglish + '\'' +
 			'}';
+	}
+
+	@Override
+	public boolean equals(final Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		final SubjectEntity that = (SubjectEntity) o;
+		return Objects.equals(id, that.id) && Objects.equals(subjectId, that.subjectId) && Objects.equals(subject, that.subject) && Objects.equals(subjectEnglish, that.subjectEnglish) && Objects.equals(educationForm, that.educationForm) && Objects.equals(subjectCode, that.subjectCode) && Objects.equals(categoryId, that.categoryId) && Objects.equals(category, that.category) && Objects.equals(categoryEnglish, that.categoryEnglish) && Objects.equals(branchId, that.branchId) && Objects.equals(branch, that.branch) && Objects.equals(branchEnglish, that.branchEnglish);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, subjectId, subject, subjectEnglish, educationForm, subjectCode, categoryId, category, categoryEnglish, branchId, branch, branchEnglish);
 	}
 }

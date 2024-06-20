@@ -26,14 +26,15 @@ class SubjectEntityTest {
 	@Test
 	void testBuilderMethods() {
 		final var id = 1L;
-		final var subjectId = 2L;
+		final var subjectId = 2;
 		final var subject = "subject";
 		final var subjectEnglish = "subjectEnglish";
 		final var educationForm = "educationForm";
-		final var categoryId = 3L;
+		final var subjectCode = "subjectCode";
+		final var categoryId = 3;
 		final var category = "category";
 		final var categoryEnglish = "categoryEnglish";
-		final var branchId = 4L;
+		final var branchId = 4;
 		final var branch = "branch";
 		final var branchEnglish = "branchEnglish";
 
@@ -41,6 +42,7 @@ class SubjectEntityTest {
 			.withId(id)
 			.withSubjectId(subjectId)
 			.withSubject(subject)
+			.withSubjectCode(subjectCode)
 			.withSubjectEnglish(subjectEnglish)
 			.withEducationForm(educationForm)
 			.withCategoryId(categoryId)
@@ -53,6 +55,7 @@ class SubjectEntityTest {
 		Assertions.assertThat(bean).isNotNull().hasNoNullFieldsOrProperties();
 		Assertions.assertThat(bean.getId()).isEqualTo(id);
 		Assertions.assertThat(bean.getSubjectId()).isEqualTo(subjectId);
+		Assertions.assertThat(bean.getSubjectCode()).isEqualTo(subjectCode);
 		Assertions.assertThat(bean.getSubject()).isEqualTo(subject);
 		Assertions.assertThat(bean.getSubjectEnglish()).isEqualTo(subjectEnglish);
 		Assertions.assertThat(bean.getEducationForm()).isEqualTo(educationForm);
