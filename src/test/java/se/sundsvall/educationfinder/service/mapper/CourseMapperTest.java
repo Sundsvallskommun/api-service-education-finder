@@ -21,7 +21,7 @@ import se.sundsvall.educationfinder.integration.db.model.CourseEntity;
 class CourseMapperTest {
 
 	private final static String CODE = "code";
-	private final static BigDecimal CREDITS = new BigDecimal(50.0);
+	private final static BigDecimal CREDITS = new BigDecimal("50.0");
 	private final static String PROVIDER = "provider";
 	private final static LocalDate START = LocalDate.now();
 	private final static LocalDate END = LocalDate.now().plusDays(1);
@@ -32,7 +32,7 @@ class CourseMapperTest {
 	private final static Integer NUMBER_OF_SEATS = 1;
 	private final static String PROVIDER_URL = "providerUrl";
 	private final static String INFORMATION = "information";
-	private final static BigDecimal SCOPE = new BigDecimal(100.0);
+	private final static BigDecimal SCOPE = new BigDecimal("100.0");
 	private final static String STUDY_LOCATION = "studyLocation";
 	private final static String SUBJECT_CODE = "subjectCode";
 	private final static String URL = "url";
@@ -153,6 +153,7 @@ class CourseMapperTest {
 				.withUrl(URL));
 	}
 
+	@Test
 	void toPagedCoursesResponseWhenInputIsNull() {
 		assertThat(CourseMapper.toPagedCoursesResponse(null)).isNull();
 	}

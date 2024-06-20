@@ -54,4 +54,5 @@ import net.kaczmarzyk.spring.data.jpa.web.annotation.Spec;
 	@Spec(params = "searchString", path = INFORMATION, spec = LikeIgnoreCase.class)
 })
 public interface CourseSpecification extends Specification<CourseEntity> {
+
 }
