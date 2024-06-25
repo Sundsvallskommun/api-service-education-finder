@@ -45,8 +45,7 @@ class StatisticsResourceTest {
 			.returnResult()
 			.getResponseBody();
 
-		assertThat(response).isNotNull();
-		assertThat(response).containsExactlyInAnyOrder("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21");
+		assertThat(response).isNotNull().containsExactlyInAnyOrder("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21");
 	}
 
 	@Test
@@ -60,8 +59,7 @@ class StatisticsResourceTest {
 			.returnResult()
 			.getResponseBody();
 
-		assertThat(response).isNotNull();
-		assertThat(response).containsExactlyInAnyOrder("BYGG OCH ANLÄGGNING",
+		assertThat(response).isNotNull().containsExactlyInAnyOrder("BYGG OCH ANLÄGGNING",
 			"DATA OCH IT",
 			"EKONOMI, MARKNADSFÖRING OCH ADMINISTRATION",
 			"FRISK- OCH SKÖNHETSVÅRD",
@@ -95,8 +93,7 @@ class StatisticsResourceTest {
 			.returnResult()
 			.getResponseBody();
 
-		assertThat(response).isNotNull();
-		assertThat(response).containsExactlyInAnyOrder("AUB", "FHSK", "SV", "UOH", "YH");
+		assertThat(response).isNotNull().containsExactlyInAnyOrder("AUB", "FHSK", "SV", "UOH", "YH");
 	}
 
 	@Test
@@ -110,8 +107,7 @@ class StatisticsResourceTest {
 			.returnResult()
 			.getResponseBody();
 
-		assertThat(response).isNotNull();
-		assertThat(response).containsExactlyInAnyOrder("HÄRNÖSAND", "KRAMFORS", "SUNDSVALL", "ÖRNSKÖLDSVIK", "ÖSTERSUND");
+		assertThat(response).isNotNull().containsExactlyInAnyOrder("HÄRNÖSAND", "KRAMFORS", "SUNDSVALL", "ÖRNSKÖLDSVIK", "ÖSTERSUND");
 	}
 
 	@Test
@@ -124,8 +120,8 @@ class StatisticsResourceTest {
 			.expectBody(String[].class)
 			.returnResult()
 			.getResponseBody();
-		assertThat(response).isNotNull();
-		assertThat(response).containsExactlyInAnyOrder("Any date in this format: yyyy-MM-dd");
+
+		assertThat(response).isNotNull().containsExactlyInAnyOrder("Any date in this format: yyyy-MM-dd");
 	}
 
 	@Test
@@ -139,8 +135,7 @@ class StatisticsResourceTest {
 			.returnResult()
 			.getResponseBody();
 
-		assertThat(response).isNotNull();
-		assertThat(response).containsExactlyInAnyOrder("Any date in this format: yyyy-MM-dd");
+		assertThat(response).isNotNull().containsExactlyInAnyOrder("Any date in this format: yyyy-MM-dd");
 	}
 
 
@@ -162,11 +157,11 @@ class StatisticsResourceTest {
 			.getResponseBody();
 
 		assertThat(response).isNotNull();
-		assertThat(response.getFinishedCourses()).isEqualTo(0);
-		assertThat(response.getOnGoingCourses()).isEqualTo(0);
-		assertThat(response.getPlannedCourses()).isEqualTo(0);
-		assertThat(response.getAvailableSeats()).isEqualTo(0);
-		assertThat(response.getTotalCapacity()).isEqualTo(0);
+		assertThat(response.getFinishedCourses()).isZero();
+		assertThat(response.getOnGoingCourses()).isZero();
+		assertThat(response.getPlannedCourses()).isZero();
+		assertThat(response.getAvailableSeats()).isZero();
+		assertThat(response.getTotalCapacity()).isZero();
 
 		assertThat(response.getStartDate()).isEqualTo(startDate);
 		assertThat(response.getEndDate()).isEqualTo(endDate);
@@ -194,10 +189,10 @@ class StatisticsResourceTest {
 
 		assertThat(response).isNotNull();
 		assertThat(response.getFinishedCourses()).isEqualTo(772);
-		assertThat(response.getOnGoingCourses()).isEqualTo(0);
 		assertThat(response.getPlannedCourses()).isEqualTo(792);
-		assertThat(response.getAvailableSeats()).isEqualTo(0);
-		assertThat(response.getTotalCapacity()).isEqualTo(0);
+		assertThat(response.getOnGoingCourses()).isZero();
+		assertThat(response.getAvailableSeats()).isZero();
+		assertThat(response.getTotalCapacity()).isZero();
 
 		assertThat(response.getStartDate()).isEqualTo(startDate);
 		assertThat(response.getEndDate()).isEqualTo(endDate);
@@ -226,10 +221,10 @@ class StatisticsResourceTest {
 
 		assertThat(response).isNotNull();
 		assertThat(response.getFinishedCourses()).isEqualTo(12);
-		assertThat(response.getOnGoingCourses()).isEqualTo(0);
 		assertThat(response.getPlannedCourses()).isEqualTo(12);
-		assertThat(response.getAvailableSeats()).isEqualTo(0);
-		assertThat(response.getTotalCapacity()).isEqualTo(0);
+		assertThat(response.getOnGoingCourses()).isZero();
+		assertThat(response.getAvailableSeats()).isZero();
+		assertThat(response.getTotalCapacity()).isZero();
 
 		assertThat(response.getStartDate()).isEqualTo(startDate);
 		assertThat(response.getEndDate()).isEqualTo(endDate);
@@ -258,10 +253,10 @@ class StatisticsResourceTest {
 
 		assertThat(response).isNotNull();
 		assertThat(response.getFinishedCourses()).isEqualTo(156);
-		assertThat(response.getOnGoingCourses()).isEqualTo(0);
 		assertThat(response.getPlannedCourses()).isEqualTo(156);
-		assertThat(response.getAvailableSeats()).isEqualTo(0);
-		assertThat(response.getTotalCapacity()).isEqualTo(0);
+		assertThat(response.getOnGoingCourses()).isZero();
+		assertThat(response.getAvailableSeats()).isZero();
+		assertThat(response.getTotalCapacity()).isZero();
 
 		assertThat(response.getStartDate()).isEqualTo(startDate);
 		assertThat(response.getEndDate()).isEqualTo(endDate);
@@ -290,10 +285,10 @@ class StatisticsResourceTest {
 
 		assertThat(response).isNotNull();
 		assertThat(response.getFinishedCourses()).isEqualTo(520);
-		assertThat(response.getOnGoingCourses()).isEqualTo(0);
 		assertThat(response.getPlannedCourses()).isEqualTo(792);
-		assertThat(response.getAvailableSeats()).isEqualTo(0);
-		assertThat(response.getTotalCapacity()).isEqualTo(0);
+		assertThat(response.getOnGoingCourses()).isZero();
+		assertThat(response.getAvailableSeats()).isZero();
+		assertThat(response.getTotalCapacity()).isZero();
 
 		assertThat(response.getStartDate()).isEqualTo(startDate);
 		assertThat(response.getEndDate()).isEqualTo(endDate);

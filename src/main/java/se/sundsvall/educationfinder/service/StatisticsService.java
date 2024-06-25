@@ -51,8 +51,6 @@ public class StatisticsService {
 	}
 
 	public Statistics calculateStatistics(final StatisticsParameters parameters, final List<CourseEntity> courses) {
-		var statistics = new Statistics();
-
 		var ongoingCourses = courses.stream()
 			.filter(course -> course.getStart().isBefore(parameters.getStartDate()) && course.getEnd().isAfter(parameters.getEndDate()))
 			.count();
@@ -76,7 +74,7 @@ public class StatisticsService {
 			.mapToInt(CourseEntity::getNumberOfSeats)
 			.sum();
 
-		return statistics
+		return new Statistics()
 			.withOnGoingCourses((int) ongoingCourses)
 			.withPlannedCourses((int) plannedCourses)
 			.withFinishedCourses((int) finishedCourses)

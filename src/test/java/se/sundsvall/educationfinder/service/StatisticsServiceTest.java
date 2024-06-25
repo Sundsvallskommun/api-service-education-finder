@@ -82,13 +82,6 @@ class StatisticsServiceTest {
 		verify(courseRepositoryMock).findDistinctBy(StudyLocationProjection.class, Sort.by(STUDY_LOCATION));
 	}
 
-	private static Stream<Arguments> calculateStatisticsArgumentProvider() {
-		return Stream.of(
-			Arguments.of(new StatisticsParameters().withStartDate(LocalDate.of(2023, 1, 1)).withStartDate(LocalDate.of(2023, 12, 31)).withStudyLocations(List.of("Sundsvall"))),
-			Arguments.of(new StatisticsParameters().withStartDate(LocalDate.of(2022, 1, 1)).withStartDate(LocalDate.of(2024, 12, 31)).withEducationForms(List.of("YH"))));
-
-	}
-
 	private static Stream<Arguments> findStatisticsFilterValuesProvider() {
 		return Stream.of(
 			Arguments.of(StatisticsFilter.CATEGORY, CategoryProjection.class, CATEGORY),
