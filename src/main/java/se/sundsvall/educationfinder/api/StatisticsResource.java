@@ -55,8 +55,7 @@ class StatisticsResource {
 	@GetMapping(path = "/filters/{statisticsFilter}/values")
 	@Operation(summary = "Find available filter values")
 	ResponseEntity<List<String>> findFilterValues(@Parameter(description = "The attribute name to get available values from") @PathVariable final StatisticsFilter statisticsFilter) {
-		var validValues = service.findStatisticsFilterValues(statisticsFilter);
-		return ok(validValues);
+		return ok(service.findStatisticsFilterValues(statisticsFilter));
 	}
 
 }

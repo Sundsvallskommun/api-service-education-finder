@@ -146,14 +146,14 @@ class StatisticsResourceTest {
 
 	@Test
 	void getStatisticsByStudyLocation() {
-		var studyLocation = "sundsvall";
+		var studyLocations = List.of("HÄRNÖSAND", "KRAMFORS", "SUNDSVALL");
 		var startDate = LocalDate.of(2023, 1, 1);
 		var endDate = LocalDate.of(2023, 8, 1);
 
 		final var response = webTestClient.get()
 			.uri(builder -> builder
 				.path("/statistics")
-				.queryParams(createParameterMap(null, null, null, List.of(studyLocation), startDate, endDate))
+				.queryParams(createParameterMap(null, null, null, studyLocations, startDate, endDate))
 				.build())
 			.exchange()
 			.expectStatus().isOk()
@@ -173,7 +173,7 @@ class StatisticsResourceTest {
 		assertThat(response.getCategories()).isEmpty();
 		assertThat(response.getCategoryIds()).isEmpty();
 		assertThat(response.getEducationForms()).isEmpty();
-		assertThat(response.getStudyLocations()).containsExactly(studyLocation);
+		assertThat(response.getStudyLocations()).containsExactlyElementsOf(studyLocations);
 	}
 
 	@Test
@@ -209,14 +209,14 @@ class StatisticsResourceTest {
 
 	@Test
 	void getStatisticsByCategory() {
-		var category = "Data och IT";
+		var categories = List.of("FRISK- OCH SKÖNHETSVÅRD", "FÖRBEREDANDE UTBILDNINGAR", "HANTVERK");
 		var startDate = LocalDate.of(2023, 1, 1);
 		var endDate = LocalDate.of(2024, 8, 1);
 
 		final var response = webTestClient.get()
 			.uri(builder -> builder
 				.path("/statistics")
-				.queryParams(createParameterMap(List.of(category), null, null, null, startDate, endDate))
+				.queryParams(createParameterMap(categories, null, null, null, startDate, endDate))
 				.build())
 			.exchange()
 			.expectStatus().isOk()
@@ -225,15 +225,15 @@ class StatisticsResourceTest {
 			.getResponseBody();
 
 		assertThat(response).isNotNull();
-		assertThat(response.getFinishedCourses()).isEqualTo(47);
+		assertThat(response.getFinishedCourses()).isEqualTo(12);
 		assertThat(response.getOnGoingCourses()).isEqualTo(0);
-		assertThat(response.getPlannedCourses()).isEqualTo(47);
+		assertThat(response.getPlannedCourses()).isEqualTo(12);
 		assertThat(response.getAvailableSeats()).isEqualTo(0);
 		assertThat(response.getTotalCapacity()).isEqualTo(0);
 
 		assertThat(response.getStartDate()).isEqualTo(startDate);
 		assertThat(response.getEndDate()).isEqualTo(endDate);
-		assertThat(response.getCategories()).containsExactly(category);
+		assertThat(response.getCategories()).containsExactlyElementsOf(categories);
 		assertThat(response.getCategoryIds()).isEmpty();
 		assertThat(response.getStudyLocations()).isEmpty();
 		assertThat(response.getEducationForms()).isEmpty();
@@ -241,14 +241,14 @@ class StatisticsResourceTest {
 
 	@Test
 	void getStatisticsByCategoryId() {
-		var categoryId = "1";
+		var categoryIds = List.of("1", "2", "3", "4", "5");
 		var startDate = LocalDate.of(2022, 1, 1);
 		var endDate = LocalDate.of(2024, 10, 1);
 
 		final var response = webTestClient.get()
 			.uri(builder -> builder
 				.path("/statistics")
-				.queryParams(createParameterMap(null, List.of(categoryId), null, null, startDate, endDate))
+				.queryParams(createParameterMap(null, categoryIds, null, null, startDate, endDate))
 				.build())
 			.exchange()
 			.expectStatus().isOk()
@@ -257,15 +257,15 @@ class StatisticsResourceTest {
 			.getResponseBody();
 
 		assertThat(response).isNotNull();
-		assertThat(response.getFinishedCourses()).isEqualTo(18);
+		assertThat(response.getFinishedCourses()).isEqualTo(156);
 		assertThat(response.getOnGoingCourses()).isEqualTo(0);
-		assertThat(response.getPlannedCourses()).isEqualTo(18);
+		assertThat(response.getPlannedCourses()).isEqualTo(156);
 		assertThat(response.getAvailableSeats()).isEqualTo(0);
 		assertThat(response.getTotalCapacity()).isEqualTo(0);
 
 		assertThat(response.getStartDate()).isEqualTo(startDate);
 		assertThat(response.getEndDate()).isEqualTo(endDate);
-		assertThat(response.getCategoryIds()).containsExactly(categoryId);
+		assertThat(response.getCategoryIds()).containsExactlyElementsOf(categoryIds);
 		assertThat(response.getCategories()).isEmpty();
 		assertThat(response.getStudyLocations()).isEmpty();
 		assertThat(response.getEducationForms()).isEmpty();
@@ -273,14 +273,14 @@ class StatisticsResourceTest {
 
 	@Test
 	void getStatisticsByEducationForm() {
-		var educationForm = "SV";
+		var educationForms = List.of("SV", "AUB", "FHSK");
 		var startDate = LocalDate.of(2023, 3, 1);
 		var endDate = LocalDate.of(2024, 2, 1);
 
 		final var response = webTestClient.get()
 			.uri(builder -> builder
 				.path("/statistics")
-				.queryParams(createParameterMap(null, null, List.of(educationForm), null, startDate, endDate))
+				.queryParams(createParameterMap(null, null, educationForms, null, startDate, endDate))
 				.build())
 			.exchange()
 			.expectStatus().isOk()
@@ -297,7 +297,7 @@ class StatisticsResourceTest {
 
 		assertThat(response.getStartDate()).isEqualTo(startDate);
 		assertThat(response.getEndDate()).isEqualTo(endDate);
-		assertThat(response.getEducationForms()).containsExactly(educationForm);
+		assertThat(response.getEducationForms()).containsExactlyElementsOf(educationForms);
 		assertThat(response.getCategoryIds()).isEmpty();
 		assertThat(response.getCategories()).isEmpty();
 		assertThat(response.getStudyLocations()).isEmpty();
