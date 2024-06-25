@@ -19,10 +19,10 @@ public enum StatisticsFilter {
 
 	@Override
 	public String toString() {
-		return new StatisticsFilter.SubjectFilterConverter().convert(this);
+		return new StatisticsFilter.StatisticsFilterConverter().convert(this);
 	}
 
-	public static class SubjectFilterConverter implements Converter<StatisticsFilter, String> {
+	public static class StatisticsFilterConverter implements Converter<StatisticsFilter, String> {
 		@Override
 		public String convert(final StatisticsFilter source) {
 			return UPPER_UNDERSCORE.to(LOWER_CAMEL, source.name());

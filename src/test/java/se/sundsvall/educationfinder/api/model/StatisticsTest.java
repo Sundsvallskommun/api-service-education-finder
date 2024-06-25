@@ -45,6 +45,7 @@ class StatisticsTest {
 		var studyLocations = List.of("studyLocations");
 		var educationForms = List.of("educationForms");
 		var categories = List.of("categories");
+		var categoryIds = List.of("categoryIds");
 		var startDate = LocalDate.now();
 		var endDate = LocalDate.now().plusDays(1);
 
@@ -57,6 +58,7 @@ class StatisticsTest {
 			.withStudyLocations(studyLocations)
 			.withEducationForms(educationForms)
 			.withCategories(categories)
+			.withCategoryIds(categoryIds)
 			.withStartDate(startDate)
 			.withEndDate(endDate);
 
@@ -69,13 +71,14 @@ class StatisticsTest {
 		Assertions.assertThat(bean.getStudyLocations()).isEqualTo(studyLocations);
 		Assertions.assertThat(bean.getEducationForms()).isEqualTo(educationForms);
 		Assertions.assertThat(bean.getCategories()).isEqualTo(categories);
+		Assertions.assertThat(bean.getCategoryIds()).isEqualTo(categoryIds);
 		Assertions.assertThat(bean.getStartDate()).isEqualTo(startDate);
 		Assertions.assertThat(bean.getEndDate()).isEqualTo(endDate);
 	}
 
 	@Test
 	void testNoDirtOnCreatedBean() {
-		Assertions.assertThat(Statistics.create()).hasAllNullFieldsOrProperties();
-		Assertions.assertThat(new Statistics()).hasAllNullFieldsOrProperties();
+		Assertions.assertThat(Statistics.create()).hasNoNullFieldsOrPropertiesExcept("startDate", "endDate");
+		Assertions.assertThat(new Statistics()).hasNoNullFieldsOrPropertiesExcept("startDate", "endDate");
 	}
 }

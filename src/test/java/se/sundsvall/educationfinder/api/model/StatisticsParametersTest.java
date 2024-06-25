@@ -11,6 +11,7 @@ import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Random;
 
 import org.assertj.core.api.Assertions;
@@ -36,26 +37,26 @@ class StatisticsParametersTest {
 
 	@Test
 	void testBuilderMethods() {
-		var category = "category";
-		var categoryId = "categoryId";
-		var educationForm = "educationForm";
-		var studyLocation = "studyLocation";
+		var categories = List.of("category");
+		var categoryIds = List.of("categoryId");
+		var educationForms = List.of("educationForm");
+		var studyLocations = List.of("studyLocation");
 		var startDate = LocalDate.now();
 		var endDate = LocalDate.now().plusDays(1);
 
 		var bean = StatisticsParameters.create()
-			.withCategory(category)
-			.withCategoryId(categoryId)
-			.withEducationForm(educationForm)
-			.withStudyLocation(studyLocation)
+			.withCategories(categories)
+			.withCategoryIds(categoryIds)
+			.withEducationForms(educationForms)
+			.withStudyLocations(studyLocations)
 			.withStartDate(startDate)
 			.withEndDate(endDate);
 
 		Assertions.assertThat(bean).isNotNull().hasNoNullFieldsOrProperties();
-		Assertions.assertThat(bean.getCategory()).isEqualTo(category);
-		Assertions.assertThat(bean.getCategoryId()).isEqualTo(categoryId);
-		Assertions.assertThat(bean.getEducationForm()).isEqualTo(educationForm);
-		Assertions.assertThat(bean.getStudyLocation()).isEqualTo(studyLocation);
+		Assertions.assertThat(bean.getCategories()).isEqualTo(categories);
+		Assertions.assertThat(bean.getCategoryIds()).isEqualTo(categoryIds);
+		Assertions.assertThat(bean.getEducationForms()).isEqualTo(educationForms);
+		Assertions.assertThat(bean.getStudyLocations()).isEqualTo(studyLocations);
 		Assertions.assertThat(bean.getStartDate()).isEqualTo(startDate);
 		Assertions.assertThat(bean.getEndDate()).isEqualTo(endDate);
 	}

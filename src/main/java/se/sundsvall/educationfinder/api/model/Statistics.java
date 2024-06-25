@@ -3,6 +3,7 @@ package se.sundsvall.educationfinder.api.model;
 import static io.swagger.v3.oas.annotations.media.Schema.AccessMode.READ_ONLY;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,28 +13,31 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public class Statistics {
 
 	@Schema(description = "Number of on-going courses", example = "10", accessMode = READ_ONLY)
-	private Integer onGoingCourses;
+	private int onGoingCourses;
 
 	@Schema(description = "Number of planned courses", example = "10", accessMode = READ_ONLY)
-	private Integer plannedCourses;
+	private int plannedCourses;
 
 	@Schema(description = "Number of finished courses", example = "10", accessMode = READ_ONLY)
-	private Integer finishedCourses;
+	private int finishedCourses;
 
 	@Schema(description = "Number of available seats", example = "10", accessMode = READ_ONLY)
-	private Integer availableSeats;
+	private int availableSeats;
 
 	@Schema(description = "Total capacity", example = "10", accessMode = READ_ONLY)
-	private Integer totalCapacity;
+	private int totalCapacity;
 
 	@Schema(description = "Study locations used for filtering", accessMode = READ_ONLY)
-	private List<String> studyLocations;
+	private List<String> studyLocations = new ArrayList<>();
 
 	@Schema(description = "Education forms used for filtering", accessMode = READ_ONLY)
-	private List<String> educationForms;
+	private List<String> educationForms = new ArrayList<>();
 
 	@Schema(description = "Categories used for filtering", accessMode = READ_ONLY)
-	private List<String> categories;
+	private List<String> categories = new ArrayList<>();
+
+	@Schema(description = "Category ids used for filtering", accessMode = READ_ONLY)
+	private List<String> categoryIds = new ArrayList<>();
 
 	@Schema(description = "Start date used for filtering", accessMode = READ_ONLY)
 	private LocalDate startDate;
@@ -45,67 +49,67 @@ public class Statistics {
 		return new Statistics();
 	}
 
-	public Integer getOnGoingCourses() {
+	public int getOnGoingCourses() {
 		return onGoingCourses;
 	}
 
-	public void setOnGoingCourses(final Integer onGoingCourses) {
+	public void setOnGoingCourses(final int onGoingCourses) {
 		this.onGoingCourses = onGoingCourses;
 	}
 
-	public Statistics withOnGoingCourses(final Integer onGoingCourses) {
+	public Statistics withOnGoingCourses(final int onGoingCourses) {
 		this.onGoingCourses = onGoingCourses;
 		return this;
 	}
 
-	public Integer getPlannedCourses() {
+	public int getPlannedCourses() {
 		return plannedCourses;
 	}
 
-	public void setPlannedCourses(final Integer plannedCourses) {
+	public void setPlannedCourses(final int plannedCourses) {
 		this.plannedCourses = plannedCourses;
 	}
 
-	public Statistics withPlannedCourses(final Integer plannedCourses) {
+	public Statistics withPlannedCourses(final int plannedCourses) {
 		this.plannedCourses = plannedCourses;
 		return this;
 	}
 
-	public Integer getFinishedCourses() {
+	public int getFinishedCourses() {
 		return finishedCourses;
 	}
 
-	public void setFinishedCourses(final Integer finishedCourses) {
+	public void setFinishedCourses(final int finishedCourses) {
 		this.finishedCourses = finishedCourses;
 	}
 
-	public Statistics withFinishedCourses(final Integer finishedCourses) {
+	public Statistics withFinishedCourses(final int finishedCourses) {
 		this.finishedCourses = finishedCourses;
 		return this;
 	}
 
-	public Integer getAvailableSeats() {
+	public int getAvailableSeats() {
 		return availableSeats;
 	}
 
-	public void setAvailableSeats(final Integer availableSeats) {
+	public void setAvailableSeats(final int availableSeats) {
 		this.availableSeats = availableSeats;
 	}
 
-	public Statistics withAvailableSeats(final Integer availableSeats) {
+	public Statistics withAvailableSeats(final int availableSeats) {
 		this.availableSeats = availableSeats;
 		return this;
 	}
 
-	public Integer getTotalCapacity() {
+	public int getTotalCapacity() {
 		return totalCapacity;
 	}
 
-	public void setTotalCapacity(final Integer totalCapacity) {
+	public void setTotalCapacity(final int totalCapacity) {
 		this.totalCapacity = totalCapacity;
 	}
 
-	public Statistics withTotalCapacity(final Integer totalCapacity) {
+	public Statistics withTotalCapacity(final int totalCapacity) {
 		this.totalCapacity = totalCapacity;
 		return this;
 	}
@@ -133,6 +137,19 @@ public class Statistics {
 
 	public Statistics withEducationForms(final List<String> educationForms) {
 		this.educationForms = educationForms;
+		return this;
+	}
+
+	public List<String> getCategoryIds() {
+		return categoryIds;
+	}
+
+	public void setCategoryIds(final List<String> categoryIds) {
+		this.categoryIds = categoryIds;
+	}
+
+	public Statistics withCategoryIds(final List<String> categoryIds) {
+		this.categoryIds = categoryIds;
 		return this;
 	}
 
@@ -186,6 +203,7 @@ public class Statistics {
 			", studyLocations=" + studyLocations +
 			", educationForms=" + educationForms +
 			", categories=" + categories +
+			", categoryIds=" + categoryIds +
 			", startDate=" + startDate +
 			", endDate=" + endDate +
 			'}';
@@ -196,11 +214,11 @@ public class Statistics {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		final Statistics that = (Statistics) o;
-		return Objects.equals(onGoingCourses, that.onGoingCourses) && Objects.equals(plannedCourses, that.plannedCourses) && Objects.equals(finishedCourses, that.finishedCourses) && Objects.equals(availableSeats, that.availableSeats) && Objects.equals(totalCapacity, that.totalCapacity) && Objects.equals(studyLocations, that.studyLocations) && Objects.equals(educationForms, that.educationForms) && Objects.equals(categories, that.categories) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate);
+		return Objects.equals(onGoingCourses, that.onGoingCourses) && Objects.equals(plannedCourses, that.plannedCourses) && Objects.equals(finishedCourses, that.finishedCourses) && Objects.equals(availableSeats, that.availableSeats) && Objects.equals(totalCapacity, that.totalCapacity) && Objects.equals(studyLocations, that.studyLocations) && Objects.equals(educationForms, that.educationForms) && Objects.equals(categories, that.categories) && Objects.equals(categoryIds, that.categoryIds) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(onGoingCourses, plannedCourses, finishedCourses, availableSeats, totalCapacity, studyLocations, educationForms, categories, startDate, endDate);
+		return Objects.hash(onGoingCourses, plannedCourses, finishedCourses, availableSeats, totalCapacity, studyLocations, educationForms, categories, categoryIds, startDate, endDate);
 	}
 }

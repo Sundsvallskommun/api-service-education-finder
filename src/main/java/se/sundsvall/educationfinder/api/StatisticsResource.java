@@ -6,6 +6,8 @@ import static org.springframework.http.ResponseEntity.ok;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
+
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -40,17 +42,17 @@ class StatisticsResource {
 
 	private final StatisticsService service;
 
-	public StatisticsResource(final StatisticsService service) {
+	StatisticsResource(final StatisticsService service) {
 		this.service = service;
 	}
 
 	@GetMapping
 	@Operation(summary = "Get statistics based on given parameters")
-	ResponseEntity<Statistics> find(@ParameterObject final StatisticsParameters parameters) {
-		return ok().build();
+	ResponseEntity<Statistics> getStatistics(@ParameterObject @Valid final StatisticsParameters parameters) {
+		return ok(service.getStatisticsByParameters(parameters));
 	}
 
-	@GetMapping(path = "/filters/{courseFilter}/values")
+	@GetMapping(path = "/filters/{statisticsFilter}/values")
 	@Operation(summary = "Find available filter values")
 	ResponseEntity<List<String>> findFilterValues(@Parameter(description = "The attribute name to get available values from") @PathVariable final StatisticsFilter statisticsFilter) {
 		var validValues = service.findStatisticsFilterValues(statisticsFilter);
