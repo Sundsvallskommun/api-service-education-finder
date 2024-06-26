@@ -159,24 +159,24 @@ class CourseRepositoryTest {
 	}
 
 	@ParameterizedTest
-	@MethodSource("findAllByParametersArguments")
-	void findAllByParameters(final StatisticsParameters parameters, final Integer matches) {
+	@MethodSource("findAllByParametersAndCodeArguments")
+	void findAllByParametersAndCode(final StatisticsParameters parameters, final Integer matches) {
 
-		var result = courseRepository.findAllByParameters(parameters, null);
+		var result = courseRepository.findAllByParametersAndCode(parameters, null);
 
 		assertThat(result).hasSize(matches);
 	}
 
 	@ParameterizedTest
-	@MethodSource("findAllByParametersAndCodesArguments")
-	void findAllByParametersAndCodes(final StatisticsParameters parameters, final Integer matches, final List<String> codes) {
+	@MethodSource("findAllByParametersAndCodeAndCodesArguments")
+	void findAllByParametersAndCodeAndCodes(final StatisticsParameters parameters, final Integer matches, final List<String> codes) {
 
-		var result = courseRepository.findAllByParameters(parameters, codes);
+		var result = courseRepository.findAllByParametersAndCode(parameters, codes);
 
 		assertThat(result).hasSize(matches);
 	}
 
-	private static Stream<Arguments> findAllByParametersArguments() {
+	private static Stream<Arguments> findAllByParametersAndCodeArguments() {
 		return Stream.of(
 			Arguments.of(StatisticsParameters.create().withStartDate(LocalDate.of(2024, 6, 1)).withEndDate(LocalDate.of(2024, 12, 1)), 39),
 			Arguments.of(StatisticsParameters.create().withStartDate(LocalDate.of(2024, 1, 1)).withEndDate(LocalDate.of(2024, 12, 1)).withStudyLocations(List.of("Sundsvall")), 296),
@@ -186,7 +186,7 @@ class CourseRepositoryTest {
 			Arguments.of(StatisticsParameters.create().withStartDate(LocalDate.of(2023, 1, 1)).withEndDate(LocalDate.of(2021, 12, 31)), 0));
 	}
 
-	private static Stream<Arguments> findAllByParametersAndCodesArguments() {
+	private static Stream<Arguments> findAllByParametersAndCodeAndCodesArguments() {
 		return Stream.of(
 			Arguments.of(StatisticsParameters.create().withStartDate(LocalDate.of(2023, 10, 31)).withEndDate(LocalDate.of(2024, 6, 6)), 25, List.of("GRNSVAC", "GRNSVAD", "GRNSVEB", "RLXAAR")),
 			Arguments.of(StatisticsParameters.create().withStudyLocations(List.of("Sundsvall")), 12, List.of("ADMADM01", "ADMADM02", "ADMADM00S", "ADMPER0"))

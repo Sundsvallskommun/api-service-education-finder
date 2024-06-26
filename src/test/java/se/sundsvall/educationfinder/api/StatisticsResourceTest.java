@@ -141,7 +141,6 @@ class StatisticsResourceTest {
 		assertThat(response).isNotNull().containsExactlyInAnyOrder("Any date in this format: yyyy-MM-dd");
 	}
 
-
 	@Test
 	void getStatisticsByStudyLocation() {
 		var studyLocations = List.of("HÄRNÖSAND", "KRAMFORS", "SUNDSVALL");
@@ -192,7 +191,7 @@ class StatisticsResourceTest {
 
 		assertThat(response).isNotNull();
 		assertThat(response.getFinishedCourses()).isEqualTo(772);
-		assertThat(response.getPlannedCourses()).isEqualTo(792);
+		assertThat(response.getPlannedCourses()).isEqualTo(802);
 		assertThat(response.getOnGoingCourses()).isZero();
 		assertThat(response.getAvailableSeats()).isZero();
 		assertThat(response.getTotalCapacity()).isZero();

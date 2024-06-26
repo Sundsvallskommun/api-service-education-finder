@@ -7,6 +7,7 @@ import static se.sundsvall.educationfinder.integration.db.model.SubjectEntity_.E
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.cache.annotation.Cacheable;
@@ -38,17 +39,23 @@ public class StatisticsService {
 	}
 
 	public Statistics getStatisticsByParameters(final StatisticsParameters parameters) {
-		var subjects = subjectRepository.findAllByParameters(parameters);
+		var codes = getSubjectCodes(parameters);
+		var courses = courseRepository.findAllByParametersAndCode(parameters, codes);
+		return calculateStatistics(parameters, courses);
+	}
 
-		var codes = subjects.stream()
+	private List<String> getSubjectCodes(final StatisticsParameters parameters) {
+		if (!parametersContainSubjectFilter(parameters)) {
+			return null;
+		}
+		return subjectRepository.findAllByParameters(parameters).stream()
 			.map(SubjectEntity::getSubjectCode)
 			.distinct()
 			.toList();
+	}
 
-		var courses = courseRepository.findAllByParameters(parameters, codes);
-
-		return calculateStatistics(parameters, courses);
-
+	private boolean parametersContainSubjectFilter(final StatisticsParameters parameters) {
+		return Stream.of(parameters.getCategories(), parameters.getCategoryIds(), parameters.getEducationForms()).anyMatch(Objects::nonNull);
 	}
 
 	public Statistics calculateStatistics(final StatisticsParameters parameters, final List<CourseEntity> courses) {
