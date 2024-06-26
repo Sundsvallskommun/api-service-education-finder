@@ -9,9 +9,11 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import se.sundsvall.educationfinder.api.converter.StringToCourseFilterConverter;
+import se.sundsvall.educationfinder.api.converter.StringToStatisticsFilterConverter;
+
 import net.kaczmarzyk.spring.data.jpa.swagger.springdoc.SpecificationArgResolverSpringdocOperationCustomizer;
 import net.kaczmarzyk.spring.data.jpa.web.SpecificationArgumentResolver;
-import se.sundsvall.educationfinder.api.converter.StringToCourseFilterConverter;
 
 @Configuration
 class SpringMvcConfiguration implements WebMvcConfigurer {
@@ -20,7 +22,7 @@ class SpringMvcConfiguration implements WebMvcConfigurer {
 	SpecificationArgResolverSpringdocOperationCustomizer specificationArgResolverSpringdocOperationCustomizer() {
 		return new SpecificationArgResolverSpringdocOperationCustomizer();
 	}
-	
+
 	@Override
 	public void addArgumentResolvers(final List<HandlerMethodArgumentResolver> resolvers) {
 		resolvers.add(new SpecificationArgumentResolver());
@@ -30,5 +32,6 @@ class SpringMvcConfiguration implements WebMvcConfigurer {
 	@Override
 	public void addFormatters(FormatterRegistry registry) {
 		registry.addConverter(new StringToCourseFilterConverter());
+		registry.addConverter(new StringToStatisticsFilterConverter());
 	}
 }
