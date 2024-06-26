@@ -40,7 +40,7 @@ class StatisticsResourceTest {
 	@Test
 	void findCategoryIdFilterValues() {
 		final var response = webTestClient.get()
-			.uri(builder -> builder.path(FILTER_PATH).build(Map.of("statisticsFilter", CATEGORY_ID.name())))
+			.uri(builder -> builder.path(FILTER_PATH).build(Map.of("statisticsFilter", CATEGORY_ID)))
 			.exchange()
 			.expectStatus().isOk()
 			.expectHeader().contentType(APPLICATION_JSON)
@@ -54,7 +54,7 @@ class StatisticsResourceTest {
 	@Test
 	void findCategoryFilterValues() {
 		final var response = webTestClient.get()
-			.uri(builder -> builder.path(FILTER_PATH).build(Map.of("statisticsFilter", CATEGORY.name())))
+			.uri(builder -> builder.path(FILTER_PATH).build(Map.of("statisticsFilter", CATEGORY)))
 			.exchange()
 			.expectStatus().isOk()
 			.expectHeader().contentType(APPLICATION_JSON)
@@ -88,7 +88,7 @@ class StatisticsResourceTest {
 	@Test
 	void findEducationFormFilterValues() {
 		var response = webTestClient.get()
-			.uri(builder -> builder.path(FILTER_PATH).build(Map.of("statisticsFilter", EDUCATION_FORM.name())))
+			.uri(builder -> builder.path(FILTER_PATH).build(Map.of("statisticsFilter", EDUCATION_FORM)))
 			.exchange()
 			.expectStatus().isOk()
 			.expectHeader().contentType(APPLICATION_JSON)
@@ -102,7 +102,7 @@ class StatisticsResourceTest {
 	@Test
 	void findStudyLocationFilterValues() {
 		final var response = webTestClient.get()
-			.uri(builder -> builder.path(FILTER_PATH).build(Map.of("statisticsFilter", STUDY_LOCATION.name())))
+			.uri(builder -> builder.path(FILTER_PATH).build(Map.of("statisticsFilter", STUDY_LOCATION)))
 			.exchange()
 			.expectStatus().isOk()
 			.expectHeader().contentType(APPLICATION_JSON)
@@ -116,7 +116,7 @@ class StatisticsResourceTest {
 	@Test
 	void findStartDateFilterValues() {
 		final var response = webTestClient.get()
-			.uri(builder -> builder.path(FILTER_PATH).build(Map.of("statisticsFilter", START_DATE.name())))
+			.uri(builder -> builder.path(FILTER_PATH).build(Map.of("statisticsFilter", START_DATE)))
 			.exchange()
 			.expectStatus().isOk()
 			.expectHeader().contentType(APPLICATION_JSON)
@@ -130,7 +130,7 @@ class StatisticsResourceTest {
 	@Test
 	void findEndDateFilterValues() {
 		final var response = webTestClient.get()
-			.uri(builder -> builder.path(FILTER_PATH).build(Map.of("statisticsFilter", END_DATE.name())))
+			.uri(builder -> builder.path(FILTER_PATH).build(Map.of("statisticsFilter", END_DATE)))
 			.exchange()
 			.expectStatus().isOk()
 			.expectHeader().contentType(APPLICATION_JSON)

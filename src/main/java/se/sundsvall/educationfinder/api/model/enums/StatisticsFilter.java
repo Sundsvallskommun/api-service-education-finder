@@ -1,9 +1,6 @@
 package se.sundsvall.educationfinder.api.model.enums;
 
-import static com.google.common.base.CaseFormat.LOWER_CAMEL;
-import static com.google.common.base.CaseFormat.UPPER_UNDERSCORE;
-
-import org.springframework.core.convert.converter.Converter;
+import se.sundsvall.educationfinder.api.converter.StatisticsFilterToStringConverter;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -19,13 +16,6 @@ public enum StatisticsFilter {
 
 	@Override
 	public String toString() {
-		return new StatisticsFilter.StatisticsFilterConverter().convert(this);
-	}
-
-	public static class StatisticsFilterConverter implements Converter<StatisticsFilter, String> {
-		@Override
-		public String convert(final StatisticsFilter source) {
-			return UPPER_UNDERSCORE.to(LOWER_CAMEL, source.name());
-		}
+		return new StatisticsFilterToStringConverter().convert(this);
 	}
 }
