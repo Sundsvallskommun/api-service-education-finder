@@ -2,6 +2,10 @@
 # General settings
 #========================================
 spring:
+  cache:
+    cache-names:
+      - course-filters
+      - subject-filters
   application:
     name: api-education-finder
   datasource:
@@ -17,8 +21,7 @@ spring:
           schema-generation:
             database:
               action: validate
-  cache:
-    cache-names: course-filters
+
     caffeine:
       spec: maximumSize=1000,expireAfterWrite=86400s
 logging:
