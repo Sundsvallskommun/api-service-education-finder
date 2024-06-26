@@ -7,12 +7,7 @@ import static se.sundsvall.educationfinder.integration.db.model.SubjectEntity_.C
 import static se.sundsvall.educationfinder.integration.db.model.SubjectEntity_.EDUCATION_FORM;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Stream;
-
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -23,13 +18,11 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.transaction.annotation.Transactional;
 
-import se.sundsvall.educationfinder.integration.db.model.SubjectEntity;
+import se.sundsvall.educationfinder.api.model.StatisticsParameters;
 import se.sundsvall.educationfinder.integration.db.model.projection.CategoryIdProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.CategoryProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.EducationFormProjection;
-import se.sundsvall.educationfinder.integration.db.specification.SubjectSpecification;
 
 /**
  * SubjectRepository tests.
@@ -37,7 +30,6 @@ import se.sundsvall.educationfinder.integration.db.specification.SubjectSpecific
  * @see /src/test/resources/db/scripts/testdata.sql for data setup.
  */
 @DataJpaTest
-@Transactional
 @AutoConfigureTestDatabase(replace = NONE)
 @ActiveProfiles("junit")
 class SubjectRepositoryTest {
@@ -53,7 +45,7 @@ class SubjectRepositoryTest {
 		// Assert
 		assertThat(result)
 			.extracting(EducationFormProjection::getEducationForm)
-			.containsExactly("FHSK", "UOH", "YH");
+			.containsExactly("AUB", "FHSK", "SV", "UOH", "YH");
 	}
 
 	@Test
@@ -119,47 +111,21 @@ class SubjectRepositoryTest {
 	}
 
 	@ParameterizedTest
-	@MethodSource("specificationsProvider")
-	void findBySpecification(final Map<String, Object> filter, final Integer matches) {
-		SubjectSpecification subjectSpecification = (root1, query, criteriaBuilder) -> criteriaBuilder.conjunction();
+	@MethodSource("findAllByParametersArguments")
+	void findAllByParameters(final StatisticsParameters parameters, final Integer matches) {
+		var result = subjectRepository.findAllByParameters(parameters);
 
-		var specification = subjectSpecification.and((root, query, criteriaBuilder) -> buildPredicate(filter, root, criteriaBuilder));
-
-		var test = subjectRepository.findAll(specification);
-
-		assertThat(test).isNotNull();
-		assertThat(test.size()).isEqualTo(matches);
-
+		assertThat(result).hasSize(matches);
 	}
 
-	private Predicate buildPredicate(Map<String, Object> filter, Root<SubjectEntity> root, CriteriaBuilder criteriaBuilder) {
-		List<Predicate> predicates = filter.entrySet().stream()
-			.map(entry -> {
-				String key = entry.getKey();
-				Object value = entry.getValue();
-				return criteriaBuilder.equal(root.get(key), value);
-			})
-			.toList();
-
-		return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
-	}
-
-	private static Stream<Arguments> specificationsProvider() {
+	private static Stream<Arguments> findAllByParametersArguments() {
 		return Stream.of(
-			// Search by category and education form expects 15 matches
-			Arguments.of(Map.of(CATEGORY, "Konstnärliga utbildningar", EDUCATION_FORM, "YH"), 15),
-			// Search by categoryId and education form expects 15 matches
-			Arguments.of(Map.of(CATEGORY_ID, 8, EDUCATION_FORM, "YH"), 15),
-			// Search by category and education form expects 25 matches
-			Arguments.of(Map.of(CATEGORY, "Konstnärliga utbildningar", EDUCATION_FORM, "UOH"), 25),
-			// Search with empty filter expects 1000 matches
-			Arguments.of(Map.of(), 1000),
-			// Search by category expects 75 matches
-			Arguments.of(Map.of(CATEGORY, "Medicin och vård"), 75),
-			// Search by categoryId expects 63 matches
-			Arguments.of(Map.of(CATEGORY_ID, 3), 63),
-			// Search by education form expects 283 matches
-			Arguments.of(Map.of(EDUCATION_FORM, "YH"), 283));
+			Arguments.of(StatisticsParameters.create().withCategories(List.of("Konstnärliga utbildningar")).withEducationForms(List.of("YH")), 15),
+			Arguments.of(StatisticsParameters.create().withCategoryIds(List.of("8")).withEducationForms(List.of("YH")), 15),
+			Arguments.of(StatisticsParameters.create().withCategories(List.of("Konstnärliga utbildningar")).withEducationForms(List.of("UOH")), 25),
+			Arguments.of(StatisticsParameters.create(), 3154),
+			Arguments.of(StatisticsParameters.create().withCategories(List.of("Medicin och vård")), 193),
+			Arguments.of(StatisticsParameters.create().withCategoryIds(List.of("3")), 218),
+			Arguments.of(StatisticsParameters.create().withEducationForms(List.of("YH")), 286));
 	}
-
 }

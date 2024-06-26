@@ -8,7 +8,14 @@ import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.PR
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.SCOPE;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.STUDY_LOCATION;
 
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -17,6 +24,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
+import se.sundsvall.educationfinder.api.model.StatisticsParameters;
 import se.sundsvall.educationfinder.integration.db.model.CourseEntity;
 import se.sundsvall.educationfinder.integration.db.model.projection.CreditsProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.LevelProjection;
@@ -148,5 +156,40 @@ class CourseRepositoryTest {
 			.hasSize(20)
 			.extracting(CourseEntity::getStudyLocation)
 			.allMatch(searchWord::equalsIgnoreCase);
+	}
+
+	@ParameterizedTest
+	@MethodSource("findAllByParametersArguments")
+	void findAllByParameters(final StatisticsParameters parameters, final Integer matches) {
+
+		var result = courseRepository.findAllByParameters(parameters, null);
+
+		assertThat(result).hasSize(matches);
+	}
+
+	@ParameterizedTest
+	@MethodSource("findAllByParametersAndCodesArguments")
+	void findAllByParametersAndCodes(final StatisticsParameters parameters, final Integer matches, final List<String> codes) {
+
+		var result = courseRepository.findAllByParameters(parameters, codes);
+
+		assertThat(result).hasSize(matches);
+	}
+
+	private static Stream<Arguments> findAllByParametersArguments() {
+		return Stream.of(
+			Arguments.of(StatisticsParameters.create().withStartDate(LocalDate.of(2024, 6, 1)).withEndDate(LocalDate.of(2024, 12, 1)), 39),
+			Arguments.of(StatisticsParameters.create().withStartDate(LocalDate.of(2024, 1, 1)).withEndDate(LocalDate.of(2024, 12, 1)).withStudyLocations(List.of("Sundsvall")), 296),
+			Arguments.of(StatisticsParameters.create().withStartDate(LocalDate.of(2023, 10, 31)).withEndDate(LocalDate.of(2024, 12, 8)), 811),
+			Arguments.of(StatisticsParameters.create().withStartDate(LocalDate.of(2023, 10, 31)).withEndDate(LocalDate.of(2024, 12, 8)).withStudyLocations(List.of("Kramfors")), 8),
+			Arguments.of(StatisticsParameters.create().withStudyLocations(List.of("Sundsvall", "Kramfors")), 853),
+			Arguments.of(StatisticsParameters.create().withStartDate(LocalDate.of(2023, 1, 1)).withEndDate(LocalDate.of(2021, 12, 31)), 0));
+	}
+
+	private static Stream<Arguments> findAllByParametersAndCodesArguments() {
+		return Stream.of(
+			Arguments.of(StatisticsParameters.create().withStartDate(LocalDate.of(2023, 10, 31)).withEndDate(LocalDate.of(2024, 6, 6)), 25, List.of("GRNSVAC", "GRNSVAD", "GRNSVEB", "RLXAAR")),
+			Arguments.of(StatisticsParameters.create().withStudyLocations(List.of("Sundsvall")), 12, List.of("ADMADM01", "ADMADM02", "ADMADM00S", "ADMPER0"))
+		);
 	}
 }

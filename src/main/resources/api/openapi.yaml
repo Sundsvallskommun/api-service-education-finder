@@ -5,14 +5,154 @@ info:
   license:
     name: MIT License
     url: https://opensource.org/licenses/MIT
-  version: "1.1"
+  version: "1.2"
 servers:
-  - url: http://localhost:55371
+  - url: http://localhost:62055
     description: Generated server url
 tags:
   - name: Courses
     description: Find courses
+  - name: Statistics
+    description: Get statistics
 paths:
+  /statistics:
+    get:
+      tags:
+        - Statistics
+      summary: Get statistics based on given parameters
+      operationId: getStatistics
+      parameters:
+        - name: categories
+          in: query
+          description: List of categories
+          required: false
+          schema:
+            type: string
+            description: List of categories
+            example: Medicin och vård
+          example: Medicin och vård
+        - name: categoryIds
+          in: query
+          description: List of category IDs
+          required: false
+          schema:
+            type: string
+            description: List of category IDs
+            example: 5
+          example: 5
+        - name: educationForms
+          in: query
+          description: List of education forms
+          required: false
+          schema:
+            type: string
+            description: List of education forms
+            example: YH
+          example: YH
+        - name: studyLocations
+          in: query
+          description: List of study locations
+          required: false
+          schema:
+            type: string
+            description: List of study locations
+            example: Sundsvall
+          example: Sundsvall
+        - name: startDate
+          in: query
+          description: Start date
+          required: true
+          schema:
+            type: string
+            description: Start date
+            example: 2024-01-01
+          example: 2024-01-01
+        - name: endDate
+          in: query
+          description: End date
+          required: true
+          schema:
+            type: string
+            description: End date
+            example: 2024-12-31
+          example: 2024-12-31
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Statistics"
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Statistics"
+        "404":
+          description: Not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "500":
+          description: Internal Server error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "400":
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Problem"
+                  - $ref: "#/components/schemas/ConstraintViolationProblem"
+  /statistics/filters/{statisticsFilter}/values:
+    get:
+      tags:
+        - Statistics
+      summary: Find available filter values
+      operationId: findFilterValues
+      parameters:
+        - name: statisticsFilter
+          in: path
+          description: The attribute name to get available values from
+          required: true
+          schema:
+            $ref: "#/components/schemas/StatisticsFilter"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            application/problem+json:
+              schema:
+                type: array
+                items:
+                  type: string
+        "404":
+          description: Not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "500":
+          description: Internal Server error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "400":
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Problem"
+                  - $ref: "#/components/schemas/ConstraintViolationProblem"
   /courses:
     get:
       tags:
@@ -192,35 +332,35 @@ paths:
           schema:
             type: string
       responses:
-        "404":
-          description: Not found
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        "500":
-          description: Internal Server error
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
         "200":
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PagedCoursesResponse'
+                $ref: "#/components/schemas/PagedCoursesResponse"
             application/problem+json:
               schema:
-                $ref: '#/components/schemas/PagedCoursesResponse'
+                $ref: "#/components/schemas/PagedCoursesResponse"
+        "404":
+          description: Not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "500":
+          description: Internal Server error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
         "400":
           description: Bad request
           content:
             application/problem+json:
               schema:
                 oneOf:
-                  - $ref: '#/components/schemas/Problem'
-                  - $ref: '#/components/schemas/ConstraintViolationProblem'
+                  - $ref: "#/components/schemas/Problem"
+                  - $ref: "#/components/schemas/ConstraintViolationProblem"
   /courses/filters/{courseFilter}/values:
     get:
       tags:
@@ -228,27 +368,15 @@ paths:
       summary: Find available filter values
       description: |
         Find available filter values (for use in the "Find course"-resource).
-      operationId: findFilterValues
+      operationId: findFilterValues_1
       parameters:
         - name: courseFilter
           in: path
           description: The attribute name to get available values from
           required: true
           schema:
-            $ref: '#/components/schemas/CourseFilter'
+            $ref: "#/components/schemas/CourseFilter"
       responses:
-        "404":
-          description: Not found
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-        "500":
-          description: Internal Server error
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
         "200":
           description: Successful operation
           content:
@@ -262,14 +390,26 @@ paths:
                 type: array
                 items:
                   type: string
+        "404":
+          description: Not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "500":
+          description: Internal Server error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
         "400":
           description: Bad request
           content:
             application/problem+json:
               schema:
                 oneOf:
-                  - $ref: '#/components/schemas/Problem'
-                  - $ref: '#/components/schemas/ConstraintViolationProblem'
+                  - $ref: "#/components/schemas/Problem"
+                  - $ref: "#/components/schemas/ConstraintViolationProblem"
   /api-docs:
     get:
       tags:
@@ -291,10 +431,8 @@ components:
     Problem:
       type: object
       properties:
-        title:
-          type: string
-        detail:
-          type: string
+        status:
+          $ref: "#/components/schemas/StatusType"
         instance:
           type: string
           format: uri
@@ -305,21 +443,23 @@ components:
           type: object
           additionalProperties:
             type: object
-        status:
-          $ref: '#/components/schemas/StatusType'
+        title:
+          type: string
+        detail:
+          type: string
     StatusType:
       type: object
       properties:
-        reasonPhrase:
-          type: string
         statusCode:
           type: integer
           format: int32
+        reasonPhrase:
+          type: string
     ConstraintViolationProblem:
       type: object
       properties:
         cause:
-          $ref: '#/components/schemas/ThrowableProblem'
+          $ref: "#/components/schemas/ThrowableProblem"
         stackTrace:
           type: array
           items:
@@ -346,16 +486,14 @@ components:
           type: string
           format: uri
         status:
-          $ref: '#/components/schemas/StatusType'
+          $ref: "#/components/schemas/StatusType"
         violations:
           type: array
           items:
-            $ref: '#/components/schemas/Violation'
+            $ref: "#/components/schemas/Violation"
         title:
           type: string
         message:
-          type: string
-        detail:
           type: string
         instance:
           type: string
@@ -364,6 +502,8 @@ components:
           type: object
           additionalProperties:
             type: object
+        detail:
+          type: string
         suppressed:
           type: array
           items:
@@ -401,7 +541,7 @@ components:
       type: object
       properties:
         cause:
-          $ref: '#/components/schemas/ThrowableProblem'
+          $ref: "#/components/schemas/ThrowableProblem"
         stackTrace:
           type: array
           items:
@@ -426,10 +566,8 @@ components:
                 type: boolean
         message:
           type: string
-        title:
-          type: string
-        detail:
-          type: string
+        status:
+          $ref: "#/components/schemas/StatusType"
         instance:
           type: string
           format: uri
@@ -440,8 +578,10 @@ components:
           type: object
           additionalProperties:
             type: object
-        status:
-          $ref: '#/components/schemas/StatusType'
+        title:
+          type: string
+        detail:
+          type: string
         suppressed:
           type: array
           items:
@@ -482,6 +622,93 @@ components:
           type: string
         message:
           type: string
+    Statistics:
+      type: object
+      properties:
+        onGoingCourses:
+          type: integer
+          description: Number of on-going courses
+          format: int32
+          readOnly: true
+          example: 10
+        plannedCourses:
+          type: integer
+          description: Number of planned courses
+          format: int32
+          readOnly: true
+          example: 10
+        finishedCourses:
+          type: integer
+          description: Number of finished courses
+          format: int32
+          readOnly: true
+          example: 10
+        availableSeats:
+          type: integer
+          description: Number of available seats
+          format: int32
+          readOnly: true
+          example: 10
+        totalCapacity:
+          type: integer
+          description: Total capacity
+          format: int32
+          readOnly: true
+          example: 10
+        studyLocations:
+          type: array
+          description: Study locations used for filtering
+          readOnly: true
+          items:
+            type: string
+            description: Study locations used for filtering
+            readOnly: true
+        educationForms:
+          type: array
+          description: Education forms used for filtering
+          readOnly: true
+          items:
+            type: string
+            description: Education forms used for filtering
+            readOnly: true
+        categories:
+          type: array
+          description: Categories used for filtering
+          readOnly: true
+          items:
+            type: string
+            description: Categories used for filtering
+            readOnly: true
+        categoryIds:
+          type: array
+          description: Category ids used for filtering
+          readOnly: true
+          items:
+            type: string
+            description: Category ids used for filtering
+            readOnly: true
+        startDate:
+          type: string
+          description: Start date used for filtering
+          format: date
+          readOnly: true
+        endDate:
+          type: string
+          description: End date used for filtering
+          format: date
+          readOnly: true
+      description: Statistics model
+      readOnly: true
+    StatisticsFilter:
+      type: string
+      description: Statistics filter model
+      enum:
+        - educationForm
+        - category
+        - categoryId
+        - studyLocation
+        - startDate
+        - endDate
     Course:
       type: object
       properties:
@@ -586,9 +813,9 @@ components:
           type: array
           readOnly: true
           items:
-            $ref: '#/components/schemas/Course'
+            $ref: "#/components/schemas/Course"
         _meta:
-          $ref: '#/components/schemas/PagingMetaData'
+          $ref: "#/components/schemas/PagingMetaData"
       description: Paged course response model
       readOnly: true
     PagingMetaData:

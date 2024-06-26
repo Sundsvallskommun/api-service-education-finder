@@ -11,9 +11,6 @@ import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.LE
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.PROVIDER;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.SCOPE;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.STUDY_LOCATION;
-import static se.sundsvall.educationfinder.integration.db.model.SubjectEntity_.CATEGORY;
-import static se.sundsvall.educationfinder.integration.db.model.SubjectEntity_.CATEGORY_ID;
-import static se.sundsvall.educationfinder.integration.db.model.SubjectEntity_.EDUCATION_FORM;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -31,14 +28,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
 import se.sundsvall.educationfinder.api.model.enums.CourseFilter;
-import se.sundsvall.educationfinder.api.model.enums.SubjectFilter;
 import se.sundsvall.educationfinder.integration.db.CourseRepository;
-import se.sundsvall.educationfinder.integration.db.SubjectRepository;
 import se.sundsvall.educationfinder.integration.db.model.CourseEntity;
-import se.sundsvall.educationfinder.integration.db.model.projection.CategoryIdProjection;
-import se.sundsvall.educationfinder.integration.db.model.projection.CategoryProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.CreditsProjection;
-import se.sundsvall.educationfinder.integration.db.model.projection.EducationFormProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.LevelProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.ProviderProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.ScopeProjection;
@@ -56,9 +48,6 @@ class CourseServiceTest {
 
 	@Mock
 	private CourseRepository courseRepositoryMock;
-
-	@Mock
-	private SubjectRepository subjectRepositoryMock;
 
 	@InjectMocks
 	private CourseService courseService;
@@ -92,22 +81,6 @@ class CourseServiceTest {
 	}
 
 
-	@ParameterizedTest
-	@MethodSource("findStatisticsFilterValuesProvider")
-	void findStatisticsFilterValues(SubjectFilter subjectFilter, Class<?> projectionClass, String attributeName) {
-
-		courseService.findStatisticsFilterValues(subjectFilter);
-
-		// Assert
-		verify(subjectRepositoryMock).findDistinctBy(projectionClass, Sort.by(attributeName));
-	}
-
-	@Test
-	void findSubjectFilterStudyLocationValues() {
-		courseService.findStatisticsFilterValues(SubjectFilter.STUDY_LOCATION);
-		verify(courseRepositoryMock).findDistinctBy(StudyLocationProjection.class, Sort.by(STUDY_LOCATION));
-	}
-
 	private static Stream<Arguments> findFilterValuesProvider() {
 		return Stream.of(
 			Arguments.of(CourseFilter.STUDY_LOCATION, StudyLocationProjection.class, STUDY_LOCATION),
@@ -117,10 +90,5 @@ class CourseServiceTest {
 			Arguments.of(CourseFilter.CREDITS, CreditsProjection.class, CREDITS));
 	}
 
-	private static Stream<Arguments> findStatisticsFilterValuesProvider() {
-		return Stream.of(
-			Arguments.of(SubjectFilter.CATEGORY, CategoryProjection.class, CATEGORY),
-			Arguments.of(SubjectFilter.CATEGORY_ID, CategoryIdProjection.class, CATEGORY_ID),
-			Arguments.of(SubjectFilter.EDUCATION_FORM, EducationFormProjection.class, EDUCATION_FORM));
-	}
+
 }

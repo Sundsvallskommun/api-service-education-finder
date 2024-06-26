@@ -18,7 +18,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-class StatisticsTest {
+class StatisticsParametersTest {
 
 	@BeforeAll
 	static void setup() {
@@ -27,7 +27,7 @@ class StatisticsTest {
 
 	@Test
 	void testBean() {
-		assertThat(Statistics.class, allOf(
+		assertThat(StatisticsParameters.class, allOf(
 			hasValidBeanConstructor(),
 			hasValidGettersAndSetters(),
 			hasValidBeanHashCode(),
@@ -37,48 +37,33 @@ class StatisticsTest {
 
 	@Test
 	void testBuilderMethods() {
-		var onGoingCourses = 2;
-		var plannedCourses = 3;
-		var finishedCourses = 4;
-		var availableSeats = 55;
-		var totalCapacity = 100;
-		var studyLocations = List.of("studyLocations");
-		var educationForms = List.of("educationForms");
-		var categories = List.of("categories");
-		var categoryIds = List.of("categoryIds");
+		var categories = List.of("category");
+		var categoryIds = List.of("categoryId");
+		var educationForms = List.of("educationForm");
+		var studyLocations = List.of("studyLocation");
 		var startDate = LocalDate.now();
 		var endDate = LocalDate.now().plusDays(1);
 
-		var bean = Statistics.create()
-			.withOnGoingCourses(onGoingCourses)
-			.withPlannedCourses(plannedCourses)
-			.withFinishedCourses(finishedCourses)
-			.withAvailableSeats(availableSeats)
-			.withTotalCapacity(totalCapacity)
-			.withStudyLocations(studyLocations)
-			.withEducationForms(educationForms)
+		var bean = StatisticsParameters.create()
 			.withCategories(categories)
 			.withCategoryIds(categoryIds)
+			.withEducationForms(educationForms)
+			.withStudyLocations(studyLocations)
 			.withStartDate(startDate)
 			.withEndDate(endDate);
 
 		Assertions.assertThat(bean).isNotNull().hasNoNullFieldsOrProperties();
-		Assertions.assertThat(bean.getOnGoingCourses()).isEqualTo(onGoingCourses);
-		Assertions.assertThat(bean.getPlannedCourses()).isEqualTo(plannedCourses);
-		Assertions.assertThat(bean.getFinishedCourses()).isEqualTo(finishedCourses);
-		Assertions.assertThat(bean.getAvailableSeats()).isEqualTo(availableSeats);
-		Assertions.assertThat(bean.getTotalCapacity()).isEqualTo(totalCapacity);
-		Assertions.assertThat(bean.getStudyLocations()).isEqualTo(studyLocations);
-		Assertions.assertThat(bean.getEducationForms()).isEqualTo(educationForms);
 		Assertions.assertThat(bean.getCategories()).isEqualTo(categories);
 		Assertions.assertThat(bean.getCategoryIds()).isEqualTo(categoryIds);
+		Assertions.assertThat(bean.getEducationForms()).isEqualTo(educationForms);
+		Assertions.assertThat(bean.getStudyLocations()).isEqualTo(studyLocations);
 		Assertions.assertThat(bean.getStartDate()).isEqualTo(startDate);
 		Assertions.assertThat(bean.getEndDate()).isEqualTo(endDate);
 	}
 
 	@Test
 	void testNoDirtOnCreatedBean() {
-		Assertions.assertThat(Statistics.create()).hasNoNullFieldsOrPropertiesExcept("startDate", "endDate");
-		Assertions.assertThat(new Statistics()).hasNoNullFieldsOrPropertiesExcept("startDate", "endDate");
+		Assertions.assertThat(StatisticsParameters.create()).hasAllNullFieldsOrProperties();
+		Assertions.assertThat(new StatisticsParameters()).hasAllNullFieldsOrProperties();
 	}
 }
