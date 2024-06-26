@@ -18,7 +18,9 @@ spring:
             database:
               action: validate
   cache:
-    cache-names: course-filters
+    cache-names:
+      - course-filters
+      - subject-filters
     caffeine:
       spec: maximumSize=1000,expireAfterWrite=86400s
 logging:
