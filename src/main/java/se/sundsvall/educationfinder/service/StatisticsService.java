@@ -6,6 +6,7 @@ import static se.sundsvall.educationfinder.integration.db.model.SubjectEntity_.C
 import static se.sundsvall.educationfinder.integration.db.model.SubjectEntity_.EDUCATION_FORM;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.cache.annotation.Cacheable;
@@ -93,24 +94,28 @@ public class StatisticsService {
 		return switch (statisticsFilter) {
 			case EDUCATION_FORM ->
 				subjectRepository.findDistinctBy(EducationFormProjection.class, Sort.by(EDUCATION_FORM)).stream()
+					.filter(Objects::nonNull)
 					.map(EducationFormProjection::getEducationForm)
 					.filter(StringUtils::isNotEmpty)
 					.map(StringUtils::upperCase)
 					.toList();
 			case CATEGORY ->
 				subjectRepository.findDistinctBy(CategoryProjection.class, Sort.by(CATEGORY)).stream()
+					.filter(Objects::nonNull)
 					.map(CategoryProjection::getCategory)
 					.filter(StringUtils::isNotEmpty)
 					.map(StringUtils::upperCase)
 					.toList();
 			case CATEGORY_ID ->
 				subjectRepository.findDistinctBy(CategoryIdProjection.class, Sort.by(CATEGORY_ID)).stream()
+					.filter(Objects::nonNull)
 					.map(CategoryIdProjection::getCategoryId)
 					.filter(StringUtils::isNotEmpty)
 					.map(StringUtils::upperCase)
 					.toList();
 			case STUDY_LOCATION ->
 				courseRepository.findDistinctBy(StudyLocationProjection.class, Sort.by(STUDY_LOCATION)).stream()
+					.filter(Objects::nonNull)
 					.map(StudyLocationProjection::getStudyLocation)
 					.filter(StringUtils::isNotEmpty)
 					.map(StringUtils::upperCase)
