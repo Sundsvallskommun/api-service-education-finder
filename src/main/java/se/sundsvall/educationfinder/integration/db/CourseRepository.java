@@ -16,7 +16,7 @@ import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 @CircuitBreaker(name = "courseRepository")
 public interface CourseRepository extends ReadOnlyRepository<CourseEntity, Long>, JpaSpecificationExecutor<CourseEntity> {
 
-	default List<CourseEntity> findAllByParameters(final StatisticsParameters parameters, final List<String> codes) {
+	default List<CourseEntity> findAllByParametersAndCode(final StatisticsParameters parameters, final List<String> codes) {
 		var startDate = parameters.getStartDate();
 		var endDate = parameters.getEndDate();
 		var studyLocation = parameters.getStudyLocations();
