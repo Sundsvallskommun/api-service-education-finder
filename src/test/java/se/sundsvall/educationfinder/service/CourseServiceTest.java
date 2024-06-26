@@ -80,6 +80,7 @@ class CourseServiceTest {
 		verify(courseRepositoryMock).findDistinctBy(projectionClass, Sort.by(attributeName));
 	}
 
+
 	private static Stream<Arguments> findFilterValuesProvider() {
 		return Stream.of(
 			Arguments.of(CourseFilter.STUDY_LOCATION, StudyLocationProjection.class, STUDY_LOCATION),
@@ -88,4 +89,6 @@ class CourseServiceTest {
 			Arguments.of(CourseFilter.SCOPE, ScopeProjection.class, SCOPE),
 			Arguments.of(CourseFilter.CREDITS, CreditsProjection.class, CREDITS));
 	}
+
+
 }
