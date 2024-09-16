@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.zalando.problem.Problem;
 import org.zalando.problem.violations.ConstraintViolationProblem;
 
+import se.sundsvall.dept44.common.validators.annotation.ValidMunicipalityId;
 import se.sundsvall.educationfinder.api.model.Statistics;
 import se.sundsvall.educationfinder.api.model.StatisticsParameters;
 import se.sundsvall.educationfinder.api.model.enums.StatisticsFilter;
@@ -32,7 +33,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @Validated
-@RequestMapping(path = "/statistics", produces = {APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE})
+@RequestMapping(path = "/{municipalityId}/statistics", produces = {APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE})
 @Tag(name = "Statistics", description = "Get statistics")
 @ApiResponse(responseCode = "200", description = "Successful operation", useReturnTypeSchema = true)
 @ApiResponse(responseCode = "400", description = "Bad request", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(oneOf = {Problem.class, ConstraintViolationProblem.class})))
@@ -48,14 +49,18 @@ class StatisticsResource {
 
 	@GetMapping
 	@Operation(summary = "Get statistics based on given parameters")
-	ResponseEntity<Statistics> getStatistics(@ParameterObject @Valid final StatisticsParameters parameters) {
-		return ok(service.getStatisticsByParameters(parameters));
+	ResponseEntity<Statistics> getStatistics(
+		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @ValidMunicipalityId @PathVariable final String municipalityId,
+		@ParameterObject @Valid final StatisticsParameters parameters) {
+		return ok(service.getStatisticsByParameters(parameters, municipalityId));
 	}
 
 	@GetMapping(path = "/filters/{statisticsFilter}/values")
 	@Operation(summary = "Find available filter values")
-	ResponseEntity<List<String>> findFilterValues(@Parameter(description = "The attribute name to get available values from") @PathVariable final StatisticsFilter statisticsFilter) {
-		return ok(service.findStatisticsFilterValues(statisticsFilter));
+	ResponseEntity<List<String>> findFilterValues(
+		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @ValidMunicipalityId @PathVariable final String municipalityId,
+		@Parameter(description = "The attribute name to get available values from") @PathVariable final StatisticsFilter statisticsFilter) {
+		return ok(service.findStatisticsFilterValues(statisticsFilter,municipalityId));
 	}
 
 }

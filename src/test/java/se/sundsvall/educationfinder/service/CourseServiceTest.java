@@ -52,18 +52,28 @@ class CourseServiceTest {
 	@InjectMocks
 	private CourseService courseService;
 
+	private static Stream<Arguments> findFilterValuesProvider() {
+		return Stream.of(
+			Arguments.of(CourseFilter.STUDY_LOCATION, StudyLocationProjection.class, STUDY_LOCATION),
+			Arguments.of(CourseFilter.PROVIDER, ProviderProjection.class, PROVIDER),
+			Arguments.of(CourseFilter.LEVEL, LevelProjection.class, LEVEL),
+			Arguments.of(CourseFilter.SCOPE, ScopeProjection.class, SCOPE),
+			Arguments.of(CourseFilter.CREDITS, CreditsProjection.class, CREDITS));
+	}
+
 	@Test
 	void find() {
 
 		// Arrange
 		final var pageRequest = PageRequest.of(0, 10, Sort.by(DESC, "name"));
+		final var municipalityId = "2281";
 
 		when(pageMock.getContent()).thenReturn(List.of(CourseEntity.create()));
 		when(pageMock.getPageable()).thenReturn(pageRequest);
 		when(courseRepositoryMock.findAll(any(CourseSpecification.class), eq(pageRequest))).thenReturn(pageMock);
 
 		// Act
-		final var result = courseService.find(courseSpecificationMock, pageRequest);
+		final var result = courseService.find(courseSpecificationMock, pageRequest, municipalityId);
 
 		// Assert
 		assertThat(result).isNotNull();
@@ -72,22 +82,15 @@ class CourseServiceTest {
 
 	@ParameterizedTest
 	@MethodSource("findFilterValuesProvider")
-	void findFilterValues(CourseFilter courseFilter, Class<?> projectionClass, String attributeName) {
+	void findFilterValues(final CourseFilter courseFilter, final Class<?> projectionClass, final String attributeName) {
 
-		courseService.findFilterValues(courseFilter);
+		// Arrange
+		final var municipalityId = "2281";
+
+		courseService.findFilterValues(courseFilter, municipalityId);
 
 		// Assert
 		verify(courseRepositoryMock).findDistinctBy(projectionClass, Sort.by(attributeName));
-	}
-
-
-	private static Stream<Arguments> findFilterValuesProvider() {
-		return Stream.of(
-			Arguments.of(CourseFilter.STUDY_LOCATION, StudyLocationProjection.class, STUDY_LOCATION),
-			Arguments.of(CourseFilter.PROVIDER, ProviderProjection.class, PROVIDER),
-			Arguments.of(CourseFilter.LEVEL, LevelProjection.class, LEVEL),
-			Arguments.of(CourseFilter.SCOPE, ScopeProjection.class, SCOPE),
-			Arguments.of(CourseFilter.CREDITS, CreditsProjection.class, CREDITS));
 	}
 
 

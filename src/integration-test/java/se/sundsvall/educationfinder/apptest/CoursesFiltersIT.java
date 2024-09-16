@@ -14,10 +14,12 @@ class CoursesFiltersIT extends AbstractAppTest {
 
 	private static final String RESPONSE_FILE = "response.json";
 
+	private static final String PATH = "/2281/courses/filters";
+
 	@Test
 	void test01_findCreditsFilterValues() {
 		setupCall()
-			.withServicePath("/courses/filters/credits/values")
+			.withServicePath(PATH + "/credits/values")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -27,7 +29,7 @@ class CoursesFiltersIT extends AbstractAppTest {
 	@Test
 	void test02_findProviderFilterValues() {
 		setupCall()
-			.withServicePath("/courses/filters/provider/values")
+			.withServicePath(PATH + "/provider/values")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -37,7 +39,7 @@ class CoursesFiltersIT extends AbstractAppTest {
 	@Test
 	void test03_findLevelFilterValues() {
 		setupCall()
-			.withServicePath("/courses/filters/level/values")
+			.withServicePath(PATH + "/level/values")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -47,7 +49,7 @@ class CoursesFiltersIT extends AbstractAppTest {
 	@Test
 	void test04_findScopeFilterValues() {
 		setupCall()
-			.withServicePath("/courses/filters/scope/values")
+			.withServicePath(PATH + "/scope/values")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -57,10 +59,11 @@ class CoursesFiltersIT extends AbstractAppTest {
 	@Test
 	void test05_findStudyLocationFilterValues() {
 		setupCall()
-			.withServicePath("/courses/filters/studyLocation/values")
+			.withServicePath(PATH + "/studyLocation/values")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
 			.sendRequestAndVerifyResponse();
 	}
+
 }

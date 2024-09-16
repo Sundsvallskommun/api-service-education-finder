@@ -38,13 +38,13 @@ public class StatisticsService {
 		this.subjectRepository = subjectRepository;
 	}
 
-	public Statistics getStatisticsByParameters(final StatisticsParameters parameters) {
-		var codes = getSubjectCodes(parameters);
-		var courses = courseRepository.findAllByParametersAndCode(parameters, codes);
+	public Statistics getStatisticsByParameters(final StatisticsParameters parameters, final String municipalityId) {
+		final var codes = getSubjectCodes(parameters, municipalityId);
+		final var courses = courseRepository.findAllByParametersAndCode(parameters, codes);
 		return calculateStatistics(parameters, courses);
 	}
 
-	private List<String> getSubjectCodes(final StatisticsParameters parameters) {
+	private List<String> getSubjectCodes(final StatisticsParameters parameters, final String municipalityId) {
 		if (!parametersContainSubjectFilter(parameters)) {
 			return null;
 		}
@@ -59,25 +59,25 @@ public class StatisticsService {
 	}
 
 	public Statistics calculateStatistics(final StatisticsParameters parameters, final List<CourseEntity> courses) {
-		var ongoingCourses = courses.stream()
+		final var ongoingCourses = courses.stream()
 			.filter(course -> course.getStart().isBefore(parameters.getStartDate()) && course.getEnd().isAfter(parameters.getEndDate()))
 			.count();
 
-		var plannedCourses = courses.stream()
+		final var plannedCourses = courses.stream()
 			.filter(course -> course.getStart().isAfter(parameters.getStartDate()) && course.getStart().isBefore(parameters.getEndDate()))
 			.count();
 
-		var finishedCourses = courses.stream()
+		final var finishedCourses = courses.stream()
 			.filter(course -> course.getEnd().isAfter(parameters.getStartDate()) && course.getEnd().isBefore(parameters.getEndDate()))
 			.count();
 
-		var availableSeats = courses.stream()
+		final var availableSeats = courses.stream()
 			.filter(course -> course.getStart().isAfter(parameters.getStartDate()) && course.getStart().isBefore(parameters.getEndDate()))
 			.filter(course -> course.getNumberOfSeats() != null)
 			.mapToInt(CourseEntity::getNumberOfSeats)
 			.sum();
 
-		var totalCapacity = courses.stream()
+		final var totalCapacity = courses.stream()
 			.filter(course -> course.getNumberOfSeats() != null)
 			.mapToInt(CourseEntity::getNumberOfSeats)
 			.sum();
@@ -97,7 +97,7 @@ public class StatisticsService {
 	}
 
 	@Cacheable("subject-filters")
-	public List<String> findStatisticsFilterValues(final StatisticsFilter statisticsFilter) {
+	public List<String> findStatisticsFilterValues(final StatisticsFilter statisticsFilter, final String municipalityId) {
 		return switch (statisticsFilter) {
 			case EDUCATION_FORM ->
 				subjectRepository.findDistinctBy(EducationFormProjection.class, Sort.by(EDUCATION_FORM)).stream()
@@ -130,4 +130,5 @@ public class StatisticsService {
 			case START_DATE, END_DATE -> List.of("Any date in this format: yyyy-MM-dd");
 		};
 	}
+
 }

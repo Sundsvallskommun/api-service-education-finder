@@ -31,7 +31,8 @@ import se.sundsvall.educationfinder.api.model.Statistics;
 @ActiveProfiles("junit")
 class StatisticsResourceTest {
 
-	private static final String BASE_PATH = "/statistics";
+	private static final String BASE_PATH = "/2281/statistics";
+
 	private static final String FILTER_PATH = BASE_PATH + "/filters/{statisticsFilter}/values";
 
 	@Autowired
@@ -87,7 +88,7 @@ class StatisticsResourceTest {
 
 	@Test
 	void findEducationFormFilterValues() {
-		var response = webTestClient.get()
+		final var response = webTestClient.get()
 			.uri(builder -> builder.path(FILTER_PATH).build(Map.of("statisticsFilter", EDUCATION_FORM)))
 			.exchange()
 			.expectStatus().isOk()
@@ -143,9 +144,9 @@ class StatisticsResourceTest {
 
 	@Test
 	void getStatisticsByStudyLocation() {
-		var studyLocations = List.of("HÄRNÖSAND", "KRAMFORS", "SUNDSVALL");
-		var startDate = LocalDate.of(2023, 1, 1);
-		var endDate = LocalDate.of(2023, 8, 1);
+		final var studyLocations = List.of("HÄRNÖSAND", "KRAMFORS", "SUNDSVALL");
+		final var startDate = LocalDate.of(2023, 1, 1);
+		final var endDate = LocalDate.of(2023, 8, 1);
 
 		final var response = webTestClient.get()
 			.uri(builder -> builder
@@ -175,8 +176,8 @@ class StatisticsResourceTest {
 
 	@Test
 	void getStatisticsByDates() {
-		var startDate = LocalDate.of(2023, 1, 1);
-		var endDate = LocalDate.of(2024, 6, 1);
+		final var startDate = LocalDate.of(2023, 1, 1);
+		final var endDate = LocalDate.of(2024, 6, 1);
 
 		final var response = webTestClient.get()
 			.uri(builder -> builder
@@ -206,9 +207,9 @@ class StatisticsResourceTest {
 
 	@Test
 	void getStatisticsByCategory() {
-		var categories = List.of("FRISK- OCH SKÖNHETSVÅRD", "FÖRBEREDANDE UTBILDNINGAR", "HANTVERK");
-		var startDate = LocalDate.of(2023, 1, 1);
-		var endDate = LocalDate.of(2024, 8, 1);
+		final var categories = List.of("FRISK- OCH SKÖNHETSVÅRD", "FÖRBEREDANDE UTBILDNINGAR", "HANTVERK");
+		final var startDate = LocalDate.of(2023, 1, 1);
+		final var endDate = LocalDate.of(2024, 8, 1);
 
 		final var response = webTestClient.get()
 			.uri(builder -> builder
@@ -238,9 +239,9 @@ class StatisticsResourceTest {
 
 	@Test
 	void getStatisticsByCategoryId() {
-		var categoryIds = List.of("1", "2", "3", "4", "5");
-		var startDate = LocalDate.of(2022, 1, 1);
-		var endDate = LocalDate.of(2024, 10, 1);
+		final var categoryIds = List.of("1", "2", "3", "4", "5");
+		final var startDate = LocalDate.of(2022, 1, 1);
+		final var endDate = LocalDate.of(2024, 10, 1);
 
 		final var response = webTestClient.get()
 			.uri(builder -> builder
@@ -270,9 +271,9 @@ class StatisticsResourceTest {
 
 	@Test
 	void getStatisticsByEducationForm() {
-		var educationForms = List.of("SV", "AUB", "FHSK");
-		var startDate = LocalDate.of(2023, 3, 1);
-		var endDate = LocalDate.of(2024, 2, 1);
+		final var educationForms = List.of("SV", "AUB", "FHSK");
+		final var startDate = LocalDate.of(2023, 3, 1);
+		final var endDate = LocalDate.of(2024, 2, 1);
 
 		final var response = webTestClient.get()
 			.uri(builder -> builder
@@ -302,7 +303,7 @@ class StatisticsResourceTest {
 
 	private MultiValueMap<String, String> createParameterMap(final List<String> categories, final List<String> categoryIds,
 		final List<String> educationForms, final List<String> studyLocations, final LocalDate startDate, final LocalDate endDate) {
-		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
+		final MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
 
 		ofNullable(categories).ifPresent(p -> parameters.addAll("categories", p));
 		ofNullable(categoryIds).ifPresent(p -> parameters.addAll("categoryIds", p));

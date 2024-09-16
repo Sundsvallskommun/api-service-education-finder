@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.zalando.problem.Problem;
 import org.zalando.problem.violations.ConstraintViolationProblem;
 
+import se.sundsvall.dept44.common.validators.annotation.ValidMunicipalityId;
 import se.sundsvall.educationfinder.api.model.PagedCoursesResponse;
 import se.sundsvall.educationfinder.api.model.enums.CourseFilter;
 import se.sundsvall.educationfinder.integration.db.specification.CourseSpecification;
@@ -33,7 +34,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @Validated
-@RequestMapping(path = "/courses", produces = {APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE})
+@RequestMapping(path = "/{municipalityId}/courses", produces = {APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE})
 @Tag(name = "Courses", description = "Find courses")
 @ApiResponse(responseCode = "200", description = "Successful operation", useReturnTypeSchema = true)
 @ApiResponse(responseCode = "400", description = "Bad request", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(oneOf = {Problem.class, ConstraintViolationProblem.class})))
@@ -49,13 +50,18 @@ class CoursesResource {
 
 	@GetMapping
 	@Operation(summary = "Find course", description = FIND_COURSE_DESCRIPTION)
-	ResponseEntity<PagedCoursesResponse> find(final CourseSpecification specification, @ParameterObject final Pageable pageable) {
-		return ok(courseService.find(specification, pageable));
+	ResponseEntity<PagedCoursesResponse> find(
+		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @ValidMunicipalityId @PathVariable final String municipalityId,
+		final CourseSpecification specification, @ParameterObject final Pageable pageable) {
+		return ok(courseService.find(specification, pageable, municipalityId));
 	}
 
 	@GetMapping(path = "/filters/{courseFilter}/values")
 	@Operation(summary = "Find available filter values", description = FIND_FILTER_VALUES_DESCRITPTION)
-	ResponseEntity<List<String>> findFilterValues(@Parameter(description = "The attribute name to get available values from") @PathVariable final CourseFilter courseFilter) {
-		return ok(courseService.findFilterValues(courseFilter));
+	ResponseEntity<List<String>> findFilterValues(
+		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @ValidMunicipalityId @PathVariable final String municipalityId,
+		@Parameter(description = "The attribute name to get available values from") @PathVariable final CourseFilter courseFilter) {
+		return ok(courseService.findFilterValues(courseFilter, municipalityId));
 	}
+
 }

@@ -5,9 +5,9 @@ info:
   license:
     name: MIT License
     url: https://opensource.org/licenses/MIT
-  version: "1.2"
+  version: "2.0"
 servers:
-  - url: http://localhost:62055
+  - url: http://localhost:65354
     description: Generated server url
 tags:
   - name: Courses
@@ -15,13 +15,20 @@ tags:
   - name: Statistics
     description: Get statistics
 paths:
-  /statistics:
+  /{municipalityId}/statistics:
     get:
       tags:
         - Statistics
       summary: Get statistics based on given parameters
       operationId: getStatistics
       parameters:
+        - name: municipalityId
+          in: path
+          description: Municipality id
+          required: true
+          schema:
+            type: string
+          example: 2281
         - name: categories
           in: query
           description: List of categories
@@ -86,6 +93,14 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Statistics"
+        "400":
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Problem"
+                  - $ref: "#/components/schemas/ConstraintViolationProblem"
         "404":
           description: Not found
           content:
@@ -98,21 +113,20 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-        "400":
-          description: Bad request
-          content:
-            application/problem+json:
-              schema:
-                oneOf:
-                  - $ref: "#/components/schemas/Problem"
-                  - $ref: "#/components/schemas/ConstraintViolationProblem"
-  /statistics/filters/{statisticsFilter}/values:
+  /{municipalityId}/statistics/filters/{statisticsFilter}/values:
     get:
       tags:
         - Statistics
       summary: Find available filter values
       operationId: findFilterValues
       parameters:
+        - name: municipalityId
+          in: path
+          description: Municipality id
+          required: true
+          schema:
+            type: string
+          example: 2281
         - name: statisticsFilter
           in: path
           description: The attribute name to get available values from
@@ -133,6 +147,14 @@ paths:
                 type: array
                 items:
                   type: string
+        "400":
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Problem"
+                  - $ref: "#/components/schemas/ConstraintViolationProblem"
         "404":
           description: Not found
           content:
@@ -145,15 +167,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-        "400":
-          description: Bad request
-          content:
-            application/problem+json:
-              schema:
-                oneOf:
-                  - $ref: "#/components/schemas/Problem"
-                  - $ref: "#/components/schemas/ConstraintViolationProblem"
-  /courses:
+  /{municipalityId}/courses:
     get:
       tags:
         - Courses
@@ -201,6 +215,13 @@ paths:
         - All date parameters are expected to be on the format: yyyy-MM-dd (example value: '2025-01-01')
       operationId: find
       parameters:
+        - name: municipalityId
+          in: path
+          description: Municipality id
+          required: true
+          schema:
+            type: string
+          example: 2281
         - name: page
           in: query
           description: Zero-based page index (0..N)
@@ -341,6 +362,14 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/PagedCoursesResponse"
+        "400":
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Problem"
+                  - $ref: "#/components/schemas/ConstraintViolationProblem"
         "404":
           description: Not found
           content:
@@ -353,15 +382,7 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-        "400":
-          description: Bad request
-          content:
-            application/problem+json:
-              schema:
-                oneOf:
-                  - $ref: "#/components/schemas/Problem"
-                  - $ref: "#/components/schemas/ConstraintViolationProblem"
-  /courses/filters/{courseFilter}/values:
+  /{municipalityId}/courses/filters/{courseFilter}/values:
     get:
       tags:
         - Courses
@@ -370,6 +391,13 @@ paths:
         Find available filter values (for use in the "Find course"-resource).
       operationId: findFilterValues_1
       parameters:
+        - name: municipalityId
+          in: path
+          description: Municipality id
+          required: true
+          schema:
+            type: string
+          example: 2281
         - name: courseFilter
           in: path
           description: The attribute name to get available values from
@@ -390,6 +418,14 @@ paths:
                 type: array
                 items:
                   type: string
+        "400":
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Problem"
+                  - $ref: "#/components/schemas/ConstraintViolationProblem"
         "404":
           description: Not found
           content:
@@ -402,14 +438,6 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
-        "400":
-          description: Bad request
-          content:
-            application/problem+json:
-              schema:
-                oneOf:
-                  - $ref: "#/components/schemas/Problem"
-                  - $ref: "#/components/schemas/ConstraintViolationProblem"
   /api-docs:
     get:
       tags:
@@ -431,8 +459,6 @@ components:
     Problem:
       type: object
       properties:
-        status:
-          $ref: "#/components/schemas/StatusType"
         instance:
           type: string
           format: uri
@@ -447,6 +473,8 @@ components:
           type: string
         detail:
           type: string
+        status:
+          $ref: "#/components/schemas/StatusType"
     StatusType:
       type: object
       properties:
@@ -566,8 +594,6 @@ components:
                 type: boolean
         message:
           type: string
-        status:
-          $ref: "#/components/schemas/StatusType"
         instance:
           type: string
           format: uri
@@ -582,6 +608,8 @@ components:
           type: string
         detail:
           type: string
+        status:
+          $ref: "#/components/schemas/StatusType"
         suppressed:
           type: array
           items:

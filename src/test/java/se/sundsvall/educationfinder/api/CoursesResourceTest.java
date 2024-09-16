@@ -25,15 +25,24 @@ import se.sundsvall.educationfinder.api.model.PagedCoursesResponse;
 @ActiveProfiles("junit")
 class CoursesResourceTest {
 
+	private static final String PATH = "/2281/courses";
+
 	@Autowired
 	private WebTestClient webTestClient;
+
+	private static Stream<Arguments> queryParameters() {
+		return Stream.of(
+			Arguments.of("Sundsvall", "vuxenutbildning", "matematik", 101),
+			Arguments.of("Sundsvall", "grundläggande", "kemi", 5),
+			Arguments.of("Kramfors", "yrkeshögskoleutbildning", "möbelsnickare", 3));
+	}
 
 	@Test
 	void findAll() {
 
 		// Act
 		final var response = webTestClient.get()
-			.uri(builder -> builder.path("/courses")
+			.uri(builder -> builder.path(PATH)
 				.queryParam("size", "30")
 				.build())
 			.exchange()
@@ -58,7 +67,7 @@ class CoursesResourceTest {
 
 		// Act
 		final var response = webTestClient.get()
-			.uri(builder -> builder.path("/courses")
+			.uri(builder -> builder.path(PATH)
 				.queryParam("studyLocation", "Ibiza")
 				.build())
 			.exchange()
@@ -83,7 +92,7 @@ class CoursesResourceTest {
 
 		// Act
 		final var response = webTestClient.get()
-			.uri(builder -> builder.path("/courses")
+			.uri(builder -> builder.path(PATH)
 				.queryParam("studyLocation", "Härnösand")
 				.build())
 			.exchange()
@@ -111,7 +120,7 @@ class CoursesResourceTest {
 
 		// Act
 		final var response = webTestClient.get()
-			.uri(builder -> builder.path("/courses")
+			.uri(builder -> builder.path(PATH)
 				.queryParam("credits", "325")
 				.build())
 			.exchange()
@@ -139,7 +148,7 @@ class CoursesResourceTest {
 
 		// Act
 		final var response = webTestClient.get()
-			.uri(builder -> builder.path("/courses")
+			.uri(builder -> builder.path(PATH)
 				.queryParam("studyLocation", "Härnösand")
 				.queryParam("name", "Drifttekniker Kraft & Värme")
 				.build())
@@ -170,7 +179,7 @@ class CoursesResourceTest {
 
 		// Act
 		final var response = webTestClient.get()
-			.uri(builder -> builder.path("/courses")
+			.uri(builder -> builder.path(PATH)
 				.queryParam("studyLocation", "Sundsvall")
 				.queryParam("name", "vardags")
 				.queryParam("endBefore", "2024-02-28")
@@ -201,7 +210,7 @@ class CoursesResourceTest {
 
 		// Act
 		final var response = webTestClient.get()
-			.uri(builder -> builder.path("/courses")
+			.uri(builder -> builder.path(PATH)
 				.queryParam("studyLocation", "Sundsvall")
 				.queryParam("name", "vardags")
 				.queryParam("startAfter", "2020-01-01")
@@ -233,7 +242,7 @@ class CoursesResourceTest {
 
 		// Act
 		final var response = webTestClient.get()
-			.uri("/courses/filters/credits/values")
+			.uri(PATH + "/filters/credits/values")
 			.exchange()
 			.expectStatus().isOk()
 			.expectHeader().contentType(APPLICATION_JSON)
@@ -271,7 +280,7 @@ class CoursesResourceTest {
 
 		// Act
 		final var response = webTestClient.get()
-			.uri("/courses/filters/provider/values")
+			.uri(PATH + "/filters/provider/values")
 			.exchange()
 			.expectStatus().isOk()
 			.expectHeader().contentType(APPLICATION_JSON)
@@ -296,7 +305,7 @@ class CoursesResourceTest {
 
 		// Act
 		final var response = webTestClient.get()
-			.uri("/courses/filters/level/values")
+			.uri(PATH + "/filters/level/values")
 			.exchange()
 			.expectStatus().isOk()
 			.expectHeader().contentType(APPLICATION_JSON)
@@ -320,7 +329,7 @@ class CoursesResourceTest {
 
 		// Act
 		final var response = webTestClient.get()
-			.uri("/courses/filters/scope/values")
+			.uri(PATH + "/filters/scope/values")
 			.exchange()
 			.expectStatus().isOk()
 			.expectHeader().contentType(APPLICATION_JSON)
@@ -339,7 +348,7 @@ class CoursesResourceTest {
 
 		// Act
 		final var response = webTestClient.get()
-			.uri("/courses/filters/studyLocation/values")
+			.uri(PATH + "/filters/studyLocation/values")
 			.exchange()
 			.expectStatus().isOk()
 			.expectHeader().contentType(APPLICATION_JSON)
@@ -353,19 +362,12 @@ class CoursesResourceTest {
 			.containsExactly("HÄRNÖSAND", "KRAMFORS", "SUNDSVALL", "ÖRNSKÖLDSVIK", "ÖSTERSUND");
 	}
 
-	private static Stream<Arguments> queryParameters() {
-		return Stream.of(
-			Arguments.of("Sundsvall", "vuxenutbildning", "matematik", 101),
-			Arguments.of("Sundsvall", "grundläggande", "kemi", 5),
-			Arguments.of("Kramfors", "yrkeshögskoleutbildning", "möbelsnickare", 3));
-	}
-
 	@ParameterizedTest
 	@MethodSource("queryParameters")
 	void findAllOnSpecificStudyLocationAndLevelWithCustomSearchString(final String studyLocation, final String level, final String searchString, final Integer matches) {
 
 		final var response = webTestClient.get()
-			.uri(builder -> builder.path("/courses")
+			.uri(builder -> builder.path(PATH)
 				.queryParam("studyLocation", studyLocation)
 				.queryParam("level", level)
 				.queryParam("searchString", searchString)
@@ -383,4 +385,5 @@ class CoursesResourceTest {
 		assertThat(response.getMetadata().getTotalRecords()).isEqualTo(matches.longValue());
 		assertThat(response.getMetadata().getTotalPages()).isEqualTo((matches.longValue() / 20) + 1);
 	}
+
 }
