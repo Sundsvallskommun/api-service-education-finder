@@ -52,6 +52,15 @@ class CourseServiceTest {
 	@InjectMocks
 	private CourseService courseService;
 
+	private static Stream<Arguments> findFilterValuesProvider() {
+		return Stream.of(
+			Arguments.of(CourseFilter.STUDY_LOCATION, StudyLocationProjection.class, STUDY_LOCATION),
+			Arguments.of(CourseFilter.PROVIDER, ProviderProjection.class, PROVIDER),
+			Arguments.of(CourseFilter.LEVEL, LevelProjection.class, LEVEL),
+			Arguments.of(CourseFilter.SCOPE, ScopeProjection.class, SCOPE),
+			Arguments.of(CourseFilter.CREDITS, CreditsProjection.class, CREDITS));
+	}
+
 	@Test
 	void find() {
 
@@ -72,22 +81,12 @@ class CourseServiceTest {
 
 	@ParameterizedTest
 	@MethodSource("findFilterValuesProvider")
-	void findFilterValues(CourseFilter courseFilter, Class<?> projectionClass, String attributeName) {
+	void findFilterValues(final CourseFilter courseFilter, final Class<?> projectionClass, final String attributeName) {
 
 		courseService.findFilterValues(courseFilter);
 
 		// Assert
 		verify(courseRepositoryMock).findDistinctBy(projectionClass, Sort.by(attributeName));
-	}
-
-
-	private static Stream<Arguments> findFilterValuesProvider() {
-		return Stream.of(
-			Arguments.of(CourseFilter.STUDY_LOCATION, StudyLocationProjection.class, STUDY_LOCATION),
-			Arguments.of(CourseFilter.PROVIDER, ProviderProjection.class, PROVIDER),
-			Arguments.of(CourseFilter.LEVEL, LevelProjection.class, LEVEL),
-			Arguments.of(CourseFilter.SCOPE, ScopeProjection.class, SCOPE),
-			Arguments.of(CourseFilter.CREDITS, CreditsProjection.class, CREDITS));
 	}
 
 

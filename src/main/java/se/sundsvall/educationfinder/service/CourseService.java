@@ -35,12 +35,12 @@ public class CourseService {
 		this.courseRepository = courseRepository;
 	}
 
-	public PagedCoursesResponse find(CourseSpecification specification, Pageable pageable) {
+	public PagedCoursesResponse find(final CourseSpecification specification, final Pageable pageable) {
 		return toPagedCoursesResponse(courseRepository.findAll(specification, pageable));
 	}
 
 	@Cacheable("course-filters")
-	public List<String> findFilterValues(CourseFilter courseFilter) {
+	public List<String> findFilterValues(final CourseFilter courseFilter) {
 		return switch (courseFilter) {
 			case STUDY_LOCATION ->
 				courseRepository.findDistinctBy(StudyLocationProjection.class, Sort.by(STUDY_LOCATION)).stream()
@@ -54,16 +54,14 @@ public class CourseService {
 					.filter(Objects::nonNull)
 					.map(ProviderProjection::getProvider)
 					.toList();
-			case LEVEL ->
-				courseRepository.findDistinctBy(LevelProjection.class, Sort.by(LEVEL)).stream()
-					.filter(Objects::nonNull)
-					.map(LevelProjection::getLevel)
-					.toList();
-			case SCOPE ->
-				courseRepository.findDistinctBy(ScopeProjection.class, Sort.by(SCOPE)).stream()
-					.filter(Objects::nonNull)
-					.map(ScopeProjection::getScope)
-					.toList();
+			case LEVEL -> courseRepository.findDistinctBy(LevelProjection.class, Sort.by(LEVEL)).stream()
+				.filter(Objects::nonNull)
+				.map(LevelProjection::getLevel)
+				.toList();
+			case SCOPE -> courseRepository.findDistinctBy(ScopeProjection.class, Sort.by(SCOPE)).stream()
+				.filter(Objects::nonNull)
+				.map(ScopeProjection::getScope)
+				.toList();
 			case CREDITS ->
 				courseRepository.findDistinctBy(CreditsProjection.class, Sort.by(CREDITS)).stream()
 					.filter(Objects::nonNull)
@@ -71,4 +69,5 @@ public class CourseService {
 					.toList();
 		};
 	}
+
 }

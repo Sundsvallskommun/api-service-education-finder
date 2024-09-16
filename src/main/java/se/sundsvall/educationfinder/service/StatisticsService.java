@@ -39,8 +39,8 @@ public class StatisticsService {
 	}
 
 	public Statistics getStatisticsByParameters(final StatisticsParameters parameters) {
-		var codes = getSubjectCodes(parameters);
-		var courses = courseRepository.findAllByParametersAndCode(parameters, codes);
+		final var codes = getSubjectCodes(parameters);
+		final var courses = courseRepository.findAllByParametersAndCode(parameters, codes);
 		return calculateStatistics(parameters, courses);
 	}
 
@@ -59,25 +59,25 @@ public class StatisticsService {
 	}
 
 	public Statistics calculateStatistics(final StatisticsParameters parameters, final List<CourseEntity> courses) {
-		var ongoingCourses = courses.stream()
+		final var ongoingCourses = courses.stream()
 			.filter(course -> course.getStart().isBefore(parameters.getStartDate()) && course.getEnd().isAfter(parameters.getEndDate()))
 			.count();
 
-		var plannedCourses = courses.stream()
+		final var plannedCourses = courses.stream()
 			.filter(course -> course.getStart().isAfter(parameters.getStartDate()) && course.getStart().isBefore(parameters.getEndDate()))
 			.count();
 
-		var finishedCourses = courses.stream()
+		final var finishedCourses = courses.stream()
 			.filter(course -> course.getEnd().isAfter(parameters.getStartDate()) && course.getEnd().isBefore(parameters.getEndDate()))
 			.count();
 
-		var availableSeats = courses.stream()
+		final var availableSeats = courses.stream()
 			.filter(course -> course.getStart().isAfter(parameters.getStartDate()) && course.getStart().isBefore(parameters.getEndDate()))
 			.filter(course -> course.getNumberOfSeats() != null)
 			.mapToInt(CourseEntity::getNumberOfSeats)
 			.sum();
 
-		var totalCapacity = courses.stream()
+		final var totalCapacity = courses.stream()
 			.filter(course -> course.getNumberOfSeats() != null)
 			.mapToInt(CourseEntity::getNumberOfSeats)
 			.sum();
@@ -130,4 +130,5 @@ public class StatisticsService {
 			case START_DATE, END_DATE -> List.of("Any date in this format: yyyy-MM-dd");
 		};
 	}
+
 }

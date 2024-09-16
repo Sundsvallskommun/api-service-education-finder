@@ -39,6 +39,8 @@ import se.sundsvall.educationfinder.integration.db.model.projection.StudyLocatio
 
 @ExtendWith(value = {MockitoExtension.class, ResourceLoaderExtension.class})
 class StatisticsServiceTest {
+	
+	private final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
 	@Mock
 	private SubjectRepository subjectRepositoryMock;
@@ -49,16 +51,22 @@ class StatisticsServiceTest {
 	@InjectMocks
 	private StatisticsService statisticsService;
 
-	private final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
+	private static Stream<Arguments> findStatisticsFilterValuesProvider() {
+		return Stream.of(
+			Arguments.of(StatisticsFilter.CATEGORY, CategoryProjection.class, CATEGORY),
+			Arguments.of(StatisticsFilter.CATEGORY_ID, CategoryIdProjection.class, CATEGORY_ID),
+			Arguments.of(StatisticsFilter.EDUCATION_FORM, EducationFormProjection.class, EDUCATION_FORM));
+	}
 
 	@Test
-	void calculateStatistics(@Load(value = "mockdata/courses.json", as = Load.ResourceType.STRING) String value) throws IOException {
-		var courses = objectMapper.readValue(value, new TypeReference<List<CourseEntity>>() {
+	void calculateStatistics(@Load(value = "mockdata/courses.json", as = Load.ResourceType.STRING) final String value) throws IOException {
+		final var courses = objectMapper.readValue(value, new TypeReference<List<CourseEntity>>() {
+
 		});
 
-		var parameters = new StatisticsParameters().withStartDate(LocalDate.of(2023, 1, 1)).withEndDate(LocalDate.of(2023, 12, 31));
+		final var parameters = new StatisticsParameters().withStartDate(LocalDate.of(2023, 1, 1)).withEndDate(LocalDate.of(2023, 12, 31));
 
-		var result = statisticsService.calculateStatistics(parameters, courses);
+		final var result = statisticsService.calculateStatistics(parameters, courses);
 
 		assertThat(result.getAvailableSeats()).isEqualTo(137);
 		assertThat(result.getOnGoingCourses()).isEqualTo(3);
@@ -68,7 +76,7 @@ class StatisticsServiceTest {
 
 	@ParameterizedTest
 	@MethodSource("findStatisticsFilterValuesProvider")
-	void findStatisticsFilterValues(StatisticsFilter statisticsFilter, Class<?> projectionClass, String attributeName) {
+	void findStatisticsFilterValues(final StatisticsFilter statisticsFilter, final Class<?> projectionClass, final String attributeName) {
 
 		statisticsService.findStatisticsFilterValues(statisticsFilter);
 
@@ -80,13 +88,6 @@ class StatisticsServiceTest {
 	void findStatisticsFilterStudyLocationValues() {
 		statisticsService.findStatisticsFilterValues(StatisticsFilter.STUDY_LOCATION);
 		verify(courseRepositoryMock).findDistinctBy(StudyLocationProjection.class, Sort.by(STUDY_LOCATION));
-	}
-
-	private static Stream<Arguments> findStatisticsFilterValuesProvider() {
-		return Stream.of(
-			Arguments.of(StatisticsFilter.CATEGORY, CategoryProjection.class, CATEGORY),
-			Arguments.of(StatisticsFilter.CATEGORY_ID, CategoryIdProjection.class, CATEGORY_ID),
-			Arguments.of(StatisticsFilter.EDUCATION_FORM, EducationFormProjection.class, EDUCATION_FORM));
 	}
 
 }

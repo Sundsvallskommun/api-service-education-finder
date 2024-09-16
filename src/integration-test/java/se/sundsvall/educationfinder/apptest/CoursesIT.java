@@ -14,10 +14,12 @@ class CoursesIT extends AbstractAppTest {
 
 	private static final String RESPONSE_FILE = "response.json";
 
+	private static final String PATH = "/2281/courses";
+
 	@Test
 	void test01_findAll() {
 		setupCall()
-			.withServicePath("/courses")
+			.withServicePath(PATH)
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -27,7 +29,7 @@ class CoursesIT extends AbstractAppTest {
 	@Test
 	void test02_findAllEmptyResult() {
 		setupCall()
-			.withServicePath("/courses?name=does-not-exist")
+			.withServicePath(PATH + "?name=does-not-exist")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -37,7 +39,7 @@ class CoursesIT extends AbstractAppTest {
 	@Test
 	void test03_findAllByStudyLocation() {
 		setupCall()
-			.withServicePath("/courses?studyLocation=härnö")
+			.withServicePath(PATH + "?studyLocation=härnö")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -47,7 +49,7 @@ class CoursesIT extends AbstractAppTest {
 	@Test
 	void test04_findAllByCode() {
 		setupCall()
-			.withServicePath("/courses?code=JURAFF0")
+			.withServicePath(PATH + "?code=JURAFF0")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -57,7 +59,7 @@ class CoursesIT extends AbstractAppTest {
 	@Test
 	void test05_findAllByProvider() {
 		setupCall()
-			.withServicePath("/courses?provider=härnösand")
+			.withServicePath(PATH + "?provider=härnösand")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -67,7 +69,7 @@ class CoursesIT extends AbstractAppTest {
 	@Test
 	void test06_findAllByLevel() {
 		setupCall()
-			.withServicePath("/courses?level=yrkeshögskole")
+			.withServicePath(PATH + "?level=yrkeshögskole")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -77,7 +79,7 @@ class CoursesIT extends AbstractAppTest {
 	@Test
 	void test07_findAllByCredits() {
 		setupCall()
-			.withServicePath("/courses?credits=325")
+			.withServicePath(PATH + "?credits=325")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -87,7 +89,7 @@ class CoursesIT extends AbstractAppTest {
 	@Test
 	void test08_findAllByScope() {
 		setupCall()
-			.withServicePath("/courses?scope=25")
+			.withServicePath(PATH + "?scope=25")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -97,7 +99,7 @@ class CoursesIT extends AbstractAppTest {
 	@Test
 	void test09_findAllByScopeAndEnd() {
 		setupCall()
-			.withServicePath("/courses?scope=50&end=2023-11-17")
+			.withServicePath(PATH + "?scope=50&end=2023-11-17")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -107,7 +109,7 @@ class CoursesIT extends AbstractAppTest {
 	@Test
 	void test10_findAllByLevelAndStartSortByEnd() {
 		setupCall()
-			.withServicePath("/courses?level=yrkeshögskoleutbildning&start=2024-09-01&sort=end,asc")
+			.withServicePath(PATH + "?level=yrkeshögskoleutbildning&start=2024-09-01&sort=end,asc")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -117,7 +119,7 @@ class CoursesIT extends AbstractAppTest {
 	@Test
 	void test11_findAllByEarliestApplicationSortByStudyLocation() {
 		setupCall()
-			.withServicePath("/courses?earliestApplication=2023-05-24&sort=studyLocation")
+			.withServicePath(PATH + "?earliestApplication=2023-05-24&sort=studyLocation")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -127,7 +129,7 @@ class CoursesIT extends AbstractAppTest {
 	@Test
 	void test12_findAllByLatestApplicationSortByStudyLocation() {
 		setupCall()
-			.withServicePath("/courses?latestApplication=2023-08-27&sort=latestApplication,asc")
+			.withServicePath(PATH + "?latestApplication=2023-08-27&sort=latestApplication,asc")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -137,7 +139,7 @@ class CoursesIT extends AbstractAppTest {
 	@Test
 	void test13_findAllByInformation() {
 		setupCall()
-			.withServicePath("/courses?information=storkök")
+			.withServicePath(PATH + "?information=storkök")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -147,7 +149,7 @@ class CoursesIT extends AbstractAppTest {
 	@Test
 	void test14_findAllByStartAfterAndStartBefore() {
 		setupCall()
-			.withServicePath("/courses?startAfter=2024-12-31&startBefore=2025-01-02")
+			.withServicePath(PATH + "?startAfter=2024-12-31&startBefore=2025-01-02")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -157,7 +159,7 @@ class CoursesIT extends AbstractAppTest {
 	@Test
 	void test15_findAllByEndAfterAndEndBefore() {
 		setupCall()
-			.withServicePath("/courses?endAfter=2026-05-30&endBefore=2026-06-15")
+			.withServicePath(PATH + "?endAfter=2026-05-30&endBefore=2026-06-15")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -167,7 +169,7 @@ class CoursesIT extends AbstractAppTest {
 	@Test
 	void test16_findAllByEarliestApplicationAfterAndEarliestApplicationBefore() {
 		setupCall()
-			.withServicePath("/courses?earliestApplicationAfter=2023-03-20&earliestApplicationBefore=2023-03-25")
+			.withServicePath(PATH + "?earliestApplicationAfter=2023-03-20&earliestApplicationBefore=2023-03-25")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -177,7 +179,7 @@ class CoursesIT extends AbstractAppTest {
 	@Test
 	void test17_findAllByLatestApplicationAfterAndLatestApplicationBefore() {
 		setupCall()
-			.withServicePath("/courses?latestApplicationAfter=2023-09-05&latestApplicationBefore=2023-09-15")
+			.withServicePath(PATH + "?latestApplicationAfter=2023-09-05&latestApplicationBefore=2023-09-15")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -187,7 +189,7 @@ class CoursesIT extends AbstractAppTest {
 	@Test
 	void test18_findAllBySearchStringMatchingCode() {
 		setupCall()
-			.withServicePath("/courses?searchString=SgrH")
+			.withServicePath(PATH + "?searchString=SgrH")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -197,7 +199,7 @@ class CoursesIT extends AbstractAppTest {
 	@Test
 	void test19_findAllBySearchStringMatchingName() {
 		setupCall()
-			.withServicePath("/courses?searchString=Läsa och skriva")
+			.withServicePath(PATH + "?searchString=Läsa och skriva")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -207,7 +209,7 @@ class CoursesIT extends AbstractAppTest {
 	@Test
 	void test20_findAllBySearchStringMatchingInformation() {
 		setupCall()
-			.withServicePath("/courses?searchString=för dig som har en intellektuell funktionsnedsättning eller förvärvad hjärnskada")
+			.withServicePath(PATH + "?searchString=för dig som har en intellektuell funktionsnedsättning eller förvärvad hjärnskada")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -217,7 +219,7 @@ class CoursesIT extends AbstractAppTest {
 	@Test
 	void test21_findAllByStudyLocationAndSearchStringMatchingName() {
 		setupCall()
-			.withServicePath("/courses?studyLocation=Härnösand&searchString=Drifttekniker")
+			.withServicePath(PATH + "?studyLocation=Härnösand&searchString=Drifttekniker")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
