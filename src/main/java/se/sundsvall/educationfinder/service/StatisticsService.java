@@ -38,13 +38,13 @@ public class StatisticsService {
 		this.subjectRepository = subjectRepository;
 	}
 
-	public Statistics getStatisticsByParameters(final StatisticsParameters parameters, final String municipalityId) {
-		final var codes = getSubjectCodes(parameters, municipalityId);
+	public Statistics getStatisticsByParameters(final StatisticsParameters parameters) {
+		final var codes = getSubjectCodes(parameters);
 		final var courses = courseRepository.findAllByParametersAndCode(parameters, codes);
 		return calculateStatistics(parameters, courses);
 	}
 
-	private List<String> getSubjectCodes(final StatisticsParameters parameters, final String municipalityId) {
+	private List<String> getSubjectCodes(final StatisticsParameters parameters) {
 		if (!parametersContainSubjectFilter(parameters)) {
 			return null;
 		}
@@ -97,7 +97,7 @@ public class StatisticsService {
 	}
 
 	@Cacheable("subject-filters")
-	public List<String> findStatisticsFilterValues(final StatisticsFilter statisticsFilter, final String municipalityId) {
+	public List<String> findStatisticsFilterValues(final StatisticsFilter statisticsFilter) {
 		return switch (statisticsFilter) {
 			case EDUCATION_FORM ->
 				subjectRepository.findDistinctBy(EducationFormProjection.class, Sort.by(EDUCATION_FORM)).stream()

@@ -35,12 +35,12 @@ public class CourseService {
 		this.courseRepository = courseRepository;
 	}
 
-	public PagedCoursesResponse find(final CourseSpecification specification, final Pageable pageable, final String municipalityId) {
+	public PagedCoursesResponse find(final CourseSpecification specification, final Pageable pageable) {
 		return toPagedCoursesResponse(courseRepository.findAll(specification, pageable));
 	}
 
 	@Cacheable("course-filters")
-	public List<String> findFilterValues(final CourseFilter courseFilter, final String municipalityId) {
+	public List<String> findFilterValues(final CourseFilter courseFilter) {
 		return switch (courseFilter) {
 			case STUDY_LOCATION ->
 				courseRepository.findDistinctBy(StudyLocationProjection.class, Sort.by(STUDY_LOCATION)).stream()

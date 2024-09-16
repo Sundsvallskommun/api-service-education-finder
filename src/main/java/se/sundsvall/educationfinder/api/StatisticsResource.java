@@ -52,7 +52,7 @@ class StatisticsResource {
 	ResponseEntity<Statistics> getStatistics(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @ValidMunicipalityId @PathVariable final String municipalityId,
 		@ParameterObject @Valid final StatisticsParameters parameters) {
-		return ok(service.getStatisticsByParameters(parameters, municipalityId));
+		return ok(service.getStatisticsByParameters(parameters));
 	}
 
 	@GetMapping(path = "/filters/{statisticsFilter}/values")
@@ -60,7 +60,7 @@ class StatisticsResource {
 	ResponseEntity<List<String>> findFilterValues(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @ValidMunicipalityId @PathVariable final String municipalityId,
 		@Parameter(description = "The attribute name to get available values from") @PathVariable final StatisticsFilter statisticsFilter) {
-		return ok(service.findStatisticsFilterValues(statisticsFilter,municipalityId));
+		return ok(service.findStatisticsFilterValues(statisticsFilter));
 	}
 
 }

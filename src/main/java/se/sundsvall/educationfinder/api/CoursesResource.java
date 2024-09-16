@@ -53,7 +53,7 @@ class CoursesResource {
 	ResponseEntity<PagedCoursesResponse> find(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @ValidMunicipalityId @PathVariable final String municipalityId,
 		final CourseSpecification specification, @ParameterObject final Pageable pageable) {
-		return ok(courseService.find(specification, pageable, municipalityId));
+		return ok(courseService.find(specification, pageable));
 	}
 
 	@GetMapping(path = "/filters/{courseFilter}/values")
@@ -61,7 +61,7 @@ class CoursesResource {
 	ResponseEntity<List<String>> findFilterValues(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @ValidMunicipalityId @PathVariable final String municipalityId,
 		@Parameter(description = "The attribute name to get available values from") @PathVariable final CourseFilter courseFilter) {
-		return ok(courseService.findFilterValues(courseFilter, municipalityId));
+		return ok(courseService.findFilterValues(courseFilter));
 	}
 
 }

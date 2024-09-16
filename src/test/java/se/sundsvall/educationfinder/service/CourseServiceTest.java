@@ -66,14 +66,13 @@ class CourseServiceTest {
 
 		// Arrange
 		final var pageRequest = PageRequest.of(0, 10, Sort.by(DESC, "name"));
-		final var municipalityId = "2281";
 
 		when(pageMock.getContent()).thenReturn(List.of(CourseEntity.create()));
 		when(pageMock.getPageable()).thenReturn(pageRequest);
 		when(courseRepositoryMock.findAll(any(CourseSpecification.class), eq(pageRequest))).thenReturn(pageMock);
 
 		// Act
-		final var result = courseService.find(courseSpecificationMock, pageRequest, municipalityId);
+		final var result = courseService.find(courseSpecificationMock, pageRequest);
 
 		// Assert
 		assertThat(result).isNotNull();
@@ -84,10 +83,7 @@ class CourseServiceTest {
 	@MethodSource("findFilterValuesProvider")
 	void findFilterValues(final CourseFilter courseFilter, final Class<?> projectionClass, final String attributeName) {
 
-		// Arrange
-		final var municipalityId = "2281";
-
-		courseService.findFilterValues(courseFilter, municipalityId);
+		courseService.findFilterValues(courseFilter);
 
 		// Assert
 		verify(courseRepositoryMock).findDistinctBy(projectionClass, Sort.by(attributeName));

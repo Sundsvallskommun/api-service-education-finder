@@ -39,9 +39,7 @@ import se.sundsvall.educationfinder.integration.db.model.projection.StudyLocatio
 
 @ExtendWith(value = {MockitoExtension.class, ResourceLoaderExtension.class})
 class StatisticsServiceTest {
-
-	private static final String MUNICIPALITY_ID = "123";
-
+	
 	private final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
 	@Mock
@@ -80,7 +78,7 @@ class StatisticsServiceTest {
 	@MethodSource("findStatisticsFilterValuesProvider")
 	void findStatisticsFilterValues(final StatisticsFilter statisticsFilter, final Class<?> projectionClass, final String attributeName) {
 
-		statisticsService.findStatisticsFilterValues(statisticsFilter, MUNICIPALITY_ID);
+		statisticsService.findStatisticsFilterValues(statisticsFilter);
 
 		// Assert
 		verify(subjectRepositoryMock).findDistinctBy(projectionClass, Sort.by(attributeName));
@@ -88,7 +86,7 @@ class StatisticsServiceTest {
 
 	@Test
 	void findStatisticsFilterStudyLocationValues() {
-		statisticsService.findStatisticsFilterValues(StatisticsFilter.STUDY_LOCATION, MUNICIPALITY_ID);
+		statisticsService.findStatisticsFilterValues(StatisticsFilter.STUDY_LOCATION);
 		verify(courseRepositoryMock).findDistinctBy(StudyLocationProjection.class, Sort.by(STUDY_LOCATION));
 	}
 
