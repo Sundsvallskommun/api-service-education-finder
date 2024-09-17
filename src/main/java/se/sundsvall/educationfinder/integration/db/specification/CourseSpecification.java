@@ -20,6 +20,7 @@ import se.sundsvall.educationfinder.integration.db.model.CourseEntity;
 import net.kaczmarzyk.spring.data.jpa.domain.Equal;
 import net.kaczmarzyk.spring.data.jpa.domain.EqualIgnoreCase;
 import net.kaczmarzyk.spring.data.jpa.domain.GreaterThan;
+import net.kaczmarzyk.spring.data.jpa.domain.In;
 import net.kaczmarzyk.spring.data.jpa.domain.LessThan;
 import net.kaczmarzyk.spring.data.jpa.domain.LikeIgnoreCase;
 import net.kaczmarzyk.spring.data.jpa.web.annotation.And;
@@ -27,13 +28,14 @@ import net.kaczmarzyk.spring.data.jpa.web.annotation.Or;
 import net.kaczmarzyk.spring.data.jpa.web.annotation.Spec;
 
 @And({
+	@Spec(params = "scope", path = SCOPE, spec = In.class),
+	@Spec(params = "studyLocation", path = STUDY_LOCATION, spec = In.class),
+	@Spec(params = "level", path = LEVEL, spec = In.class),
+
 	@Spec(params = "code", path = CODE, spec = EqualIgnoreCase.class),
 	@Spec(params = "name", path = NAME, spec = LikeIgnoreCase.class),
 	@Spec(params = "provider", path = PROVIDER, spec = LikeIgnoreCase.class),
-	@Spec(params = "level", path = LEVEL, spec = LikeIgnoreCase.class),
 	@Spec(params = "credits", path = CREDITS, spec = Equal.class),
-	@Spec(params = "scope", path = SCOPE, spec = Equal.class),
-	@Spec(params = "studyLocation", path = STUDY_LOCATION, spec = LikeIgnoreCase.class),
 	@Spec(params = "start", path = START, spec = Equal.class),
 	@Spec(params = "startBefore", path = START, spec = LessThan.class),
 	@Spec(params = "startAfter", path = START, spec = GreaterThan.class),
