@@ -30,8 +30,11 @@ public class Statistics {
 	@Schema(description = "Study locations used for filtering", accessMode = READ_ONLY)
 	private List<String> studyLocations = new ArrayList<>();
 
-	@Schema(description = "Education forms used for filtering", accessMode = READ_ONLY)
-	private List<String> educationForms = new ArrayList<>();
+	@Schema(description = "Scopes used for filtering", accessMode = READ_ONLY)
+	private List<String> scopes = new ArrayList<>();
+
+	@Schema(description = "Levels used for filtering", accessMode = READ_ONLY)
+	private List<String> levels = new ArrayList<>();
 
 	@Schema(description = "Categories used for filtering", accessMode = READ_ONLY)
 	private List<String> categories = new ArrayList<>();
@@ -127,16 +130,29 @@ public class Statistics {
 		return this;
 	}
 
-	public List<String> getEducationForms() {
-		return educationForms;
+	public List<String> getScopes() {
+		return scopes;
 	}
 
-	public void setEducationForms(final List<String> educationForms) {
-		this.educationForms = educationForms;
+	public void setScopes(final List<String> scopes) {
+		this.scopes = scopes;
 	}
 
-	public Statistics withEducationForms(final List<String> educationForms) {
-		this.educationForms = educationForms;
+	public Statistics withScopes(final List<String> scopes) {
+		this.scopes = scopes;
+		return this;
+	}
+
+	public List<String> getLevels() {
+		return levels;
+	}
+
+	public void setLevels(final List<String> levels) {
+		this.levels = levels;
+	}
+
+	public Statistics withLevels(final List<String> levels) {
+		this.levels = levels;
 		return this;
 	}
 
@@ -201,7 +217,8 @@ public class Statistics {
 			", availableSeats=" + availableSeats +
 			", totalCapacity=" + totalCapacity +
 			", studyLocations=" + studyLocations +
-			", educationForms=" + educationForms +
+			", scopes=" + scopes +
+			", levels=" + levels +
 			", categories=" + categories +
 			", categoryIds=" + categoryIds +
 			", startDate=" + startDate +
@@ -214,11 +231,11 @@ public class Statistics {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		final Statistics that = (Statistics) o;
-		return Objects.equals(onGoingCourses, that.onGoingCourses) && Objects.equals(plannedCourses, that.plannedCourses) && Objects.equals(finishedCourses, that.finishedCourses) && Objects.equals(availableSeats, that.availableSeats) && Objects.equals(totalCapacity, that.totalCapacity) && Objects.equals(studyLocations, that.studyLocations) && Objects.equals(educationForms, that.educationForms) && Objects.equals(categories, that.categories) && Objects.equals(categoryIds, that.categoryIds) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate);
+		return onGoingCourses == that.onGoingCourses && plannedCourses == that.plannedCourses && finishedCourses == that.finishedCourses && availableSeats == that.availableSeats && totalCapacity == that.totalCapacity && Objects.equals(studyLocations, that.studyLocations) && Objects.equals(scopes, that.scopes) && Objects.equals(levels, that.levels) && Objects.equals(categories, that.categories) && Objects.equals(categoryIds, that.categoryIds) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(onGoingCourses, plannedCourses, finishedCourses, availableSeats, totalCapacity, studyLocations, educationForms, categories, categoryIds, startDate, endDate);
+		return Objects.hash(onGoingCourses, plannedCourses, finishedCourses, availableSeats, totalCapacity, studyLocations, scopes, levels, categories, categoryIds, startDate, endDate);
 	}
 }

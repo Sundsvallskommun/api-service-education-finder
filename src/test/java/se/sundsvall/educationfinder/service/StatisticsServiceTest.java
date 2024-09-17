@@ -2,10 +2,11 @@ package se.sundsvall.educationfinder.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.LEVEL;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.SCOPE;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.STUDY_LOCATION;
 import static se.sundsvall.educationfinder.integration.db.model.SubjectEntity_.CATEGORY;
 import static se.sundsvall.educationfinder.integration.db.model.SubjectEntity_.CATEGORY_ID;
-import static se.sundsvall.educationfinder.integration.db.model.SubjectEntity_.EDUCATION_FORM;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -34,12 +35,13 @@ import se.sundsvall.educationfinder.integration.db.SubjectRepository;
 import se.sundsvall.educationfinder.integration.db.model.CourseEntity;
 import se.sundsvall.educationfinder.integration.db.model.projection.CategoryIdProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.CategoryProjection;
-import se.sundsvall.educationfinder.integration.db.model.projection.EducationFormProjection;
+import se.sundsvall.educationfinder.integration.db.model.projection.LevelProjection;
+import se.sundsvall.educationfinder.integration.db.model.projection.ScopeProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.StudyLocationProjection;
 
 @ExtendWith(value = {MockitoExtension.class, ResourceLoaderExtension.class})
 class StatisticsServiceTest {
-	
+
 	private final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
 	@Mock
@@ -51,11 +53,17 @@ class StatisticsServiceTest {
 	@InjectMocks
 	private StatisticsService statisticsService;
 
-	private static Stream<Arguments> findStatisticsFilterValuesProvider() {
+	private static Stream<Arguments> findStatisticsSubjectFilterValuesProvider() {
 		return Stream.of(
 			Arguments.of(StatisticsFilter.CATEGORY, CategoryProjection.class, CATEGORY),
-			Arguments.of(StatisticsFilter.CATEGORY_ID, CategoryIdProjection.class, CATEGORY_ID),
-			Arguments.of(StatisticsFilter.EDUCATION_FORM, EducationFormProjection.class, EDUCATION_FORM));
+			Arguments.of(StatisticsFilter.CATEGORY_ID, CategoryIdProjection.class, CATEGORY_ID));
+	}
+
+	private static Stream<Arguments> findStatisticsCourseFilterValuesProvider() {
+		return Stream.of(
+			Arguments.of(StatisticsFilter.LEVEL, LevelProjection.class, LEVEL),
+			Arguments.of(StatisticsFilter.STUDY_LOCATION, StudyLocationProjection.class, STUDY_LOCATION),
+			Arguments.of(StatisticsFilter.SCOPE, ScopeProjection.class, SCOPE));
 	}
 
 	@Test
@@ -75,8 +83,18 @@ class StatisticsServiceTest {
 	}
 
 	@ParameterizedTest
-	@MethodSource("findStatisticsFilterValuesProvider")
-	void findStatisticsFilterValues(final StatisticsFilter statisticsFilter, final Class<?> projectionClass, final String attributeName) {
+	@MethodSource("findStatisticsCourseFilterValuesProvider")
+	void findStatisticsCourseFilterValues(final StatisticsFilter statisticsFilter, final Class<?> projectionClass, final String attributeName) {
+
+		statisticsService.findStatisticsFilterValues(statisticsFilter);
+
+		// Assert
+		verify(courseRepositoryMock).findDistinctBy(projectionClass, Sort.by(attributeName));
+	}
+
+	@ParameterizedTest
+	@MethodSource("findStatisticsSubjectFilterValuesProvider")
+	void findStatisticsSubjectFilterValues(final StatisticsFilter statisticsFilter, final Class<?> projectionClass, final String attributeName) {
 
 		statisticsService.findStatisticsFilterValues(statisticsFilter);
 

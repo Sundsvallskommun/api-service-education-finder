@@ -2,7 +2,6 @@ package se.sundsvall.educationfinder.integration.db;
 
 import static se.sundsvall.educationfinder.integration.db.specification.SubjectSpecification.withCategory;
 import static se.sundsvall.educationfinder.integration.db.specification.SubjectSpecification.withCategoryId;
-import static se.sundsvall.educationfinder.integration.db.specification.SubjectSpecification.withEducationForm;
 
 import java.util.List;
 
@@ -17,12 +16,10 @@ import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 public interface SubjectRepository extends ReadOnlyRepository<SubjectEntity, Long>, JpaSpecificationExecutor<SubjectEntity> {
 
 	default List<SubjectEntity> findAllByParameters(final StatisticsParameters parameters) {
-		var educationForms = parameters.getEducationForms();
 		var categories = parameters.getCategories();
 		var categoryIds = parameters.getCategoryIds();
 
-		return this.findAll(withEducationForm(educationForms)
-			.and(withCategory(categories))
+		return this.findAll((withCategory(categories))
 			.and(withCategoryId(categoryIds)));
 	}
 

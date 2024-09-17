@@ -6,8 +6,8 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static se.sundsvall.educationfinder.api.model.enums.StatisticsFilter.CATEGORY;
 import static se.sundsvall.educationfinder.api.model.enums.StatisticsFilter.CATEGORY_ID;
-import static se.sundsvall.educationfinder.api.model.enums.StatisticsFilter.EDUCATION_FORM;
 import static se.sundsvall.educationfinder.api.model.enums.StatisticsFilter.END_DATE;
+import static se.sundsvall.educationfinder.api.model.enums.StatisticsFilter.LEVEL;
 import static se.sundsvall.educationfinder.api.model.enums.StatisticsFilter.START_DATE;
 import static se.sundsvall.educationfinder.api.model.enums.StatisticsFilter.STUDY_LOCATION;
 
@@ -89,7 +89,7 @@ class StatisticsResourceTest {
 	@Test
 	void findEducationFormFilterValues() {
 		final var response = webTestClient.get()
-			.uri(builder -> builder.path(FILTER_PATH).build(Map.of("statisticsFilter", EDUCATION_FORM)))
+			.uri(builder -> builder.path(FILTER_PATH).build(Map.of("statisticsFilter", LEVEL)))
 			.exchange()
 			.expectStatus().isOk()
 			.expectHeader().contentType(APPLICATION_JSON)
@@ -97,7 +97,12 @@ class StatisticsResourceTest {
 			.returnResult()
 			.getResponseBody();
 
-		assertThat(response).isNotNull().containsExactlyInAnyOrder("AUB", "FHSK", "SV", "UOH", "YH");
+		assertThat(response).isNotNull().containsExactlyInAnyOrder(
+			"GRUNDLÄGGANDE VUXENUTBILDNING",
+			"GYMNASIAL VUXENUTBILDNING",
+			"KOMMUNAL VUXENUTBILDNING SOM ANPASSAD UTBILDNING PÅ GRUNDLÄGGANDE NIVÅ",
+			"KOMMUNAL VUXENUTBILDNING SOM ANPASSAD UTBILDNING PÅ GYMNASIAL NIVÅ",
+			"YRKESHÖGSKOLEUTBILDNING");
 	}
 
 	@Test
@@ -151,7 +156,7 @@ class StatisticsResourceTest {
 		final var response = webTestClient.get()
 			.uri(builder -> builder
 				.path(BASE_PATH)
-				.queryParams(createParameterMap(null, null, null, studyLocations, startDate, endDate))
+				.queryParams(createParameterMap(null, null, null, null, studyLocations, startDate, endDate))
 				.build())
 			.exchange()
 			.expectStatus().isOk()
@@ -170,7 +175,8 @@ class StatisticsResourceTest {
 		assertThat(response.getEndDate()).isEqualTo(endDate);
 		assertThat(response.getCategories()).isEmpty();
 		assertThat(response.getCategoryIds()).isEmpty();
-		assertThat(response.getEducationForms()).isEmpty();
+		assertThat(response.getScopes()).isEmpty();
+		assertThat(response.getLevels()).isEmpty();
 		assertThat(response.getStudyLocations()).containsExactlyElementsOf(studyLocations);
 	}
 
@@ -182,7 +188,7 @@ class StatisticsResourceTest {
 		final var response = webTestClient.get()
 			.uri(builder -> builder
 				.path(BASE_PATH)
-				.queryParams(createParameterMap(null, null, null, null, startDate, endDate))
+				.queryParams(createParameterMap(null, null, null, null, null, startDate, endDate))
 				.build())
 			.exchange()
 			.expectStatus().isOk()
@@ -202,7 +208,8 @@ class StatisticsResourceTest {
 		assertThat(response.getCategories()).isEmpty();
 		assertThat(response.getCategoryIds()).isEmpty();
 		assertThat(response.getStudyLocations()).isEmpty();
-		assertThat(response.getEducationForms()).isEmpty();
+		assertThat(response.getLevels()).isEmpty();
+		assertThat(response.getScopes()).isEmpty();
 	}
 
 	@Test
@@ -214,7 +221,7 @@ class StatisticsResourceTest {
 		final var response = webTestClient.get()
 			.uri(builder -> builder
 				.path(BASE_PATH)
-				.queryParams(createParameterMap(categories, null, null, null, startDate, endDate))
+				.queryParams(createParameterMap(categories, null, null, null, null, startDate, endDate))
 				.build())
 			.exchange()
 			.expectStatus().isOk()
@@ -234,7 +241,8 @@ class StatisticsResourceTest {
 		assertThat(response.getCategories()).containsExactlyElementsOf(categories);
 		assertThat(response.getCategoryIds()).isEmpty();
 		assertThat(response.getStudyLocations()).isEmpty();
-		assertThat(response.getEducationForms()).isEmpty();
+		assertThat(response.getLevels()).isEmpty();
+		assertThat(response.getScopes()).isEmpty();
 	}
 
 	@Test
@@ -246,7 +254,7 @@ class StatisticsResourceTest {
 		final var response = webTestClient.get()
 			.uri(builder -> builder
 				.path(BASE_PATH)
-				.queryParams(createParameterMap(null, categoryIds, null, null, startDate, endDate))
+				.queryParams(createParameterMap(null, categoryIds, null, null, null, startDate, endDate))
 				.build())
 			.exchange()
 			.expectStatus().isOk()
@@ -266,19 +274,53 @@ class StatisticsResourceTest {
 		assertThat(response.getCategoryIds()).containsExactlyElementsOf(categoryIds);
 		assertThat(response.getCategories()).isEmpty();
 		assertThat(response.getStudyLocations()).isEmpty();
-		assertThat(response.getEducationForms()).isEmpty();
+		assertThat(response.getLevels()).isEmpty();
+		assertThat(response.getScopes()).isEmpty();
 	}
 
 	@Test
-	void getStatisticsByEducationForm() {
-		final var educationForms = List.of("SV", "AUB", "FHSK");
+	void getStatisticsByScopes() {
+		final var scopes = List.of("25", "75", "100");
 		final var startDate = LocalDate.of(2023, 3, 1);
 		final var endDate = LocalDate.of(2024, 2, 1);
 
 		final var response = webTestClient.get()
 			.uri(builder -> builder
 				.path(BASE_PATH)
-				.queryParams(createParameterMap(null, null, educationForms, null, startDate, endDate))
+				.queryParams(createParameterMap(null, null, scopes, null, null, startDate, endDate))
+				.build())
+			.exchange()
+			.expectStatus().isOk()
+			.expectBody(Statistics.class)
+			.returnResult()
+			.getResponseBody();
+
+		assertThat(response).isNotNull();
+		assertThat(response.getFinishedCourses()).isEqualTo(276);
+		assertThat(response.getPlannedCourses()).isEqualTo(533);
+		assertThat(response.getOnGoingCourses()).isZero();
+		assertThat(response.getAvailableSeats()).isZero();
+		assertThat(response.getTotalCapacity()).isZero();
+
+		assertThat(response.getStartDate()).isEqualTo(startDate);
+		assertThat(response.getEndDate()).isEqualTo(endDate);
+		assertThat(response.getScopes()).containsExactlyElementsOf(scopes);
+		assertThat(response.getLevels()).isEmpty();
+		assertThat(response.getCategoryIds()).isEmpty();
+		assertThat(response.getCategories()).isEmpty();
+		assertThat(response.getStudyLocations()).isEmpty();
+	}
+
+	@Test
+	void getStatisticsByLevels() {
+		final var levels = List.of("grundläggande vuxenutbildning", "gymnasial vuxenutbildning");
+		final var startDate = LocalDate.of(2023, 3, 1);
+		final var endDate = LocalDate.of(2024, 2, 1);
+
+		final var response = webTestClient.get()
+			.uri(builder -> builder
+				.path(BASE_PATH)
+				.queryParams(createParameterMap(null, null, null, levels, null, startDate, endDate))
 				.build())
 			.exchange()
 			.expectStatus().isOk()
@@ -295,19 +337,21 @@ class StatisticsResourceTest {
 
 		assertThat(response.getStartDate()).isEqualTo(startDate);
 		assertThat(response.getEndDate()).isEqualTo(endDate);
-		assertThat(response.getEducationForms()).containsExactlyElementsOf(educationForms);
+		assertThat(response.getLevels()).containsExactlyElementsOf(levels);
+		assertThat(response.getScopes()).isEmpty();
 		assertThat(response.getCategoryIds()).isEmpty();
 		assertThat(response.getCategories()).isEmpty();
 		assertThat(response.getStudyLocations()).isEmpty();
 	}
 
 	private MultiValueMap<String, String> createParameterMap(final List<String> categories, final List<String> categoryIds,
-		final List<String> educationForms, final List<String> studyLocations, final LocalDate startDate, final LocalDate endDate) {
+		final List<String> scopes, final List<String> levels, final List<String> studyLocations, final LocalDate startDate, final LocalDate endDate) {
 		final MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
 
 		ofNullable(categories).ifPresent(p -> parameters.addAll("categories", p));
 		ofNullable(categoryIds).ifPresent(p -> parameters.addAll("categoryIds", p));
-		ofNullable(educationForms).ifPresent(p -> parameters.addAll("educationForms", p));
+		ofNullable(scopes).ifPresent(p -> parameters.addAll("scopes", p));
+		ofNullable(levels).ifPresent(p -> parameters.addAll("levels", p));
 		ofNullable(studyLocations).ifPresent(p -> parameters.addAll("studyLocations", p));
 		ofNullable(startDate).ifPresent(p -> parameters.add("startDate", String.valueOf(p)));
 		ofNullable(endDate).ifPresent(p -> parameters.add("endDate", String.valueOf(p)));

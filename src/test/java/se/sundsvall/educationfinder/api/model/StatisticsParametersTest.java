@@ -39,26 +39,29 @@ class StatisticsParametersTest {
 	void testBuilderMethods() {
 		var categories = List.of("category");
 		var categoryIds = List.of("categoryId");
-		var educationForms = List.of("educationForm");
+		var levels = List.of("level");
 		var studyLocations = List.of("studyLocation");
+		var scopes = List.of("scope");
 		var startDate = LocalDate.now();
 		var endDate = LocalDate.now().plusDays(1);
 
 		var bean = StatisticsParameters.create()
 			.withCategories(categories)
 			.withCategoryIds(categoryIds)
-			.withEducationForms(educationForms)
+			.withLevels(levels)
 			.withStudyLocations(studyLocations)
+			.withScopes(scopes)
 			.withStartDate(startDate)
 			.withEndDate(endDate);
 
 		Assertions.assertThat(bean).isNotNull().hasNoNullFieldsOrProperties();
 		Assertions.assertThat(bean.getCategories()).isEqualTo(categories);
 		Assertions.assertThat(bean.getCategoryIds()).isEqualTo(categoryIds);
-		Assertions.assertThat(bean.getEducationForms()).isEqualTo(educationForms);
+		Assertions.assertThat(bean.getLevels()).isEqualTo(levels);
 		Assertions.assertThat(bean.getStudyLocations()).isEqualTo(studyLocations);
 		Assertions.assertThat(bean.getStartDate()).isEqualTo(startDate);
 		Assertions.assertThat(bean.getEndDate()).isEqualTo(endDate);
+		Assertions.assertThat(bean.getScopes()).isEqualTo(scopes);
 	}
 
 	@Test

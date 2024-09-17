@@ -452,4 +452,24 @@ class CoursesResourceTest {
 		assertThat(response.getMetadata().getTotalRecords()).isEqualTo(matches.longValue());
 		assertThat(response.getMetadata().getTotalPages()).isEqualTo((matches.longValue() / 20) + 1);
 	}
+
+	@Test
+	void findByCourseId() {
+		final var response = webTestClient.get()
+			.uri(PATH + "/6032")
+			.exchange()
+			.expectStatus().isOk()
+			.expectBody(Course.class)
+			.returnResult()
+			.getResponseBody();
+
+		assertThat(response).isNotNull();
+		assertThat(response.getId()).isEqualTo(6032);
+		assertThat(response.getStudyLocation()).isEqualTo("Sundsvall");
+		assertThat(response.getProvider()).isEqualTo("Sundsvalls Kommun");
+		assertThat(response.getProviderUrl()).isEqualTo("http://sundsvall.se/vuxenutbildning");
+		assertThat(response.getCode()).isEqualTo("PEDBAS0");
+		assertThat(response.getName()).isEqualTo("Barns lärande och växande");
+		assertThat(response.getLevel()).isEqualTo("gymnasial vuxenutbildning");
+	}
 }

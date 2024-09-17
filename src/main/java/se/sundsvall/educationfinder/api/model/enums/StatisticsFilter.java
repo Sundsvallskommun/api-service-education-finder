@@ -7,7 +7,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(description = "Statistics filter model", enumAsRef = true)
 public enum StatisticsFilter {
 
-	EDUCATION_FORM,
+	LEVEL,
+	SCOPE,
 	CATEGORY,
 	CATEGORY_ID,
 	STUDY_LOCATION,

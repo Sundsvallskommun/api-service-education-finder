@@ -20,6 +20,7 @@ import org.zalando.problem.Problem;
 import org.zalando.problem.violations.ConstraintViolationProblem;
 
 import se.sundsvall.dept44.common.validators.annotation.ValidMunicipalityId;
+import se.sundsvall.educationfinder.api.model.Course;
 import se.sundsvall.educationfinder.api.model.PagedCoursesResponse;
 import se.sundsvall.educationfinder.api.model.enums.CourseFilter;
 import se.sundsvall.educationfinder.integration.db.specification.CourseSpecification;
@@ -55,6 +56,15 @@ class CoursesResource {
 		final CourseSpecification specification, @ParameterObject final Pageable pageable) {
 		return ok(courseService.find(specification, pageable));
 	}
+
+	@GetMapping(path = "/{courseId}")
+	@Operation(summary = "Find course by id")
+	ResponseEntity<Course> findCourseById(
+		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @ValidMunicipalityId @PathVariable final String municipalityId,
+		@Parameter(name = "courseId", description = "The id of the course", example = "1234") @PathVariable final Long courseId) {
+		return ok(courseService.findCourseById(courseId));
+	}
+
 
 	@GetMapping(path = "/filters/{courseFilter}/values")
 	@Operation(summary = "Find available filter values", description = FIND_FILTER_VALUES_DESCRITPTION)

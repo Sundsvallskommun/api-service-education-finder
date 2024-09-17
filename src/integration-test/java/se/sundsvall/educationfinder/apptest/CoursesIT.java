@@ -39,7 +39,7 @@ class CoursesIT extends AbstractAppTest {
 	@Test
 	void test03_findAllByStudyLocation() {
 		setupCall()
-			.withServicePath(PATH + "?studyLocation=härnö")
+			.withServicePath(PATH + "?studyLocation=Härnösand")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -69,7 +69,7 @@ class CoursesIT extends AbstractAppTest {
 	@Test
 	void test06_findAllByLevel() {
 		setupCall()
-			.withServicePath(PATH + "?level=yrkeshögskole")
+			.withServicePath(PATH + "?level=yrkeshögskoleutbildning")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)

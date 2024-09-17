@@ -21,7 +21,7 @@ class StringToStatisticsFilterConverterTest {
 	void convert() {
 
 		// Arrange
-		final var stringValueList = List.of("educationForm", "category", "categoryId", "studyLocation", "startDate", "endDate");
+		final var stringValueList = List.of("scope", "level", "category", "categoryId", "studyLocation", "startDate", "endDate");
 
 		// Act
 		final var result = stringValueList.stream()

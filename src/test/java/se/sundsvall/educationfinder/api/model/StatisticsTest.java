@@ -43,7 +43,8 @@ class StatisticsTest {
 		var availableSeats = 55;
 		var totalCapacity = 100;
 		var studyLocations = List.of("studyLocations");
-		var educationForms = List.of("educationForms");
+		var levels = List.of("educationForms");
+		var scopes = List.of("25", "50", "100");
 		var categories = List.of("categories");
 		var categoryIds = List.of("categoryIds");
 		var startDate = LocalDate.now();
@@ -56,9 +57,10 @@ class StatisticsTest {
 			.withAvailableSeats(availableSeats)
 			.withTotalCapacity(totalCapacity)
 			.withStudyLocations(studyLocations)
-			.withEducationForms(educationForms)
 			.withCategories(categories)
 			.withCategoryIds(categoryIds)
+			.withScopes(scopes)
+			.withLevels(levels)
 			.withStartDate(startDate)
 			.withEndDate(endDate);
 
@@ -69,7 +71,8 @@ class StatisticsTest {
 		Assertions.assertThat(bean.getAvailableSeats()).isEqualTo(availableSeats);
 		Assertions.assertThat(bean.getTotalCapacity()).isEqualTo(totalCapacity);
 		Assertions.assertThat(bean.getStudyLocations()).isEqualTo(studyLocations);
-		Assertions.assertThat(bean.getEducationForms()).isEqualTo(educationForms);
+		Assertions.assertThat(bean.getLevels()).isEqualTo(levels);
+		Assertions.assertThat(bean.getScopes()).isEqualTo(scopes);
 		Assertions.assertThat(bean.getCategories()).isEqualTo(categories);
 		Assertions.assertThat(bean.getCategoryIds()).isEqualTo(categoryIds);
 		Assertions.assertThat(bean.getStartDate()).isEqualTo(startDate);

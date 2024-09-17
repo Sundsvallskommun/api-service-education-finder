@@ -1,7 +1,9 @@
 package se.sundsvall.educationfinder.integration.db;
 
 import static se.sundsvall.educationfinder.integration.db.specification.StatisticsSpecification.withCodes;
-import static se.sundsvall.educationfinder.integration.db.specification.StatisticsSpecification.withStudyLocation;
+import static se.sundsvall.educationfinder.integration.db.specification.StatisticsSpecification.withLevels;
+import static se.sundsvall.educationfinder.integration.db.specification.StatisticsSpecification.withScopes;
+import static se.sundsvall.educationfinder.integration.db.specification.StatisticsSpecification.withStudyLocations;
 import static se.sundsvall.educationfinder.integration.db.specification.StatisticsSpecification.withinPeriod;
 
 import java.util.List;
@@ -19,9 +21,13 @@ public interface CourseRepository extends ReadOnlyRepository<CourseEntity, Long>
 	default List<CourseEntity> findAllByParametersAndCode(final StatisticsParameters parameters, final List<String> codes) {
 		var startDate = parameters.getStartDate();
 		var endDate = parameters.getEndDate();
-		var studyLocation = parameters.getStudyLocations();
+		var studyLocations = parameters.getStudyLocations();
+		var levels = parameters.getLevels();
+		var scopes = parameters.getScopes();
 
-		return this.findAll(withStudyLocation(studyLocation)
+		return this.findAll(withStudyLocations(studyLocations)
+			.and(withLevels(levels))
+			.and(withScopes(scopes))
 			.and(withCodes(codes))
 			.and(withinPeriod(startDate, endDate)));
 	}

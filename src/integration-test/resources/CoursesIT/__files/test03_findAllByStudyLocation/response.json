@@ -1,6 +1,7 @@
 {
 	"courses": [
 		{
+			"id": 6856,
 			"code": "VFXABR",
 			"name": "VVS lärling",
 			"provider": "Sundsvalls Kommun",
@@ -18,6 +19,7 @@
 			"information": "<![CDATA[ <p>Är du en självständig, teknisk problemlösare? Då kanske VVS-montör är ett yrke för dig!<br />&nbsp;</p> ]]>"
 		},
 		{
+			"id": 6869,
 			"code": "INXACR",
 			"name": "Industritekniker Underhåll",
 			"provider": "Sundsvalls Kommun",
@@ -35,6 +37,7 @@
 			"information": "<![CDATA[ Industrin är i stort behov av kvalificerad arbetskraft. Vill du snabbt komma ut på arbetsmarknaden och arbeta i en spännande och omväxlande miljö? ]]>"
 		},
 		{
+			"id": 6987,
 			"code": "YH00090",
 			"name": "Drifttekniker Kraft & Värme",
 			"provider": "Härnösands kommun, Yrkeshögskolan",
@@ -50,6 +53,7 @@
 			"information": "Vill du skaffa dig en utbildning som är hett efterfrågad och som ger dig varierande och intressanta uppgifter i jobbet? Med vår utbildning till Drifttekniker kraft & värme hamnar du mitt i en spännande bransch med ständig utveckling, där du arbetar med en av samhällets allra viktigaste funktioner. Försörjningen av värme, elkraft och kyla måste hållas igång dygnet runt samtidigt som ny teknik och smarta lösningar för att spara energi, pengar och miljö införs. Som drifttekniker är du en nyckelperson i allt från praktiskt arbete med drift och underhåll av energiteknisk utrustning till användning av den senaste IT-tekniken för styrning och optimering. De omfattande perioderna av praktik (LIA - Lärande i Arbete) gör att du redan tidigt i utbildningen får nyttig erfarenhet och är redo att gå direkt ut i arbetslivet, kanske hos en arbetsgivare som du redan under utbildningen har knutit kontakt med. Samtidigt ger breda praktiska och teoretiska kunskaper dig möjligheter att utvecklas och ta större ansvar inom nya yrkesroller och teknikområden."
 		},
 		{
+			"id": 6983,
 			"code": "YH00118",
 			"name": "Affärsutvecklare besöksnäring",
 			"provider": "YH Akademin AB",
@@ -66,6 +70,7 @@
 			"information": "Vill du arbeta med turism eller är du redan verksam inom besöksnäringen? Är du en kreativ optimist som gillar att utveckla, förbättra och hitta nya vägar framåt? Har du lätt för att nätverka och tycker om att påverka? Då är den här utbildningen något för dig!Att jobba som affärsutvecklareSom affärsutvecklare arbetar du med att driva och utveckla ett företag eller en organisation framåt. Du arbetar ofta nära ledningen och tar fram underlag genom att analysera nuläge, och göra omvärldsanalyser för att kunna föreslå en bra väg framåt för företaget. Det kan handla om nya produkter eller att förbättra system och funktioner.En utbildning som ger dig bred kompetensYrkesAkademins utbildning till affärsutvecklare inom besöksnäring ger dig kompetens att utveckla och paketera tjänster inom turist- och besöksnäringen. Utbildningen ger dig verktyg att kunna analysera marknadstendenser och trender, och att projektleda konceptutveckling och digitalt förändringsarbete. Du kommer också att ha kunskaper i att använda analysmaterial för att identifiera affärsmöjligheter och skapa attraktiva paket och tjänster för potentiella kunder.Jobbmöjligheter inom besöksnäringenBesöksnäringen räknas som världens största och snabbast växande näring. Fram till år 2020 förväntas den svenska besöksnäringens omfattning och exportvärde fördubblas. Därför finns det goda jobbmöjligheter för affärsutvecklare med rätt kompetens och utbildning. Yrkesrollen är också viktig då företag i dag har ständigt höga krav på förbättring och utveckling för att öka konkurrenskraften.Ta ditt nästa karriärsteg hos oss på YrkesAkademin Yrkeshögskola"
 		},
 		{
+			"id": 6984,
 			"code": "YH00118",
 			"name": "Affärsutvecklare besöksnäring",
 			"provider": "YH Akademin AB",
@@ -81,6 +86,7 @@
 			"information": "Vill du arbeta med turism eller är du redan verksam inom besöksnäringen? Är du en kreativ optimist som gillar att utveckla, förbättra och hitta nya vägar framåt? Har du lätt för att nätverka och tycker om att påverka? Då är den här utbildningen något för dig!Att jobba som affärsutvecklareSom affärsutvecklare arbetar du med att driva och utveckla ett företag eller en organisation framåt. Du arbetar ofta nära ledningen och tar fram underlag genom att analysera nuläge, och göra omvärldsanalyser för att kunna föreslå en bra väg framåt för företaget. Det kan handla om nya produkter eller att förbättra system och funktioner.En utbildning som ger dig bred kompetensYrkesAkademins utbildning till affärsutvecklare inom besöksnäring ger dig kompetens att utveckla och paketera tjänster inom turist- och besöksnäringen. Utbildningen ger dig verktyg att kunna analysera marknadstendenser och trender, och att projektleda konceptutveckling och digitalt förändringsarbete. Du kommer också att ha kunskaper i att använda analysmaterial för att identifiera affärsmöjligheter och skapa attraktiva paket och tjänster för potentiella kunder.Jobbmöjligheter inom besöksnäringenBesöksnäringen räknas som världens största och snabbast växande näring. Fram till år 2020 förväntas den svenska besöksnäringens omfattning och exportvärde fördubblas. Därför finns det goda jobbmöjligheter för affärsutvecklare med rätt kompetens och utbildning. Yrkesrollen är också viktig då företag i dag har ständigt höga krav på förbättring och utveckling för att öka konkurrenskraften.Ta ditt nästa karriärsteg hos oss på YrkesAkademin Yrkeshögskola"
 		},
 		{
+			"id": 6986,
 			"code": "YH00090",
 			"name": "Drifttekniker Kraft & Värme",
 			"provider": "Härnösands kommun, Yrkeshögskolan",
