@@ -1,6 +1,7 @@
 {
 	"courses": [
 		{
+			"id": 6987,
 			"code": "YH00090",
 			"name": "Drifttekniker Kraft & Värme",
 			"provider": "Härnösands kommun, Yrkeshögskolan",
@@ -16,6 +17,7 @@
 			"information": "Vill du skaffa dig en utbildning som är hett efterfrågad och som ger dig varierande och intressanta uppgifter i jobbet? Med vår utbildning till Drifttekniker kraft & värme hamnar du mitt i en spännande bransch med ständig utveckling, där du arbetar med en av samhällets allra viktigaste funktioner. Försörjningen av värme, elkraft och kyla måste hållas igång dygnet runt samtidigt som ny teknik och smarta lösningar för att spara energi, pengar och miljö införs. Som drifttekniker är du en nyckelperson i allt från praktiskt arbete med drift och underhåll av energiteknisk utrustning till användning av den senaste IT-tekniken för styrning och optimering. De omfattande perioderna av praktik (LIA - Lärande i Arbete) gör att du redan tidigt i utbildningen får nyttig erfarenhet och är redo att gå direkt ut i arbetslivet, kanske hos en arbetsgivare som du redan under utbildningen har knutit kontakt med. Samtidigt ger breda praktiska och teoretiska kunskaper dig möjligheter att utvecklas och ta större ansvar inom nya yrkesroller och teknikområden."
 		},
 		{
+			"id": 6986,
 			"code": "YH00090",
 			"name": "Drifttekniker Kraft & Värme",
 			"provider": "Härnösands kommun, Yrkeshögskolan",

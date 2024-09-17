@@ -29,6 +29,6 @@ class StatisticsFilterToStringConverterTest {
 			.toList();
 
 		// Assert
-		assertThat(result).containsExactlyInAnyOrder("educationForm", "category", "categoryId", "studyLocation", "startDate", "endDate");
+		assertThat(result).containsExactlyInAnyOrder("level", "scope", "category", "categoryId", "studyLocation", "startDate", "endDate");
 	}
 }

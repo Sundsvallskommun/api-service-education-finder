@@ -1,6 +1,7 @@
 {
 	"courses": [
 		{
+			"id": 6856,
 			"code": "VFXABR",
 			"name": "VVS lärling",
 			"provider": "Sundsvalls Kommun",
@@ -18,6 +19,7 @@
 			"information": "<![CDATA[ <p>Är du en självständig, teknisk problemlösare? Då kanske VVS-montör är ett yrke för dig!<br />&nbsp;</p> ]]>"
 		},
 		{
+			"id": 6861,
 			"code": "FTXADR",
 			"name": "Personbilsmekaniker",
 			"provider": "Sundsvalls Kommun",
@@ -35,6 +37,7 @@
 			"information": "<![CDATA[ <p>För dig som gillar teknik och datorer och vill bli proffs på elektronik och felsökning på fordon. Personbilsmekaniker gör felsökningar och utför service och reparationer på personbilar eller motorcyklar.</p> ]]>"
 		},
 		{
+			"id": 6862,
 			"code": "INXADR",
 			"name": "Industriteknik plåt och svets",
 			"provider": "Sundsvalls Kommun",
@@ -52,6 +55,7 @@
 			"information": "<![CDATA[ Vill du vässa dina möjligheter till arbete inom industrin? ]]>"
 		},
 		{
+			"id": 6865,
 			"code": "INXABR",
 			"name": "Industriteknik CNC",
 			"provider": "Sundsvalls Kommun",
@@ -69,6 +73,7 @@
 			"information": "<![CDATA[ Industriutbildning med gemensam ingång med möjlighet till fördjupning inom CNC - Skärande och bearbetning. ]]>"
 		},
 		{
+			"id": 6869,
 			"code": "INXACR",
 			"name": "Industritekniker Underhåll",
 			"provider": "Sundsvalls Kommun",

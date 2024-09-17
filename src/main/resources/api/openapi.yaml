@@ -7,7 +7,7 @@ info:
     url: https://opensource.org/licenses/MIT
   version: "2.0"
 servers:
-  - url: http://localhost:65354
+  - url: http://localhost:56745
     description: Generated server url
 tags:
   - name: Courses
@@ -47,15 +47,15 @@ paths:
             description: List of category IDs
             example: 5
           example: 5
-        - name: educationForms
+        - name: levels
           in: query
-          description: List of education forms
+          description: List of levels
           required: false
           schema:
             type: string
-            description: List of education forms
-            example: YH
-          example: YH
+            description: List of levels
+            example: gymnasial vuxenutbildning
+          example: gymnasial vuxenutbildning
         - name: studyLocations
           in: query
           description: List of study locations
@@ -65,6 +65,15 @@ paths:
             description: List of study locations
             example: Sundsvall
           example: Sundsvall
+        - name: scopes
+          in: query
+          description: List of scopes
+          required: false
+          schema:
+            type: string
+            description: List of scopes
+            example: "25, 50, 75"
+          example: "25, 50, 75"
         - name: startDate
           in: query
           description: Start date
@@ -84,6 +93,12 @@ paths:
             example: 2024-12-31
           example: 2024-12-31
       responses:
+        "404":
+          description: Not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
         "200":
           description: Successful operation
           content:
@@ -101,12 +116,6 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/Problem"
                   - $ref: "#/components/schemas/ConstraintViolationProblem"
-        "404":
-          description: Not found
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
         "500":
           description: Internal Server error
           content:
@@ -134,6 +143,12 @@ paths:
           schema:
             $ref: "#/components/schemas/StatisticsFilter"
       responses:
+        "404":
+          description: Not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
         "200":
           description: Successful operation
           content:
@@ -155,12 +170,6 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/Problem"
                   - $ref: "#/components/schemas/ConstraintViolationProblem"
-        "404":
-          description: Not found
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
         "500":
           description: Internal Server error
           content:
@@ -181,13 +190,13 @@ paths:
         - sort: Sorting criteria in the format: property,(asc|desc). Default sort order is ascending. Multiple sort criteria are supported.
 
         Filter parameters:
+        - studyLocation: The course study location. Parameter filter strategy: 'IN'. The parameter can be provided multiple times to specify multiple values. Example usage: ?studyLocation=Sundsvall&studyLocation=Östersund
+        - scope: The course scope in percent. Parameter filter strategy: 'IN'. The parameter can be provided multiple times to specify multiple values. Example usage: ?scope=100&scope=75
+        - level: The course level. Parameter filter strategy: 'IN'. The parameter can be provided multiple times to specify multiple values. Example usage: ?level=gymnasial%20vuxenutbildning&level=grundläggande%20vuxenutbildning
         - code: The course code. Parameter filter strategy: 'EQUAL-IGNORE-CASE'. Example value: 'PRRPRR02'
         - name: The course name. Parameter filter strategy: 'LIKE-IGNORE-CASE'. Example value: 'Programmering'
         - provider: The course provider. Parameter filter strategy: 'LIKE-IGNORE-CASE'. Example value: 'Sundsvalls Kommun'
-        - level: The course level. Parameter filter strategy: 'LIKE-IGNORE-CASE'. Example value: 'gymnasial vuxenutbildning'
         - credits: The course credits. Parameter filter strategy: 'EQUAL'. Example value: '150'
-        - scope: The course scope in percent. Parameter filter strategy: 'EQUAL'. Example value: '100'
-        - studyLocation: The course study location. Parameter filter strategy: 'LIKE-IGNORE-CASE'. Example value: 'Sundsvall'
         - start: The course start date. Parameter filter strategy: 'EQUAL'. Example value: '2025-01-01'
         - startBefore: A date that occurs before the course start date. Parameter filter strategy: 'LESS-THAN'. Example value: '2020-01-01'
         - startAfter: A date that occurs after the course start date. Parameter filter strategy: 'GREATER-THAN'. Example value: '2020-12-31'
@@ -204,6 +213,7 @@ paths:
         - searchString: Search for the parameter value in code, name and information attributes. Parameter filter strategy: 'LIKE-IGNORE-CASE'. Example value: 'Programmering'
 
         Parameter filter strategies:
+        - IN: Accepts a list of values separated by comma. The parameter value must have an exact match, case sensitive.
         - EQUAL: The parameter must have an exact match, case sensitive.
         - EQUAL-IGNORE-CASE: The parameter must have an exact match, case insensitive.
         - LIKE: The parameter value must occur somewhere in the searched attribute, case sensitive.
@@ -247,6 +257,21 @@ paths:
             type: array
             items:
               type: string
+        - name: scope
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: studyLocation
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: level
+          in: query
+          required: false
+          schema:
+            type: string
         - name: code
           in: query
           required: false
@@ -262,22 +287,7 @@ paths:
           required: false
           schema:
             type: string
-        - name: level
-          in: query
-          required: false
-          schema:
-            type: string
         - name: credits
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: scope
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: studyLocation
           in: query
           required: false
           schema:
@@ -353,6 +363,12 @@ paths:
           schema:
             type: string
       responses:
+        "404":
+          description: Not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
         "200":
           description: Successful operation
           content:
@@ -370,12 +386,58 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/Problem"
                   - $ref: "#/components/schemas/ConstraintViolationProblem"
+        "500":
+          description: Internal Server error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+  /{municipalityId}/courses/{courseId}:
+    get:
+      tags:
+        - Courses
+      summary: Find course by id
+      operationId: findCourseById
+      parameters:
+        - name: municipalityId
+          in: path
+          description: Municipality id
+          required: true
+          schema:
+            type: string
+          example: 2281
+        - name: courseId
+          in: path
+          description: The id of the course
+          required: true
+          schema:
+            type: integer
+            format: int64
+          example: 1234
+      responses:
         "404":
           description: Not found
           content:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Course"
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Course"
+        "400":
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Problem"
+                  - $ref: "#/components/schemas/ConstraintViolationProblem"
         "500":
           description: Internal Server error
           content:
@@ -405,6 +467,12 @@ paths:
           schema:
             $ref: "#/components/schemas/CourseFilter"
       responses:
+        "404":
+          description: Not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
         "200":
           description: Successful operation
           content:
@@ -426,12 +494,6 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/Problem"
                   - $ref: "#/components/schemas/ConstraintViolationProblem"
-        "404":
-          description: Not found
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
         "500":
           description: Internal Server error
           content:
@@ -469,12 +531,12 @@ components:
           type: object
           additionalProperties:
             type: object
-        title:
-          type: string
-        detail:
-          type: string
         status:
           $ref: "#/components/schemas/StatusType"
+        detail:
+          type: string
+        title:
+          type: string
     StatusType:
       type: object
       properties:
@@ -604,12 +666,12 @@ components:
           type: object
           additionalProperties:
             type: object
-        title:
-          type: string
-        detail:
-          type: string
         status:
           $ref: "#/components/schemas/StatusType"
+        detail:
+          type: string
+        title:
+          type: string
         suppressed:
           type: array
           items:
@@ -691,13 +753,21 @@ components:
             type: string
             description: Study locations used for filtering
             readOnly: true
-        educationForms:
+        scopes:
           type: array
-          description: Education forms used for filtering
+          description: Scopes used for filtering
           readOnly: true
           items:
             type: string
-            description: Education forms used for filtering
+            description: Scopes used for filtering
+            readOnly: true
+        levels:
+          type: array
+          description: Levels used for filtering
+          readOnly: true
+          items:
+            type: string
+            description: Levels used for filtering
             readOnly: true
         categories:
           type: array
@@ -731,7 +801,8 @@ components:
       type: string
       description: Statistics filter model
       enum:
-        - educationForm
+        - level
+        - scope
         - category
         - categoryId
         - studyLocation
@@ -740,6 +811,12 @@ components:
     Course:
       type: object
       properties:
+        id:
+          type: integer
+          description: Course ID
+          format: int64
+          readOnly: true
+          example: 1
         code:
           type: string
           description: Course code

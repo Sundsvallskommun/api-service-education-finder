@@ -13,6 +13,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(description = "Course model", accessMode = READ_ONLY)
 public class Course {
 
+	@Schema(description = "Course ID", example = "1", accessMode = READ_ONLY)
+	private Long id;
+
 	@Schema(description = "Course code", example = "PRRPRR02", accessMode = READ_ONLY)
 	private String code;
 
@@ -69,6 +72,19 @@ public class Course {
 
 	public static Course create() {
 		return new Course();
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Course withId(Long id) {
+		this.id = id;
+		return this;
 	}
 
 	public String getCode() {
@@ -280,26 +296,38 @@ public class Course {
 	}
 
 	@Override
-	public int hashCode() {
-		return Objects.hash(code, credits, earliestApplication, end, information, latestApplication, level, name, numberOfSeats, provider, providerUrl, scope, start, studyLocation, subjectCode, url);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) { return true; }
-		if (!(obj instanceof final Course other)) { return false; }
-		return Objects.equals(code, other.code) && Objects.equals(credits, other.credits) && Objects.equals(earliestApplication, other.earliestApplication) && Objects.equals(end, other.end) && Objects.equals(information, other.information) && Objects
-			.equals(latestApplication, other.latestApplication) && Objects.equals(level, other.level) && Objects.equals(name, other.name) && Objects.equals(numberOfSeats, other.numberOfSeats) && Objects.equals(provider, other.provider) && Objects.equals(
-				providerUrl, other.providerUrl) && Objects.equals(scope, other.scope) && Objects.equals(start, other.start) && Objects.equals(studyLocation, other.studyLocation) && Objects.equals(subjectCode, other.subjectCode) && Objects.equals(url,
-					other.url);
-	}
-
-	@Override
 	public String toString() {
-		final StringBuilder builder = new StringBuilder();
-		builder.append("Course [code=").append(code).append(", name=").append(name).append(", provider=").append(provider).append(", providerUrl=").append(providerUrl).append(", level=").append(level).append(", url=").append(url).append(", credits=")
-			.append(credits).append(", scope=").append(scope).append(", studyLocation=").append(studyLocation).append(", subjectCode=").append(subjectCode).append(", numberOfSeats=").append(numberOfSeats).append(", start=").append(start).append(", end=")
-			.append(end).append(", earliestApplication=").append(earliestApplication).append(", latestApplication=").append(latestApplication).append(", information=").append(information).append("]");
-		return builder.toString();
+		return "Course{" +
+			"id=" + id +
+			", code='" + code + '\'' +
+			", name='" + name + '\'' +
+			", provider='" + provider + '\'' +
+			", providerUrl='" + providerUrl + '\'' +
+			", level='" + level + '\'' +
+			", url='" + url + '\'' +
+			", credits=" + credits +
+			", scope=" + scope +
+			", studyLocation='" + studyLocation + '\'' +
+			", subjectCode='" + subjectCode + '\'' +
+			", numberOfSeats=" + numberOfSeats +
+			", start=" + start +
+			", end=" + end +
+			", earliestApplication=" + earliestApplication +
+			", latestApplication=" + latestApplication +
+			", information='" + information + '\'' +
+			'}';
+	}
+
+	@Override
+	public boolean equals(final Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		final Course course = (Course) o;
+		return Objects.equals(id, course.id) && Objects.equals(code, course.code) && Objects.equals(name, course.name) && Objects.equals(provider, course.provider) && Objects.equals(providerUrl, course.providerUrl) && Objects.equals(level, course.level) && Objects.equals(url, course.url) && Objects.equals(credits, course.credits) && Objects.equals(scope, course.scope) && Objects.equals(studyLocation, course.studyLocation) && Objects.equals(subjectCode, course.subjectCode) && Objects.equals(numberOfSeats, course.numberOfSeats) && Objects.equals(start, course.start) && Objects.equals(end, course.end) && Objects.equals(earliestApplication, course.earliestApplication) && Objects.equals(latestApplication, course.latestApplication) && Objects.equals(information, course.information);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, code, name, provider, providerUrl, level, url, credits, scope, studyLocation, subjectCode, numberOfSeats, start, end, earliestApplication, latestApplication, information);
 	}
 }

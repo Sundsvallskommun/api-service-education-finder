@@ -1,9 +1,10 @@
 package se.sundsvall.educationfinder.service;
 
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.LEVEL;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.SCOPE;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.STUDY_LOCATION;
 import static se.sundsvall.educationfinder.integration.db.model.SubjectEntity_.CATEGORY;
 import static se.sundsvall.educationfinder.integration.db.model.SubjectEntity_.CATEGORY_ID;
-import static se.sundsvall.educationfinder.integration.db.model.SubjectEntity_.EDUCATION_FORM;
 
 import java.util.List;
 import java.util.Objects;
@@ -23,7 +24,8 @@ import se.sundsvall.educationfinder.integration.db.model.CourseEntity;
 import se.sundsvall.educationfinder.integration.db.model.SubjectEntity;
 import se.sundsvall.educationfinder.integration.db.model.projection.CategoryIdProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.CategoryProjection;
-import se.sundsvall.educationfinder.integration.db.model.projection.EducationFormProjection;
+import se.sundsvall.educationfinder.integration.db.model.projection.LevelProjection;
+import se.sundsvall.educationfinder.integration.db.model.projection.ScopeProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.StudyLocationProjection;
 
 @Service
@@ -55,7 +57,7 @@ public class StatisticsService {
 	}
 
 	private boolean parametersContainSubjectFilter(final StatisticsParameters parameters) {
-		return Stream.of(parameters.getCategories(), parameters.getCategoryIds(), parameters.getEducationForms()).anyMatch(Objects::nonNull);
+		return Stream.of(parameters.getCategories(), parameters.getCategoryIds()).anyMatch(Objects::nonNull);
 	}
 
 	public Statistics calculateStatistics(final StatisticsParameters parameters, final List<CourseEntity> courses) {
@@ -91,7 +93,8 @@ public class StatisticsService {
 			.withStartDate(parameters.getStartDate())
 			.withEndDate(parameters.getEndDate())
 			.withStudyLocations(parameters.getStudyLocations())
-			.withEducationForms(parameters.getEducationForms())
+			.withScopes(parameters.getScopes())
+			.withLevels(parameters.getLevels())
 			.withCategories(parameters.getCategories())
 			.withCategoryIds(parameters.getCategoryIds());
 	}
@@ -99,13 +102,6 @@ public class StatisticsService {
 	@Cacheable("subject-filters")
 	public List<String> findStatisticsFilterValues(final StatisticsFilter statisticsFilter) {
 		return switch (statisticsFilter) {
-			case EDUCATION_FORM ->
-				subjectRepository.findDistinctBy(EducationFormProjection.class, Sort.by(EDUCATION_FORM)).stream()
-					.filter(Objects::nonNull)
-					.map(EducationFormProjection::getEducationForm)
-					.filter(StringUtils::isNotEmpty)
-					.map(StringUtils::upperCase)
-					.toList();
 			case CATEGORY ->
 				subjectRepository.findDistinctBy(CategoryProjection.class, Sort.by(CATEGORY)).stream()
 					.filter(Objects::nonNull)
@@ -117,6 +113,20 @@ public class StatisticsService {
 				subjectRepository.findDistinctBy(CategoryIdProjection.class, Sort.by(CATEGORY_ID)).stream()
 					.filter(Objects::nonNull)
 					.map(CategoryIdProjection::getCategoryId)
+					.filter(StringUtils::isNotEmpty)
+					.map(StringUtils::upperCase)
+					.toList();
+			case SCOPE ->
+				courseRepository.findDistinctBy(ScopeProjection.class, Sort.by(SCOPE)).stream()
+					.filter(Objects::nonNull)
+					.map(ScopeProjection::getScope)
+					.filter(StringUtils::isNotEmpty)
+					.map(StringUtils::upperCase)
+					.toList();
+			case LEVEL ->
+				courseRepository.findDistinctBy(LevelProjection.class, Sort.by(LEVEL)).stream()
+					.filter(Objects::nonNull)
+					.map(LevelProjection::getLevel)
 					.filter(StringUtils::isNotEmpty)
 					.map(StringUtils::upperCase)
 					.toList();

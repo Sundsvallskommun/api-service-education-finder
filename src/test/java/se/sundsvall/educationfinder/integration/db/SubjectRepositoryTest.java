@@ -120,12 +120,8 @@ class SubjectRepositoryTest {
 
 	private static Stream<Arguments> findAllByParametersArguments() {
 		return Stream.of(
-			Arguments.of(StatisticsParameters.create().withCategories(List.of("Konstnärliga utbildningar")).withEducationForms(List.of("YH")), 15),
-			Arguments.of(StatisticsParameters.create().withCategoryIds(List.of("8")).withEducationForms(List.of("YH")), 15),
-			Arguments.of(StatisticsParameters.create().withCategories(List.of("Konstnärliga utbildningar")).withEducationForms(List.of("UOH")), 25),
 			Arguments.of(StatisticsParameters.create(), 3154),
 			Arguments.of(StatisticsParameters.create().withCategories(List.of("Medicin och vård")), 193),
-			Arguments.of(StatisticsParameters.create().withCategoryIds(List.of("3")), 218),
-			Arguments.of(StatisticsParameters.create().withEducationForms(List.of("YH")), 286));
+			Arguments.of(StatisticsParameters.create().withCategoryIds(List.of("3")), 218));
 	}
 }

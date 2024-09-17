@@ -37,6 +37,7 @@ class CourseTest {
 	@Test
 	void testBuilderMethods() {
 
+		final var id = 1L;
 		final var code = "code";
 		final var credits = 50.0;
 		final var provider = "provider";
@@ -55,6 +56,7 @@ class CourseTest {
 		final var url = "url";
 
 		final var bean = Course.create()
+			.withId(id)
 			.withCode(code)
 			.withCredits(credits)
 			.withProvider(provider)
@@ -73,6 +75,7 @@ class CourseTest {
 			.withUrl(url);
 
 		assertThat(bean).isNotNull().hasNoNullFieldsOrProperties();
+		assertThat(bean.getId()).isEqualTo(id);
 		assertThat(bean.getCode()).isEqualTo(code);
 		assertThat(bean.getCredits()).isEqualTo(credits);
 		assertThat(bean.getProvider()).isEqualTo(provider);

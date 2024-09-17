@@ -6,6 +6,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
@@ -25,16 +26,37 @@ import se.sundsvall.educationfinder.api.model.PagedCoursesResponse;
 @ActiveProfiles("junit")
 class CoursesResourceTest {
 
-	private static final String PATH = "/2281/courses";
-
 	@Autowired
 	private WebTestClient webTestClient;
 
+	private static String PATH = "/2281/courses";
+
+	private static Stream<Arguments> findAllStudyLocationProvider() {
+		return Stream.of(
+			Arguments.of(List.of("Sundsvall"), 843, 43),
+			Arguments.of(List.of("Härnösand"), 6, 1),
+			Arguments.of(List.of("Sundsvall", "Härnösand"), 849, 43));
+	}
+
+	private static Stream<Arguments> findAllScopeProvider() {
+		return Stream.of(
+			Arguments.of(List.of(25), 257, 13),
+			Arguments.of(List.of(50), 270, 14),
+			Arguments.of(List.of(25, 50), 527, 27));
+	}
+
+	private static Stream<Arguments> findAllLevelProvider() {
+		return Stream.of(
+			Arguments.of(List.of("grundläggande vuxenutbildning"), 144, 8),
+			Arguments.of(List.of("gymnasial vuxenutbildning"), 648, 33),
+			Arguments.of(List.of("grundläggande vuxenutbildning", "gymnasial vuxenutbildning"), 792, 40));
+	}
+
 	private static Stream<Arguments> queryParameters() {
 		return Stream.of(
-			Arguments.of("Sundsvall", "vuxenutbildning", "matematik", 101),
-			Arguments.of("Sundsvall", "grundläggande", "kemi", 5),
-			Arguments.of("Kramfors", "yrkeshögskoleutbildning", "möbelsnickare", 3));
+			Arguments.of("Sundsvall", "grundläggande vuxenutbildning", "matematik", 22),
+			Arguments.of("Sundsvall", "grundläggande vuxenutbildning", "kemi", 4),
+			Arguments.of("Sundsvall", "gymnasial vuxenutbildning", "psy", 9));
 	}
 
 	@Test
@@ -87,13 +109,13 @@ class CoursesResourceTest {
 		assertThat(response.getMetadata().getTotalPages()).isZero();
 	}
 
-	@Test
-	void findAllOnSpecificStudyLocation() {
-
+	@ParameterizedTest
+	@MethodSource("findAllStudyLocationProvider")
+	void findAllOnStudyLocation(List<String> studyLocations, int expectedRecords, int expectedPages) {
 		// Act
-		final var response = webTestClient.get()
+		var response = webTestClient.get()
 			.uri(builder -> builder.path(PATH)
-				.queryParam("studyLocation", "Härnösand")
+				.queryParam("studyLocation", studyLocations)
 				.build())
 			.exchange()
 			.expectStatus().isOk()
@@ -104,15 +126,59 @@ class CoursesResourceTest {
 
 		// Assert
 		assertThat(response).isNotNull();
-		assertThat(response.getCourses())
-			.hasSize(6)
-			.extracting(Course::getStudyLocation).containsOnly("Härnösand");
-		assertThat(response.getCourses()).hasSize(6);
-		assertThat(response.getMetadata().getCount()).isEqualTo(6);
+		assertThat(response.getCourses()).hasSizeLessThanOrEqualTo(20);
 		assertThat(response.getMetadata().getLimit()).isEqualTo(20);
+		assertThat(response.getMetadata().getTotalRecords()).isEqualTo(expectedRecords);
+		assertThat(response.getMetadata().getTotalPages()).isEqualTo(expectedPages);
 		assertThat(response.getMetadata().getPage()).isZero();
-		assertThat(response.getMetadata().getTotalRecords()).isEqualTo(6);
-		assertThat(response.getMetadata().getTotalPages()).isEqualTo(1);
+	}
+
+	@ParameterizedTest
+	@MethodSource("findAllLevelProvider")
+	void findAllOnLevel(List<String> levels, int expectedRecords, int expectedPages) {
+		// Act
+		var response = webTestClient.get()
+			.uri(builder -> builder.path(PATH)
+				.queryParam("level", levels)
+				.build())
+			.exchange()
+			.expectStatus().isOk()
+			.expectHeader().contentType(APPLICATION_JSON)
+			.expectBody(PagedCoursesResponse.class)
+			.returnResult()
+			.getResponseBody();
+
+		// Assert
+		assertThat(response).isNotNull();
+		assertThat(response.getCourses()).hasSizeLessThanOrEqualTo(20);
+		assertThat(response.getMetadata().getLimit()).isEqualTo(20);
+		assertThat(response.getMetadata().getTotalRecords()).isEqualTo(expectedRecords);
+		assertThat(response.getMetadata().getTotalPages()).isEqualTo(expectedPages);
+		assertThat(response.getMetadata().getPage()).isZero();
+	}
+
+	@ParameterizedTest
+	@MethodSource("findAllScopeProvider")
+	void findAllOnScope(List<Integer> scopes, int expectedRecords, int expectedPages) {
+		// Act
+		var response = webTestClient.get()
+			.uri(builder -> builder.path(PATH)
+				.queryParam("scope", scopes)
+				.build())
+			.exchange()
+			.expectStatus().isOk()
+			.expectHeader().contentType(APPLICATION_JSON)
+			.expectBody(PagedCoursesResponse.class)
+			.returnResult()
+			.getResponseBody();
+
+		// Assert
+		assertThat(response).isNotNull();
+		assertThat(response.getCourses()).hasSizeLessThanOrEqualTo(20);
+		assertThat(response.getMetadata().getLimit()).isEqualTo(20);
+		assertThat(response.getMetadata().getTotalRecords()).isEqualTo(expectedRecords);
+		assertThat(response.getMetadata().getTotalPages()).isEqualTo(expectedPages);
+		assertThat(response.getMetadata().getPage()).isZero();
 	}
 
 	@Test
@@ -362,6 +428,7 @@ class CoursesResourceTest {
 			.containsExactly("HÄRNÖSAND", "KRAMFORS", "SUNDSVALL", "ÖRNSKÖLDSVIK", "ÖSTERSUND");
 	}
 
+
 	@ParameterizedTest
 	@MethodSource("queryParameters")
 	void findAllOnSpecificStudyLocationAndLevelWithCustomSearchString(final String studyLocation, final String level, final String searchString, final Integer matches) {
@@ -386,4 +453,23 @@ class CoursesResourceTest {
 		assertThat(response.getMetadata().getTotalPages()).isEqualTo((matches.longValue() / 20) + 1);
 	}
 
+	@Test
+	void findByCourseId() {
+		final var response = webTestClient.get()
+			.uri(PATH + "/6032")
+			.exchange()
+			.expectStatus().isOk()
+			.expectBody(Course.class)
+			.returnResult()
+			.getResponseBody();
+
+		assertThat(response).isNotNull();
+		assertThat(response.getId()).isEqualTo(6032);
+		assertThat(response.getStudyLocation()).isEqualTo("Sundsvall");
+		assertThat(response.getProvider()).isEqualTo("Sundsvalls Kommun");
+		assertThat(response.getProviderUrl()).isEqualTo("http://sundsvall.se/vuxenutbildning");
+		assertThat(response.getCode()).isEqualTo("PEDBAS0");
+		assertThat(response.getName()).isEqualTo("Barns lärande och växande");
+		assertThat(response.getLevel()).isEqualTo("gymnasial vuxenutbildning");
+	}
 }

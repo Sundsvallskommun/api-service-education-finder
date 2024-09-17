@@ -3,6 +3,8 @@ package se.sundsvall.educationfinder.integration.db.specification;
 import static java.util.Objects.nonNull;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.CODE;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.END;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.LEVEL;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.SCOPE;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.START;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.STUDY_LOCATION;
 
@@ -24,7 +26,15 @@ public interface StatisticsSpecification {
 		return (entity, query, criteriaBuilder) -> criteriaBuilder.and();
 	}
 
-	static Specification<CourseEntity> withStudyLocation(final List<String> studyLocations) {
+	static Specification<CourseEntity> withLevels(final List<String> levels) {
+		return (entity, cq, cb) -> nonNull(levels) ? entity.get(LEVEL).in(levels) : cb.and();
+	}
+
+	static Specification<CourseEntity> withScopes(final List<String> scopes) {
+		return (entity, cq, cb) -> nonNull(scopes) ? entity.get(SCOPE).in(scopes) : cb.and();
+	}
+
+	static Specification<CourseEntity> withStudyLocations(final List<String> studyLocations) {
 		return (entity, cq, cb) -> nonNull(studyLocations) ? entity.get(STUDY_LOCATION).in(studyLocations) : cb.and();
 	}
 

@@ -1,6 +1,7 @@
 {
 	"courses": [
 		{
+			"id": 6854,
 			"code": "RLXAAR",
 			"name": "Kock",
 			"provider": "Sundsvalls Kommun",
@@ -18,6 +19,7 @@
 			"information": "<![CDATA[ Gillar du att få till nya smaker och nya rätter? Lär dig allt om matlagning och service! Kockar som jobbar på restauranger eller hotell arbetar ofta med att tillaga flera olika maträtter enligt gästernas beställningar, så kallad à la carte. I storkök, till exempel på sjukhus eller i personalrestauranger tillagas däremot ofta ett fåtal rätter som görs i stora mängder. ]]>"
 		},
 		{
+			"id": 6855,
 			"code": "RLXAAR",
 			"name": "Kock",
 			"provider": "Sundsvalls Kommun",

@@ -17,11 +17,14 @@ public class StatisticsParameters {
 	@Schema(description = "List of category IDs", example = "5")
 	private List<String> categoryIds;
 
-	@Schema(description = "List of education forms", example = "YH")
-	private List<String> educationForms;
+	@Schema(description = "List of levels", example = "gymnasial vuxenutbildning")
+	private List<String> levels;
 
 	@Schema(description = "List of study locations", example = "Sundsvall")
 	private List<String> studyLocations;
+
+	@Schema(description = "List of scopes", example = "25, 50, 75")
+	private List<String> scopes;
 
 	@NotNull
 	@Schema(description = "Start date", example = "2024-01-01", requiredMode = Schema.RequiredMode.REQUIRED)
@@ -33,6 +36,19 @@ public class StatisticsParameters {
 
 	public static StatisticsParameters create() {
 		return new StatisticsParameters();
+	}
+
+	public List<String> getScopes() {
+		return scopes;
+	}
+
+	public void setScopes(final List<String> scopes) {
+		this.scopes = scopes;
+	}
+
+	public StatisticsParameters withScopes(final List<String> scope) {
+		this.scopes = scope;
+		return this;
 	}
 
 	public List<String> getCategories() {
@@ -61,16 +77,16 @@ public class StatisticsParameters {
 		return this;
 	}
 
-	public List<String> getEducationForms() {
-		return educationForms;
+	public List<String> getLevels() {
+		return levels;
 	}
 
-	public void setEducationForms(final List<String> educationForms) {
-		this.educationForms = educationForms;
+	public void setLevels(final List<String> levels) {
+		this.levels = levels;
 	}
 
-	public StatisticsParameters withEducationForms(final List<String> educationForm) {
-		this.educationForms = educationForm;
+	public StatisticsParameters withLevels(final List<String> level) {
+		this.levels = level;
 		return this;
 	}
 
@@ -118,8 +134,9 @@ public class StatisticsParameters {
 		return "StatisticsParameters{" +
 			"categories=" + categories +
 			", categoryIds=" + categoryIds +
-			", educationForms=" + educationForms +
+			", levels=" + levels +
 			", studyLocations=" + studyLocations +
+			", scopes=" + scopes +
 			", startDate=" + startDate +
 			", endDate=" + endDate +
 			'}';
@@ -130,11 +147,11 @@ public class StatisticsParameters {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		final StatisticsParameters that = (StatisticsParameters) o;
-		return Objects.equals(categories, that.categories) && Objects.equals(categoryIds, that.categoryIds) && Objects.equals(educationForms, that.educationForms) && Objects.equals(studyLocations, that.studyLocations) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate);
+		return Objects.equals(categories, that.categories) && Objects.equals(categoryIds, that.categoryIds) && Objects.equals(levels, that.levels) && Objects.equals(studyLocations, that.studyLocations) && Objects.equals(scopes, that.scopes) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(categories, categoryIds, educationForms, studyLocations, startDate, endDate);
+		return Objects.hash(categories, categoryIds, levels, studyLocations, scopes, startDate, endDate);
 	}
 }

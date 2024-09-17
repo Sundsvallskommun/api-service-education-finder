@@ -26,6 +26,7 @@ public final class CourseMapper {
 	public static Course toCourse(CourseEntity courseEntity) {
 		return Optional.ofNullable(courseEntity)
 			.map(entity -> Course.create()
+				.withId(entity.getId())
 				.withCode(entity.getCode())
 				.withCredits(toDouble(entity.getCredits()))
 				.withEarliestApplication(entity.getEarliestApplication())
