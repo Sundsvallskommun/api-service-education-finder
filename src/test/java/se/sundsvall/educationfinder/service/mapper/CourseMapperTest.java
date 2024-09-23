@@ -20,22 +20,37 @@ import se.sundsvall.educationfinder.integration.db.model.CourseEntity;
 @ExtendWith(MockitoExtension.class)
 class CourseMapperTest {
 
-	private final static String CODE = "code";
-	private final static BigDecimal CREDITS = new BigDecimal("50.0");
-	private final static String PROVIDER = "provider";
-	private final static LocalDate START = LocalDate.now();
-	private final static LocalDate END = LocalDate.now().plusDays(1);
-	private final static LocalDate EARLIEST_APPLICATION = LocalDate.now().plusDays(2);
-	private final static LocalDate LATEST_APPLICATION = LocalDate.now().plusDays(1);
-	private final static String LEVEL = "level";
-	private final static String NAME = "name";
-	private final static Integer NUMBER_OF_SEATS = 1;
-	private final static String PROVIDER_URL = "providerUrl";
-	private final static String INFORMATION = "information";
-	private final static BigDecimal SCOPE = new BigDecimal("100.0");
-	private final static String STUDY_LOCATION = "studyLocation";
-	private final static String SUBJECT_CODE = "subjectCode";
-	private final static String URL = "url";
+	private static final String CODE = "code";
+
+	private static final BigDecimal CREDITS = new BigDecimal("50.0");
+
+	private static final String PROVIDER = "provider";
+
+	private static final LocalDate START = LocalDate.now();
+
+	private static final LocalDate END = LocalDate.now().plusDays(1);
+
+	private static final LocalDate EARLIEST_APPLICATION = LocalDate.now().plusDays(2);
+
+	private static final LocalDate LATEST_APPLICATION = LocalDate.now().plusDays(1);
+
+	private static final String LEVEL = "level";
+
+	private static final String NAME = "name";
+
+	private static final Integer NUMBER_OF_SEATS = 1;
+
+	private static final String PROVIDER_URL = "providerUrl";
+
+	private static final String INFORMATION = "information";
+
+	private static final BigDecimal SCOPE = new BigDecimal("100.0");
+
+	private static final String STUDY_LOCATION = "studyLocation";
+
+	private static final String SUBJECT_CODE = "subjectCode";
+
+	private static final String URL = "url";
 
 	@Test
 	void toCourse() {
@@ -110,7 +125,7 @@ class CourseMapperTest {
 	}
 
 	@Test
-	void toPagedCoursesResponse(@Mock Page<CourseEntity> pageMock, @Mock Pageable pageableMock) {
+	void toPagedCoursesResponse(@Mock final Page<CourseEntity> pageMock, @Mock final Pageable pageableMock) {
 
 		final var entityList = List.of(createCourseEntity());
 
@@ -177,4 +192,5 @@ class CourseMapperTest {
 			.withSubjectCode(SUBJECT_CODE)
 			.withUrl(URL);
 	}
+
 }

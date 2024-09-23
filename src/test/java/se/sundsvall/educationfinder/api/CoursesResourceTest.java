@@ -26,10 +26,10 @@ import se.sundsvall.educationfinder.api.model.PagedCoursesResponse;
 @ActiveProfiles("junit")
 class CoursesResourceTest {
 
+	private static final String PATH = "/2281/courses";
+
 	@Autowired
 	private WebTestClient webTestClient;
-
-	private static String PATH = "/2281/courses";
 
 	private static Stream<Arguments> findAllStudyLocationProvider() {
 		return Stream.of(
@@ -111,9 +111,9 @@ class CoursesResourceTest {
 
 	@ParameterizedTest
 	@MethodSource("findAllStudyLocationProvider")
-	void findAllOnStudyLocation(List<String> studyLocations, int expectedRecords, int expectedPages) {
+	void findAllOnStudyLocation(final List<String> studyLocations, final int expectedRecords, final int expectedPages) {
 		// Act
-		var response = webTestClient.get()
+		final var response = webTestClient.get()
 			.uri(builder -> builder.path(PATH)
 				.queryParam("studyLocation", studyLocations)
 				.build())
@@ -135,9 +135,9 @@ class CoursesResourceTest {
 
 	@ParameterizedTest
 	@MethodSource("findAllLevelProvider")
-	void findAllOnLevel(List<String> levels, int expectedRecords, int expectedPages) {
+	void findAllOnLevel(final List<String> levels, final int expectedRecords, final int expectedPages) {
 		// Act
-		var response = webTestClient.get()
+		final var response = webTestClient.get()
 			.uri(builder -> builder.path(PATH)
 				.queryParam("level", levels)
 				.build())
@@ -159,9 +159,9 @@ class CoursesResourceTest {
 
 	@ParameterizedTest
 	@MethodSource("findAllScopeProvider")
-	void findAllOnScope(List<Integer> scopes, int expectedRecords, int expectedPages) {
+	void findAllOnScope(final List<Integer> scopes, final int expectedRecords, final int expectedPages) {
 		// Act
-		var response = webTestClient.get()
+		final var response = webTestClient.get()
 			.uri(builder -> builder.path(PATH)
 				.queryParam("scope", scopes)
 				.build())
@@ -472,4 +472,5 @@ class CoursesResourceTest {
 		assertThat(response.getName()).isEqualTo("Barns lärande och växande");
 		assertThat(response.getLevel()).isEqualTo("gymnasial vuxenutbildning");
 	}
+
 }
