@@ -1,7 +1,7 @@
 {
 	"courses": [
 		{
-			"id": 6808,
+			"id": 790,
 			"code": "SGRHEM7",
 			"name": "Hem- och konsumentkunskap",
 			"provider": "Sundsvalls Kommun",
@@ -17,7 +17,7 @@
 			"information": "<![CDATA[ <p>Komvux som anpassad&nbsp;utbildning är för dig som har en intellektuell funktionsnedsättning eller förvärvad hjärnskada.</p><p>Kursen är för dig som vill:</p><ul>\t<li>\t<p>lära dig att baka och laga mat samt lära dig om samband mellan mat och hälsa</p>\t</li>\t<li>\t<p>lära dig om hygien</p>\t</li>\t<li>\t<p>lära dig planera och genomföra inköp</p>\t</li></ul><p>Studietakt: individuell</p><p>Nivå: grundläggande</p><p>Antagning: löpande i mån av plats</p> ]]>"
 		},
 		{
-			"id": 6809,
+			"id": 791,
 			"code": "SGRHEMU",
 			"name": "Mat ,måltider och hälsa",
 			"provider": "Sundsvalls Kommun",
@@ -33,7 +33,7 @@
 			"information": "<![CDATA[ <p>Komvux som anpassad&nbsp;utbildning är för dig som har en intellektuell funktionsnedsättning eller förvärvad hjärnskada.</p><p>Kursen är för dig som vill:</p><ul>\t<li>\t<p>lära dig att baka och laga mat samt lära dig om samband mellan mat och hälsa</p>\t</li>\t<li>\t<p>lära dig om hygien</p>\t</li>\t<li>\t<p>lära dig planera och genomföra inköp</p>\t</li></ul><p>Studietakt: individuell</p><p>Nivå: grundläggande</p>Antagning: löpande i mån av plats ]]>"
 		},
 		{
-			"id": 6810,
+			"id": 792,
 			"code": "SGRHEMV",
 			"name": "Konsumtion och ekonomi",
 			"provider": "Sundsvalls Kommun",
@@ -49,7 +49,7 @@
 			"information": "<![CDATA[ <p>Komvux som anpassad&nbsp;utbildning är för dig som har en intellektuell funktionsnedsättning eller förvärvad hjärnskada.</p><p>Kursen är för dig som vill:</p><ul>\t<li>\t<p>lära dig planera och genomföra inköp</p>\t</li>\t<li>\t<p>lära dig använda pengar</p>\t</li>\t<li>\t<p>lära dig räkna i praktiska situationer</p>\t</li></ul><p>Studietakt: individuell</p><p>Nivå: grundläggande</p><p>Antagning: löpande i mån av plats</p><div>&nbsp;</div> ]]>"
 		},
 		{
-			"id": 6811,
+			"id": 793,
 			"code": "SGRHEMX",
 			"name": "Miljö och livsstil",
 			"provider": "Sundsvalls Kommun",
@@ -65,7 +65,7 @@
 			"information": "<![CDATA[ <p>Komvux som anpassad&nbsp;utbildning är för dig som har en intellektuell funktionsnedsättning eller förvärvad hjärnskada.</p><p>Kursen är för dig som vill:</p><ul>\t<li>\t<p>lära dig mer om arbetsfördelning i hushållet ur ett jämställdhetsperspektiv</p>\t</li>\t<li>\t<p>lära dig om samband mellan mat och hälsa</p>\t</li>\t<li>\t<p>lära dig om redskap och teknisk utrustning som du använder hemma</p>\t</li></ul><p>Studietakt: individuell</p><p>Nivå: grundläggande</p><p>Antagning: löpande i mån av plats</p><div>&nbsp;</div> ]]>"
 		},
 		{
-			"id": 6812,
+			"id": 794,
 			"code": "SGRHIS7",
 			"name": "Historia",
 			"provider": "Sundsvalls Kommun",

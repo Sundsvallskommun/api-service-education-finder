@@ -1,7 +1,7 @@
 {
 	"courses": [
 		{
-			"id": 6857,
+			"id": 828,
 			"code": "BAXAFR",
 			"name": "Byggarbetare kombo",
 			"provider": "Sundsvalls Kommun",
@@ -19,7 +19,7 @@
 			"information": "<![CDATA[ <p>Utbildningen vänder sig till dig som vill arbeta inom trä, betong, mureri, måleri, plattsättning och mark och anläggning. Kombinationsutbildning (kombo) vänder sig till dig som kombinerar din yrkesutbildning med studier i svenska som andraspråk eller Sfi.</p> ]]>"
 		},
 		{
-			"id": 6858,
+			"id": 829,
 			"code": "RLXAAR",
 			"name": "Restaurang och livsmedel  ",
 			"provider": "Sundsvalls Kommun",
@@ -37,7 +37,7 @@
 			"information": "<![CDATA[ <p>För dig som vill lära dig om bra råvaror, tillagning, dryck, servering och god service. Hos oss får du lära dig om bra råvaror och hur man tillagar dem, om dryck, servering och service. Du får också möjlighet att utveckla din kreativitet och testa dina idéer inom matlagning.</p> ]]>"
 		},
 		{
-			"id": 6859,
+			"id": 830,
 			"code": "RLXAAR",
 			"name": "Restaurang och livsmedel kombo",
 			"provider": "Sundsvalls Kommun",
@@ -55,7 +55,7 @@
 			"information": "<![CDATA[ För dig som vill lära dig om bra råvaror, tillagning, dryck, servering och god service. Hos oss får du lära dig om bra råvaror och hur man tillagar dem, om dryck, servering och service. Du får också möjlighet att utveckla din kreativitet och testa dina idéer inom matlagning. ]]>"
 		},
 		{
-			"id": 6866,
+			"id": 834,
 			"code": "BAXABR",
 			"name": "Bygg och anläggning ",
 			"provider": "Sundsvalls Kommun",
