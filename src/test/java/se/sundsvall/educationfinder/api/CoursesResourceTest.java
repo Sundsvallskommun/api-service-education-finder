@@ -456,7 +456,7 @@ class CoursesResourceTest {
 	@Test
 	void findByCourseId() {
 		final var response = webTestClient.get()
-			.uri(PATH + "/6032")
+			.uri(PATH + "/32")
 			.exchange()
 			.expectStatus().isOk()
 			.expectBody(Course.class)
@@ -464,7 +464,7 @@ class CoursesResourceTest {
 			.getResponseBody();
 
 		assertThat(response).isNotNull();
-		assertThat(response.getId()).isEqualTo(6032);
+		assertThat(response.getId()).isEqualTo(32);
 		assertThat(response.getStudyLocation()).isEqualTo("Sundsvall");
 		assertThat(response.getProvider()).isEqualTo("Sundsvalls Kommun");
 		assertThat(response.getProviderUrl()).isEqualTo("http://sundsvall.se/vuxenutbildning");
