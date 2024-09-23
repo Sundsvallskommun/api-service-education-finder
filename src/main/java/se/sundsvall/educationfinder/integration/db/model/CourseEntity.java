@@ -17,7 +17,7 @@ import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 public class CourseEntity {
 
 	@Id
-	@Column(name = "KurserVuxenutbildning_id", insertable = false, updatable = false)
+	@Column(name = "KurserVuxenutbildningId", insertable = false, updatable = false)
 	private Long id;
 
 	@Column(name = "Kurskod", insertable = false, updatable = false)
