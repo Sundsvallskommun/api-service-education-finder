@@ -4,20 +4,20 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
+
 @Entity
 @Table(schema = "api_vuxenutb", name = "KurserVuxenutbildning")
 public class CourseEntity {
 
 	@Id
-	@Column(name = "kurstillfalleId", insertable = false, updatable = false)
+	@Column(name = "KurserVuxenutbildningId", insertable = false, updatable = false)
 	private Long id;
 
 	@Column(name = "Kurskod", insertable = false, updatable = false)
@@ -304,12 +304,16 @@ public class CourseEntity {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) { return true; }
-		if (!(obj instanceof final CourseEntity other)) { return false; }
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof final CourseEntity other)) {
+			return false;
+		}
 		return Objects.equals(code, other.code) && Objects.equals(credits, other.credits) && Objects.equals(earliestApplication, other.earliestApplication) && Objects.equals(end, other.end) && Objects.equals(id, other.id) && Objects.equals(information,
 			other.information) && Objects.equals(latestApplication, other.latestApplication) && Objects.equals(level, other.level) && Objects.equals(name, other.name) && Objects.equals(numberOfSeats, other.numberOfSeats) && Objects.equals(provider,
-				other.provider) && Objects.equals(providerUrl, other.providerUrl) && Objects.equals(scope, other.scope) && Objects.equals(start, other.start) && Objects.equals(studyLocation, other.studyLocation) && Objects.equals(subjectCode,
-					other.subjectCode) && Objects.equals(url, other.url);
+			other.provider) && Objects.equals(providerUrl, other.providerUrl) && Objects.equals(scope, other.scope) && Objects.equals(start, other.start) && Objects.equals(studyLocation, other.studyLocation) && Objects.equals(subjectCode,
+			other.subjectCode) && Objects.equals(url, other.url);
 	}
 
 	@Override
