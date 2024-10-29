@@ -18,7 +18,6 @@
 		<!-- Service properties -->
 		<generated-sources-path>${project.build.directory}/generated-sources
 		</generated-sources-path>
-		<specification-arg-resolver.version>3.1.0</specification-arg-resolver.version>
 		<guava.version>33.3.1-jre</guava.version>
 	</properties>
 	<dependencies>
