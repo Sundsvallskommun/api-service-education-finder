@@ -1,43 +1,71 @@
 {
 	"courses": [
 		{
-			"id": 851,
-			"code": "YH00090",
-			"name": "Drifttekniker Kraft & Värme",
-			"provider": "Härnösands kommun, Yrkeshögskolan",
-			"providerUrl": "https://www.hetautbildningar.se",
-			"level": "yrkeshögskoleutbildning",
-			"url": "http://www.hetautbildningar.se",
-			"credits": 400.0,
+			"id": 2000,
+			"code": "Okänd",
+			"name": "Okänd",
+			"provider": "Härnösands folkhögskola",
+			"providerUrl": "https://hfs.se/",
 			"scope": 100.0,
 			"studyLocation": "Härnösand",
-			"subjectCode": "525522d",
-			"start": "2024-09-01",
-			"end": "2026-06-30",
-			"information": "Vill du skaffa dig en utbildning som är hett efterfrågad och som ger dig varierande och intressanta uppgifter i jobbet? Med vår utbildning till Drifttekniker kraft & värme hamnar du mitt i en spännande bransch med ständig utveckling, där du arbetar med en av samhällets allra viktigaste funktioner. Försörjningen av värme, elkraft och kyla måste hållas igång dygnet runt samtidigt som ny teknik och smarta lösningar för att spara energi, pengar och miljö införs. Som drifttekniker är du en nyckelperson i allt från praktiskt arbete med drift och underhåll av energiteknisk utrustning till användning av den senaste IT-tekniken för styrning och optimering. De omfattande perioderna av praktik (LIA - Lärande i Arbete) gör att du redan tidigt i utbildningen får nyttig erfarenhet och är redo att gå direkt ut i arbetslivet, kanske hos en arbetsgivare som du redan under utbildningen har knutit kontakt med. Samtidigt ger breda praktiska och teoretiska kunskaper dig möjligheter att utvecklas och ta större ansvar inom nya yrkesroller och teknikområden."
+			"languageOfInstruction": "swe",
+			"start": "2023-08-21",
+			"end": "2024-05-31"
 		},
 		{
-			"id": 850,
-			"code": "YH00090",
-			"name": "Drifttekniker Kraft & Värme",
-			"provider": "Härnösands kommun, Yrkeshögskolan",
-			"providerUrl": "https://www.hetautbildningar.se",
-			"level": "yrkeshögskoleutbildning",
-			"url": "http://www.hetautbildningar.se",
-			"credits": 400.0,
+			"id": 2001,
+			"code": "Okänd",
+			"name": "Okänd",
+			"provider": "Härnösands folkhögskola",
+			"providerUrl": "https://hfs.se/",
 			"scope": 100.0,
 			"studyLocation": "Härnösand",
-			"subjectCode": "525522d",
-			"start": "2023-09-04",
-			"end": "2025-06-08",
-			"information": "Vill du skaffa dig en utbildning som är hett efterfrågad och som ger dig varierande och intressanta uppgifter i jobbet? Med vår utbildning till Drifttekniker kraft & värme hamnar du mitt i en spännande bransch med ständig utveckling, där du arbetar med en av samhällets allra viktigaste funktioner. Försörjningen av värme, elkraft och kyla måste hållas igång dygnet runt samtidigt som ny teknik och smarta lösningar för att spara energi, pengar och miljö införs. Som drifttekniker är du en nyckelperson i allt från praktiskt arbete med drift och underhåll av energiteknisk utrustning till användning av den senaste IT-tekniken för styrning och optimering. De omfattande perioderna av praktik (LIA - Lärande i Arbete) gör att du redan tidigt i utbildningen får nyttig erfarenhet och är redo att gå direkt ut i arbetslivet, kanske hos en arbetsgivare som du redan under utbildningen har knutit kontakt med. Samtidigt ger breda praktiska och teoretiska kunskaper dig möjligheter att utvecklas och ta större ansvar inom nya yrkesroller och teknikområden."
+			"languageOfInstruction": "swe",
+			"start": "2023-08-21",
+			"end": "2024-06-07"
+		},
+		{
+			"id": 2002,
+			"code": "Okänd",
+			"name": "Okänd",
+			"provider": "Härnösands folkhögskola",
+			"providerUrl": "https://hfs.se/",
+			"scope": 50.0,
+			"studyLocation": "Härnösand",
+			"languageOfInstruction": "swe",
+			"start": "2023-08-28",
+			"end": "2024-01-14"
+		},
+		{
+			"id": 2003,
+			"code": "Okänd",
+			"name": "Okänd",
+			"provider": "Härnösands folkhögskola",
+			"providerUrl": "https://hfs.se/",
+			"scope": 100.0,
+			"studyLocation": "Härnösand",
+			"languageOfInstruction": "swe",
+			"start": "2023-08-14",
+			"end": "2024-06-07"
+		},
+		{
+			"id": 2004,
+			"code": "Okänd",
+			"name": "Okänd",
+			"provider": "Härnösands folkhögskola",
+			"providerUrl": "https://hfs.se/",
+			"scope": 100.0,
+			"studyLocation": "Härnösand",
+			"languageOfInstruction": "swe",
+			"start": "2023-08-28",
+			"end": "2024-06-14"
 		}
 	],
 	"_meta": {
 		"page": 0,
-		"limit": 20,
-		"count": 2,
-		"totalRecords": 2,
-		"totalPages": 1
+		"limit": 5,
+		"count": 5,
+		"totalRecords": 33,
+		"totalPages": 7
 	}
 }

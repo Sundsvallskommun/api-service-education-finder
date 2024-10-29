@@ -40,8 +40,15 @@ public final class CourseMapper {
 				.withInformation(entity.getInformation())
 				.withScope(toDouble(entity.getScope()))
 				.withStart(entity.getStart())
+				.withCategory(Optional.ofNullable(entity.getCategory())
+					.map(category -> category.split("-")[0].trim())
+					.orElse(null))
+				.withSubcategory(Optional.ofNullable(entity.getCategory())
+					.map(category -> category.split("-")[1].trim())
+					.orElse(null))
 				.withStudyLocation(entity.getStudyLocation())
 				.withSubjectCode(entity.getSubjectCode())
+				.withLanguageOfInstruction(entity.getLanguageOfInstruction())
 				.withUrl(entity.getUrl()))
 			.orElse(null);
 	}

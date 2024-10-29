@@ -1,0 +1,12 @@
+{
+	"onGoingCourses": 0,
+	"plannedCourses": 3,
+	"finishedCourses": 2,
+	"availableSeats": 0,
+	"totalCapacity": 0,
+	"subCategories": [
+		"HÄLSO- OCH SJUKVÅRDADMINISTRATION"
+	],
+	"startDate": "2023-01-01",
+	"endDate": "2023-12-30"
+}

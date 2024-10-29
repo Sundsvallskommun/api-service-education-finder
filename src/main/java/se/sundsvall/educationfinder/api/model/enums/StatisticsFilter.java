@@ -10,7 +10,7 @@ public enum StatisticsFilter {
 	LEVEL,
 	SCOPE,
 	CATEGORY,
-	CATEGORY_ID,
+	SUBCATEGORY,
 	STUDY_LOCATION,
 	START_DATE,
 	END_DATE;

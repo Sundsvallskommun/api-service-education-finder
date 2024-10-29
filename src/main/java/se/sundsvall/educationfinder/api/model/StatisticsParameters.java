@@ -14,8 +14,8 @@ public class StatisticsParameters {
 	@Schema(description = "List of categories", example = "Medicin och vård")
 	private List<String> categories;
 
-	@Schema(description = "List of category IDs", example = "5")
-	private List<String> categoryIds;
+	@Schema(description = "List of sub categories", example = "PSYKOTERAPI")
+	private List<String> subCategories;
 
 	@Schema(description = "List of levels", example = "gymnasial vuxenutbildning")
 	private List<String> levels;
@@ -64,16 +64,16 @@ public class StatisticsParameters {
 		return this;
 	}
 
-	public List<String> getCategoryIds() {
-		return categoryIds;
+	public List<String> getSubCategories() {
+		return subCategories;
 	}
 
-	public void setCategoryIds(final List<String> categoryIds) {
-		this.categoryIds = categoryIds;
+	public void setSubCategories(final List<String> subCategories) {
+		this.subCategories = subCategories;
 	}
 
-	public StatisticsParameters withCategoryIds(final List<String> categoryId) {
-		this.categoryIds = categoryId;
+	public StatisticsParameters withSubCategories(final List<String> subCategory) {
+		this.subCategories = subCategory;
 		return this;
 	}
 
@@ -133,7 +133,7 @@ public class StatisticsParameters {
 	public String toString() {
 		return "StatisticsParameters{" +
 			"categories=" + categories +
-			", categoryIds=" + categoryIds +
+			", subCategories=" + subCategories +
 			", levels=" + levels +
 			", studyLocations=" + studyLocations +
 			", scopes=" + scopes +
@@ -147,11 +147,11 @@ public class StatisticsParameters {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		final StatisticsParameters that = (StatisticsParameters) o;
-		return Objects.equals(categories, that.categories) && Objects.equals(categoryIds, that.categoryIds) && Objects.equals(levels, that.levels) && Objects.equals(studyLocations, that.studyLocations) && Objects.equals(scopes, that.scopes) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate);
+		return Objects.equals(categories, that.categories) && Objects.equals(subCategories, that.subCategories) && Objects.equals(levels, that.levels) && Objects.equals(studyLocations, that.studyLocations) && Objects.equals(scopes, that.scopes) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(categories, categoryIds, levels, studyLocations, scopes, startDate, endDate);
+		return Objects.hash(categories, subCategories, levels, studyLocations, scopes, startDate, endDate);
 	}
 }

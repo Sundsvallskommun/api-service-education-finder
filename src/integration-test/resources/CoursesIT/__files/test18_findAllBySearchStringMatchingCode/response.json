@@ -1,7 +1,7 @@
 {
 	"courses": [
 		{
-			"id": 790,
+			"id": 1378,
 			"code": "SGRHEM7",
 			"name": "Hem- och konsumentkunskap",
 			"provider": "Sundsvalls Kommun",
@@ -12,12 +12,14 @@
 			"scope": 100.0,
 			"studyLocation": "Sundsvall",
 			"subjectCode": "SGRHEM7",
+			"category": "Övriga kurser och tvärvetenskap",
+			"subcategory": "Övriga kurser",
 			"earliestApplication": "2023-04-01",
 			"latestApplication": "2023-09-17",
 			"information": "<![CDATA[ <p>Komvux som anpassad&nbsp;utbildning är för dig som har en intellektuell funktionsnedsättning eller förvärvad hjärnskada.</p><p>Kursen är för dig som vill:</p><ul>\t<li>\t<p>lära dig att baka och laga mat samt lära dig om samband mellan mat och hälsa</p>\t</li>\t<li>\t<p>lära dig om hygien</p>\t</li>\t<li>\t<p>lära dig planera och genomföra inköp</p>\t</li></ul><p>Studietakt: individuell</p><p>Nivå: grundläggande</p><p>Antagning: löpande i mån av plats</p> ]]>"
 		},
 		{
-			"id": 791,
+			"id": 1379,
 			"code": "SGRHEMU",
 			"name": "Mat ,måltider och hälsa",
 			"provider": "Sundsvalls Kommun",
@@ -28,12 +30,14 @@
 			"scope": 100.0,
 			"studyLocation": "Sundsvall",
 			"subjectCode": "SGRHEMU",
+			"category": "Hotell, restaurang och turism",
+			"subcategory": "Kost",
 			"earliestApplication": "2023-04-01",
 			"latestApplication": "2023-09-17",
 			"information": "<![CDATA[ <p>Komvux som anpassad&nbsp;utbildning är för dig som har en intellektuell funktionsnedsättning eller förvärvad hjärnskada.</p><p>Kursen är för dig som vill:</p><ul>\t<li>\t<p>lära dig att baka och laga mat samt lära dig om samband mellan mat och hälsa</p>\t</li>\t<li>\t<p>lära dig om hygien</p>\t</li>\t<li>\t<p>lära dig planera och genomföra inköp</p>\t</li></ul><p>Studietakt: individuell</p><p>Nivå: grundläggande</p>Antagning: löpande i mån av plats ]]>"
 		},
 		{
-			"id": 792,
+			"id": 1380,
 			"code": "SGRHEMV",
 			"name": "Konsumtion och ekonomi",
 			"provider": "Sundsvalls Kommun",
@@ -44,12 +48,32 @@
 			"scope": 100.0,
 			"studyLocation": "Sundsvall",
 			"subjectCode": "SGRHEMV",
+			"category": "Ekonomi, marknadsföring och administration",
+			"subcategory": "Ekonomi",
 			"earliestApplication": "2023-04-01",
 			"latestApplication": "2023-09-17",
 			"information": "<![CDATA[ <p>Komvux som anpassad&nbsp;utbildning är för dig som har en intellektuell funktionsnedsättning eller förvärvad hjärnskada.</p><p>Kursen är för dig som vill:</p><ul>\t<li>\t<p>lära dig planera och genomföra inköp</p>\t</li>\t<li>\t<p>lära dig använda pengar</p>\t</li>\t<li>\t<p>lära dig räkna i praktiska situationer</p>\t</li></ul><p>Studietakt: individuell</p><p>Nivå: grundläggande</p><p>Antagning: löpande i mån av plats</p><div>&nbsp;</div> ]]>"
 		},
 		{
-			"id": 793,
+			"id": 1380,
+			"code": "SGRHEMV",
+			"name": "Konsumtion och ekonomi",
+			"provider": "Sundsvalls Kommun",
+			"providerUrl": "http://sundsvall.se/vuxenutbildning",
+			"level": "Kommunal vuxenutbildning som anpassad utbildning på grundläggande nivå",
+			"url": "https://sundsvall.alvis.se/hittakurser/kurs/59404",
+			"credits": 100.0,
+			"scope": 100.0,
+			"studyLocation": "Sundsvall",
+			"subjectCode": "SGRHEMV",
+			"category": "Ekonomi, marknadsföring och administration",
+			"subcategory": "Ekonomi",
+			"earliestApplication": "2023-04-01",
+			"latestApplication": "2023-09-17",
+			"information": "<![CDATA[ <p>Komvux som anpassad&nbsp;utbildning är för dig som har en intellektuell funktionsnedsättning eller förvärvad hjärnskada.</p><p>Kursen är för dig som vill:</p><ul>\t<li>\t<p>lära dig planera och genomföra inköp</p>\t</li>\t<li>\t<p>lära dig använda pengar</p>\t</li>\t<li>\t<p>lära dig räkna i praktiska situationer</p>\t</li></ul><p>Studietakt: individuell</p><p>Nivå: grundläggande</p><p>Antagning: löpande i mån av plats</p><div>&nbsp;</div> ]]>"
+		},
+		{
+			"id": 1382,
 			"code": "SGRHEMX",
 			"name": "Miljö och livsstil",
 			"provider": "Sundsvalls Kommun",
@@ -60,30 +84,16 @@
 			"scope": 100.0,
 			"studyLocation": "Sundsvall",
 			"subjectCode": "SGRHEMX",
+			"category": "Naturvetenskap",
+			"subcategory": "Miljö",
 			"earliestApplication": "2023-04-01",
 			"latestApplication": "2023-09-17",
 			"information": "<![CDATA[ <p>Komvux som anpassad&nbsp;utbildning är för dig som har en intellektuell funktionsnedsättning eller förvärvad hjärnskada.</p><p>Kursen är för dig som vill:</p><ul>\t<li>\t<p>lära dig mer om arbetsfördelning i hushållet ur ett jämställdhetsperspektiv</p>\t</li>\t<li>\t<p>lära dig om samband mellan mat och hälsa</p>\t</li>\t<li>\t<p>lära dig om redskap och teknisk utrustning som du använder hemma</p>\t</li></ul><p>Studietakt: individuell</p><p>Nivå: grundläggande</p><p>Antagning: löpande i mån av plats</p><div>&nbsp;</div> ]]>"
-		},
-		{
-			"id": 794,
-			"code": "SGRHIS7",
-			"name": "Historia",
-			"provider": "Sundsvalls Kommun",
-			"providerUrl": "http://sundsvall.se/vuxenutbildning",
-			"level": "Kommunal vuxenutbildning som anpassad utbildning på grundläggande nivå",
-			"url": "https://sundsvall.alvis.se/hittakurser/kurs/59406",
-			"credits": 150.0,
-			"scope": 100.0,
-			"studyLocation": "Sundsvall",
-			"subjectCode": "SGRHIS7",
-			"earliestApplication": "2023-04-01",
-			"latestApplication": "2023-09-17",
-			"information": "<![CDATA[ <p>Komvux som anpassad&nbsp;utbildning är för dig som har en intellektuell funktionsnedsättning eller förvärvad hjärnskada.</p><p>Kursen är för dig som vill:</p><ul>\t<li>\t<p>lära dig om historiska händelser i Sverige och i övriga delar av världen</p>\t</li>\t<li>\t<p>samtala om hur historien påverkar vårt liv idag</p>\t</li>\t<li>\t<p>studera historiska tidsperioder</p>\t</li></ul><p>Studietakt: individuell</p><p>Nivå: grundläggande</p>Antagning: löpande i mån av plats<br />&nbsp; ]]>"
 		}
 	],
 	"_meta": {
 		"page": 0,
-		"limit": 20,
+		"limit": 5,
 		"count": 5,
 		"totalRecords": 5,
 		"totalPages": 1

@@ -5,8 +5,6 @@ import static org.mockito.Mockito.verify;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.LEVEL;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.SCOPE;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.STUDY_LOCATION;
-import static se.sundsvall.educationfinder.integration.db.model.SubjectEntity_.CATEGORY;
-import static se.sundsvall.educationfinder.integration.db.model.SubjectEntity_.CATEGORY_ID;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -31,10 +29,7 @@ import se.sundsvall.dept44.test.extension.ResourceLoaderExtension;
 import se.sundsvall.educationfinder.api.model.StatisticsParameters;
 import se.sundsvall.educationfinder.api.model.enums.StatisticsFilter;
 import se.sundsvall.educationfinder.integration.db.CourseRepository;
-import se.sundsvall.educationfinder.integration.db.SubjectRepository;
 import se.sundsvall.educationfinder.integration.db.model.CourseEntity;
-import se.sundsvall.educationfinder.integration.db.model.projection.CategoryIdProjection;
-import se.sundsvall.educationfinder.integration.db.model.projection.CategoryProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.LevelProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.ScopeProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.StudyLocationProjection;
@@ -45,19 +40,10 @@ class StatisticsServiceTest {
 	private final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
 	@Mock
-	private SubjectRepository subjectRepositoryMock;
-
-	@Mock
 	private CourseRepository courseRepositoryMock;
 
 	@InjectMocks
 	private StatisticsService statisticsService;
-
-	private static Stream<Arguments> findStatisticsSubjectFilterValuesProvider() {
-		return Stream.of(
-			Arguments.of(StatisticsFilter.CATEGORY, CategoryProjection.class, CATEGORY),
-			Arguments.of(StatisticsFilter.CATEGORY_ID, CategoryIdProjection.class, CATEGORY_ID));
-	}
 
 	private static Stream<Arguments> findStatisticsCourseFilterValuesProvider() {
 		return Stream.of(
@@ -90,16 +76,6 @@ class StatisticsServiceTest {
 
 		// Assert
 		verify(courseRepositoryMock).findDistinctBy(projectionClass, Sort.by(attributeName));
-	}
-
-	@ParameterizedTest
-	@MethodSource("findStatisticsSubjectFilterValuesProvider")
-	void findStatisticsSubjectFilterValues(final StatisticsFilter statisticsFilter, final Class<?> projectionClass, final String attributeName) {
-
-		statisticsService.findStatisticsFilterValues(statisticsFilter);
-
-		// Assert
-		verify(subjectRepositoryMock).findDistinctBy(projectionClass, Sort.by(attributeName));
 	}
 
 	@Test
