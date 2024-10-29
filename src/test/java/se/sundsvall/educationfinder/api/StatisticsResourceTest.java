@@ -242,7 +242,7 @@ class StatisticsResourceTest {
 		assertThat(response).isNotNull();
 		assertThat(response.getFinishedCourses()).isEqualTo(114);
 		assertThat(response.getPlannedCourses()).isEqualTo(16);
-		assertThat(response.getOnGoingCourses()).isEqualTo(0);
+		assertThat(response.getOnGoingCourses()).isZero();
 		assertThat(response.getAvailableSeats()).isZero();
 		assertThat(response.getTotalCapacity()).isZero();
 
@@ -273,8 +273,8 @@ class StatisticsResourceTest {
 
 		assertThat(response).isNotNull();
 		assertThat(response.getFinishedCourses()).isEqualTo(19);
-		assertThat(response.getPlannedCourses()).isEqualTo(0);
-		assertThat(response.getOnGoingCourses()).isEqualTo(0);
+		assertThat(response.getPlannedCourses()).isZero();
+		assertThat(response.getOnGoingCourses()).isZero();
 		assertThat(response.getAvailableSeats()).isZero();
 		assertThat(response.getTotalCapacity()).isZero();
 

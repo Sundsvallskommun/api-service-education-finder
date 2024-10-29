@@ -572,7 +572,7 @@ class CoursesResourceTest {
 		assertThat(response.getCourses()).hasSize(20).extracting(Course::getCategory).contains("Naturvetenskap");
 		assertThat(response.getMetadata().getCount()).isEqualTo(20);
 		assertThat(response.getMetadata().getLimit()).isEqualTo(20);
-		assertThat(response.getMetadata().getPage()).isEqualTo(0);
+		assertThat(response.getMetadata().getPage()).isZero();
 		assertThat(response.getMetadata().getTotalRecords()).isEqualTo(145);
 	}
 

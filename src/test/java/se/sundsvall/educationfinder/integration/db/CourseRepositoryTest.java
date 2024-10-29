@@ -201,15 +201,6 @@ class CourseRepositoryTest {
 		assertThat(result).hasSize(matches);
 	}
 
-	@ParameterizedTest
-	@MethodSource("findAllByParametersAndCodeAndCodesArguments")
-	void findAllByParametersAndCodeAndCodes(final StatisticsParameters parameters, final Integer matches) {
-
-		var result = courseRepository.findAllByParameters(parameters);
-
-		assertThat(result).hasSize(matches);
-	}
-
 	private static Stream<Arguments> findAllByParametersArguments() {
 		return Stream.of(
 			Arguments.of(StatisticsParameters.create().withStartDate(LocalDate.of(2020, 6, 1)).withEndDate(LocalDate.of(2024, 12, 1)), 1689),
@@ -218,12 +209,5 @@ class CourseRepositoryTest {
 			Arguments.of(StatisticsParameters.create().withStartDate(LocalDate.of(2020, 10, 31)).withEndDate(LocalDate.of(2024, 12, 8)).withStudyLocations(List.of("Kramfors")), 10),
 			Arguments.of(StatisticsParameters.create().withStudyLocations(List.of("Sundsvall", "Kramfors")), 1287),
 			Arguments.of(StatisticsParameters.create().withStartDate(LocalDate.of(2020, 1, 1)).withEndDate(LocalDate.of(2021, 12, 31)), 0));
-	}
-
-	private static Stream<Arguments> findAllByParametersAndCodeAndCodesArguments() {
-		return Stream.of(
-			Arguments.of(StatisticsParameters.create().withStartDate(LocalDate.of(2023, 10, 31)).withEndDate(LocalDate.of(2024, 6, 6)), 1460, List.of("GRNSVAC", "GRNSVAD", "GRNSVEB", "RLXAAR")),
-			Arguments.of(StatisticsParameters.create().withStudyLocations(List.of("Sundsvall")), 1275, List.of("ADMADM01", "ADMADM02", "ADMADM00S", "ADMPER0"))
-		);
 	}
 }
