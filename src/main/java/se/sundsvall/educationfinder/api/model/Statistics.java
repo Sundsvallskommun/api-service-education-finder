@@ -40,7 +40,7 @@ public class Statistics {
 	private List<String> categories = new ArrayList<>();
 
 	@Schema(description = "Category ids used for filtering", accessMode = READ_ONLY)
-	private List<String> categoryIds = new ArrayList<>();
+	private List<String> subCategories = new ArrayList<>();
 
 	@Schema(description = "Start date used for filtering", accessMode = READ_ONLY)
 	private LocalDate startDate;
@@ -156,16 +156,16 @@ public class Statistics {
 		return this;
 	}
 
-	public List<String> getCategoryIds() {
-		return categoryIds;
+	public List<String> getSubCategories() {
+		return subCategories;
 	}
 
-	public void setCategoryIds(final List<String> categoryIds) {
-		this.categoryIds = categoryIds;
+	public void setSubCategories(final List<String> subCategories) {
+		this.subCategories = subCategories;
 	}
 
-	public Statistics withCategoryIds(final List<String> categoryIds) {
-		this.categoryIds = categoryIds;
+	public Statistics withSubCategories(final List<String> subCategories) {
+		this.subCategories = subCategories;
 		return this;
 	}
 
@@ -220,7 +220,7 @@ public class Statistics {
 			", scopes=" + scopes +
 			", levels=" + levels +
 			", categories=" + categories +
-			", categoryIds=" + categoryIds +
+			", subCategories=" + subCategories +
 			", startDate=" + startDate +
 			", endDate=" + endDate +
 			'}';
@@ -231,11 +231,11 @@ public class Statistics {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		final Statistics that = (Statistics) o;
-		return onGoingCourses == that.onGoingCourses && plannedCourses == that.plannedCourses && finishedCourses == that.finishedCourses && availableSeats == that.availableSeats && totalCapacity == that.totalCapacity && Objects.equals(studyLocations, that.studyLocations) && Objects.equals(scopes, that.scopes) && Objects.equals(levels, that.levels) && Objects.equals(categories, that.categories) && Objects.equals(categoryIds, that.categoryIds) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate);
+		return onGoingCourses == that.onGoingCourses && plannedCourses == that.plannedCourses && finishedCourses == that.finishedCourses && availableSeats == that.availableSeats && totalCapacity == that.totalCapacity && Objects.equals(studyLocations, that.studyLocations) && Objects.equals(scopes, that.scopes) && Objects.equals(levels, that.levels) && Objects.equals(categories, that.categories) && Objects.equals(subCategories, that.subCategories) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(onGoingCourses, plannedCourses, finishedCourses, availableSeats, totalCapacity, studyLocations, scopes, levels, categories, categoryIds, startDate, endDate);
+		return Objects.hash(onGoingCourses, plannedCourses, finishedCourses, availableSeats, totalCapacity, studyLocations, scopes, levels, categories, subCategories, startDate, endDate);
 	}
 }

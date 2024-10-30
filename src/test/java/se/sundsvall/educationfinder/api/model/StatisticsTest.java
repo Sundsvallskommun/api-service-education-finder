@@ -46,7 +46,7 @@ class StatisticsTest {
 		var levels = List.of("educationForms");
 		var scopes = List.of("25", "50", "100");
 		var categories = List.of("categories");
-		var categoryIds = List.of("categoryIds");
+		var subCategories = List.of("subCategories");
 		var startDate = LocalDate.now();
 		var endDate = LocalDate.now().plusDays(1);
 
@@ -58,8 +58,8 @@ class StatisticsTest {
 			.withTotalCapacity(totalCapacity)
 			.withStudyLocations(studyLocations)
 			.withCategories(categories)
-			.withCategoryIds(categoryIds)
 			.withScopes(scopes)
+			.withSubCategories(subCategories)
 			.withLevels(levels)
 			.withStartDate(startDate)
 			.withEndDate(endDate);
@@ -74,7 +74,7 @@ class StatisticsTest {
 		Assertions.assertThat(bean.getLevels()).isEqualTo(levels);
 		Assertions.assertThat(bean.getScopes()).isEqualTo(scopes);
 		Assertions.assertThat(bean.getCategories()).isEqualTo(categories);
-		Assertions.assertThat(bean.getCategoryIds()).isEqualTo(categoryIds);
+		Assertions.assertThat(bean.getSubCategories()).isEqualTo(subCategories);
 		Assertions.assertThat(bean.getStartDate()).isEqualTo(startDate);
 		Assertions.assertThat(bean.getEndDate()).isEqualTo(endDate);
 	}

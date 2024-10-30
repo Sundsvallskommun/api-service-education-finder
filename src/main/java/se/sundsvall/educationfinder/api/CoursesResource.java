@@ -8,8 +8,6 @@ import static se.sundsvall.educationfinder.api.model.ApiConstants.FIND_FILTER_VA
 
 import java.util.List;
 
-import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,9 +19,9 @@ import org.zalando.problem.violations.ConstraintViolationProblem;
 
 import se.sundsvall.dept44.common.validators.annotation.ValidMunicipalityId;
 import se.sundsvall.educationfinder.api.model.Course;
+import se.sundsvall.educationfinder.api.model.CourseParameters;
 import se.sundsvall.educationfinder.api.model.PagedCoursesResponse;
 import se.sundsvall.educationfinder.api.model.enums.CourseFilter;
-import se.sundsvall.educationfinder.integration.db.specification.CourseSpecification;
 import se.sundsvall.educationfinder.service.CourseService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -53,8 +51,8 @@ class CoursesResource {
 	@Operation(summary = "Find course", description = FIND_COURSE_DESCRIPTION)
 	ResponseEntity<PagedCoursesResponse> find(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @ValidMunicipalityId @PathVariable final String municipalityId,
-		final CourseSpecification specification, @ParameterObject final Pageable pageable) {
-		return ok(courseService.find(specification, pageable));
+		final CourseParameters parameters) {
+		return ok(courseService.find(parameters));
 	}
 
 	@GetMapping(path = "/{courseId}")

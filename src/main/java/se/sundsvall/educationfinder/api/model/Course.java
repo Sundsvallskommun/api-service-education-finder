@@ -49,6 +49,15 @@ public class Course {
 	@Schema(description = "Number of seats", example = "10", accessMode = READ_ONLY)
 	private Integer numberOfSeats;
 
+	@Schema(description = "Course category", example = "Ekonomi, marknadsföring och administration", accessMode = READ_ONLY)
+	private String category;
+
+	@Schema(description = "Course subcategory", example = "Administration", accessMode = READ_ONLY)
+	private String subcategory;
+
+	@Schema(description = "Language of instruction", example = "Swedish", accessMode = READ_ONLY)
+	private String languageOfInstruction;
+
 	@Schema(description = "Course start date", example = "2020-08-31", accessMode = READ_ONLY)
 	@DateTimeFormat(iso = DATE)
 	private LocalDate start;
@@ -87,6 +96,32 @@ public class Course {
 		return this;
 	}
 
+	public String getLanguageOfInstruction() {
+		return languageOfInstruction;
+	}
+
+	public void setLanguageOfInstruction(String languageOfInstruction) {
+		this.languageOfInstruction = languageOfInstruction;
+	}
+
+	public Course withLanguageOfInstruction(String languageOfInstruction) {
+		this.languageOfInstruction = languageOfInstruction;
+		return this;
+	}
+
+	public String getSubcategory() {
+		return subcategory;
+	}
+
+	public void setSubcategory(String subcategory) {
+		this.subcategory = subcategory;
+	}
+
+	public Course withSubcategory(String subcategory) {
+		this.subcategory = subcategory;
+		return this;
+	}
+
 	public String getCode() {
 		return code;
 	}
@@ -97,6 +132,19 @@ public class Course {
 
 	public Course withCode(String code) {
 		this.code = code;
+		return this;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public Course withCategory(String category) {
+		this.category = category;
 		return this;
 	}
 
@@ -310,6 +358,9 @@ public class Course {
 			", studyLocation='" + studyLocation + '\'' +
 			", subjectCode='" + subjectCode + '\'' +
 			", numberOfSeats=" + numberOfSeats +
+			", category='" + category + '\'' +
+			", subcategory='" + subcategory + '\'' +
+			", languageOfInstruction='" + languageOfInstruction + '\'' +
 			", start=" + start +
 			", end=" + end +
 			", earliestApplication=" + earliestApplication +
@@ -323,11 +374,11 @@ public class Course {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		final Course course = (Course) o;
-		return Objects.equals(id, course.id) && Objects.equals(code, course.code) && Objects.equals(name, course.name) && Objects.equals(provider, course.provider) && Objects.equals(providerUrl, course.providerUrl) && Objects.equals(level, course.level) && Objects.equals(url, course.url) && Objects.equals(credits, course.credits) && Objects.equals(scope, course.scope) && Objects.equals(studyLocation, course.studyLocation) && Objects.equals(subjectCode, course.subjectCode) && Objects.equals(numberOfSeats, course.numberOfSeats) && Objects.equals(start, course.start) && Objects.equals(end, course.end) && Objects.equals(earliestApplication, course.earliestApplication) && Objects.equals(latestApplication, course.latestApplication) && Objects.equals(information, course.information);
+		return Objects.equals(id, course.id) && Objects.equals(code, course.code) && Objects.equals(name, course.name) && Objects.equals(provider, course.provider) && Objects.equals(providerUrl, course.providerUrl) && Objects.equals(level, course.level) && Objects.equals(url, course.url) && Objects.equals(credits, course.credits) && Objects.equals(scope, course.scope) && Objects.equals(studyLocation, course.studyLocation) && Objects.equals(subjectCode, course.subjectCode) && Objects.equals(numberOfSeats, course.numberOfSeats) && Objects.equals(category, course.category) && Objects.equals(subcategory, course.subcategory) && Objects.equals(languageOfInstruction, course.languageOfInstruction) && Objects.equals(start, course.start) && Objects.equals(end, course.end) && Objects.equals(earliestApplication, course.earliestApplication) && Objects.equals(latestApplication, course.latestApplication) && Objects.equals(information, course.information);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, code, name, provider, providerUrl, level, url, credits, scope, studyLocation, subjectCode, numberOfSeats, start, end, earliestApplication, latestApplication, information);
+		return Objects.hash(id, code, name, provider, providerUrl, level, url, credits, scope, studyLocation, subjectCode, numberOfSeats, category, subcategory, languageOfInstruction, start, end, earliestApplication, latestApplication, information);
 	}
 }

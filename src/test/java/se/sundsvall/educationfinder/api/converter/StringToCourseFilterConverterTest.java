@@ -21,7 +21,7 @@ class StringToCourseFilterConverterTest {
 	void convert() {
 
 		// Arrange
-		final var stringValueList = List.of("credits", "provider", "level", "scope", "studyLocation");
+		final var stringValueList = List.of("credits", "provider", "category", "subcategory", "level", "scope", "studyLocation");
 
 		// Act
 		final var result = stringValueList.stream()
