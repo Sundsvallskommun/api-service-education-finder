@@ -1,43 +1,43 @@
 {
 	"courses": [
 		{
-			"id": 848,
 			"code": "YH00118",
-			"name": "Affärsutvecklare besöksnäring",
-			"provider": "YH Akademin AB",
-			"providerUrl": "https://ya.se/yrkeshogskola/",
 			"level": "yrkeshögskoleutbildning",
-			"url": "https://ya.se/yrkeshogskola/affarsutvecklare-besoksnaring/",
-			"credits": 400.0,
-			"scope": 100.0,
-			"studyLocation": "Härnösand",
-			"subjectCode": "525812z",
 			"start": "2025-01-01",
+			"studyLocation": "Härnösand",
+			"providerUrl": "https://ya.se/yrkeshogskola/",
+			"url": "https://ya.se/yrkeshogskola/affarsutvecklare-besoksnaring/",
+			"provider": "YH Akademin AB",
+			"credits": 400,
+			"scope": 100,
+			"name": "Affärsutvecklare besöksnäring",
 			"end": "2026-12-31",
-			"information": "Vill du arbeta med turism eller är du redan verksam inom besöksnäringen? Är du en kreativ optimist som gillar att utveckla, förbättra och hitta nya vägar framåt? Har du lätt för att nätverka och tycker om att påverka? Då är den här utbildningen något för dig!Att jobba som affärsutvecklareSom affärsutvecklare arbetar du med att driva och utveckla ett företag eller en organisation framåt. Du arbetar ofta nära ledningen och tar fram underlag genom att analysera nuläge, och göra omvärldsanalyser för att kunna föreslå en bra väg framåt för företaget. Det kan handla om nya produkter eller att förbättra system och funktioner.En utbildning som ger dig bred kompetensYrkesAkademins utbildning till affärsutvecklare inom besöksnäring ger dig kompetens att utveckla och paketera tjänster inom turist- och besöksnäringen. Utbildningen ger dig verktyg att kunna analysera marknadstendenser och trender, och att projektleda konceptutveckling och digitalt förändringsarbete. Du kommer också att ha kunskaper i att använda analysmaterial för att identifiera affärsmöjligheter och skapa attraktiva paket och tjänster för potentiella kunder.Jobbmöjligheter inom besöksnäringenBesöksnäringen räknas som världens största och snabbast växande näring. Fram till år 2020 förväntas den svenska besöksnäringens omfattning och exportvärde fördubblas. Därför finns det goda jobbmöjligheter för affärsutvecklare med rätt kompetens och utbildning. Yrkesrollen är också viktig då företag i dag har ständigt höga krav på förbättring och utveckling för att öka konkurrenskraften.Ta ditt nästa karriärsteg hos oss på YrkesAkademin Yrkeshögskola"
+			"information": "Vill du arbeta med turism eller är du redan verksam inom besöksnäringen? Är du en kreativ optimist som gillar att utveckla, förbättra och hitta nya vägar framåt? Har du lätt för att nätverka och tycker om att påverka? Då är den här utbildningen något för dig!Att jobba som affärsutvecklareSom affärsutvecklare arbetar du med att driva och utveckla ett företag eller en organisation framåt. Du arbetar ofta nära ledningen och tar fram underlag genom att analysera nuläge, och göra omvärldsanalyser för att kunna föreslå en bra väg framåt för företaget. Det kan handla om nya produkter eller att förbättra system och funktioner.En utbildning som ger dig bred kompetensYrkesAkademins utbildning till affärsutvecklare inom besöksnäring ger dig kompetens att utveckla och paketera tjänster inom turist- och besöksnäringen. Utbildningen ger dig verktyg att kunna analysera marknadstendenser och trender, och att projektleda konceptutveckling och digitalt förändringsarbete. Du kommer också att ha kunskaper i att använda analysmaterial för att identifiera affärsmöjligheter och skapa attraktiva paket och tjänster för potentiella kunder.Jobbmöjligheter inom besöksnäringenBesöksnäringen räknas som världens största och snabbast växande näring. Fram till år 2020 förväntas den svenska besöksnäringens omfattning och exportvärde fördubblas. Därför finns det goda jobbmöjligheter för affärsutvecklare med rätt kompetens och utbildning. Yrkesrollen är också viktig då företag i dag har ständigt höga krav på förbättring och utveckling för att öka konkurrenskraften.Ta ditt nästa karriärsteg hos oss på YrkesAkademin Yrkeshögskola",
+			"id": 848,
+			"subjectCode": "525812z"
 		},
 		{
-			"id": 849,
 			"code": "YH00118",
-			"name": "Affärsutvecklare besöksnäring",
-			"provider": "YH Akademin AB",
-			"providerUrl": "https://ya.se/yrkeshogskola/",
 			"level": "yrkeshögskoleutbildning",
-			"url": "https://ya.se/yrkeshogskola/affarsutvecklare-besoksnaring/",
-			"credits": 400.0,
-			"scope": 100.0,
-			"studyLocation": "Örnsköldsvik",
-			"subjectCode": "525812z",
 			"start": "2025-01-01",
+			"studyLocation": "Örnsköldsvik",
+			"providerUrl": "https://ya.se/yrkeshogskola/",
+			"url": "https://ya.se/yrkeshogskola/affarsutvecklare-besoksnaring/",
+			"provider": "YH Akademin AB",
+			"credits": 400,
+			"scope": 100,
+			"name": "Affärsutvecklare besöksnäring",
 			"end": "2026-12-31",
-			"information": "Vill du arbeta med turism eller är du redan verksam inom besöksnäringen? Är du en kreativ optimist som gillar att utveckla, förbättra och hitta nya vägar framåt? Har du lätt för att nätverka och tycker om att påverka? Då är den här utbildningen något för dig!Att jobba som affärsutvecklareSom affärsutvecklare arbetar du med att driva och utveckla ett företag eller en organisation framåt. Du arbetar ofta nära ledningen och tar fram underlag genom att analysera nuläge, och göra omvärldsanalyser för att kunna föreslå en bra väg framåt för företaget. Det kan handla om nya produkter eller att förbättra system och funktioner.En utbildning som ger dig bred kompetensYrkesAkademins utbildning till affärsutvecklare inom besöksnäring ger dig kompetens att utveckla och paketera tjänster inom turist- och besöksnäringen. Utbildningen ger dig verktyg att kunna analysera marknadstendenser och trender, och att projektleda konceptutveckling och digitalt förändringsarbete. Du kommer också att ha kunskaper i att använda analysmaterial för att identifiera affärsmöjligheter och skapa attraktiva paket och tjänster för potentiella kunder.Jobbmöjligheter inom besöksnäringenBesöksnäringen räknas som världens största och snabbast växande näring. Fram till år 2020 förväntas den svenska besöksnäringens omfattning och exportvärde fördubblas. Därför finns det goda jobbmöjligheter för affärsutvecklare med rätt kompetens och utbildning. Yrkesrollen är också viktig då företag i dag har ständigt höga krav på förbättring och utveckling för att öka konkurrenskraften.Ta ditt nästa karriärsteg hos oss på YrkesAkademin Yrkeshögskola"
+			"information": "Vill du arbeta med turism eller är du redan verksam inom besöksnäringen? Är du en kreativ optimist som gillar att utveckla, förbättra och hitta nya vägar framåt? Har du lätt för att nätverka och tycker om att påverka? Då är den här utbildningen något för dig!Att jobba som affärsutvecklareSom affärsutvecklare arbetar du med att driva och utveckla ett företag eller en organisation framåt. Du arbetar ofta nära ledningen och tar fram underlag genom att analysera nuläge, och göra omvärldsanalyser för att kunna föreslå en bra väg framåt för företaget. Det kan handla om nya produkter eller att förbättra system och funktioner.En utbildning som ger dig bred kompetensYrkesAkademins utbildning till affärsutvecklare inom besöksnäring ger dig kompetens att utveckla och paketera tjänster inom turist- och besöksnäringen. Utbildningen ger dig verktyg att kunna analysera marknadstendenser och trender, och att projektleda konceptutveckling och digitalt förändringsarbete. Du kommer också att ha kunskaper i att använda analysmaterial för att identifiera affärsmöjligheter och skapa attraktiva paket och tjänster för potentiella kunder.Jobbmöjligheter inom besöksnäringenBesöksnäringen räknas som världens största och snabbast växande näring. Fram till år 2020 förväntas den svenska besöksnäringens omfattning och exportvärde fördubblas. Därför finns det goda jobbmöjligheter för affärsutvecklare med rätt kompetens och utbildning. Yrkesrollen är också viktig då företag i dag har ständigt höga krav på förbättring och utveckling för att öka konkurrenskraften.Ta ditt nästa karriärsteg hos oss på YrkesAkademin Yrkeshögskola",
+			"id": 849,
+			"subjectCode": "525812z"
 		}
 	],
 	"_meta": {
-		"page": 0,
+		"totalRecords": 2,
 		"limit": 20,
 		"count": 2,
-		"totalRecords": 2,
-		"totalPages": 1
+		"totalPages": 1,
+		"page": 0
 	}
 }

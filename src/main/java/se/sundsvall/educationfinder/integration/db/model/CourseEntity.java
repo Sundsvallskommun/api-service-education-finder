@@ -312,8 +312,8 @@ public class CourseEntity {
 		}
 		return Objects.equals(code, other.code) && Objects.equals(credits, other.credits) && Objects.equals(earliestApplication, other.earliestApplication) && Objects.equals(end, other.end) && Objects.equals(id, other.id) && Objects.equals(information,
 			other.information) && Objects.equals(latestApplication, other.latestApplication) && Objects.equals(level, other.level) && Objects.equals(name, other.name) && Objects.equals(numberOfSeats, other.numberOfSeats) && Objects.equals(provider,
-			other.provider) && Objects.equals(providerUrl, other.providerUrl) && Objects.equals(scope, other.scope) && Objects.equals(start, other.start) && Objects.equals(studyLocation, other.studyLocation) && Objects.equals(subjectCode,
-			other.subjectCode) && Objects.equals(url, other.url);
+				other.provider) && Objects.equals(providerUrl, other.providerUrl) && Objects.equals(scope, other.scope) && Objects.equals(start, other.start) && Objects.equals(studyLocation, other.studyLocation) && Objects.equals(subjectCode,
+					other.subjectCode) && Objects.equals(url, other.url);
 	}
 
 	@Override

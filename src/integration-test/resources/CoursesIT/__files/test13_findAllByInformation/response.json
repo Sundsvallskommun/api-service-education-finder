@@ -1,47 +1,47 @@
 {
 	"courses": [
 		{
-			"id": 825,
 			"code": "RLXAAR",
-			"name": "Kock",
-			"provider": "Sundsvalls Kommun",
-			"providerUrl": "http://sundsvall.se/vuxenutbildning",
 			"level": "gymnasial vuxenutbildning",
-			"url": "https://sundsvall.alvis.se/hittakurser/kurs/4260",
-			"credits": 1450.0,
-			"scope": 100.0,
-			"studyLocation": "Sundsvall",
-			"subjectCode": "RLXAAR",
 			"start": "2023-08-21",
-			"end": "2024-08-30",
 			"earliestApplication": "2023-03-02",
 			"latestApplication": "2023-08-20",
-			"information": "<![CDATA[ Gillar du att få till nya smaker och nya rätter? Lär dig allt om matlagning och service! Kockar som jobbar på restauranger eller hotell arbetar ofta med att tillaga flera olika maträtter enligt gästernas beställningar, så kallad à la carte. I storkök, till exempel på sjukhus eller i personalrestauranger tillagas däremot ofta ett fåtal rätter som görs i stora mängder. ]]>"
+			"studyLocation": "Sundsvall",
+			"providerUrl": "http://sundsvall.se/vuxenutbildning",
+			"url": "https://sundsvall.alvis.se/hittakurser/kurs/4260",
+			"provider": "Sundsvalls Kommun",
+			"credits": 1450,
+			"scope": 100,
+			"name": "Kock",
+			"end": "2024-08-30",
+			"information": "<![CDATA[ Gillar du att få till nya smaker och nya rätter? Lär dig allt om matlagning och service! Kockar som jobbar på restauranger eller hotell arbetar ofta med att tillaga flera olika maträtter enligt gästernas beställningar, så kallad à la carte. I storkök, till exempel på sjukhus eller i personalrestauranger tillagas däremot ofta ett fåtal rätter som görs i stora mängder. ]]>",
+			"id": 825,
+			"subjectCode": "RLXAAR"
 		},
 		{
-			"id": 826,
 			"code": "RLXAAR",
-			"name": "Kock",
-			"provider": "Sundsvalls Kommun",
-			"providerUrl": "http://sundsvall.se/vuxenutbildning",
 			"level": "gymnasial vuxenutbildning",
-			"url": "https://sundsvall.alvis.se/hittakurser/kurs/4260",
-			"credits": 1450.0,
-			"scope": 100.0,
-			"studyLocation": "Sundsvall",
-			"subjectCode": "RLXAAR",
 			"start": "2023-10-16",
-			"end": "2024-10-25",
 			"earliestApplication": "2023-03-02",
 			"latestApplication": "2023-10-15",
-			"information": "<![CDATA[ Gillar du att få till nya smaker och nya rätter? Lär dig allt om matlagning och service! Kockar som jobbar på restauranger eller hotell arbetar ofta med att tillaga flera olika maträtter enligt gästernas beställningar, så kallad à la carte. I storkök, till exempel på sjukhus eller i personalrestauranger tillagas däremot ofta ett fåtal rätter som görs i stora mängder. ]]>"
+			"studyLocation": "Sundsvall",
+			"providerUrl": "http://sundsvall.se/vuxenutbildning",
+			"url": "https://sundsvall.alvis.se/hittakurser/kurs/4260",
+			"provider": "Sundsvalls Kommun",
+			"credits": 1450,
+			"scope": 100,
+			"name": "Kock",
+			"end": "2024-10-25",
+			"information": "<![CDATA[ Gillar du att få till nya smaker och nya rätter? Lär dig allt om matlagning och service! Kockar som jobbar på restauranger eller hotell arbetar ofta med att tillaga flera olika maträtter enligt gästernas beställningar, så kallad à la carte. I storkök, till exempel på sjukhus eller i personalrestauranger tillagas däremot ofta ett fåtal rätter som görs i stora mängder. ]]>",
+			"id": 826,
+			"subjectCode": "RLXAAR"
 		}
 	],
 	"_meta": {
-		"page": 0,
+		"totalRecords": 2,
 		"limit": 20,
 		"count": 2,
-		"totalRecords": 2,
-		"totalPages": 1
+		"totalPages": 1,
+		"page": 0
 	}
 }

@@ -89,5 +89,4 @@ class CourseServiceTest {
 		verify(courseRepositoryMock).findDistinctBy(projectionClass, Sort.by(attributeName));
 	}
 
-
 }

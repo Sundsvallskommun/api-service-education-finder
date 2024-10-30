@@ -52,33 +52,28 @@ public class CourseService {
 	@Cacheable("course-filters")
 	public List<String> findFilterValues(final CourseFilter courseFilter) {
 		return switch (courseFilter) {
-			case STUDY_LOCATION ->
-				courseRepository.findDistinctBy(StudyLocationProjection.class, Sort.by(STUDY_LOCATION)).stream()
-					.filter(Objects::nonNull)
-					.map(StudyLocationProjection::getStudyLocation)
-					.filter(StringUtils::isNotEmpty)
-					.map(StringUtils::upperCase)
-					.toList();
-			case PROVIDER ->
-				courseRepository.findDistinctBy(ProviderProjection.class, Sort.by(PROVIDER)).stream()
-					.filter(Objects::nonNull)
-					.map(ProviderProjection::getProvider)
-					.toList();
-			case LEVEL ->
-				courseRepository.findDistinctBy(LevelProjection.class, Sort.by(LEVEL)).stream()
-					.filter(Objects::nonNull)
-					.map(LevelProjection::getLevel)
-					.toList();
-			case SCOPE ->
-				courseRepository.findDistinctBy(ScopeProjection.class, Sort.by(SCOPE)).stream()
-					.filter(Objects::nonNull)
-					.map(ScopeProjection::getScope)
-					.toList();
-			case CREDITS ->
-				courseRepository.findDistinctBy(CreditsProjection.class, Sort.by(CREDITS)).stream()
-					.filter(Objects::nonNull)
-					.map(CreditsProjection::getCredits)
-					.toList();
+			case STUDY_LOCATION -> courseRepository.findDistinctBy(StudyLocationProjection.class, Sort.by(STUDY_LOCATION)).stream()
+				.filter(Objects::nonNull)
+				.map(StudyLocationProjection::getStudyLocation)
+				.filter(StringUtils::isNotEmpty)
+				.map(StringUtils::upperCase)
+				.toList();
+			case PROVIDER -> courseRepository.findDistinctBy(ProviderProjection.class, Sort.by(PROVIDER)).stream()
+				.filter(Objects::nonNull)
+				.map(ProviderProjection::getProvider)
+				.toList();
+			case LEVEL -> courseRepository.findDistinctBy(LevelProjection.class, Sort.by(LEVEL)).stream()
+				.filter(Objects::nonNull)
+				.map(LevelProjection::getLevel)
+				.toList();
+			case SCOPE -> courseRepository.findDistinctBy(ScopeProjection.class, Sort.by(SCOPE)).stream()
+				.filter(Objects::nonNull)
+				.map(ScopeProjection::getScope)
+				.toList();
+			case CREDITS -> courseRepository.findDistinctBy(CreditsProjection.class, Sort.by(CREDITS)).stream()
+				.filter(Objects::nonNull)
+				.map(CreditsProjection::getCredits)
+				.toList();
 		};
 	}
 }

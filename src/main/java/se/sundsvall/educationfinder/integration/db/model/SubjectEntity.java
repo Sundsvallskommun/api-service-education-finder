@@ -228,10 +228,14 @@ public class SubjectEntity {
 
 	@Override
 	public boolean equals(final Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
 		final SubjectEntity that = (SubjectEntity) o;
-		return Objects.equals(id, that.id) && Objects.equals(subjectId, that.subjectId) && Objects.equals(subject, that.subject) && Objects.equals(subjectEnglish, that.subjectEnglish) && Objects.equals(educationForm, that.educationForm) && Objects.equals(subjectCode, that.subjectCode) && Objects.equals(categoryId, that.categoryId) && Objects.equals(category, that.category) && Objects.equals(categoryEnglish, that.categoryEnglish) && Objects.equals(branchId, that.branchId) && Objects.equals(branch, that.branch) && Objects.equals(branchEnglish, that.branchEnglish);
+		return Objects.equals(id, that.id) && Objects.equals(subjectId, that.subjectId) && Objects.equals(subject, that.subject) && Objects.equals(subjectEnglish, that.subjectEnglish) && Objects.equals(educationForm, that.educationForm) && Objects.equals(
+			subjectCode, that.subjectCode) && Objects.equals(categoryId, that.categoryId) && Objects.equals(category, that.category) && Objects.equals(categoryEnglish, that.categoryEnglish) && Objects.equals(branchId, that.branchId) && Objects.equals(
+				branch, that.branch) && Objects.equals(branchEnglish, that.branchEnglish);
 	}
 
 	@Override

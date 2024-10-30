@@ -428,7 +428,6 @@ class CoursesResourceTest {
 			.containsExactly("HÄRNÖSAND", "KRAMFORS", "SUNDSVALL", "ÖRNSKÖLDSVIK", "ÖSTERSUND");
 	}
 
-
 	@ParameterizedTest
 	@MethodSource("queryParameters")
 	void findAllOnSpecificStudyLocationAndLevelWithCustomSearchString(final String studyLocation, final String level, final String searchString, final Integer matches) {

@@ -35,10 +35,14 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @Validated
-@RequestMapping(path = "/{municipalityId}/courses", produces = {APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE})
+@RequestMapping(path = "/{municipalityId}/courses", produces = {
+	APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE
+})
 @Tag(name = "Courses", description = "Find courses")
 @ApiResponse(responseCode = "200", description = "Successful operation", useReturnTypeSchema = true)
-@ApiResponse(responseCode = "400", description = "Bad request", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(oneOf = {Problem.class, ConstraintViolationProblem.class})))
+@ApiResponse(responseCode = "400", description = "Bad request", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(oneOf = {
+	Problem.class, ConstraintViolationProblem.class
+})))
 @ApiResponse(responseCode = "404", description = "Not found", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
 @ApiResponse(responseCode = "500", description = "Internal Server error", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
 class CoursesResource {
@@ -64,7 +68,6 @@ class CoursesResource {
 		@Parameter(name = "courseId", description = "The id of the course", example = "1234") @PathVariable final Long courseId) {
 		return ok(courseService.findCourseById(courseId));
 	}
-
 
 	@GetMapping(path = "/filters/{courseFilter}/values")
 	@Operation(summary = "Find available filter values", description = FIND_FILTER_VALUES_DESCRITPTION)

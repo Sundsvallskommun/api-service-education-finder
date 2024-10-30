@@ -1,29 +1,27 @@
 {
-	"courses": [
-		{
-			"id": 837,
-			"code": "INXACR",
-			"name": "Industritekniker Underhåll",
-			"provider": "Sundsvalls Kommun",
-			"providerUrl": "http://sundsvall.se/vuxenutbildning",
-			"level": "gymnasial vuxenutbildning",
-			"url": "https://sundsvall.alvis.se/hittakurser/kurs/15125",
-			"credits": 1400.0,
-			"scope": 100.0,
-			"studyLocation": "Härnösand",
-			"subjectCode": "INXACR",
-			"start": "2023-10-09",
-			"end": "2024-10-04",
-			"earliestApplication": "2023-05-24",
-			"latestApplication": "2023-09-10",
-			"information": "<![CDATA[ Industrin är i stort behov av kvalificerad arbetskraft. Vill du snabbt komma ut på arbetsmarknaden och arbeta i en spännande och omväxlande miljö? ]]>"
-		}
-	],
+	"courses": [{
+		"code": "INXACR",
+		"level": "gymnasial vuxenutbildning",
+		"start": "2023-10-09",
+		"earliestApplication": "2023-05-24",
+		"latestApplication": "2023-09-10",
+		"studyLocation": "Härnösand",
+		"providerUrl": "http://sundsvall.se/vuxenutbildning",
+		"url": "https://sundsvall.alvis.se/hittakurser/kurs/15125",
+		"provider": "Sundsvalls Kommun",
+		"credits": 1400,
+		"scope": 100,
+		"name": "Industritekniker Underhåll",
+		"end": "2024-10-04",
+		"information": "<![CDATA[ Industrin är i stort behov av kvalificerad arbetskraft. Vill du snabbt komma ut på arbetsmarknaden och arbeta i en spännande och omväxlande miljö? ]]>",
+		"id": 837,
+		"subjectCode": "INXACR"
+	}],
 	"_meta": {
-		"page": 0,
+		"totalRecords": 1,
 		"limit": 20,
 		"count": 1,
-		"totalRecords": 1,
-		"totalPages": 1
+		"totalPages": 1,
+		"page": 0
 	}
 }

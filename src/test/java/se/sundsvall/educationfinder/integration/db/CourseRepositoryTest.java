@@ -189,7 +189,6 @@ class CourseRepositoryTest {
 	private static Stream<Arguments> findAllByParametersAndCodeAndCodesArguments() {
 		return Stream.of(
 			Arguments.of(StatisticsParameters.create().withStartDate(LocalDate.of(2023, 10, 31)).withEndDate(LocalDate.of(2024, 6, 6)), 25, List.of("GRNSVAC", "GRNSVAD", "GRNSVEB", "RLXAAR")),
-			Arguments.of(StatisticsParameters.create().withStudyLocations(List.of("Sundsvall")), 12, List.of("ADMADM01", "ADMADM02", "ADMADM00S", "ADMPER0"))
-		);
+			Arguments.of(StatisticsParameters.create().withStudyLocations(List.of("Sundsvall")), 12, List.of("ADMADM01", "ADMADM02", "ADMADM00S", "ADMPER0")));
 	}
 }

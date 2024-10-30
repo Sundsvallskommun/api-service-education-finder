@@ -39,7 +39,9 @@ import se.sundsvall.educationfinder.integration.db.model.projection.LevelProject
 import se.sundsvall.educationfinder.integration.db.model.projection.ScopeProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.StudyLocationProjection;
 
-@ExtendWith(value = {MockitoExtension.class, ResourceLoaderExtension.class})
+@ExtendWith(value = {
+	MockitoExtension.class, ResourceLoaderExtension.class
+})
 class StatisticsServiceTest {
 
 	private final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());

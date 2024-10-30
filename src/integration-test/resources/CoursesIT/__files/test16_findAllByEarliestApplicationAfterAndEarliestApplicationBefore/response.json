@@ -1,29 +1,27 @@
 {
-	"courses": [
-		{
-			"id": 833,
-			"code": "INXABR",
-			"name": "Industriteknik CNC",
-			"provider": "Sundsvalls Kommun",
-			"providerUrl": "http://sundsvall.se/vuxenutbildning",
-			"level": "gymnasial vuxenutbildning",
-			"url": "https://sundsvall.alvis.se/hittakurser/kurs/70361",
-			"credits": 1500.0,
-			"scope": 100.0,
-			"studyLocation": "Sundsvall",
-			"subjectCode": "INXABR",
-			"start": "2023-10-16",
-			"end": "2024-12-13",
-			"earliestApplication": "2023-03-22",
-			"latestApplication": "2023-09-10",
-			"information": "<![CDATA[ Industriutbildning med gemensam ingång med möjlighet till fördjupning inom CNC - Skärande och bearbetning. ]]>"
-		}
-	],
+	"courses": [{
+		"code": "INXABR",
+		"level": "gymnasial vuxenutbildning",
+		"start": "2023-10-16",
+		"earliestApplication": "2023-03-22",
+		"latestApplication": "2023-09-10",
+		"studyLocation": "Sundsvall",
+		"providerUrl": "http://sundsvall.se/vuxenutbildning",
+		"url": "https://sundsvall.alvis.se/hittakurser/kurs/70361",
+		"provider": "Sundsvalls Kommun",
+		"credits": 1500,
+		"scope": 100,
+		"name": "Industriteknik CNC",
+		"end": "2024-12-13",
+		"information": "<![CDATA[ Industriutbildning med gemensam ingång med möjlighet till fördjupning inom CNC - Skärande och bearbetning. ]]>",
+		"id": 833,
+		"subjectCode": "INXABR"
+	}],
 	"_meta": {
-		"page": 0,
+		"totalRecords": 1,
 		"limit": 20,
 		"count": 1,
-		"totalRecords": 1,
-		"totalPages": 1
+		"totalPages": 1,
+		"page": 0
 	}
 }

@@ -228,10 +228,14 @@ public class Statistics {
 
 	@Override
 	public boolean equals(final Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
 		final Statistics that = (Statistics) o;
-		return onGoingCourses == that.onGoingCourses && plannedCourses == that.plannedCourses && finishedCourses == that.finishedCourses && availableSeats == that.availableSeats && totalCapacity == that.totalCapacity && Objects.equals(studyLocations, that.studyLocations) && Objects.equals(scopes, that.scopes) && Objects.equals(levels, that.levels) && Objects.equals(categories, that.categories) && Objects.equals(categoryIds, that.categoryIds) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate);
+		return onGoingCourses == that.onGoingCourses && plannedCourses == that.plannedCourses && finishedCourses == that.finishedCourses && availableSeats == that.availableSeats && totalCapacity == that.totalCapacity && Objects.equals(studyLocations,
+			that.studyLocations) && Objects.equals(scopes, that.scopes) && Objects.equals(levels, that.levels) && Objects.equals(categories, that.categories) && Objects.equals(categoryIds, that.categoryIds) && Objects.equals(startDate, that.startDate)
+			&& Objects.equals(endDate, that.endDate);
 	}
 
 	@Override
