@@ -5,9 +5,9 @@ info:
   license:
     name: MIT License
     url: https://opensource.org/licenses/MIT
-  version: "2.0"
+  version: "3.0"
 servers:
-  - url: http://localhost:56745
+  - url: http://localhost:55165
     description: Generated server url
 tags:
   - name: Courses
@@ -38,15 +38,15 @@ paths:
             description: List of categories
             example: Medicin och vård
           example: Medicin och vård
-        - name: categoryIds
+        - name: subCategories
           in: query
-          description: List of category IDs
+          description: List of sub categories
           required: false
           schema:
             type: string
-            description: List of category IDs
-            example: 5
-          example: 5
+            description: List of sub categories
+            example: PSYKOTERAPI
+          example: PSYKOTERAPI
         - name: levels
           in: query
           description: List of levels
@@ -108,6 +108,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Statistics"
+        "500":
+          description: Internal Server error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
         "400":
           description: Bad request
           content:
@@ -116,12 +122,6 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/Problem"
                   - $ref: "#/components/schemas/ConstraintViolationProblem"
-        "500":
-          description: Internal Server error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
   /{municipalityId}/statistics/filters/{statisticsFilter}/values:
     get:
       tags:
@@ -162,6 +162,12 @@ paths:
                 type: array
                 items:
                   type: string
+        "500":
+          description: Internal Server error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
         "400":
           description: Bad request
           content:
@@ -170,12 +176,6 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/Problem"
                   - $ref: "#/components/schemas/ConstraintViolationProblem"
-        "500":
-          description: Internal Server error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
   /{municipalityId}/courses:
     get:
       tags:
@@ -232,136 +232,11 @@ paths:
           schema:
             type: string
           example: 2281
-        - name: page
+        - name: parameters
           in: query
-          description: Zero-based page index (0..N)
-          required: false
+          required: true
           schema:
-            minimum: 0
-            type: integer
-            default: 0
-        - name: size
-          in: query
-          description: The size of the page to be returned
-          required: false
-          schema:
-            minimum: 1
-            type: integer
-            default: 20
-        - name: sort
-          in: query
-          description: "Sorting criteria in the format: property,(asc|desc). Default\
-          \ sort order is ascending. Multiple sort criteria are supported."
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-        - name: scope
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: studyLocation
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: level
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: code
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: name
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: provider
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: credits
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: start
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: startBefore
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: startAfter
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: end
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: endBefore
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: endAfter
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: earliestApplication
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: earliestApplicationBefore
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: earliestApplicationAfter
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: latestApplication
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: latestApplicationBefore
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: latestApplicationAfter
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: information
-          in: query
-          required: false
-          schema:
-            type: string
-        - name: searchString
-          in: query
-          required: false
-          schema:
-            type: string
+            $ref: "#/components/schemas/CourseParameters"
       responses:
         "404":
           description: Not found
@@ -378,6 +253,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/PagedCoursesResponse"
+        "500":
+          description: Internal Server error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
         "400":
           description: Bad request
           content:
@@ -386,12 +267,6 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/Problem"
                   - $ref: "#/components/schemas/ConstraintViolationProblem"
-        "500":
-          description: Internal Server error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
   /{municipalityId}/courses/{courseId}:
     get:
       tags:
@@ -430,6 +305,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Course"
+        "500":
+          description: Internal Server error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
         "400":
           description: Bad request
           content:
@@ -438,12 +319,6 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/Problem"
                   - $ref: "#/components/schemas/ConstraintViolationProblem"
-        "500":
-          description: Internal Server error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
   /{municipalityId}/courses/filters/{courseFilter}/values:
     get:
       tags:
@@ -486,6 +361,12 @@ paths:
                 type: array
                 items:
                   type: string
+        "500":
+          description: Internal Server error
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
         "400":
           description: Bad request
           content:
@@ -494,12 +375,6 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/Problem"
                   - $ref: "#/components/schemas/ConstraintViolationProblem"
-        "500":
-          description: Internal Server error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
   /api-docs:
     get:
       tags:
@@ -533,9 +408,9 @@ components:
             type: object
         status:
           $ref: "#/components/schemas/StatusType"
-        detail:
-          type: string
         title:
+          type: string
+        detail:
           type: string
     StatusType:
       type: object
@@ -668,9 +543,9 @@ components:
             type: object
         status:
           $ref: "#/components/schemas/StatusType"
-        detail:
-          type: string
         title:
+          type: string
+        detail:
           type: string
         suppressed:
           type: array
@@ -777,7 +652,7 @@ components:
             type: string
             description: Categories used for filtering
             readOnly: true
-        categoryIds:
+        subCategories:
           type: array
           description: Category ids used for filtering
           readOnly: true
@@ -804,10 +679,122 @@ components:
         - level
         - scope
         - category
-        - categoryId
+        - subcategory
         - studyLocation
         - startDate
         - endDate
+    CourseParameters:
+      type: object
+      properties:
+        page:
+          minimum: 1
+          type: integer
+          description: Page number
+          format: int32
+          example: 1
+          default: 1
+        limit:
+          minimum: 1
+          type: integer
+          description: Result size per page. Maximum allowed value is dynamically
+            configured
+          format: int32
+          example: 15
+        sortBy:
+          type: array
+          items:
+            type: string
+            description: The properties to sort on
+            example: propertyName
+        sortDirection:
+          $ref: "#/components/schemas/Direction"
+        code:
+          type: string
+          description: Course code
+          example: KEMKEM02
+        category:
+          type: string
+          description: Category
+          example: Naturvetenskap
+        subcategory:
+          type: string
+          description: Subcategory
+          example: Kemi
+        name:
+          type: string
+          description: Name of the course
+          example: Etnicitet och kulturmöten
+        provider:
+          type: string
+          description: Provider of the course
+          example: Sundsvalls Kommun
+        credits:
+          type: string
+          description: Course credits
+          example: "100"
+        information:
+          type: string
+          description: Information about the course
+          example: This is course information
+        languageOfInstruction:
+          type: string
+          description: Language of instruction
+          example: Swedish
+        searchString:
+          type: string
+          description: Search string
+          example: searchString
+        start:
+          type: string
+          description: Start date of the course
+          format: date
+          example: 2022-12-31
+        end:
+          type: string
+          description: End date of the course
+          format: date
+          example: 2022-12-31
+        earliestApplication:
+          type: string
+          description: Earliest application date
+          format: date
+          example: 2022-12-31
+        latestApplication:
+          type: string
+          description: Latest application date
+          format: date
+          example: 2022-12-31
+        scopes:
+          type: array
+          description: Scope of the course
+          example: 75
+          items:
+            type: string
+            description: Scope of the course
+            example: "75"
+        studyLocations:
+          type: array
+          description: Study location
+          example: Sundsvall
+          items:
+            type: string
+            description: Study location
+            example: Sundsvall
+        levels:
+          type: array
+          description: Level of the course
+          example: gymnasial vuxenutbildning
+          items:
+            type: string
+            description: Level of the course
+            example: gymnasial vuxenutbildning
+    Direction:
+      type: string
+      description: The sort order direction
+      example: ASC
+      enum:
+        - ASC
+        - DESC
     Course:
       type: object
       properties:
@@ -875,6 +862,21 @@ components:
           format: int32
           readOnly: true
           example: 10
+        category:
+          type: string
+          description: Course category
+          readOnly: true
+          example: "Ekonomi, marknadsföring och administration"
+        subcategory:
+          type: string
+          description: Course subcategory
+          readOnly: true
+          example: Administration
+        languageOfInstruction:
+          type: string
+          description: Language of instruction
+          readOnly: true
+          example: Swedish
         start:
           type: string
           description: Course start date
@@ -963,6 +965,8 @@ components:
       description: Course filter model
       enum:
         - credits
+        - category
+        - subcategory
         - provider
         - level
         - scope

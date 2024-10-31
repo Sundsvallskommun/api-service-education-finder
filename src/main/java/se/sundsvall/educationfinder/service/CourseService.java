@@ -1,6 +1,7 @@
 package se.sundsvall.educationfinder.service;
 
 import static org.zalando.problem.Status.NOT_FOUND;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.CATEGORY;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.CREDITS;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.LEVEL;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.PROVIDER;
@@ -14,21 +15,22 @@ import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.zalando.problem.Problem;
 
 import se.sundsvall.educationfinder.api.model.Course;
+import se.sundsvall.educationfinder.api.model.CourseParameters;
 import se.sundsvall.educationfinder.api.model.PagedCoursesResponse;
 import se.sundsvall.educationfinder.api.model.enums.CourseFilter;
 import se.sundsvall.educationfinder.integration.db.CourseRepository;
+import se.sundsvall.educationfinder.integration.db.model.projection.CategoryProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.CreditsProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.LevelProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.ProviderProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.ScopeProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.StudyLocationProjection;
-import se.sundsvall.educationfinder.integration.db.specification.CourseSpecification;
 
 @Service
 public class CourseService {
@@ -39,8 +41,8 @@ public class CourseService {
 		this.courseRepository = courseRepository;
 	}
 
-	public PagedCoursesResponse find(final CourseSpecification specification, final Pageable pageable) {
-		return toPagedCoursesResponse(courseRepository.findAll(specification, pageable));
+	public PagedCoursesResponse find(final CourseParameters parameters) {
+		return toPagedCoursesResponse(courseRepository.findAllByCourseParameters(parameters, PageRequest.of(parameters.getPage() - 1, parameters.getLimit(), parameters.sort())));
 	}
 
 	public Course findCourseById(final Long id) {
@@ -52,6 +54,28 @@ public class CourseService {
 	@Cacheable("course-filters")
 	public List<String> findFilterValues(final CourseFilter courseFilter) {
 		return switch (courseFilter) {
+			case CATEGORY -> courseRepository.findDistinctBy(CategoryProjection.class, Sort.by(CATEGORY)).stream()
+				.filter(Objects::nonNull)
+				.map(CategoryProjection::getCategory)
+				.map(category -> {
+					var parts = category.split(" - ", 2);
+					return parts[0].trim();
+				})
+				.distinct()
+				.filter(StringUtils::isNotEmpty)
+				.map(StringUtils::upperCase)
+				.toList();
+			case SUBCATEGORY -> courseRepository.findDistinctBy(CategoryProjection.class, Sort.by(CATEGORY)).stream()
+				.filter(Objects::nonNull)
+				.map(CategoryProjection::getCategory)
+				.map(category -> {
+					var parts = category.split(" - ", 2);
+					return parts.length > 1 ? parts[1].trim() : "";
+				})
+				.distinct()
+				.filter(StringUtils::isNotEmpty)
+				.map(StringUtils::upperCase)
+				.toList();
 			case STUDY_LOCATION -> courseRepository.findDistinctBy(StudyLocationProjection.class, Sort.by(STUDY_LOCATION)).stream()
 				.filter(Objects::nonNull)
 				.map(StudyLocationProjection::getStudyLocation)

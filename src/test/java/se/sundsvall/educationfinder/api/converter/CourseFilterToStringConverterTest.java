@@ -29,6 +29,6 @@ class CourseFilterToStringConverterTest {
 			.toList();
 
 		// Assert
-		assertThat(result).containsExactlyInAnyOrder("credits", "provider", "level", "scope", "studyLocation");
+		assertThat(result).containsExactlyInAnyOrder("credits", "provider", "category", "subcategory", "level", "scope", "studyLocation");
 	}
 }

@@ -6,6 +6,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.data.domain.Sort.Direction.DESC;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.CATEGORY;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.CREDITS;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.LEVEL;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.PROVIDER;
@@ -27,24 +28,24 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
+import se.sundsvall.educationfinder.api.model.CourseParameters;
 import se.sundsvall.educationfinder.api.model.enums.CourseFilter;
 import se.sundsvall.educationfinder.integration.db.CourseRepository;
 import se.sundsvall.educationfinder.integration.db.model.CourseEntity;
+import se.sundsvall.educationfinder.integration.db.model.projection.CategoryProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.CreditsProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.LevelProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.ProviderProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.ScopeProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.StudyLocationProjection;
-import se.sundsvall.educationfinder.integration.db.specification.CourseSpecification;
 
 @ExtendWith(MockitoExtension.class)
 class CourseServiceTest {
 
-	@Mock
-	private Page<CourseEntity> pageMock;
+	private static final String SUBCATEGORY = "subcategory";
 
 	@Mock
-	private CourseSpecification courseSpecificationMock;
+	private Page<CourseEntity> pageMock;
 
 	@Mock
 	private CourseRepository courseRepositoryMock;
@@ -55,6 +56,8 @@ class CourseServiceTest {
 	private static Stream<Arguments> findFilterValuesProvider() {
 		return Stream.of(
 			Arguments.of(CourseFilter.STUDY_LOCATION, StudyLocationProjection.class, STUDY_LOCATION),
+			Arguments.of(CourseFilter.CATEGORY, CategoryProjection.class, CATEGORY),
+			Arguments.of(CourseFilter.SUBCATEGORY, CategoryProjection.class, CATEGORY),
 			Arguments.of(CourseFilter.PROVIDER, ProviderProjection.class, PROVIDER),
 			Arguments.of(CourseFilter.LEVEL, LevelProjection.class, LEVEL),
 			Arguments.of(CourseFilter.SCOPE, ScopeProjection.class, SCOPE),
@@ -63,20 +66,23 @@ class CourseServiceTest {
 
 	@Test
 	void find() {
-
-		// Arrange
-		final var pageRequest = PageRequest.of(0, 10, Sort.by(DESC, "name"));
+		var courseParameters = CourseParameters.create()
+			.withCategory("category")
+			.withLimit(10)
+			.withPage(1)
+			.withSortBy(List.of("name"))
+			.withSortDirection(DESC);
+		var pageRequest = PageRequest.of(courseParameters.getPage() - 1, courseParameters.getLimit(), courseParameters.sort());
 
 		when(pageMock.getContent()).thenReturn(List.of(CourseEntity.create()));
 		when(pageMock.getPageable()).thenReturn(pageRequest);
-		when(courseRepositoryMock.findAll(any(CourseSpecification.class), eq(pageRequest))).thenReturn(pageMock);
+		when(courseRepositoryMock.findAllByCourseParameters(any(CourseParameters.class), eq(pageRequest))).thenReturn(pageMock);
 
-		// Act
-		final var result = courseService.find(courseSpecificationMock, pageRequest);
+		var result = courseService.find(courseParameters);
 
-		// Assert
 		assertThat(result).isNotNull();
-		verify(courseRepositoryMock).findAll(courseSpecificationMock, pageRequest);
+		assertThat(result.getCourses()).hasSize(1);
+		verify(courseRepositoryMock).findAllByCourseParameters(courseParameters, pageRequest);
 	}
 
 	@ParameterizedTest
@@ -85,7 +91,6 @@ class CourseServiceTest {
 
 		courseService.findFilterValues(courseFilter);
 
-		// Assert
 		verify(courseRepositoryMock).findDistinctBy(projectionClass, Sort.by(attributeName));
 	}
 

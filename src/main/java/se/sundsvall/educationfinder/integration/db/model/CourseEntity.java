@@ -72,6 +72,12 @@ public class CourseEntity {
 	@Column(name = "RekommenderadInformation", insertable = false, updatable = false)
 	private String information;
 
+	@Column(name = "Intresseomrade_kategori")
+	private String category;
+
+	@Column(name = "Undervisningssprak")
+	private String languageOfInstruction;
+
 	public static CourseEntity create() {
 		return new CourseEntity();
 	}
@@ -86,6 +92,32 @@ public class CourseEntity {
 
 	public CourseEntity withId(Long id) {
 		this.id = id;
+		return this;
+	}
+
+	public String getLanguageOfInstruction() {
+		return languageOfInstruction;
+	}
+
+	public void setLanguageOfInstruction(String languageOfInstruction) {
+		this.languageOfInstruction = languageOfInstruction;
+	}
+
+	public CourseEntity withLanguageOfInstruction(String languageOfInstruction) {
+		this.languageOfInstruction = languageOfInstruction;
+		return this;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public CourseEntity withCategory(String category) {
+		this.category = category;
 		return this;
 	}
 
@@ -298,30 +330,45 @@ public class CourseEntity {
 	}
 
 	@Override
-	public int hashCode() {
-		return Objects.hash(code, credits, earliestApplication, end, id, information, latestApplication, level, name, numberOfSeats, provider, providerUrl, scope, start, studyLocation, subjectCode, url);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!(obj instanceof final CourseEntity other)) {
-			return false;
-		}
-		return Objects.equals(code, other.code) && Objects.equals(credits, other.credits) && Objects.equals(earliestApplication, other.earliestApplication) && Objects.equals(end, other.end) && Objects.equals(id, other.id) && Objects.equals(information,
-			other.information) && Objects.equals(latestApplication, other.latestApplication) && Objects.equals(level, other.level) && Objects.equals(name, other.name) && Objects.equals(numberOfSeats, other.numberOfSeats) && Objects.equals(provider,
-				other.provider) && Objects.equals(providerUrl, other.providerUrl) && Objects.equals(scope, other.scope) && Objects.equals(start, other.start) && Objects.equals(studyLocation, other.studyLocation) && Objects.equals(subjectCode,
-					other.subjectCode) && Objects.equals(url, other.url);
-	}
-
-	@Override
 	public String toString() {
-		final StringBuilder builder = new StringBuilder();
-		builder.append("CourseEntity [id=").append(id).append(", code=").append(code).append(", name=").append(name).append(", provider=").append(provider).append(", providerUrl=").append(providerUrl).append(", level=").append(level).append(", url=")
-			.append(url).append(", credits=").append(credits).append(", scope=").append(scope).append(", studyLocation=").append(studyLocation).append(", subjectCode=").append(subjectCode).append(", numberOfSeats=").append(numberOfSeats).append(", start=")
-			.append(start).append(", end=").append(end).append(", earliestApplication=").append(earliestApplication).append(", latestApplication=").append(latestApplication).append(", information=").append(information).append("]");
-		return builder.toString();
+		return "CourseEntity{" +
+			"id=" + id +
+			", code='" + code + '\'' +
+			", name='" + name + '\'' +
+			", provider='" + provider + '\'' +
+			", providerUrl='" + providerUrl + '\'' +
+			", level='" + level + '\'' +
+			", url='" + url + '\'' +
+			", credits=" + credits +
+			", scope=" + scope +
+			", studyLocation='" + studyLocation + '\'' +
+			", subjectCode='" + subjectCode + '\'' +
+			", numberOfSeats=" + numberOfSeats +
+			", start=" + start +
+			", end=" + end +
+			", earliestApplication=" + earliestApplication +
+			", latestApplication=" + latestApplication +
+			", information='" + information + '\'' +
+			", category='" + category + '\'' +
+			", languageOfInstruction='" + languageOfInstruction + '\'' +
+			'}';
+	}
+
+	@Override
+	public boolean equals(final Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		final CourseEntity that = (CourseEntity) o;
+		return Objects.equals(id, that.id) && Objects.equals(code, that.code) && Objects.equals(name, that.name) && Objects.equals(provider, that.provider) && Objects.equals(providerUrl, that.providerUrl) && Objects.equals(level, that.level) && Objects
+			.equals(url, that.url) && Objects.equals(credits, that.credits) && Objects.equals(scope, that.scope) && Objects.equals(studyLocation, that.studyLocation) && Objects.equals(subjectCode, that.subjectCode) && Objects.equals(numberOfSeats,
+				that.numberOfSeats) && Objects.equals(start, that.start) && Objects.equals(end, that.end) && Objects.equals(earliestApplication, that.earliestApplication) && Objects.equals(latestApplication, that.latestApplication) && Objects.equals(
+					information, that.information) && Objects.equals(category, that.category) && Objects.equals(languageOfInstruction, that.languageOfInstruction);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, code, name, provider, providerUrl, level, url, credits, scope, studyLocation, subjectCode, numberOfSeats, start, end, earliestApplication, latestApplication, information, category, languageOfInstruction);
 	}
 }

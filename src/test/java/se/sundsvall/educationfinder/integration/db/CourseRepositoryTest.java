@@ -10,6 +10,7 @@ import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.ST
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
@@ -53,9 +54,22 @@ class CourseRepositoryTest {
 		final var result = courseRepository.findDistinctBy(StudyLocationProjection.class, Sort.by(STUDY_LOCATION));
 
 		// Assert
-		assertThat(result)
+		var filteredResult = result.stream().filter(Objects::nonNull).toList();
+		assertThat(filteredResult)
 			.extracting(StudyLocationProjection::getStudyLocation)
-			.containsExactly("Härnösand", "Kramfors", "Sundsvall", "Örnsköldsvik", "Östersund");
+			.containsExactly("Boden",
+				"Fränsta",
+				"Helsingborg",
+				"Härnösand",
+				"Kramfors",
+				"Mellansel",
+				"Nyland",
+				"Skellefteå",
+				"Sollefteå",
+				"Sundsvall",
+				"Umeå",
+				"Örnsköldsvik",
+				"Östersund");
 	}
 
 	@Test
@@ -67,13 +81,28 @@ class CourseRepositoryTest {
 		// Assert
 		assertThat(result)
 			.extracting(ProviderProjection::getProvider)
-			.containsExactly(
+			.containsExactly("Blue Peak AB",
+				"Föreningen Mellansels folkhögskola",
+				"Hermods AB Umeå",
+				"Hola folkhögskola",
+				"Härnösands folkhögskola",
 				"Härnösands kommun, Yrkeshögskolan",
+				"ITH, Institutet För Tillämpad Hydraulik",
+				"Järnakademien Ångermanland",
+				"Klart Skepp Marinteknik AB",
 				"Kramfors kommun, Yrkeshögskolan Höga kusten",
+				"Lexicon Yrkeshögskola AB",
+				"Mellansels folkhögskola",
 				"One Academy AB",
+				"ProTrain Utbildning AB",
+				"Sollefteå kommun - Reveljen",
 				"Sundsvalls Kommun",
 				"Sundsvalls kommun, Vuxenutbildningen",
-				"YH Akademin AB");
+				"TCC Sverige AB",
+				"YH Akademin AB",
+				"Ålsta folkhögskola",
+				"Ålsta folkhögskola, filial Sundsvall",
+				"Örnsköldsviks folkhögskola");
 	}
 
 	@Test
@@ -83,9 +112,10 @@ class CourseRepositoryTest {
 		final var result = courseRepository.findDistinctBy(LevelProjection.class, Sort.by(LEVEL));
 
 		// Assert
-		assertThat(result)
+		var filteredResult = result.stream().filter(Objects::nonNull).toList();
+		assertThat(filteredResult)
 			.extracting(LevelProjection::getLevel)
-			.containsExactly(
+			.containsExactly("folkhögskola",
 				"grundläggande vuxenutbildning",
 				"gymnasial vuxenutbildning",
 				"Kommunal vuxenutbildning som anpassad utbildning på grundläggande nivå",
@@ -100,7 +130,8 @@ class CourseRepositoryTest {
 		final var result = courseRepository.findDistinctBy(ScopeProjection.class, Sort.by(SCOPE));
 
 		// Assert
-		assertThat(result)
+		var filteredResult = result.stream().filter(Objects::nonNull).toList();
+		assertThat(filteredResult)
 			.extracting(ScopeProjection::getScope)
 			.containsExactly("25.0", "50.0", "75.0", "100.0");
 	}
@@ -112,11 +143,13 @@ class CourseRepositoryTest {
 		final var result = courseRepository.findDistinctBy(CreditsProjection.class, Sort.by(CREDITS));
 
 		// Assert
-		assertThat(result)
+		var filteredResult = result.stream().filter(Objects::nonNull).toList();
+		assertThat(filteredResult)
 			.extracting(CreditsProjection::getCredits)
-			.containsExactly(
-				"0.0",
+			.containsExactly("0.0",
+				"15.0",
 				"50.0",
+				"60.0",
 				"100.0",
 				"150.0",
 				"200.0",
@@ -129,6 +162,7 @@ class CourseRepositoryTest {
 				"450.0",
 				"500.0",
 				"600.0",
+				"700.0",
 				"1000.0",
 				"1200.0",
 				"1400.0",
@@ -150,8 +184,8 @@ class CourseRepositoryTest {
 		assertThat(result).isNotNull();
 		assertThat(result.getPageable().getPageSize()).isEqualTo(20);
 		assertThat(result.getNumberOfElements()).isEqualTo(20);
-		assertThat(result.getTotalElements()).isEqualTo(843);
-		assertThat(result.getTotalPages()).isEqualTo(43);
+		assertThat(result.getTotalElements()).isEqualTo(1339);
+		assertThat(result.getTotalPages()).isEqualTo(67);
 		assertThat(result.getContent())
 			.hasSize(20)
 			.extracting(CourseEntity::getStudyLocation)
@@ -159,36 +193,21 @@ class CourseRepositoryTest {
 	}
 
 	@ParameterizedTest
-	@MethodSource("findAllByParametersAndCodeArguments")
-	void findAllByParametersAndCode(final StatisticsParameters parameters, final Integer matches) {
+	@MethodSource("findAllByParametersArguments")
+	void findAllByParameters(final StatisticsParameters parameters, final Integer matches) {
 
-		var result = courseRepository.findAllByParametersAndCode(parameters, null);
-
-		assertThat(result).hasSize(matches);
-	}
-
-	@ParameterizedTest
-	@MethodSource("findAllByParametersAndCodeAndCodesArguments")
-	void findAllByParametersAndCodeAndCodes(final StatisticsParameters parameters, final Integer matches, final List<String> codes) {
-
-		var result = courseRepository.findAllByParametersAndCode(parameters, codes);
+		var result = courseRepository.findAllByParameters(parameters);
 
 		assertThat(result).hasSize(matches);
 	}
 
-	private static Stream<Arguments> findAllByParametersAndCodeArguments() {
+	private static Stream<Arguments> findAllByParametersArguments() {
 		return Stream.of(
-			Arguments.of(StatisticsParameters.create().withStartDate(LocalDate.of(2024, 6, 1)).withEndDate(LocalDate.of(2024, 12, 1)), 39),
-			Arguments.of(StatisticsParameters.create().withStartDate(LocalDate.of(2024, 1, 1)).withEndDate(LocalDate.of(2024, 12, 1)).withStudyLocations(List.of("Sundsvall")), 296),
-			Arguments.of(StatisticsParameters.create().withStartDate(LocalDate.of(2023, 10, 31)).withEndDate(LocalDate.of(2024, 12, 8)), 811),
-			Arguments.of(StatisticsParameters.create().withStartDate(LocalDate.of(2023, 10, 31)).withEndDate(LocalDate.of(2024, 12, 8)).withStudyLocations(List.of("Kramfors")), 8),
-			Arguments.of(StatisticsParameters.create().withStudyLocations(List.of("Sundsvall", "Kramfors")), 853),
-			Arguments.of(StatisticsParameters.create().withStartDate(LocalDate.of(2023, 1, 1)).withEndDate(LocalDate.of(2021, 12, 31)), 0));
-	}
-
-	private static Stream<Arguments> findAllByParametersAndCodeAndCodesArguments() {
-		return Stream.of(
-			Arguments.of(StatisticsParameters.create().withStartDate(LocalDate.of(2023, 10, 31)).withEndDate(LocalDate.of(2024, 6, 6)), 25, List.of("GRNSVAC", "GRNSVAD", "GRNSVEB", "RLXAAR")),
-			Arguments.of(StatisticsParameters.create().withStudyLocations(List.of("Sundsvall")), 12, List.of("ADMADM01", "ADMADM02", "ADMADM00S", "ADMPER0")));
+			Arguments.of(StatisticsParameters.create().withStartDate(LocalDate.of(2020, 6, 1)).withEndDate(LocalDate.of(2024, 12, 1)), 1689),
+			Arguments.of(StatisticsParameters.create().withStartDate(LocalDate.of(2020, 1, 1)).withEndDate(LocalDate.of(2024, 12, 1)).withStudyLocations(List.of("Sundsvall")), 1123),
+			Arguments.of(StatisticsParameters.create().withStartDate(LocalDate.of(2020, 10, 31)).withEndDate(LocalDate.of(2024, 12, 8)), 1689),
+			Arguments.of(StatisticsParameters.create().withStartDate(LocalDate.of(2020, 10, 31)).withEndDate(LocalDate.of(2024, 12, 8)).withStudyLocations(List.of("Kramfors")), 10),
+			Arguments.of(StatisticsParameters.create().withStudyLocations(List.of("Sundsvall", "Kramfors")), 1287),
+			Arguments.of(StatisticsParameters.create().withStartDate(LocalDate.of(2020, 1, 1)).withEndDate(LocalDate.of(2021, 12, 31)), 0));
 	}
 }

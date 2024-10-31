@@ -10,12 +10,11 @@
 	</parent>
 	<groupId>se.sundsvall</groupId>
 	<artifactId>api-service-education-finder</artifactId>
-	<version>2.0</version>
+	<version>3.0</version>
 	<name>api-service-education-finder</name>
 	<properties>
 		<!-- Service properties -->
 		<generated-sources-path>${project.build.directory}/generated-sources</generated-sources-path>
-		<specification-arg-resolver.version>3.1.0</specification-arg-resolver.version>
 		<guava.version>33.3.1-jre</guava.version>
 	</properties>
 	<dependencies>
@@ -39,11 +38,6 @@
 			<groupId>org.hibernate.orm</groupId>
 			<artifactId>hibernate-jpamodelgen</artifactId>
 			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>net.kaczmarzyk</groupId>
-			<artifactId>specification-arg-resolver</artifactId>
-			<version>${specification-arg-resolver.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

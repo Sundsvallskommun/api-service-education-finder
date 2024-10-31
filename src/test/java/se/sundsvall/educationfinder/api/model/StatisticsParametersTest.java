@@ -38,7 +38,7 @@ class StatisticsParametersTest {
 	@Test
 	void testBuilderMethods() {
 		var categories = List.of("category");
-		var categoryIds = List.of("categoryId");
+		var subcategories = List.of("subcategory");
 		var levels = List.of("level");
 		var studyLocations = List.of("studyLocation");
 		var scopes = List.of("scope");
@@ -47,20 +47,20 @@ class StatisticsParametersTest {
 
 		var bean = StatisticsParameters.create()
 			.withCategories(categories)
-			.withCategoryIds(categoryIds)
 			.withLevels(levels)
 			.withStudyLocations(studyLocations)
 			.withScopes(scopes)
+			.withSubCategories(subcategories)
 			.withStartDate(startDate)
 			.withEndDate(endDate);
 
 		Assertions.assertThat(bean).isNotNull().hasNoNullFieldsOrProperties();
 		Assertions.assertThat(bean.getCategories()).isEqualTo(categories);
-		Assertions.assertThat(bean.getCategoryIds()).isEqualTo(categoryIds);
 		Assertions.assertThat(bean.getLevels()).isEqualTo(levels);
 		Assertions.assertThat(bean.getStudyLocations()).isEqualTo(studyLocations);
 		Assertions.assertThat(bean.getStartDate()).isEqualTo(startDate);
 		Assertions.assertThat(bean.getEndDate()).isEqualTo(endDate);
+		Assertions.assertThat(bean.getSubCategories()).isEqualTo(subcategories);
 		Assertions.assertThat(bean.getScopes()).isEqualTo(scopes);
 	}
 

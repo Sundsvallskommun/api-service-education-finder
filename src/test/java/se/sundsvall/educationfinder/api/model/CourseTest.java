@@ -54,6 +54,9 @@ class CourseTest {
 		final var studyLocation = "studyLocation";
 		final var subjectCode = "subjectCode";
 		final var url = "url";
+		final var category = "Ekonomi, marknadsföring och administration";
+		final var subcategory = "Administration";
+		final var languageOfInstruction = "Svenska";
 
 		final var bean = Course.create()
 			.withId(id)
@@ -72,6 +75,9 @@ class CourseTest {
 			.withStart(start)
 			.withStudyLocation(studyLocation)
 			.withSubjectCode(subjectCode)
+			.withCategory(category)
+			.withSubcategory(subcategory)
+			.withLanguageOfInstruction(languageOfInstruction)
 			.withUrl(url);
 
 		assertThat(bean).isNotNull().hasNoNullFieldsOrProperties();
@@ -91,6 +97,9 @@ class CourseTest {
 		assertThat(bean.getStart()).isEqualTo(start);
 		assertThat(bean.getStudyLocation()).isEqualTo(studyLocation);
 		assertThat(bean.getSubjectCode()).isEqualTo(subjectCode);
+		assertThat(bean.getCategory()).isEqualTo(category);
+		assertThat(bean.getSubcategory()).isEqualTo(subcategory);
+		assertThat(bean.getLanguageOfInstruction()).isEqualTo(languageOfInstruction);
 		assertThat(bean.getUrl()).isEqualTo(url);
 	}
 

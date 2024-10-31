@@ -55,6 +55,8 @@ class CourseEntityTest {
 		final var studyLocation = "studyLocation";
 		final var subjectCode = "subjectCode";
 		final var url = "url";
+		final var category = "category";
+		final var languageOfInstruction = "language";
 
 		final var bean = CourseEntity.create()
 			.withCode(code)
@@ -73,6 +75,8 @@ class CourseEntityTest {
 			.withStart(start)
 			.withStudyLocation(studyLocation)
 			.withSubjectCode(subjectCode)
+			.withCategory(category)
+			.withLanguageOfInstruction(languageOfInstruction)
 			.withUrl(url);
 
 		assertThat(bean).isNotNull().hasNoNullFieldsOrProperties();
@@ -92,6 +96,8 @@ class CourseEntityTest {
 		assertThat(bean.getStart()).isEqualTo(start);
 		assertThat(bean.getStudyLocation()).isEqualTo(studyLocation);
 		assertThat(bean.getSubjectCode()).isEqualTo(subjectCode);
+		assertThat(bean.getCategory()).isEqualTo(category);
+		assertThat(bean.getLanguageOfInstruction()).isEqualTo(languageOfInstruction);
 		assertThat(bean.getUrl()).isEqualTo(url);
 	}
 

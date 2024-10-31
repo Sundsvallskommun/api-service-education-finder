@@ -21,36 +21,22 @@ import se.sundsvall.educationfinder.integration.db.model.CourseEntity;
 class CourseMapperTest {
 
 	private static final String CODE = "code";
-
 	private static final BigDecimal CREDITS = new BigDecimal("50.0");
-
 	private static final String PROVIDER = "provider";
-
 	private static final LocalDate START = LocalDate.now();
-
 	private static final LocalDate END = LocalDate.now().plusDays(1);
-
 	private static final LocalDate EARLIEST_APPLICATION = LocalDate.now().plusDays(2);
-
 	private static final LocalDate LATEST_APPLICATION = LocalDate.now().plusDays(1);
-
 	private static final String LEVEL = "level";
-
 	private static final String NAME = "name";
-
 	private static final Integer NUMBER_OF_SEATS = 1;
-
 	private static final String PROVIDER_URL = "providerUrl";
-
 	private static final String INFORMATION = "information";
-
 	private static final BigDecimal SCOPE = new BigDecimal("100.0");
-
 	private static final String STUDY_LOCATION = "studyLocation";
-
 	private static final String SUBJECT_CODE = "subjectCode";
-
 	private static final String URL = "url";
+	private static final String CATEGORY = "Ekonomi, marknadsföring och administration - Administration";
 
 	@Test
 	void toCourse() {
@@ -80,6 +66,8 @@ class CourseMapperTest {
 				.withStart(START)
 				.withStudyLocation(STUDY_LOCATION)
 				.withSubjectCode(SUBJECT_CODE)
+				.withCategory("Ekonomi, marknadsföring och administration")
+				.withSubcategory("Administration")
 				.withUrl(URL));
 	}
 
@@ -98,25 +86,25 @@ class CourseMapperTest {
 		final var result = CourseMapper.toCourseList(entityList);
 
 		// Assert
-		assertThat(result)
-			.isNotNull()
-			.containsExactly(Course.create()
-				.withCode(CODE)
-				.withCredits(CREDITS.doubleValue())
-				.withEarliestApplication(EARLIEST_APPLICATION)
-				.withProvider(PROVIDER)
-				.withEnd(END)
-				.withLatestApplication(LATEST_APPLICATION)
-				.withLevel(LEVEL)
-				.withName(NAME)
-				.withNumberOfSeats(NUMBER_OF_SEATS)
-				.withProviderUrl(PROVIDER_URL)
-				.withInformation(INFORMATION)
-				.withScope(SCOPE.doubleValue())
-				.withStart(START)
-				.withStudyLocation(STUDY_LOCATION)
-				.withSubjectCode(SUBJECT_CODE)
-				.withUrl(URL));
+		assertThat(result).contains(Course.create()
+			.withCode(CODE)
+			.withCredits(CREDITS.doubleValue())
+			.withEarliestApplication(EARLIEST_APPLICATION)
+			.withProvider(PROVIDER)
+			.withEnd(END)
+			.withLatestApplication(LATEST_APPLICATION)
+			.withLevel(LEVEL)
+			.withName(NAME)
+			.withNumberOfSeats(NUMBER_OF_SEATS)
+			.withProviderUrl(PROVIDER_URL)
+			.withInformation(INFORMATION)
+			.withScope(SCOPE.doubleValue())
+			.withStart(START)
+			.withStudyLocation(STUDY_LOCATION)
+			.withSubjectCode(SUBJECT_CODE)
+			.withCategory("Ekonomi, marknadsföring och administration")
+			.withSubcategory("Administration")
+			.withUrl(URL));
 	}
 
 	@Test
@@ -165,6 +153,8 @@ class CourseMapperTest {
 				.withStart(START)
 				.withStudyLocation(STUDY_LOCATION)
 				.withSubjectCode(SUBJECT_CODE)
+				.withCategory("Ekonomi, marknadsföring och administration")
+				.withSubcategory("Administration")
 				.withUrl(URL));
 	}
 
@@ -190,6 +180,7 @@ class CourseMapperTest {
 			.withStart(START)
 			.withStudyLocation(STUDY_LOCATION)
 			.withSubjectCode(SUBJECT_CODE)
+			.withCategory(CATEGORY)
 			.withUrl(URL);
 	}
 
