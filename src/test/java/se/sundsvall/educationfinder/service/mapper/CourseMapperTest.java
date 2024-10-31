@@ -85,7 +85,6 @@ class CourseMapperTest {
 		// Act
 		final var result = CourseMapper.toCourseList(entityList);
 
-
 		// Assert
 		assertThat(result).contains(Course.create()
 			.withCode(CODE)

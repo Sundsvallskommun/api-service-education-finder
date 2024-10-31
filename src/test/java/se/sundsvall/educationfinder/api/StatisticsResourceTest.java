@@ -26,7 +26,6 @@ import org.springframework.util.MultiValueMap;
 import se.sundsvall.educationfinder.Application;
 import se.sundsvall.educationfinder.api.model.Statistics;
 
-
 @SpringBootTest(classes = Application.class, webEnvironment = RANDOM_PORT)
 @ActiveProfiles("junit")
 class StatisticsResourceTest {

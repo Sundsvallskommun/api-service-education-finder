@@ -356,10 +356,15 @@ public class CourseEntity {
 
 	@Override
 	public boolean equals(final Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
 		final CourseEntity that = (CourseEntity) o;
-		return Objects.equals(id, that.id) && Objects.equals(code, that.code) && Objects.equals(name, that.name) && Objects.equals(provider, that.provider) && Objects.equals(providerUrl, that.providerUrl) && Objects.equals(level, that.level) && Objects.equals(url, that.url) && Objects.equals(credits, that.credits) && Objects.equals(scope, that.scope) && Objects.equals(studyLocation, that.studyLocation) && Objects.equals(subjectCode, that.subjectCode) && Objects.equals(numberOfSeats, that.numberOfSeats) && Objects.equals(start, that.start) && Objects.equals(end, that.end) && Objects.equals(earliestApplication, that.earliestApplication) && Objects.equals(latestApplication, that.latestApplication) && Objects.equals(information, that.information) && Objects.equals(category, that.category) && Objects.equals(languageOfInstruction, that.languageOfInstruction);
+		return Objects.equals(id, that.id) && Objects.equals(code, that.code) && Objects.equals(name, that.name) && Objects.equals(provider, that.provider) && Objects.equals(providerUrl, that.providerUrl) && Objects.equals(level, that.level) && Objects
+			.equals(url, that.url) && Objects.equals(credits, that.credits) && Objects.equals(scope, that.scope) && Objects.equals(studyLocation, that.studyLocation) && Objects.equals(subjectCode, that.subjectCode) && Objects.equals(numberOfSeats,
+				that.numberOfSeats) && Objects.equals(start, that.start) && Objects.equals(end, that.end) && Objects.equals(earliestApplication, that.earliestApplication) && Objects.equals(latestApplication, that.latestApplication) && Objects.equals(
+					information, that.information) && Objects.equals(category, that.category) && Objects.equals(languageOfInstruction, that.languageOfInstruction);
 	}
 
 	@Override

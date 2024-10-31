@@ -371,10 +371,16 @@ public class Course {
 
 	@Override
 	public boolean equals(final Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
 		final Course course = (Course) o;
-		return Objects.equals(id, course.id) && Objects.equals(code, course.code) && Objects.equals(name, course.name) && Objects.equals(provider, course.provider) && Objects.equals(providerUrl, course.providerUrl) && Objects.equals(level, course.level) && Objects.equals(url, course.url) && Objects.equals(credits, course.credits) && Objects.equals(scope, course.scope) && Objects.equals(studyLocation, course.studyLocation) && Objects.equals(subjectCode, course.subjectCode) && Objects.equals(numberOfSeats, course.numberOfSeats) && Objects.equals(category, course.category) && Objects.equals(subcategory, course.subcategory) && Objects.equals(languageOfInstruction, course.languageOfInstruction) && Objects.equals(start, course.start) && Objects.equals(end, course.end) && Objects.equals(earliestApplication, course.earliestApplication) && Objects.equals(latestApplication, course.latestApplication) && Objects.equals(information, course.information);
+		return Objects.equals(id, course.id) && Objects.equals(code, course.code) && Objects.equals(name, course.name) && Objects.equals(provider, course.provider) && Objects.equals(providerUrl, course.providerUrl) && Objects.equals(level, course.level)
+			&& Objects.equals(url, course.url) && Objects.equals(credits, course.credits) && Objects.equals(scope, course.scope) && Objects.equals(studyLocation, course.studyLocation) && Objects.equals(subjectCode, course.subjectCode) && Objects.equals(
+				numberOfSeats, course.numberOfSeats) && Objects.equals(category, course.category) && Objects.equals(subcategory, course.subcategory) && Objects.equals(languageOfInstruction, course.languageOfInstruction) && Objects.equals(start,
+					course.start) && Objects.equals(end, course.end) && Objects.equals(earliestApplication, course.earliestApplication) && Objects.equals(latestApplication, course.latestApplication)
+			&& Objects.equals(information, course.information);
 	}
 
 	@Override

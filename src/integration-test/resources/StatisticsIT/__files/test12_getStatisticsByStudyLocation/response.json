@@ -1,12 +1,10 @@
 {
-	"availableSeats": 0,
-	"endDate": "2023-12-30",
 	"finishedCourses": 52,
+	"endDate": "2023-12-30",
+	"availableSeats": 0,
+	"studyLocations": ["ÖRNSKÖLDSVIK"],
+	"totalCapacity": 0,
 	"onGoingCourses": 0,
 	"plannedCourses": 301,
-	"startDate": "2023-01-01",
-	"studyLocations": [
-		"ÖRNSKÖLDSVIK"
-	],
-	"totalCapacity": 0
+	"startDate": "2023-01-01"
 }

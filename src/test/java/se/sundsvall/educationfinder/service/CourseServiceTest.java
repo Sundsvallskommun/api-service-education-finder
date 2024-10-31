@@ -88,11 +88,10 @@ class CourseServiceTest {
 	@ParameterizedTest
 	@MethodSource("findFilterValuesProvider")
 	void findFilterValues(final CourseFilter courseFilter, final Class<?> projectionClass, final String attributeName) {
-		
+
 		courseService.findFilterValues(courseFilter);
 
 		verify(courseRepositoryMock).findDistinctBy(projectionClass, Sort.by(attributeName));
 	}
-
 
 }

@@ -320,11 +320,17 @@ public class CourseParameters extends AbstractParameterPagingAndSortingBase {
 
 	@Override
 	public boolean equals(final Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		if (!super.equals(o)) return false;
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		if (!super.equals(o))
+			return false;
 		final CourseParameters that = (CourseParameters) o;
-		return Objects.equals(code, that.code) && Objects.equals(category, that.category) && Objects.equals(subcategory, that.subcategory) && Objects.equals(name, that.name) && Objects.equals(provider, that.provider) && Objects.equals(credits, that.credits) && Objects.equals(information, that.information) && Objects.equals(languageOfInstruction, that.languageOfInstruction) && Objects.equals(searchString, that.searchString) && Objects.equals(start, that.start) && Objects.equals(end, that.end) && Objects.equals(earliestApplication, that.earliestApplication) && Objects.equals(latestApplication, that.latestApplication) && Objects.equals(scopes, that.scopes) && Objects.equals(studyLocations, that.studyLocations) && Objects.equals(levels, that.levels);
+		return Objects.equals(code, that.code) && Objects.equals(category, that.category) && Objects.equals(subcategory, that.subcategory) && Objects.equals(name, that.name) && Objects.equals(provider, that.provider) && Objects.equals(credits,
+			that.credits) && Objects.equals(information, that.information) && Objects.equals(languageOfInstruction, that.languageOfInstruction) && Objects.equals(searchString, that.searchString) && Objects.equals(start, that.start) && Objects.equals(end,
+				that.end) && Objects.equals(earliestApplication, that.earliestApplication) && Objects.equals(latestApplication, that.latestApplication) && Objects.equals(scopes, that.scopes) && Objects.equals(studyLocations, that.studyLocations) && Objects
+					.equals(levels, that.levels);
 	}
 
 	@Override

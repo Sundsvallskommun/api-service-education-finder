@@ -33,10 +33,14 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @Validated
-@RequestMapping(path = "/{municipalityId}/statistics", produces = {APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE})
+@RequestMapping(path = "/{municipalityId}/statistics", produces = {
+	APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE
+})
 @Tag(name = "Statistics", description = "Get statistics")
 @ApiResponse(responseCode = "200", description = "Successful operation", useReturnTypeSchema = true)
-@ApiResponse(responseCode = "400", description = "Bad request", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(oneOf = {Problem.class, ConstraintViolationProblem.class})))
+@ApiResponse(responseCode = "400", description = "Bad request", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(oneOf = {
+	Problem.class, ConstraintViolationProblem.class
+})))
 @ApiResponse(responseCode = "404", description = "Not found", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
 @ApiResponse(responseCode = "500", description = "Internal Server error", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(implementation = Problem.class)))
 class StatisticsResource {

@@ -39,7 +39,7 @@ public interface CourseSpecification {
 		return BUILDER.buildInFilter(LEVEL, levels);
 	}
 
-	//Equal ignore case filters
+	// Equal ignore case filters
 	static Specification<CourseEntity> withName(final String name) {
 		return BUILDER.buildEqualsIgnoreCaseFilter(NAME, name);
 	}
@@ -56,17 +56,17 @@ public interface CourseSpecification {
 		return BUILDER.buildEqualsIgnoreCaseFilter(LANGUAGE_OF_INSTRUCTION, languageOfInstruction);
 	}
 
-	//Starting with ignore case filters
+	// Starting with ignore case filters
 	static Specification<CourseEntity> withCategory(final String category) {
 		return BUILDER.buildStartingWithIgnoreCaseFilter(CATEGORY, category);
 	}
 
-	//Ending with ignore case filters
+	// Ending with ignore case filters
 	static Specification<CourseEntity> withSubCategory(final String category) {
 		return BUILDER.buildEndingWithIgnoreCaseFilter(CATEGORY, category);
 	}
 
-	//Like ignore case filters
+	// Like ignore case filters
 	static Specification<CourseEntity> withLikeInformation(final String information) {
 		return BUILDER.buildLikeIgnoreCaseFilter(INFORMATION, information);
 	}

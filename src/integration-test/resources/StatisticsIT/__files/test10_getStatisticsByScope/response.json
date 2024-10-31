@@ -1,12 +1,10 @@
 {
-	"onGoingCourses": 0,
-	"plannedCourses": 26,
 	"finishedCourses": 9,
+	"endDate": "2023-12-30",
 	"availableSeats": 0,
 	"totalCapacity": 0,
-	"scopes": [
-		"75.0"
-	],
-	"startDate": "2023-01-01",
-	"endDate": "2023-12-30"
+	"onGoingCourses": 0,
+	"scopes": ["75.0"],
+	"plannedCourses": 26,
+	"startDate": "2023-01-01"
 }
