@@ -1,25 +1,11 @@
 package se.sundsvall.educationfinder.service;
 
-import static org.zalando.problem.Status.NOT_FOUND;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.CATEGORY;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.CREDITS;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.LEVEL;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.PROVIDER;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.SCOPE;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.STUDY_LOCATION;
-import static se.sundsvall.educationfinder.service.mapper.CourseMapper.toCourse;
-import static se.sundsvall.educationfinder.service.mapper.CourseMapper.toPagedCoursesResponse;
-
-import java.util.List;
-import java.util.Objects;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.zalando.problem.Problem;
-
 import se.sundsvall.educationfinder.api.model.Course;
 import se.sundsvall.educationfinder.api.model.CourseParameters;
 import se.sundsvall.educationfinder.api.model.PagedCoursesResponse;
@@ -31,6 +17,19 @@ import se.sundsvall.educationfinder.integration.db.model.projection.LevelProject
 import se.sundsvall.educationfinder.integration.db.model.projection.ProviderProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.ScopeProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.StudyLocationProjection;
+
+import java.util.List;
+import java.util.Objects;
+
+import static org.zalando.problem.Status.NOT_FOUND;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.CATEGORY;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.CREDITS;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.LEVEL;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.PROVIDER;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.SCOPE;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.STUDY_LOCATION;
+import static se.sundsvall.educationfinder.service.mapper.CourseMapper.toCourse;
+import static se.sundsvall.educationfinder.service.mapper.CourseMapper.toPagedCoursesResponse;
 
 @Service
 public class CourseService {

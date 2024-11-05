@@ -1,14 +1,12 @@
 package se.sundsvall.educationfinder.api.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.data.domain.Sort;
+import se.sundsvall.dept44.models.api.paging.AbstractParameterPagingAndSortingBase;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
-
-import org.springframework.data.domain.Sort;
-
-import se.sundsvall.dept44.models.api.paging.AbstractParameterPagingAndSortingBase;
-
-import io.swagger.v3.oas.annotations.media.Schema;
 
 public class CourseParameters extends AbstractParameterPagingAndSortingBase {
 
@@ -42,14 +40,38 @@ public class CourseParameters extends AbstractParameterPagingAndSortingBase {
 	@Schema(description = "Start date of the course", example = "2022-12-31")
 	private LocalDate start;
 
+	@Schema(description = "Start date of the course is after", example = "2022-12-31")
+	private LocalDate startAfter;
+
+	@Schema(description = "Start date of the course is before", example = "2022-12-31")
+	private LocalDate startBefore;
+
 	@Schema(description = "End date of the course", example = "2022-12-31")
 	private LocalDate end;
+
+	@Schema(description = "End date of the course is after", example = "2022-12-31")
+	private LocalDate endAfter;
+
+	@Schema(description = "End date of the course is before", example = "2022-12-31")
+	private LocalDate endBefore;
 
 	@Schema(description = "Earliest application date", example = "2022-12-31")
 	private LocalDate earliestApplication;
 
+	@Schema(description = "Earliest application date is after", example = "2022-12-31")
+	private LocalDate earliestApplicationAfter;
+
+	@Schema(description = "Earliest application date is before", example = "2022-12-31")
+	private LocalDate earliestApplicationBefore;
+
 	@Schema(description = "Latest application date", example = "2022-12-31")
 	private LocalDate latestApplication;
+
+	@Schema(description = "Latest application date is after", example = "2022-12-31")
+	private LocalDate latestApplicationAfter;
+
+	@Schema(description = "Latest application date is before", example = "2022-12-31")
+	private LocalDate latestApplicationBefore;
 
 	@Schema(description = "Scope of the course", example = "75")
 	private List<String> scopes;
@@ -292,49 +314,161 @@ public class CourseParameters extends AbstractParameterPagingAndSortingBase {
 		this.levels = levels;
 	}
 
+	public CourseParameters withStartAfter(final LocalDate startAfter) {
+		this.startAfter = startAfter;
+		return this;
+	}
+
+	public LocalDate getStartAfter() {
+		return startAfter;
+	}
+
+	public void setStartAfter(LocalDate startAfter) {
+		this.startAfter = startAfter;
+	}
+
+	public CourseParameters withStartBefore(final LocalDate startBefore) {
+		this.startBefore = startBefore;
+		return this;
+	}
+
+	public LocalDate getStartBefore() {
+		return startBefore;
+	}
+
+	public void setStartBefore(LocalDate startBefore) {
+		this.startBefore = startBefore;
+	}
+
+	public CourseParameters withEndAfter(final LocalDate endAfter) {
+		this.endAfter = endAfter;
+		return this;
+	}
+
+	public LocalDate getEndAfter() {
+		return endAfter;
+	}
+
+	public void setEndAfter(LocalDate endAfter) {
+		this.endAfter = endAfter;
+	}
+
+	public CourseParameters withEndBefore(final LocalDate endBefore) {
+		this.endBefore = endBefore;
+		return this;
+	}
+
+	public LocalDate getEndBefore() {
+		return endBefore;
+	}
+
+	public void setEndBefore(LocalDate endBefore) {
+		this.endBefore = endBefore;
+	}
+
+	public CourseParameters withEarliestApplicationAfter(final LocalDate earliestApplicationAfter) {
+		this.earliestApplicationAfter = earliestApplicationAfter;
+		return this;
+	}
+
+	public LocalDate getEarliestApplicationAfter() {
+		return earliestApplicationAfter;
+	}
+
+	public void setEarliestApplicationAfter(LocalDate earliestApplicationAfter) {
+		this.earliestApplicationAfter = earliestApplicationAfter;
+	}
+
+	public CourseParameters withEarliestApplicationBefore(final LocalDate earliestApplicationBefore) {
+		this.earliestApplicationBefore = earliestApplicationBefore;
+		return this;
+	}
+
+	public LocalDate getEarliestApplicationBefore() {
+		return earliestApplicationBefore;
+	}
+
+	public void setEarliestApplicationBefore(LocalDate earliestApplicationBefore) {
+		this.earliestApplicationBefore = earliestApplicationBefore;
+	}
+
+	public CourseParameters withLatestApplicationAfter(final LocalDate latestApplicationAfter) {
+		this.latestApplicationAfter = latestApplicationAfter;
+		return this;
+	}
+
+	public LocalDate getLatestApplicationAfter() {
+		return latestApplicationAfter;
+	}
+
+	public void setLatestApplicationAfter(LocalDate latestApplicationAfter) {
+		this.latestApplicationAfter = latestApplicationAfter;
+	}
+
+	public CourseParameters withLatestApplicationBefore(final LocalDate latestApplicationBefore) {
+		this.latestApplicationBefore = latestApplicationBefore;
+		return this;
+	}
+
+	public LocalDate getLatestApplicationBefore() {
+		return latestApplicationBefore;
+	}
+
+	public void setLatestApplicationBefore(LocalDate latestApplicationBefore) {
+		this.latestApplicationBefore = latestApplicationBefore;
+	}
+
 	@Override
 	public String toString() {
 		return "CourseParameters{" +
-			"limit=" + limit +
-			", page=" + page +
-			", sortDirection=" + sortDirection +
-			", sortBy=" + sortBy +
-			", levels=" + levels +
-			", studyLocations=" + studyLocations +
-			", scopes=" + scopes +
-			", latestApplication=" + latestApplication +
-			", earliestApplication=" + earliestApplication +
-			", end=" + end +
-			", start=" + start +
-			", searchString='" + searchString + '\'' +
-			", languageOfInstruction='" + languageOfInstruction + '\'' +
-			", information='" + information + '\'' +
-			", credits='" + credits + '\'' +
-			", provider='" + provider + '\'' +
-			", name='" + name + '\'' +
-			", subcategory='" + subcategory + '\'' +
+			"code='" + code + '\'' +
 			", category='" + category + '\'' +
-			", code='" + code + '\'' +
+			", subcategory='" + subcategory + '\'' +
+			", name='" + name + '\'' +
+			", provider='" + provider + '\'' +
+			", credits='" + credits + '\'' +
+			", information='" + information + '\'' +
+			", languageOfInstruction='" + languageOfInstruction + '\'' +
+			", searchString='" + searchString + '\'' +
+			", start=" + start +
+			", startAfter=" + startAfter +
+			", startBefore=" + startBefore +
+			", end=" + end +
+			", endAfter=" + endAfter +
+			", endBefore=" + endBefore +
+			", earliestApplication=" + earliestApplication +
+			", earliestApplicationAfter=" + earliestApplicationAfter +
+			", earliestApplicationBefore=" + earliestApplicationBefore +
+			", latestApplication=" + latestApplication +
+			", latestApplicationAfter=" + latestApplicationAfter +
+			", latestApplicationBefore=" + latestApplicationBefore +
+			", scopes=" + scopes +
+			", studyLocations=" + studyLocations +
+			", levels=" + levels +
 			'}';
 	}
 
 	@Override
-	public boolean equals(final Object o) {
+	public boolean equals(Object o) {
 		if (this == o)
 			return true;
 		if (o == null || getClass() != o.getClass())
 			return false;
 		if (!super.equals(o))
 			return false;
-		final CourseParameters that = (CourseParameters) o;
-		return Objects.equals(code, that.code) && Objects.equals(category, that.category) && Objects.equals(subcategory, that.subcategory) && Objects.equals(name, that.name) && Objects.equals(provider, that.provider) && Objects.equals(credits,
-			that.credits) && Objects.equals(information, that.information) && Objects.equals(languageOfInstruction, that.languageOfInstruction) && Objects.equals(searchString, that.searchString) && Objects.equals(start, that.start) && Objects.equals(end,
-				that.end) && Objects.equals(earliestApplication, that.earliestApplication) && Objects.equals(latestApplication, that.latestApplication) && Objects.equals(scopes, that.scopes) && Objects.equals(studyLocations, that.studyLocations) && Objects
-					.equals(levels, that.levels);
+		CourseParameters that = (CourseParameters) o;
+		return Objects.equals(code, that.code) && Objects.equals(category, that.category) && Objects.equals(subcategory, that.subcategory) && Objects.equals(name, that.name) && Objects.equals(provider,
+			that.provider) && Objects.equals(credits, that.credits) && Objects.equals(information, that.information) && Objects.equals(languageOfInstruction, that.languageOfInstruction) && Objects.equals(searchString,
+				that.searchString) && Objects.equals(start, that.start) && Objects.equals(startAfter, that.startAfter) && Objects.equals(startBefore, that.startBefore) && Objects.equals(end, that.end)
+			&& Objects.equals(endAfter, that.endAfter) && Objects.equals(endBefore, that.endBefore) && Objects.equals(earliestApplication, that.earliestApplication) && Objects.equals(earliestApplicationAfter,
+				that.earliestApplicationAfter) && Objects.equals(earliestApplicationBefore, that.earliestApplicationBefore) && Objects.equals(latestApplication, that.latestApplication) && Objects.equals(latestApplicationAfter,
+					that.latestApplicationAfter) && Objects.equals(latestApplicationBefore, that.latestApplicationBefore) && Objects.equals(scopes, that.scopes) && Objects.equals(studyLocations, that.studyLocations)
+			&& Objects.equals(levels, that.levels);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(super.hashCode(), code, category, subcategory, name, provider, credits, information, languageOfInstruction, searchString, start, end, earliestApplication, latestApplication, scopes, studyLocations, levels);
+		return Objects.hash(super.hashCode(), code, category, subcategory, name, provider, credits, information, languageOfInstruction, searchString, start, startAfter, startBefore, end, endAfter, endBefore, earliestApplication, earliestApplicationAfter,
+			earliestApplicationBefore, latestApplication, latestApplicationAfter, latestApplicationBefore, scopes, studyLocations, levels);
 	}
 }

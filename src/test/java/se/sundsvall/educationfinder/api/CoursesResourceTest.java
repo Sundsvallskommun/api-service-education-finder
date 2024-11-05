@@ -1,14 +1,5 @@
 package se.sundsvall.educationfinder.api;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.tuple;
-import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
-import static org.springframework.http.MediaType.APPLICATION_JSON;
-
-import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Stream;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -17,10 +8,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
-
 import se.sundsvall.educationfinder.Application;
 import se.sundsvall.educationfinder.api.model.Course;
 import se.sundsvall.educationfinder.api.model.PagedCoursesResponse;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 @SpringBootTest(classes = Application.class, webEnvironment = RANDOM_PORT)
 @ActiveProfiles("junit")
@@ -55,8 +54,8 @@ class CoursesResourceTest {
 	private static Stream<Arguments> queryParameters() {
 		return Stream.of(
 			Arguments.of("Sundsvall", "grundläggande vuxenutbildning", "matematik", 22),
-			Arguments.of("Sundsvall", "grundläggande vuxenutbildning", "kemi", 4),
-			Arguments.of("Sundsvall", "gymnasial vuxenutbildning", "psy", 9));
+			Arguments.of("Sundsvall", "grundläggande vuxenutbildning", "kemi", 11),
+			Arguments.of("Sundsvall", "gymnasial vuxenutbildning", "psy", 12));
 	}
 
 	@Test
@@ -270,13 +269,11 @@ class CoursesResourceTest {
 				tuple("Vardagsolyckor", "Sundsvall", LocalDate.of(2023, 11, 17)),
 				tuple("Vardagsolyckor", "Sundsvall", LocalDate.of(2023, 11, 17)),
 				tuple("Vardagsolyckor", "Sundsvall", LocalDate.of(2023, 12, 22)),
-				tuple("Vardagsolyckor", "Sundsvall", LocalDate.of(2023, 12, 22)),
-				tuple("Vardagsolyckor", "Sundsvall", LocalDate.of(2024, 3, 1)),
-				tuple("Vardagsolyckor", "Sundsvall", LocalDate.of(2024, 3, 1)));
+				tuple("Vardagsolyckor", "Sundsvall", LocalDate.of(2023, 12, 22)));
 		assertThat(response.getMetadata().getLimit()).isEqualTo(20);
-		assertThat(response.getMetadata().getCount()).isEqualTo(6);
+		assertThat(response.getMetadata().getCount()).isEqualTo(4);
 		assertThat(response.getMetadata().getPage()).isZero();
-		assertThat(response.getMetadata().getTotalRecords()).isEqualTo(6);
+		assertThat(response.getMetadata().getTotalRecords()).isEqualTo(4);
 		assertThat(response.getMetadata().getTotalPages()).isEqualTo(1);
 	}
 
@@ -288,7 +285,7 @@ class CoursesResourceTest {
 			.uri(builder -> builder.path(PATH)
 				.queryParam("studyLocation", "Sundsvall")
 				.queryParam("name", "Vardagsolyckor")
-				.queryParam("startAfter", "2020-01-01")
+				.queryParam("startAfter", "2023-10-15")
 				.queryParam("limit", "20")
 				.build())
 			.exchange()

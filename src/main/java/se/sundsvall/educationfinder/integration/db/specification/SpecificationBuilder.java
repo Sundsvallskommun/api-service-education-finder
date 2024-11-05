@@ -1,20 +1,19 @@
 package se.sundsvall.educationfinder.integration.db.specification;
 
-import static java.util.Objects.nonNull;
+import jakarta.persistence.criteria.Predicate;
+import org.springframework.data.jpa.domain.Specification;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.criteria.Predicate;
-
-import org.springframework.data.jpa.domain.Specification;
+import static java.util.Objects.nonNull;
 
 public class SpecificationBuilder<T> {
 
 	/**
-	 * Method builds an equal filter if value is not null. If value is null, method returns
-	 * an always-true predicate (meaning no filtering will be applied for sent in attribute)
+	 * Method builds an equal filter if value is not null. If value is null, method returns an always-true predicate
+	 * (meaning no filtering will be applied for sent in attribute)
 	 *
 	 * @param  attribute name that will be used in filter
 	 * @param  value     value (or null) to compare against
@@ -25,8 +24,8 @@ public class SpecificationBuilder<T> {
 	}
 
 	/**
-	 * Method builds an equal ignore case filter if value is not null. If value is null, method returns
-	 * an always-true predicate (meaning no filtering will be applied for sent in attribute)
+	 * Method builds an equal ignore case filter if value is not null. If value is null, method returns an always-true
+	 * predicate (meaning no filtering will be applied for sent in attribute)
 	 *
 	 * @param  attribute name that will be used in filter
 	 * @param  value     value (or null) to compare against
@@ -37,8 +36,8 @@ public class SpecificationBuilder<T> {
 	}
 
 	/**
-	 * Method builds a starting with ignore case filter if value is not null. If value is null, method returns
-	 * an always-true predicate (meaning no filtering will be applied for sent in attribute)
+	 * Method builds a starting with ignore case filter if value is not null. If value is null, method returns an
+	 * always-true predicate (meaning no filtering will be applied for sent in attribute)
 	 *
 	 * @param  attribute name that will be used in filter
 	 * @param  value     value (or null) to compare against
@@ -50,8 +49,7 @@ public class SpecificationBuilder<T> {
 
 	/**
 	 * Method builds a starting with ignore case filter that accepts a list of values. If values are null or empty, method
-	 * returns
-	 * an always-true predicate (meaning no filtering will be applied for sent in attribute)
+	 * returns an always-true predicate (meaning no filtering will be applied for sent in attribute)
 	 *
 	 * @param  attribute name that will be used in filter
 	 * @param  values    list of values to compare against
@@ -79,8 +77,8 @@ public class SpecificationBuilder<T> {
 	}
 
 	/**
-	 * Method builds an ending with ignore case filter if value is not null. If value is null, method returns
-	 * an always-true predicate (meaning no filtering will be applied for sent in attribute)
+	 * Method builds an ending with ignore case filter if value is not null. If value is null, method returns an always-true
+	 * predicate (meaning no filtering will be applied for sent in attribute)
 	 *
 	 * @param  attribute name that will be used in filter
 	 * @param  value     value (or null) to compare against
@@ -92,8 +90,7 @@ public class SpecificationBuilder<T> {
 
 	/**
 	 * Method builds an ending with ignore case filter that accepts a list of values. If values are null or empty, method
-	 * returns
-	 * an always-true predicate (meaning no filtering will be applied for sent in attribute)
+	 * returns an always-true predicate (meaning no filtering will be applied for sent in attribute)
 	 *
 	 * @param  attribute name that will be used in filter
 	 * @param  values    value (or null) to compare against
@@ -122,8 +119,8 @@ public class SpecificationBuilder<T> {
 	}
 
 	/**
-	 * Method builds a like ignore case filter if value is not null. If value is null, method returns
-	 * an always-true predicate (meaning no filtering will be applied for sent in attribute)
+	 * Method builds a like ignore case filter if value is not null. If value is null, method returns an always-true
+	 * predicate (meaning no filtering will be applied for sent in attribute)
 	 *
 	 * @param  attribute name that will be used in filter
 	 * @param  value     value (or null) to compare against
@@ -136,8 +133,8 @@ public class SpecificationBuilder<T> {
 	}
 
 	/**
-	 * Method builds a filter depending on sent in time stamps. If both values are null, method returns
-	 * an always-true predicate (meaning no filtering will be applied for sent in attribute)
+	 * Method builds a filter depending on sent in time stamps. If both values are null, method returns an always-true
+	 * predicate (meaning no filtering will be applied for sent in attribute)
 	 *
 	 * @param  attribute name that will be used in filter
 	 * @param  value     value (or null) to compare against
@@ -148,8 +145,8 @@ public class SpecificationBuilder<T> {
 	}
 
 	/**
-	 * Method builds a filter depending on sent in time stamps. If both values are null, method returns
-	 * an always-true predicate (meaning no filtering will be applied for sent in attribute)
+	 * Method builds a filter depending on sent in time stamps. If both values are null, method returns an always-true
+	 * predicate (meaning no filtering will be applied for sent in attribute)
 	 *
 	 * @param  attribute name that will be used in filter
 	 * @param  value     value (or null) to compare against
@@ -160,8 +157,8 @@ public class SpecificationBuilder<T> {
 	}
 
 	/**
-	 * Method builds a filter depending on sent in list of string. If values are null, method returns
-	 * an always-true predicate (meaning no filtering will be applied for sent in attribute)
+	 * Method builds a filter depending on sent in list of string. If values are null, method returns an always-true
+	 * predicate (meaning no filtering will be applied for sent in attribute)
 	 *
 	 * @param  attribute name of attribute that will be used in filter
 	 * @param  values    String-values (or null) to compare against
@@ -172,8 +169,8 @@ public class SpecificationBuilder<T> {
 	}
 
 	/**
-	 * Method builds a free text search filter for a list of attributes. If the search string is null or empty,
-	 * an always-true predicate is returned (meaning no filtering will be applied for the sent in attributes)
+	 * Method builds a free text search filter for a list of attributes. If the search string is null or empty, an
+	 * always-true predicate is returned (meaning no filtering will be applied for the sent in attributes)
 	 *
 	 * @param  attributes   list of attributes to search in
 	 * @param  searchString the search string
@@ -196,8 +193,8 @@ public class SpecificationBuilder<T> {
 	}
 
 	/**
-	 * Method builds a date range filter for two attributes. If both start and end date are null, an always-true
-	 * predicate is returned (meaning no filtering will be applied for the sent in attributes)
+	 * Method builds a date range filter for two attributes. If both start and end date are null, an always-true predicate
+	 * is returned (meaning no filtering will be applied for the sent in attributes)
 	 *
 	 * @param  startAttribute Date attribute to start filtering from
 	 * @param  endAttribute   Date attribute to end filtering at
@@ -217,6 +214,13 @@ public class SpecificationBuilder<T> {
 				return cb.lessThanOrEqualTo(root.get(endAttribute), endDate);
 			}
 			return cb.conjunction();
+		};
+	}
+
+	public Specification<T> distinct() {
+		return (entity, cq, cb) -> {
+			cq.distinct(true);
+			return null;
 		};
 	}
 
