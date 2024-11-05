@@ -1,13 +1,12 @@
 package se.sundsvall.educationfinder.apptest;
 
-import static org.springframework.http.HttpMethod.GET;
-import static org.springframework.http.HttpStatus.OK;
-
 import org.junit.jupiter.api.Test;
-
 import se.sundsvall.dept44.test.AbstractAppTest;
 import se.sundsvall.dept44.test.annotation.wiremock.WireMockAppTestSuite;
 import se.sundsvall.educationfinder.Application;
+
+import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpStatus.OK;
 
 @WireMockAppTestSuite(files = "classpath:/CoursesIT/", classes = Application.class)
 class CoursesIT extends AbstractAppTest {
@@ -230,6 +229,16 @@ class CoursesIT extends AbstractAppTest {
 	void test22_findAllBySubCategory() {
 		setupCall()
 			.withServicePath(PATH + "?subcategory=Fysik&limit=5")
+			.withHttpMethod(GET)
+			.withExpectedResponseStatus(OK)
+			.withExpectedResponse(RESPONSE_FILE)
+			.sendRequestAndVerifyResponse();
+	}
+
+	@Test
+	void test23_findAllBySearchString() {
+		setupCall()
+			.withServicePath(PATH + "?searchString=frisk&limit=5")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)

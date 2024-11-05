@@ -1,17 +1,16 @@
 package se.sundsvall.educationfinder.service.mapper;
 
-import static java.util.Collections.emptyList;
+import org.springframework.data.domain.Page;
+import se.sundsvall.dept44.models.api.paging.PagingMetaData;
+import se.sundsvall.educationfinder.api.model.Course;
+import se.sundsvall.educationfinder.api.model.PagedCoursesResponse;
+import se.sundsvall.educationfinder.integration.db.model.CourseEntity;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.data.domain.Page;
-
-import se.sundsvall.dept44.models.api.paging.PagingMetaData;
-import se.sundsvall.educationfinder.api.model.Course;
-import se.sundsvall.educationfinder.api.model.PagedCoursesResponse;
-import se.sundsvall.educationfinder.integration.db.model.CourseEntity;
+import static java.util.Collections.emptyList;
 
 public final class CourseMapper {
 
@@ -26,6 +25,12 @@ public final class CourseMapper {
 	public static Course toCourse(CourseEntity courseEntity) {
 		return Optional.ofNullable(courseEntity)
 			.map(entity -> Course.create()
+				.withCategory(Optional.ofNullable(entity.getCategory())
+					.map(category -> category.split(" - ", 2)[0].trim())
+					.orElse(null))
+				.withSubcategory(Optional.ofNullable(entity.getCategory())
+					.map(category -> category.split(" - ", 2)[1].trim())
+					.orElse(null))
 				.withId(entity.getId())
 				.withCode(entity.getCode())
 				.withCredits(toDouble(entity.getCredits()))
@@ -40,12 +45,6 @@ public final class CourseMapper {
 				.withInformation(entity.getInformation())
 				.withScope(toDouble(entity.getScope()))
 				.withStart(entity.getStart())
-				.withCategory(Optional.ofNullable(entity.getCategory())
-					.map(category -> category.split("-")[0].trim())
-					.orElse(null))
-				.withSubcategory(Optional.ofNullable(entity.getCategory())
-					.map(category -> category.split("-")[1].trim())
-					.orElse(null))
 				.withStudyLocation(entity.getStudyLocation())
 				.withSubjectCode(entity.getSubjectCode())
 				.withLanguageOfInstruction(entity.getLanguageOfInstruction())
