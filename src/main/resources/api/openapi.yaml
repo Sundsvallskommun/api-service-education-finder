@@ -7,7 +7,7 @@ info:
     url: https://opensource.org/licenses/MIT
   version: "3.0"
 servers:
-  - url: http://localhost:55165
+  - url: http://localhost:62845
     description: Generated server url
 tags:
   - name: Courses
@@ -93,8 +93,22 @@ paths:
             example: 2024-12-31
           example: 2024-12-31
       responses:
+        "400":
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Problem"
+                  - $ref: "#/components/schemas/ConstraintViolationProblem"
         "404":
           description: Not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "500":
+          description: Internal Server error
           content:
             application/problem+json:
               schema:
@@ -108,20 +122,6 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Statistics"
-        "500":
-          description: Internal Server error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
-        "400":
-          description: Bad request
-          content:
-            application/problem+json:
-              schema:
-                oneOf:
-                  - $ref: "#/components/schemas/Problem"
-                  - $ref: "#/components/schemas/ConstraintViolationProblem"
   /{municipalityId}/statistics/filters/{statisticsFilter}/values:
     get:
       tags:
@@ -143,8 +143,22 @@ paths:
           schema:
             $ref: "#/components/schemas/StatisticsFilter"
       responses:
+        "400":
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Problem"
+                  - $ref: "#/components/schemas/ConstraintViolationProblem"
         "404":
           description: Not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "500":
+          description: Internal Server error
           content:
             application/problem+json:
               schema:
@@ -162,20 +176,6 @@ paths:
                 type: array
                 items:
                   type: string
-        "500":
-          description: Internal Server error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
-        "400":
-          description: Bad request
-          content:
-            application/problem+json:
-              schema:
-                oneOf:
-                  - $ref: "#/components/schemas/Problem"
-                  - $ref: "#/components/schemas/ConstraintViolationProblem"
   /{municipalityId}/courses:
     get:
       tags:
@@ -238,8 +238,22 @@ paths:
           schema:
             $ref: "#/components/schemas/CourseParameters"
       responses:
+        "400":
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Problem"
+                  - $ref: "#/components/schemas/ConstraintViolationProblem"
         "404":
           description: Not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "500":
+          description: Internal Server error
           content:
             application/problem+json:
               schema:
@@ -253,20 +267,6 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/PagedCoursesResponse"
-        "500":
-          description: Internal Server error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
-        "400":
-          description: Bad request
-          content:
-            application/problem+json:
-              schema:
-                oneOf:
-                  - $ref: "#/components/schemas/Problem"
-                  - $ref: "#/components/schemas/ConstraintViolationProblem"
   /{municipalityId}/courses/{courseId}:
     get:
       tags:
@@ -290,8 +290,22 @@ paths:
             format: int64
           example: 1234
       responses:
+        "400":
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Problem"
+                  - $ref: "#/components/schemas/ConstraintViolationProblem"
         "404":
           description: Not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "500":
+          description: Internal Server error
           content:
             application/problem+json:
               schema:
@@ -305,20 +319,6 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Course"
-        "500":
-          description: Internal Server error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
-        "400":
-          description: Bad request
-          content:
-            application/problem+json:
-              schema:
-                oneOf:
-                  - $ref: "#/components/schemas/Problem"
-                  - $ref: "#/components/schemas/ConstraintViolationProblem"
   /{municipalityId}/courses/filters/{courseFilter}/values:
     get:
       tags:
@@ -342,8 +342,22 @@ paths:
           schema:
             $ref: "#/components/schemas/CourseFilter"
       responses:
+        "400":
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Problem"
+                  - $ref: "#/components/schemas/ConstraintViolationProblem"
         "404":
           description: Not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "500":
+          description: Internal Server error
           content:
             application/problem+json:
               schema:
@@ -361,20 +375,6 @@ paths:
                 type: array
                 items:
                   type: string
-        "500":
-          description: Internal Server error
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/Problem"
-        "400":
-          description: Bad request
-          content:
-            application/problem+json:
-              schema:
-                oneOf:
-                  - $ref: "#/components/schemas/Problem"
-                  - $ref: "#/components/schemas/ConstraintViolationProblem"
   /api-docs:
     get:
       tags:
@@ -408,9 +408,9 @@ components:
             type: object
         status:
           $ref: "#/components/schemas/StatusType"
-        title:
-          type: string
         detail:
+          type: string
+        title:
           type: string
     StatusType:
       type: object
@@ -543,9 +543,9 @@ components:
             type: object
         status:
           $ref: "#/components/schemas/StatusType"
-        title:
-          type: string
         detail:
+          type: string
+        title:
           type: string
         suppressed:
           type: array
@@ -749,9 +749,29 @@ components:
           description: Start date of the course
           format: date
           example: 2022-12-31
+        startAfter:
+          type: string
+          description: Start date of the course is after
+          format: date
+          example: 2022-12-31
+        startBefore:
+          type: string
+          description: Start date of the course is before
+          format: date
+          example: 2022-12-31
         end:
           type: string
           description: End date of the course
+          format: date
+          example: 2022-12-31
+        endAfter:
+          type: string
+          description: End date of the course is after
+          format: date
+          example: 2022-12-31
+        endBefore:
+          type: string
+          description: End date of the course is before
           format: date
           example: 2022-12-31
         earliestApplication:
@@ -759,9 +779,29 @@ components:
           description: Earliest application date
           format: date
           example: 2022-12-31
+        earliestApplicationAfter:
+          type: string
+          description: Earliest application date is after
+          format: date
+          example: 2022-12-31
+        earliestApplicationBefore:
+          type: string
+          description: Earliest application date is before
+          format: date
+          example: 2022-12-31
         latestApplication:
           type: string
           description: Latest application date
+          format: date
+          example: 2022-12-31
+        latestApplicationAfter:
+          type: string
+          description: Latest application date is after
+          format: date
+          example: 2022-12-31
+        latestApplicationBefore:
+          type: string
+          description: Latest application date is before
           format: date
           example: 2022-12-31
         scopes:

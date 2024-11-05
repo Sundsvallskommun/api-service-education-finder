@@ -1,22 +1,22 @@
 package se.sundsvall.educationfinder.api.model;
 
-import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
-import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanEquals;
-import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanHashCode;
-import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanToString;
-import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
-import static com.google.code.beanmatchers.BeanMatchers.registerValueGenerator;
-import static java.time.LocalDate.now;
-import static org.hamcrest.CoreMatchers.allOf;
-import static org.hamcrest.MatcherAssert.assertThat;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;
 
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
+import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanEquals;
+import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanHashCode;
+import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanToStringExcluding;
+import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
+import static com.google.code.beanmatchers.BeanMatchers.registerValueGenerator;
+import static java.time.LocalDate.now;
+import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 class CourseParametersTest {
 
@@ -32,7 +32,7 @@ class CourseParametersTest {
 			hasValidGettersAndSetters(),
 			hasValidBeanHashCode(),
 			hasValidBeanEquals(),
-			hasValidBeanToString()));
+			hasValidBeanToStringExcluding("sortDirection", "page", "limit", "sortBy")));
 	}
 
 	@Test
@@ -66,9 +66,17 @@ class CourseParametersTest {
 			.withLanguageOfInstruction(languageOfInstruction)
 			.withSearchString(searchString)
 			.withStart(start)
+			.withStartAfter(start)
+			.withStartBefore(start)
 			.withEnd(end)
+			.withEndAfter(end)
+			.withEndBefore(end)
 			.withEarliestApplication(earliestApplication)
+			.withEarliestApplicationAfter(earliestApplication)
+			.withEarliestApplicationBefore(earliestApplication)
 			.withLatestApplication(latestApplication)
+			.withLatestApplicationAfter(latestApplication)
+			.withLatestApplicationBefore(latestApplication)
 			.withLevels(levels)
 			.withStudyLocations(studyLocations)
 			.withScopes(scopes);
@@ -84,9 +92,17 @@ class CourseParametersTest {
 		Assertions.assertThat(bean.getLanguageOfInstruction()).isEqualTo(languageOfInstruction);
 		Assertions.assertThat(bean.getSearchString()).isEqualTo(searchString);
 		Assertions.assertThat(bean.getStart()).isEqualTo(start);
+		Assertions.assertThat(bean.getStartAfter()).isEqualTo(start);
+		Assertions.assertThat(bean.getStartBefore()).isEqualTo(start);
 		Assertions.assertThat(bean.getEnd()).isEqualTo(end);
+		Assertions.assertThat(bean.getEndAfter()).isEqualTo(end);
+		Assertions.assertThat(bean.getEndBefore()).isEqualTo(end);
 		Assertions.assertThat(bean.getEarliestApplication()).isEqualTo(earliestApplication);
+		Assertions.assertThat(bean.getEarliestApplicationAfter()).isEqualTo(earliestApplication);
+		Assertions.assertThat(bean.getEarliestApplicationBefore()).isEqualTo(earliestApplication);
 		Assertions.assertThat(bean.getLatestApplication()).isEqualTo(latestApplication);
+		Assertions.assertThat(bean.getLatestApplicationAfter()).isEqualTo(latestApplication);
+		Assertions.assertThat(bean.getLatestApplicationBefore()).isEqualTo(latestApplication);
 		Assertions.assertThat(bean.getLevels()).isEqualTo(levels);
 		Assertions.assertThat(bean.getStudyLocations()).isEqualTo(studyLocations);
 		Assertions.assertThat(bean.getScopes()).isEqualTo(scopes);
