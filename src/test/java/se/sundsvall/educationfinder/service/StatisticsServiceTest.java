@@ -1,16 +1,5 @@
 package se.sundsvall.educationfinder.service;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.LEVEL;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.SCOPE;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.STUDY_LOCATION;
-
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Stream;
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -23,16 +12,25 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Sort;
-
 import se.sundsvall.dept44.test.annotation.resource.Load;
 import se.sundsvall.dept44.test.extension.ResourceLoaderExtension;
 import se.sundsvall.educationfinder.api.model.StatisticsParameters;
-import se.sundsvall.educationfinder.api.model.enums.StatisticsFilter;
 import se.sundsvall.educationfinder.integration.db.CourseRepository;
 import se.sundsvall.educationfinder.integration.db.model.CourseEntity;
 import se.sundsvall.educationfinder.integration.db.model.projection.LevelProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.ScopeProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.StudyLocationProjection;
+
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.LEVEL;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.SCOPE;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.STUDY_LOCATION;
 
 @ExtendWith(value = {
 	MockitoExtension.class, ResourceLoaderExtension.class
@@ -49,9 +47,9 @@ class StatisticsServiceTest {
 
 	private static Stream<Arguments> findStatisticsCourseFilterValuesProvider() {
 		return Stream.of(
-			Arguments.of(StatisticsFilter.LEVEL, LevelProjection.class, LEVEL),
-			Arguments.of(StatisticsFilter.STUDY_LOCATION, StudyLocationProjection.class, STUDY_LOCATION),
-			Arguments.of(StatisticsFilter.SCOPE, ScopeProjection.class, SCOPE));
+			Arguments.of("level", LevelProjection.class, LEVEL),
+			Arguments.of("studyLocation", StudyLocationProjection.class, STUDY_LOCATION),
+			Arguments.of("scope", ScopeProjection.class, SCOPE));
 	}
 
 	@Test
@@ -72,18 +70,12 @@ class StatisticsServiceTest {
 
 	@ParameterizedTest
 	@MethodSource("findStatisticsCourseFilterValuesProvider")
-	void findStatisticsCourseFilterValues(final StatisticsFilter statisticsFilter, final Class<?> projectionClass, final String attributeName) {
+	void findStatisticsCourseFilterValues(final String attribute, final Class<?> projectionClass, final String attributeName) {
 
-		statisticsService.findStatisticsFilterValues(statisticsFilter);
+		statisticsService.findStatisticsFilterValues(attribute);
 
 		// Assert
 		verify(courseRepositoryMock).findDistinctBy(projectionClass, Sort.by(attributeName));
-	}
-
-	@Test
-	void findStatisticsFilterStudyLocationValues() {
-		statisticsService.findStatisticsFilterValues(StatisticsFilter.STUDY_LOCATION);
-		verify(courseRepositoryMock).findDistinctBy(StudyLocationProjection.class, Sort.by(STUDY_LOCATION));
 	}
 
 }

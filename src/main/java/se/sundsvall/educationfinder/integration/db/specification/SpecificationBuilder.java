@@ -6,6 +6,7 @@ import org.springframework.data.jpa.domain.Specification;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static java.util.Objects.nonNull;
 
@@ -19,7 +20,7 @@ public class SpecificationBuilder<T> {
 	 * @param  value     value (or null) to compare against
 	 * @return           Specification<T> matching sent in comparison
 	 */
-	public Specification<T> buildEqualFilter(String attribute, Object value) {
+	public Specification<T> buildEqualFilter(final String attribute, final Object value) {
 		return (entity, cq, cb) -> nonNull(value) ? cb.equal(entity.get(attribute), value) : cb.and();
 	}
 
@@ -29,22 +30,10 @@ public class SpecificationBuilder<T> {
 	 *
 	 * @param  attribute name that will be used in filter
 	 * @param  value     value (or null) to compare against
-	 * @return           Specification<T></T> matching sent in comparison
+	 * @return           Specification<T> matching sent in comparison
 	 */
-	public Specification<T> buildEqualsIgnoreCaseFilter(String attribute, String value) {
+	public Specification<T> buildEqualsIgnoreCaseFilter(final String attribute, final String value) {
 		return (entity, cq, cb) -> nonNull(value) ? cb.equal(cb.lower(entity.get(attribute)), value.toLowerCase()) : cb.and();
-	}
-
-	/**
-	 * Method builds a starting with ignore case filter if value is not null. If value is null, method returns an
-	 * always-true predicate (meaning no filtering will be applied for sent in attribute)
-	 *
-	 * @param  attribute name that will be used in filter
-	 * @param  value     value (or null) to compare against
-	 * @return           Specification<T></T>matching sent in comparison
-	 */
-	public Specification<T> buildStartingWithIgnoreCaseFilter(String attribute, String value) {
-		return (entity, cq, cb) -> nonNull(value) ? cb.like(cb.lower(entity.get(attribute)), value.toLowerCase() + "%") : cb.and();
 	}
 
 	/**
@@ -53,9 +42,9 @@ public class SpecificationBuilder<T> {
 	 *
 	 * @param  attribute name that will be used in filter
 	 * @param  values    list of values to compare against
-	 * @return           Specification<T></T>matching sent in comparison
+	 * @return           Specification<T> matching sent in comparison
 	 */
-	public Specification<T> buildStartingWithIgnoreCaseFilter(String attribute, List<String> values) {
+	public Specification<T> buildStartingWithIgnoreCaseFilter(final String attribute, final List<String> values) {
 		return (entity, cq, cb) -> {
 			if (values == null || values.isEmpty()) {
 				return cb.and();
@@ -77,26 +66,14 @@ public class SpecificationBuilder<T> {
 	}
 
 	/**
-	 * Method builds an ending with ignore case filter if value is not null. If value is null, method returns an always-true
-	 * predicate (meaning no filtering will be applied for sent in attribute)
-	 *
-	 * @param  attribute name that will be used in filter
-	 * @param  value     value (or null) to compare against
-	 * @return           Specification<T></T> matching sent in comparison
-	 */
-	public Specification<T> buildEndingWithIgnoreCaseFilter(String attribute, String value) {
-		return (entity, cq, cb) -> nonNull(value) ? cb.like(cb.lower(entity.get(attribute)), "%" + value.toLowerCase()) : cb.and();
-	}
-
-	/**
 	 * Method builds an ending with ignore case filter that accepts a list of values. If values are null or empty, method
 	 * returns an always-true predicate (meaning no filtering will be applied for sent in attribute)
 	 *
 	 * @param  attribute name that will be used in filter
 	 * @param  values    value (or null) to compare against
-	 * @return           Specification<T></T> matching sent in comparison
+	 * @return           Specification<T> matching sent in comparison
 	 */
-	public Specification<T> buildEndingWithIgnoreCaseFilter(String attribute, List<String> values) {
+	public Specification<T> buildEndingWithIgnoreCaseFilter(final String attribute, final List<String> values) {
 		return (entity, cq, cb) -> {
 			if (values == null || values.isEmpty()) {
 				return cb.and();
@@ -124,9 +101,9 @@ public class SpecificationBuilder<T> {
 	 *
 	 * @param  attribute name that will be used in filter
 	 * @param  value     value (or null) to compare against
-	 * @return           Specification<T></T> matching sent in comparison
+	 * @return           Specification<T> matching sent in comparison
 	 */
-	public Specification<T> buildLikeIgnoreCaseFilter(String attribute, String value) {
+	public Specification<T> buildLikeIgnoreCaseFilter(final String attribute, final String value) {
 		return (entity, cq, cb) -> nonNull(value)
 			? cb.like(cb.lower(entity.get(attribute)), "%" + value.toLowerCase() + "%")
 			: null;
@@ -138,9 +115,9 @@ public class SpecificationBuilder<T> {
 	 *
 	 * @param  attribute name that will be used in filter
 	 * @param  value     value (or null) to compare against
-	 * @return           Specification<T></T> matching sent in comparison
+	 * @return           Specification<T> matching sent in comparison
 	 */
-	public Specification<T> buildDateIsEqualOrBeforeFilter(String attribute, LocalDate value) {
+	public Specification<T> buildDateIsEqualOrBeforeFilter(final String attribute, final LocalDate value) {
 		return (entity, cq, cb) -> nonNull(value) ? cb.lessThanOrEqualTo(entity.get(attribute), value) : cb.and();
 	}
 
@@ -150,22 +127,40 @@ public class SpecificationBuilder<T> {
 	 *
 	 * @param  attribute name that will be used in filter
 	 * @param  value     value (or null) to compare against
-	 * @return           Specification<T></T> matching sent in comparison
+	 * @return           Specification<T> matching sent in comparison
 	 */
-	public Specification<T> buildDateIsEqualOrAfterFilter(String attribute, LocalDate value) {
+	public Specification<T> buildDateIsEqualOrAfterFilter(final String attribute, final LocalDate value) {
 		return (entity, cq, cb) -> nonNull(value) ? cb.greaterThanOrEqualTo(entity.get(attribute), value) : cb.and();
 	}
 
 	/**
-	 * Method builds a filter depending on sent in list of string. If values are null, method returns an always-true
-	 * predicate (meaning no filtering will be applied for sent in attribute)
+	 * Method builds a filter depending on sent in list of string, case-insensitive. If values are null, method returns an
+	 * always-true predicate (meaning no filtering will be applied for sent in attribute)
 	 *
 	 * @param  attribute name of attribute that will be used in filter
 	 * @param  values    String-values (or null) to compare against
 	 * @return           Specification<T> matching sent in comparison
 	 */
-	public Specification<T> buildInFilter(String attribute, List<String> values) {
-		return (root, query, cb) -> (values != null && !values.isEmpty()) ? root.get(attribute).in(values) : null;
+	public Specification<T> buildInFilterIgnoreCase(final String attribute, final List<String> values) {
+		return (root, query, cb) -> {
+			if (values == null || values.isEmpty()) {
+				return null;
+			}
+			var lowerCaseValues = values.stream()
+				.filter(Objects::nonNull)
+				.map(String::toLowerCase)
+				.toList();
+			return cb.lower(root.get(attribute)).in(lowerCaseValues);
+		};
+	}
+
+	public Specification<T> buildNumberInFilter(final String attribute, final List<Integer> values) {
+		return (root, query, cb) -> {
+			if (values == null || values.isEmpty()) {
+				return null;
+			}
+			return root.get(attribute).in(values);
+		};
 	}
 
 	/**
@@ -176,7 +171,7 @@ public class SpecificationBuilder<T> {
 	 * @param  searchString the search string
 	 * @return              Specification<T> matching the sent in comparison
 	 */
-	public Specification<T> buildFreeTextSearch(List<String> attributes, String searchString) {
+	public Specification<T> buildFreeTextSearch(final List<String> attributes, final String searchString) {
 		return (root, query, cb) -> {
 			if (searchString == null || searchString.trim().isEmpty()) {
 				return cb.conjunction();
@@ -202,7 +197,7 @@ public class SpecificationBuilder<T> {
 	 * @param  endDate        The end date of the range
 	 * @return                Specification<T> matching the sent in comparison
 	 */
-	public Specification<T> buildDateRangeFilter(String startAttribute, String endAttribute, LocalDate startDate, LocalDate endDate) {
+	public Specification<T> buildDateRangeFilter(final String startAttribute, final String endAttribute, final LocalDate startDate, final LocalDate endDate) {
 		return (root, query, cb) -> {
 			if (startDate != null && endDate != null) {
 				Predicate startPredicate = cb.lessThanOrEqualTo(root.get(startAttribute), endDate);

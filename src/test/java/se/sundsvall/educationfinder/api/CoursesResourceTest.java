@@ -217,7 +217,7 @@ class CoursesResourceTest {
 		// Act
 		final var response = webTestClient.get()
 			.uri(builder -> builder.path(PATH)
-				.queryParam("studyLocation", "Härnösand")
+				.queryParam("studyLocations", "Härnösand")
 				.queryParam("name", "Drifttekniker Kraft & Värme")
 				.queryParam("limit", "25")
 				.build())
@@ -283,10 +283,10 @@ class CoursesResourceTest {
 		// Act
 		final var response = webTestClient.get()
 			.uri(builder -> builder.path(PATH)
-				.queryParam("studyLocation", "Sundsvall")
+				.queryParam("studyLocations", "Sundsvall")
 				.queryParam("name", "Vardagsolyckor")
 				.queryParam("startAfter", "2023-10-15")
-				.queryParam("limit", "20")
+				.queryParam("limit", "6")
 				.build())
 			.exchange()
 			.expectStatus().isOk()
@@ -306,7 +306,7 @@ class CoursesResourceTest {
 				tuple("Vardagsolyckor", "Sundsvall", LocalDate.of(2023, 10, 16)),
 				tuple("Vardagsolyckor", "Sundsvall", LocalDate.of(2023, 10, 16)),
 				tuple("Vardagsolyckor", "Sundsvall", LocalDate.of(2023, 10, 16)));
-		assertThat(response.getMetadata().getLimit()).isEqualTo(20);
+		assertThat(response.getMetadata().getLimit()).isEqualTo(6);
 		assertThat(response.getMetadata().getCount()).isEqualTo(6);
 		assertThat(response.getMetadata().getPage()).isZero();
 		assertThat(response.getMetadata().getTotalRecords()).isEqualTo(6);
@@ -387,6 +387,20 @@ class CoursesResourceTest {
 				"TRANSPORT",
 				"UNDERVISNING OCH IDROTT",
 				"ÖVRIGA KURSER OCH TVÄRVETENSKAP");
+	}
+
+	@Test
+	void findFilterValuesForSubcategory() {
+		final var response = webTestClient.get()
+			.uri(PATH + "/filters/subcategory/values")
+			.exchange()
+			.expectStatus().isOk()
+			.expectHeader().contentType(APPLICATION_JSON)
+			.expectBody(String[].class)
+			.returnResult()
+			.getResponseBody();
+
+		assertThat(response).isNotNull().hasSize(114);
 	}
 
 	@Test
@@ -529,6 +543,29 @@ class CoursesResourceTest {
 	}
 
 	@Test
+	void findAllBySubcategories() {
+		var response = webTestClient.get()
+			.uri(builder -> builder.path(PATH)
+				.queryParam("subcategories", "Matematik")
+				.queryParam("limit", "20")
+				.build())
+			.exchange()
+			.expectStatus().isOk()
+			.expectHeader().contentType(APPLICATION_JSON)
+			.expectBody(PagedCoursesResponse.class)
+			.returnResult()
+			.getResponseBody();
+
+		assertThat(response).isNotNull();
+		assertThat(response.getCourses()).hasSize(20).extracting(Course::getSubcategory).contains("Matematik");
+		assertThat(response.getMetadata().getCount()).isEqualTo(20);
+		assertThat(response.getMetadata().getLimit()).isEqualTo(20);
+		assertThat(response.getMetadata().getPage()).isZero();
+		assertThat(response.getMetadata().getTotalPages()).isEqualTo(5);
+		assertThat(response.getMetadata().getTotalRecords()).isEqualTo(84);
+	}
+
+	@Test
 	void findByCourseId() {
 		final var response = webTestClient.get()
 			.uri(PATH + "/2769")
@@ -554,7 +591,7 @@ class CoursesResourceTest {
 	void findCourses() {
 		var response = webTestClient.get()
 			.uri(uriBuilder -> uriBuilder.path(PATH)
-				.queryParam("category", "NATURVETENSKAP")
+				.queryParam("categories", "NATURVETENSKAP")
 				.queryParam("limit", "20")
 				.build())
 			.exchange()

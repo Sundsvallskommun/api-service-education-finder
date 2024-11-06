@@ -1,12 +1,11 @@
 package se.sundsvall.educationfinder.api.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
-
-import jakarta.validation.constraints.NotNull;
-
-import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "Statistics parameters model")
 public class StatisticsParameters {
@@ -24,7 +23,7 @@ public class StatisticsParameters {
 	private List<String> studyLocations;
 
 	@Schema(description = "List of scopes", example = "25, 50, 75")
-	private List<String> scopes;
+	private List<Integer> scopes;
 
 	@NotNull
 	@Schema(description = "Start date", example = "2024-01-01", requiredMode = Schema.RequiredMode.REQUIRED)
@@ -38,15 +37,15 @@ public class StatisticsParameters {
 		return new StatisticsParameters();
 	}
 
-	public List<String> getScopes() {
+	public List<Integer> getScopes() {
 		return scopes;
 	}
 
-	public void setScopes(final List<String> scopes) {
+	public void setScopes(final List<Integer> scopes) {
 		this.scopes = scopes;
 	}
 
-	public StatisticsParameters withScopes(final List<String> scope) {
+	public StatisticsParameters withScopes(final List<Integer> scope) {
 		this.scopes = scope;
 		return this;
 	}

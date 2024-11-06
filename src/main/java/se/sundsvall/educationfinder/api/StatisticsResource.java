@@ -1,13 +1,12 @@
 package se.sundsvall.educationfinder.api;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.http.MediaType.APPLICATION_PROBLEM_JSON_VALUE;
-import static org.springframework.http.ResponseEntity.ok;
-
-import java.util.List;
-
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -17,19 +16,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.zalando.problem.Problem;
 import org.zalando.problem.violations.ConstraintViolationProblem;
-
 import se.sundsvall.dept44.common.validators.annotation.ValidMunicipalityId;
 import se.sundsvall.educationfinder.api.model.Statistics;
 import se.sundsvall.educationfinder.api.model.StatisticsParameters;
-import se.sundsvall.educationfinder.api.model.enums.StatisticsFilter;
 import se.sundsvall.educationfinder.service.StatisticsService;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.http.MediaType.APPLICATION_PROBLEM_JSON_VALUE;
+import static org.springframework.http.ResponseEntity.ok;
+import static se.sundsvall.educationfinder.api.model.ApiConstants.GET_STATISTICS_DESCRIPTION;
 
 @RestController
 @Validated
@@ -52,19 +49,19 @@ class StatisticsResource {
 	}
 
 	@GetMapping
-	@Operation(summary = "Get statistics based on given parameters")
+	@Operation(description = GET_STATISTICS_DESCRIPTION)
 	ResponseEntity<Statistics> getStatistics(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @ValidMunicipalityId @PathVariable final String municipalityId,
 		@ParameterObject @Valid final StatisticsParameters parameters) {
 		return ok(service.getStatisticsByParameters(parameters));
 	}
 
-	@GetMapping(path = "/filters/{statisticsFilter}/values")
+	@GetMapping(path = "/filters/{filterAttribute}/values")
 	@Operation(summary = "Find available filter values")
 	ResponseEntity<List<String>> findFilterValues(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @ValidMunicipalityId @PathVariable final String municipalityId,
-		@Parameter(description = "The attribute name to get available values from") @PathVariable final StatisticsFilter statisticsFilter) {
-		return ok(service.findStatisticsFilterValues(statisticsFilter));
+		@Parameter(description = "The attribute name to get available values from") @PathVariable final String filterAttribute) {
+		return ok(service.findStatisticsFilterValues(filterAttribute));
 	}
 
 }

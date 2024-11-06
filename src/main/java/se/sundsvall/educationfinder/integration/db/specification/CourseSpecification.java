@@ -25,19 +25,6 @@ public interface CourseSpecification {
 
 	SpecificationBuilder<CourseEntity> BUILDER = new SpecificationBuilder<>();
 
-	// In filters
-	static Specification<CourseEntity> withScopeIn(final List<String> scopes) {
-		return BUILDER.buildInFilter(SCOPE, scopes);
-	}
-
-	static Specification<CourseEntity> withStudyLocationIn(final List<String> studyLocations) {
-		return BUILDER.buildInFilter(STUDY_LOCATION, studyLocations);
-	}
-
-	static Specification<CourseEntity> withLevelIn(final List<String> levels) {
-		return BUILDER.buildInFilter(LEVEL, levels);
-	}
-
 	// Equal ignore case filters
 	static Specification<CourseEntity> withName(final String name) {
 		return BUILDER.buildEqualsIgnoreCaseFilter(NAME, name);
@@ -53,16 +40,6 @@ public interface CourseSpecification {
 
 	static Specification<CourseEntity> withLanguageOfInstruction(final String languageOfInstruction) {
 		return BUILDER.buildEqualsIgnoreCaseFilter(LANGUAGE_OF_INSTRUCTION, languageOfInstruction);
-	}
-
-	// Starting with ignore case filters
-	static Specification<CourseEntity> withCategory(final String category) {
-		return BUILDER.buildStartingWithIgnoreCaseFilter(CATEGORY, category);
-	}
-
-	// Ending with ignore case filters
-	static Specification<CourseEntity> withSubCategory(final String category) {
-		return BUILDER.buildEndingWithIgnoreCaseFilter(CATEGORY, category);
 	}
 
 	// Like ignore case filters
@@ -125,8 +102,33 @@ public interface CourseSpecification {
 		return BUILDER.buildDateIsEqualOrAfterFilter(LATEST_APPLICATION, latestApplication);
 	}
 
-	static Specification<CourseEntity> withFreeTextSearch(String searchString) {
+	static Specification<CourseEntity> withFreeTextSearch(final String searchString) {
 		return BUILDER.buildFreeTextSearch(List.of(CODE, NAME, INFORMATION, CATEGORY.split(" - ", 2)[0]), searchString);
+	}
+
+	// In filters
+	static Specification<CourseEntity> withLevels(final List<String> levels) {
+		return BUILDER.buildInFilterIgnoreCase(LEVEL, levels);
+	}
+
+	static Specification<CourseEntity> withScopes(final List<Integer> scopes) {
+		return BUILDER.buildNumberInFilter(SCOPE, scopes);
+	}
+
+	static Specification<CourseEntity> withStudyLocations(final List<String> studyLocations) {
+		return BUILDER.buildInFilterIgnoreCase(STUDY_LOCATION, studyLocations);
+	}
+
+	static Specification<CourseEntity> withCategories(final List<String> categories) {
+		return BUILDER.buildStartingWithIgnoreCaseFilter(CATEGORY, categories);
+	}
+
+	static Specification<CourseEntity> withSubCategories(final List<String> subCategories) {
+		return BUILDER.buildEndingWithIgnoreCaseFilter(CATEGORY, subCategories);
+	}
+
+	static Specification<CourseEntity> withinPeriod(final LocalDate startDate, final LocalDate endDate) {
+		return BUILDER.buildDateRangeFilter(START, END, startDate, endDate);
 	}
 
 	static Specification<CourseEntity> distinct() {

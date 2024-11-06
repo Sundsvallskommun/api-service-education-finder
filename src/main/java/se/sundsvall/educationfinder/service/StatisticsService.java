@@ -1,30 +1,32 @@
 package se.sundsvall.educationfinder.service;
 
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.CATEGORY;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.LEVEL;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.SCOPE;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.STUDY_LOCATION;
-
-import java.util.List;
-import java.util.Objects;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import se.sundsvall.educationfinder.api.model.Statistics;
 import se.sundsvall.educationfinder.api.model.StatisticsParameters;
-import se.sundsvall.educationfinder.api.model.enums.StatisticsFilter;
 import se.sundsvall.educationfinder.integration.db.CourseRepository;
 import se.sundsvall.educationfinder.integration.db.model.CourseEntity;
+import se.sundsvall.educationfinder.integration.db.model.CourseEntity_;
 import se.sundsvall.educationfinder.integration.db.model.projection.CategoryProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.LevelProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.ScopeProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.StudyLocationProjection;
 
+import java.util.List;
+import java.util.Objects;
+
 @Service
 public class StatisticsService {
+
+	private static final String LEVEL = "level";
+	private static final String SCOPE = "scope";
+	private static final String CATEGORY = "category";
+	private static final String SUBCATEGORY = "subcategory";
+	private static final String STUDY_LOCATION = "studyLocation";
+	private static final String START_DATE = "startDate";
+	private static final String END_DATE = "endDate";
 
 	private final CourseRepository courseRepository;
 
@@ -77,9 +79,9 @@ public class StatisticsService {
 	}
 
 	@Cacheable("statistics-filters")
-	public List<String> findStatisticsFilterValues(final StatisticsFilter statisticsFilter) {
-		return switch (statisticsFilter) {
-			case CATEGORY -> courseRepository.findDistinctBy(CategoryProjection.class, Sort.by(CATEGORY)).stream()
+	public List<String> findStatisticsFilterValues(final String attribute) {
+		return switch (attribute) {
+			case CATEGORY -> courseRepository.findDistinctBy(CategoryProjection.class, Sort.by(CourseEntity_.CATEGORY)).stream()
 				.filter(Objects::nonNull)
 				.map(CategoryProjection::getCategory).map(category -> {
 					var parts = category.split(" - ", 2);
@@ -89,7 +91,7 @@ public class StatisticsService {
 				.filter(StringUtils::isNotEmpty)
 				.map(StringUtils::upperCase)
 				.toList();
-			case SUBCATEGORY -> courseRepository.findDistinctBy(CategoryProjection.class, Sort.by(CATEGORY)).stream()
+			case SUBCATEGORY -> courseRepository.findDistinctBy(CategoryProjection.class, Sort.by(CourseEntity_.CATEGORY)).stream()
 				.filter(Objects::nonNull)
 				.map(CategoryProjection::getCategory)
 				.map(category -> {
@@ -100,26 +102,26 @@ public class StatisticsService {
 				.filter(StringUtils::isNotEmpty)
 				.map(StringUtils::upperCase)
 				.toList();
-			case SCOPE -> courseRepository.findDistinctBy(ScopeProjection.class, Sort.by(SCOPE)).stream()
+			case SCOPE -> courseRepository.findDistinctBy(ScopeProjection.class, Sort.by(CourseEntity_.SCOPE)).stream()
 				.filter(Objects::nonNull)
 				.map(ScopeProjection::getScope)
 				.filter(StringUtils::isNotEmpty)
 				.map(StringUtils::upperCase)
 				.toList();
-			case LEVEL -> courseRepository.findDistinctBy(LevelProjection.class, Sort.by(LEVEL)).stream()
+			case LEVEL -> courseRepository.findDistinctBy(LevelProjection.class, Sort.by(CourseEntity_.LEVEL)).stream()
 				.filter(Objects::nonNull)
 				.map(LevelProjection::getLevel)
 				.filter(StringUtils::isNotEmpty)
 				.map(StringUtils::upperCase)
 				.toList();
-			case STUDY_LOCATION -> courseRepository.findDistinctBy(StudyLocationProjection.class, Sort.by(STUDY_LOCATION)).stream()
+			case STUDY_LOCATION -> courseRepository.findDistinctBy(StudyLocationProjection.class, Sort.by(CourseEntity_.STUDY_LOCATION)).stream()
 				.filter(Objects::nonNull)
 				.map(StudyLocationProjection::getStudyLocation)
 				.filter(StringUtils::isNotEmpty)
 				.map(StringUtils::upperCase)
 				.toList();
 			case START_DATE, END_DATE -> List.of("Any date in this format: yyyy-MM-dd");
+			default -> List.of();
 		};
 	}
-
 }

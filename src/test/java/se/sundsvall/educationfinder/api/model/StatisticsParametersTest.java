@@ -1,5 +1,13 @@
 package se.sundsvall.educationfinder.api.model;
 
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Random;
+
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanEquals;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanHashCode;
@@ -9,14 +17,6 @@ import static com.google.code.beanmatchers.BeanMatchers.registerValueGenerator;
 import static java.time.LocalDate.now;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.MatcherAssert.assertThat;
-
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Random;
-
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
 
 class StatisticsParametersTest {
 
@@ -41,7 +41,7 @@ class StatisticsParametersTest {
 		var subcategories = List.of("subcategory");
 		var levels = List.of("level");
 		var studyLocations = List.of("studyLocation");
-		var scopes = List.of("scope");
+		var scopes = List.of(100, 75);
 		var startDate = LocalDate.now();
 		var endDate = LocalDate.now().plusDays(1);
 

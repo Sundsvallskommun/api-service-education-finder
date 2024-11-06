@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.distinct;
-import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withCategory;
+import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withCategories;
 import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withCode;
 import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withCredits;
 import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withEarliestApplication;
@@ -30,22 +30,17 @@ import static se.sundsvall.educationfinder.integration.db.specification.CourseSp
 import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withLatestApplication;
 import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withLatestApplicationAfter;
 import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withLatestApplicationBefore;
-import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withLevelIn;
+import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withLevels;
 import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withLikeInformation;
 import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withName;
 import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withProvider;
-import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withScopeIn;
+import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withScopes;
 import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withStart;
 import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withStartAfter;
 import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withStartBefore;
-import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withStudyLocationIn;
-import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withSubCategory;
-import static se.sundsvall.educationfinder.integration.db.specification.StatisticsSpecification.withCategories;
-import static se.sundsvall.educationfinder.integration.db.specification.StatisticsSpecification.withLevels;
-import static se.sundsvall.educationfinder.integration.db.specification.StatisticsSpecification.withScopes;
-import static se.sundsvall.educationfinder.integration.db.specification.StatisticsSpecification.withStudyLocations;
-import static se.sundsvall.educationfinder.integration.db.specification.StatisticsSpecification.withSubCategories;
-import static se.sundsvall.educationfinder.integration.db.specification.StatisticsSpecification.withinPeriod;
+import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withStudyLocations;
+import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withSubCategories;
+import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withinPeriod;
 
 @Transactional(readOnly = true)
 @CircuitBreaker(name = "courseRepository")
@@ -58,13 +53,10 @@ public interface CourseRepository extends PagingAndSortingRepository<CourseEntit
 	default Page<CourseEntity> findAllByCourseParameters(final CourseParameters parameters, final Pageable pageable) {
 		return findAll(Specification
 			.where(withCode(parameters.getCode()))
-			.and(withCategory(parameters.getCategory()))
-			.and(withSubCategory(parameters.getSubcategory()))
 			.and(withProvider(parameters.getProvider()))
 			.and(withName(parameters.getName()))
 			.and(withCredits(parameters.getCredits()))
 			.and(withLanguageOfInstruction(parameters.getLanguageOfInstruction()))
-			.and(withLikeInformation(parameters.getInformation()))
 			.and(withStart(parameters.getStart()))
 			.and(withStartAfter(parameters.getStartAfter()))
 			.and(withStartBefore(parameters.getStartBefore()))
@@ -77,9 +69,12 @@ public interface CourseRepository extends PagingAndSortingRepository<CourseEntit
 			.and(withLatestApplication(parameters.getLatestApplication()))
 			.and(withLatestApplicationAfter(parameters.getLatestApplicationAfter()))
 			.and(withLatestApplicationBefore(parameters.getLatestApplicationBefore()))
-			.and(withScopeIn(parameters.getScopes()))
-			.and(withStudyLocationIn(parameters.getStudyLocations()))
-			.and(withLevelIn(parameters.getLevels()))
+			.and(withCategories(parameters.getCategories()))
+			.and(withSubCategories(parameters.getSubcategories()))
+			.and(withScopes(parameters.getScopes()))
+			.and(withStudyLocations(parameters.getStudyLocations()))
+			.and(withLevels(parameters.getLevels()))
+			.and(withLikeInformation(parameters.getInformation()))
 			.and(withFreeTextSearch(parameters.getSearchString()))
 			.and(distinct()),
 			pageable);

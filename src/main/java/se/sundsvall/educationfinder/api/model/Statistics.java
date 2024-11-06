@@ -1,13 +1,13 @@
 package se.sundsvall.educationfinder.api.model;
 
-import static io.swagger.v3.oas.annotations.media.Schema.AccessMode.READ_ONLY;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import io.swagger.v3.oas.annotations.media.Schema;
+import static io.swagger.v3.oas.annotations.media.Schema.AccessMode.READ_ONLY;
 
 @Schema(description = "Statistics model", accessMode = READ_ONLY)
 public class Statistics {
@@ -31,7 +31,7 @@ public class Statistics {
 	private List<String> studyLocations = new ArrayList<>();
 
 	@Schema(description = "Scopes used for filtering", accessMode = READ_ONLY)
-	private List<String> scopes = new ArrayList<>();
+	private List<Integer> scopes = new ArrayList<>();
 
 	@Schema(description = "Levels used for filtering", accessMode = READ_ONLY)
 	private List<String> levels = new ArrayList<>();
@@ -130,15 +130,15 @@ public class Statistics {
 		return this;
 	}
 
-	public List<String> getScopes() {
+	public List<Integer> getScopes() {
 		return scopes;
 	}
 
-	public void setScopes(final List<String> scopes) {
+	public void setScopes(final List<Integer> scopes) {
 		this.scopes = scopes;
 	}
 
-	public Statistics withScopes(final List<String> scopes) {
+	public Statistics withScopes(final List<Integer> scopes) {
 		this.scopes = scopes;
 		return this;
 	}
