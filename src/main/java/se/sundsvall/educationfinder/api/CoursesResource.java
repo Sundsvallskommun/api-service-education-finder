@@ -18,6 +18,8 @@ import se.sundsvall.dept44.common.validators.annotation.ValidMunicipalityId;
 import se.sundsvall.educationfinder.api.model.Course;
 import se.sundsvall.educationfinder.api.model.CourseParameters;
 import se.sundsvall.educationfinder.api.model.PagedCoursesResponse;
+import se.sundsvall.educationfinder.api.validation.FilterType;
+import se.sundsvall.educationfinder.api.validation.ValidFilter;
 import se.sundsvall.educationfinder.service.CourseService;
 
 import java.util.List;
@@ -67,7 +69,7 @@ class CoursesResource {
 	@Operation(summary = "Find available filter values", description = "Find available filter values (for use in the 'find'-resource)")
 	ResponseEntity<List<String>> findFilterValues(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @ValidMunicipalityId @PathVariable final String municipalityId,
-		@Parameter(description = "The attribute name to get available values from") @PathVariable final String filterAttribute) {
+		@Parameter(description = "The attribute name to get available values from") @ValidFilter(type = FilterType.COURSE) @PathVariable final String filterAttribute) {
 		return ok(courseService.findFilterValues(filterAttribute));
 	}
 

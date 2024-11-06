@@ -14,8 +14,11 @@ import java.lang.annotation.Target;
 	ElementType.FIELD, ElementType.CONSTRUCTOR, ElementType.PARAMETER, ElementType.TYPE_USE
 })
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = ValidStatisticsFilterConstraintValidator.class)
-public @interface ValidStatisticsFilter {
+@Constraint(validatedBy = ValidFilterConstraintValidator.class)
+public @interface ValidFilter {
+
+	FilterType type() default FilterType.COURSE;
+
 	String message() default "";
 
 	Class<?>[] groups() default {};

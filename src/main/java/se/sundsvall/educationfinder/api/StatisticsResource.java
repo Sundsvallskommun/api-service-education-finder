@@ -19,6 +19,8 @@ import org.zalando.problem.violations.ConstraintViolationProblem;
 import se.sundsvall.dept44.common.validators.annotation.ValidMunicipalityId;
 import se.sundsvall.educationfinder.api.model.Statistics;
 import se.sundsvall.educationfinder.api.model.StatisticsParameters;
+import se.sundsvall.educationfinder.api.validation.FilterType;
+import se.sundsvall.educationfinder.api.validation.ValidFilter;
 import se.sundsvall.educationfinder.service.StatisticsService;
 
 import java.util.List;
@@ -60,7 +62,7 @@ class StatisticsResource {
 	@Operation(summary = "Find available filter values")
 	ResponseEntity<List<String>> findFilterValues(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @ValidMunicipalityId @PathVariable final String municipalityId,
-		@Parameter(description = "The attribute name to get available values from") @PathVariable final String filterAttribute) {
+		@Parameter(description = "The attribute name to get available values from") @ValidFilter(type = FilterType.STATISTICS) @PathVariable final String filterAttribute) {
 		return ok(service.findStatisticsFilterValues(filterAttribute));
 	}
 
