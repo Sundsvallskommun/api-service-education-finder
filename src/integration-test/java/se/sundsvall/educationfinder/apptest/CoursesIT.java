@@ -38,7 +38,7 @@ class CoursesIT extends AbstractAppTest {
 	@Test
 	void test03_findAllByStudyLocation() {
 		setupCall()
-			.withServicePath(PATH + "?studyLocation=Sundsvall&limit=5")
+			.withServicePath(PATH + "?studyLocations=Sundsvall&limit=5")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -68,7 +68,7 @@ class CoursesIT extends AbstractAppTest {
 	@Test
 	void test06_findAllByLevel() {
 		setupCall()
-			.withServicePath(PATH + "?level=yrkeshögskoleutbildning&limit=5")
+			.withServicePath(PATH + "?levels=yrkeshögskoleutbildning&limit=5")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -108,7 +108,7 @@ class CoursesIT extends AbstractAppTest {
 	@Test
 	void test10_findAllByLevelAndStartSortByEnd() {
 		setupCall()
-			.withServicePath(PATH + "?level=gymnasial vuxenutbildning&start=2024-01-08&sort=end,asc&limit=5")
+			.withServicePath(PATH + "?level=gymnasial vuxenutbildning&start=2024-01-08&sortBy=end&sortDirection=ASC&limit=5")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -118,7 +118,7 @@ class CoursesIT extends AbstractAppTest {
 	@Test
 	void test11_findAllByEarliestApplicationSortByStudyLocation() {
 		setupCall()
-			.withServicePath(PATH + "?earliestApplication=2023-05-24&sort=studyLocation&limit=5")
+			.withServicePath(PATH + "?earliestApplication=2023-05-24&sortBy=studyLocation&limit=5")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -128,7 +128,7 @@ class CoursesIT extends AbstractAppTest {
 	@Test
 	void test12_findAllByLatestApplicationSortByStudyLocation() {
 		setupCall()
-			.withServicePath(PATH + "?latestApplication=2023-08-27&sort=latestApplication,asc&limit=5")
+			.withServicePath(PATH + "?latestApplication=2023-08-27&sortBy=end&limit=5")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -218,7 +218,7 @@ class CoursesIT extends AbstractAppTest {
 	@Test
 	void test21_findAllByStudyLocationAndSearchStringMatchingName() {
 		setupCall()
-			.withServicePath(PATH + "?studyLocation=Härnösand&searchString=Drifttekniker&limit=2")
+			.withServicePath(PATH + "?studyLocations=Härnösand&searchString=Drifttekniker&limit=2")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -228,7 +228,7 @@ class CoursesIT extends AbstractAppTest {
 	@Test
 	void test22_findAllBySubCategory() {
 		setupCall()
-			.withServicePath(PATH + "?subcategory=Fysik&limit=5")
+			.withServicePath(PATH + "?subcategories=Fysik&limit=5")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -239,6 +239,36 @@ class CoursesIT extends AbstractAppTest {
 	void test23_findAllBySearchString() {
 		setupCall()
 			.withServicePath(PATH + "?searchString=frisk&limit=5")
+			.withHttpMethod(GET)
+			.withExpectedResponseStatus(OK)
+			.withExpectedResponse(RESPONSE_FILE)
+			.sendRequestAndVerifyResponse();
+	}
+
+	@Test
+	void test24_findAllByStudyLocations() {
+		setupCall()
+			.withServicePath(PATH + "?studyLocations=Sundsvall&studyLocations=Härnösand&limit=5")
+			.withHttpMethod(GET)
+			.withExpectedResponseStatus(OK)
+			.withExpectedResponse(RESPONSE_FILE)
+			.sendRequestAndVerifyResponse();
+	}
+
+	@Test
+	void test25_findAllByCategoryAndStudyLocation() {
+		setupCall()
+			.withServicePath(PATH + "?categories=naturvetenskap&studyLocations=Sundsvall&limit=5")
+			.withHttpMethod(GET)
+			.withExpectedResponseStatus(OK)
+			.withExpectedResponse(RESPONSE_FILE)
+			.sendRequestAndVerifyResponse();
+	}
+
+	@Test
+	void test26_findAllByCategoriesAndStudyLocation() {
+		setupCall()
+			.withServicePath(PATH + "?categories=naturvetenskap&categories=frisk&studyLocations=Sundsvall&limit=5")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)

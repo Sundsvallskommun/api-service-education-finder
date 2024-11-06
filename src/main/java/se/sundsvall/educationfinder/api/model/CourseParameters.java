@@ -13,12 +13,6 @@ public class CourseParameters extends AbstractParameterPagingAndSortingBase {
 	@Schema(description = "Course code", example = "KEMKEM02")
 	private String code;
 
-	@Schema(description = "Category", example = "Naturvetenskap")
-	private String category;
-
-	@Schema(description = "Subcategory", example = "Kemi")
-	private String subcategory;
-
 	@Schema(description = "Name of the course", example = "Etnicitet och kulturmöten")
 	private String name;
 
@@ -74,13 +68,19 @@ public class CourseParameters extends AbstractParameterPagingAndSortingBase {
 	private LocalDate latestApplicationBefore;
 
 	@Schema(description = "Scope of the course", example = "75")
-	private List<String> scopes;
+	private List<Integer> scopes;
 
 	@Schema(description = "Study location", example = "Sundsvall")
 	private List<String> studyLocations;
 
 	@Schema(description = "Level of the course", example = "gymnasial vuxenutbildning")
 	private List<String> levels;
+
+	@Schema(description = "Category", example = "Naturvetenskap")
+	private List<String> categories;
+
+	@Schema(description = "Subcategory", example = "Kemi")
+	private List<String> subcategories;
 
 	public static CourseParameters create() {
 		return new CourseParameters();
@@ -119,19 +119,6 @@ public class CourseParameters extends AbstractParameterPagingAndSortingBase {
 		this.code = code;
 	}
 
-	public CourseParameters withSubcategory(final String subcategory) {
-		this.subcategory = subcategory;
-		return this;
-	}
-
-	public String getSubcategory() {
-		return subcategory;
-	}
-
-	public void setSubcategory(final String subcategory) {
-		this.subcategory = subcategory;
-	}
-
 	public CourseParameters withSearchString(final String searchString) {
 		this.searchString = searchString;
 		return this;
@@ -145,17 +132,30 @@ public class CourseParameters extends AbstractParameterPagingAndSortingBase {
 		this.searchString = searchString;
 	}
 
-	public CourseParameters withCategory(final String category) {
-		this.category = category;
+	public CourseParameters withCategories(final List<String> categories) {
+		this.categories = categories;
 		return this;
 	}
 
-	public String getCategory() {
-		return category;
+	public List<String> getCategories() {
+		return categories;
 	}
 
-	public void setCategory(final String category) {
-		this.category = category;
+	public void setCategories(final List<String> categories) {
+		this.categories = categories;
+	}
+
+	public CourseParameters withSubcategories(final List<String> subcategories) {
+		this.subcategories = subcategories;
+		return this;
+	}
+
+	public List<String> getSubcategories() {
+		return subcategories;
+	}
+
+	public void setSubcategories(final List<String> subcategories) {
+		this.subcategories = subcategories;
 	}
 
 	public CourseParameters withName(final String name) {
@@ -275,16 +275,16 @@ public class CourseParameters extends AbstractParameterPagingAndSortingBase {
 		this.latestApplication = latestApplication;
 	}
 
-	public CourseParameters withScopes(final List<String> scopes) {
+	public CourseParameters withScopes(final List<Integer> scopes) {
 		this.scopes = scopes;
 		return this;
 	}
 
-	public List<String> getScopes() {
+	public List<Integer> getScopes() {
 		return scopes;
 	}
 
-	public void setScopes(final List<String> scopes) {
+	public void setScopes(final List<Integer> scopes) {
 		this.scopes = scopes;
 	}
 
@@ -422,8 +422,6 @@ public class CourseParameters extends AbstractParameterPagingAndSortingBase {
 	public String toString() {
 		return "CourseParameters{" +
 			"code='" + code + '\'' +
-			", category='" + category + '\'' +
-			", subcategory='" + subcategory + '\'' +
 			", name='" + name + '\'' +
 			", provider='" + provider + '\'' +
 			", credits='" + credits + '\'' +
@@ -445,6 +443,8 @@ public class CourseParameters extends AbstractParameterPagingAndSortingBase {
 			", scopes=" + scopes +
 			", studyLocations=" + studyLocations +
 			", levels=" + levels +
+			", categories=" + categories +
+			", subcategories=" + subcategories +
 			'}';
 	}
 
@@ -457,18 +457,19 @@ public class CourseParameters extends AbstractParameterPagingAndSortingBase {
 		if (!super.equals(o))
 			return false;
 		CourseParameters that = (CourseParameters) o;
-		return Objects.equals(code, that.code) && Objects.equals(category, that.category) && Objects.equals(subcategory, that.subcategory) && Objects.equals(name, that.name) && Objects.equals(provider,
-			that.provider) && Objects.equals(credits, that.credits) && Objects.equals(information, that.information) && Objects.equals(languageOfInstruction, that.languageOfInstruction) && Objects.equals(searchString,
-				that.searchString) && Objects.equals(start, that.start) && Objects.equals(startAfter, that.startAfter) && Objects.equals(startBefore, that.startBefore) && Objects.equals(end, that.end)
-			&& Objects.equals(endAfter, that.endAfter) && Objects.equals(endBefore, that.endBefore) && Objects.equals(earliestApplication, that.earliestApplication) && Objects.equals(earliestApplicationAfter,
-				that.earliestApplicationAfter) && Objects.equals(earliestApplicationBefore, that.earliestApplicationBefore) && Objects.equals(latestApplication, that.latestApplication) && Objects.equals(latestApplicationAfter,
-					that.latestApplicationAfter) && Objects.equals(latestApplicationBefore, that.latestApplicationBefore) && Objects.equals(scopes, that.scopes) && Objects.equals(studyLocations, that.studyLocations)
-			&& Objects.equals(levels, that.levels);
+		return Objects.equals(code, that.code) && Objects.equals(name, that.name) && Objects.equals(provider, that.provider) && Objects.equals(credits, that.credits) && Objects.equals(information,
+			that.information) && Objects.equals(languageOfInstruction, that.languageOfInstruction) && Objects.equals(searchString, that.searchString) && Objects.equals(start, that.start) && Objects.equals(startAfter,
+				that.startAfter) && Objects.equals(startBefore, that.startBefore) && Objects.equals(end, that.end) && Objects.equals(endAfter, that.endAfter) && Objects.equals(endBefore, that.endBefore)
+			&& Objects.equals(earliestApplication, that.earliestApplication) && Objects.equals(earliestApplicationAfter, that.earliestApplicationAfter) && Objects.equals(earliestApplicationBefore, that.earliestApplicationBefore)
+			&& Objects.equals(latestApplication, that.latestApplication) && Objects.equals(latestApplicationAfter, that.latestApplicationAfter) && Objects.equals(latestApplicationBefore, that.latestApplicationBefore)
+			&& Objects.equals(scopes, that.scopes) && Objects.equals(studyLocations, that.studyLocations) && Objects.equals(levels, that.levels) && Objects.equals(categories, that.categories) && Objects.equals(
+				subcategories, that.subcategories);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(super.hashCode(), code, category, subcategory, name, provider, credits, information, languageOfInstruction, searchString, start, startAfter, startBefore, end, endAfter, endBefore, earliestApplication, earliestApplicationAfter,
-			earliestApplicationBefore, latestApplication, latestApplicationAfter, latestApplicationBefore, scopes, studyLocations, levels);
+		return Objects.hash(super.hashCode(), code, name, provider, credits, information, languageOfInstruction, searchString, start, startAfter, startBefore, end, endAfter, endBefore, earliestApplication, earliestApplicationAfter,
+			earliestApplicationBefore,
+			latestApplication, latestApplicationAfter, latestApplicationBefore, scopes, studyLocations, levels, categories, subcategories);
 	}
 }

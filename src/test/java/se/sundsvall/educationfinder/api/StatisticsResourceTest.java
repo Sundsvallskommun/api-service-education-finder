@@ -1,20 +1,5 @@
 package se.sundsvall.educationfinder.api;
 
-import static java.util.Optional.ofNullable;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
-import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static se.sundsvall.educationfinder.api.model.enums.StatisticsFilter.CATEGORY;
-import static se.sundsvall.educationfinder.api.model.enums.StatisticsFilter.END_DATE;
-import static se.sundsvall.educationfinder.api.model.enums.StatisticsFilter.LEVEL;
-import static se.sundsvall.educationfinder.api.model.enums.StatisticsFilter.START_DATE;
-import static se.sundsvall.educationfinder.api.model.enums.StatisticsFilter.STUDY_LOCATION;
-import static se.sundsvall.educationfinder.api.model.enums.StatisticsFilter.SUBCATEGORY;
-
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,17 +7,33 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-
 import se.sundsvall.educationfinder.Application;
 import se.sundsvall.educationfinder.api.model.Statistics;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
+import static java.util.Optional.ofNullable;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 @SpringBootTest(classes = Application.class, webEnvironment = RANDOM_PORT)
 @ActiveProfiles("junit")
 class StatisticsResourceTest {
 
-	private static final String BASE_PATH = "/2281/statistics";
+	private static final String LEVEL = "level";
+	private static final String SCOPE = "scope";
+	private static final String CATEGORY = "category";
+	private static final String SUBCATEGORY = "subcategory";
+	private static final String STUDY_LOCATION = "studyLocation";
+	private static final String START_DATE = "startDate";
+	private static final String END_DATE = "endDate";
 
-	private static final String FILTER_PATH = BASE_PATH + "/filters/{statisticsFilter}/values";
+	private static final String BASE_PATH = "/2281/statistics";
+	private static final String FILTER_PATH = BASE_PATH + "/filters/{filterAttribute}/values";
 
 	@Autowired
 	private WebTestClient webTestClient;
@@ -40,7 +41,7 @@ class StatisticsResourceTest {
 	@Test
 	void findCategoryFilterValues() {
 		final var response = webTestClient.get()
-			.uri(builder -> builder.path(FILTER_PATH).build(Map.of("statisticsFilter", CATEGORY)))
+			.uri(builder -> builder.path(FILTER_PATH).build(Map.of("filterAttribute", CATEGORY)))
 			.exchange()
 			.expectStatus().isOk()
 			.expectHeader().contentType(APPLICATION_JSON)
@@ -74,7 +75,7 @@ class StatisticsResourceTest {
 	@Test
 	void findSubCategoryFilterValues() {
 		final var response = webTestClient.get()
-			.uri(builder -> builder.path(FILTER_PATH).build(Map.of("statisticsFilter", SUBCATEGORY)))
+			.uri(builder -> builder.path(FILTER_PATH).build(Map.of("filterAttribute", SUBCATEGORY)))
 			.exchange()
 			.expectStatus().isOk()
 			.expectHeader().contentType(APPLICATION_JSON)
@@ -88,7 +89,7 @@ class StatisticsResourceTest {
 	@Test
 	void findLevelFilterValues() {
 		final var response = webTestClient.get()
-			.uri(builder -> builder.path(FILTER_PATH).build(Map.of("statisticsFilter", LEVEL)))
+			.uri(builder -> builder.path(FILTER_PATH).build(Map.of("filterAttribute", LEVEL)))
 			.exchange()
 			.expectStatus().isOk()
 			.expectHeader().contentType(APPLICATION_JSON)
@@ -107,7 +108,7 @@ class StatisticsResourceTest {
 	@Test
 	void findStudyLocationFilterValues() {
 		final var response = webTestClient.get()
-			.uri(builder -> builder.path(FILTER_PATH).build(Map.of("statisticsFilter", STUDY_LOCATION)))
+			.uri(builder -> builder.path(FILTER_PATH).build(Map.of("filterAttribute", STUDY_LOCATION)))
 			.exchange()
 			.expectStatus().isOk()
 			.expectHeader().contentType(APPLICATION_JSON)
@@ -133,7 +134,7 @@ class StatisticsResourceTest {
 	@Test
 	void findStartDateFilterValues() {
 		final var response = webTestClient.get()
-			.uri(builder -> builder.path(FILTER_PATH).build(Map.of("statisticsFilter", START_DATE)))
+			.uri(builder -> builder.path(FILTER_PATH).build(Map.of("filterAttribute", START_DATE)))
 			.exchange()
 			.expectStatus().isOk()
 			.expectHeader().contentType(APPLICATION_JSON)
@@ -147,7 +148,7 @@ class StatisticsResourceTest {
 	@Test
 	void findEndDateFilterValues() {
 		final var response = webTestClient.get()
-			.uri(builder -> builder.path(FILTER_PATH).build(Map.of("statisticsFilter", END_DATE)))
+			.uri(builder -> builder.path(FILTER_PATH).build(Map.of("filterAttribute", END_DATE)))
 			.exchange()
 			.expectStatus().isOk()
 			.expectHeader().contentType(APPLICATION_JSON)
@@ -287,7 +288,7 @@ class StatisticsResourceTest {
 
 	@Test
 	void getStatisticsByScopes() {
-		final var scopes = List.of("25", "75", "100");
+		final var scopes = List.of(25, 75, 100);
 		final var startDate = LocalDate.of(2024, 1, 1);
 		final var endDate = LocalDate.of(2024, 8, 1);
 
@@ -352,7 +353,7 @@ class StatisticsResourceTest {
 	private MultiValueMap<String, String> createParameterMap(
 		final List<String> categories,
 		final List<String> subCategories,
-		final List<String> scopes,
+		final List<Integer> scopes,
 		final List<String> levels,
 		final List<String> studyLocations,
 		final LocalDate startDate,
@@ -361,7 +362,7 @@ class StatisticsResourceTest {
 
 		ofNullable(categories).ifPresent(p -> parameters.addAll("categories", p));
 		ofNullable(subCategories).ifPresent(p -> parameters.addAll("subCategories", p));
-		ofNullable(scopes).ifPresent(p -> parameters.addAll("scopes", p));
+		ofNullable(scopes).ifPresent(p -> parameters.addAll("scopes", p.stream().map(Objects::toString).toList()));
 		ofNullable(levels).ifPresent(p -> parameters.addAll("levels", p));
 		ofNullable(studyLocations).ifPresent(p -> parameters.addAll("studyLocations", p));
 		ofNullable(startDate).ifPresent(p -> parameters.add("startDate", String.valueOf(p)));

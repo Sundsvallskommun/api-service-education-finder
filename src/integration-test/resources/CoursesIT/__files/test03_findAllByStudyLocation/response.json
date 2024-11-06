@@ -102,10 +102,10 @@
 		}
 	],
 	"_meta": {
-		"totalRecords": 1561,
+		"totalRecords": 1068,
 		"limit": 5,
 		"count": 5,
-		"totalPages": 313,
+		"totalPages": 214,
 		"page": 0
 	}
 }

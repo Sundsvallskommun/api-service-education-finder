@@ -9,8 +9,8 @@ import org.zalando.problem.Problem;
 import se.sundsvall.educationfinder.api.model.Course;
 import se.sundsvall.educationfinder.api.model.CourseParameters;
 import se.sundsvall.educationfinder.api.model.PagedCoursesResponse;
-import se.sundsvall.educationfinder.api.model.enums.CourseFilter;
 import se.sundsvall.educationfinder.integration.db.CourseRepository;
+import se.sundsvall.educationfinder.integration.db.model.CourseEntity_;
 import se.sundsvall.educationfinder.integration.db.model.projection.CategoryProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.CreditsProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.LevelProjection;
@@ -22,17 +22,19 @@ import java.util.List;
 import java.util.Objects;
 
 import static org.zalando.problem.Status.NOT_FOUND;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.CATEGORY;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.CREDITS;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.LEVEL;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.PROVIDER;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.SCOPE;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.STUDY_LOCATION;
 import static se.sundsvall.educationfinder.service.mapper.CourseMapper.toCourse;
 import static se.sundsvall.educationfinder.service.mapper.CourseMapper.toPagedCoursesResponse;
 
 @Service
 public class CourseService {
+
+	private static final String CREDITS = "credits";
+	private static final String CATEGORY = "category";
+	private static final String SUBCATEGORY = "subcategory";
+	private static final String PROVIDER = "provider";
+	private static final String LEVEL = "level";
+	private static final String SCOPE = "scope";
+	private static final String STUDY_LOCATION = "studyLocation";
 
 	private final CourseRepository courseRepository;
 
@@ -51,9 +53,9 @@ public class CourseService {
 	}
 
 	@Cacheable("course-filters")
-	public List<String> findFilterValues(final CourseFilter courseFilter) {
-		return switch (courseFilter) {
-			case CATEGORY -> courseRepository.findDistinctBy(CategoryProjection.class, Sort.by(CATEGORY)).stream()
+	public List<String> findFilterValues(final String attribute) {
+		return switch (attribute) {
+			case CATEGORY -> courseRepository.findDistinctBy(CategoryProjection.class, Sort.by(CourseEntity_.CATEGORY)).stream()
 				.filter(Objects::nonNull)
 				.map(CategoryProjection::getCategory)
 				.map(category -> {
@@ -64,7 +66,7 @@ public class CourseService {
 				.filter(StringUtils::isNotEmpty)
 				.map(StringUtils::upperCase)
 				.toList();
-			case SUBCATEGORY -> courseRepository.findDistinctBy(CategoryProjection.class, Sort.by(CATEGORY)).stream()
+			case SUBCATEGORY -> courseRepository.findDistinctBy(CategoryProjection.class, Sort.by(CourseEntity_.CATEGORY)).stream()
 				.filter(Objects::nonNull)
 				.map(CategoryProjection::getCategory)
 				.map(category -> {
@@ -75,28 +77,29 @@ public class CourseService {
 				.filter(StringUtils::isNotEmpty)
 				.map(StringUtils::upperCase)
 				.toList();
-			case STUDY_LOCATION -> courseRepository.findDistinctBy(StudyLocationProjection.class, Sort.by(STUDY_LOCATION)).stream()
+			case STUDY_LOCATION -> courseRepository.findDistinctBy(StudyLocationProjection.class, Sort.by(CourseEntity_.STUDY_LOCATION)).stream()
 				.filter(Objects::nonNull)
 				.map(StudyLocationProjection::getStudyLocation)
 				.filter(StringUtils::isNotEmpty)
 				.map(StringUtils::upperCase)
 				.toList();
-			case PROVIDER -> courseRepository.findDistinctBy(ProviderProjection.class, Sort.by(PROVIDER)).stream()
+			case PROVIDER -> courseRepository.findDistinctBy(ProviderProjection.class, Sort.by(CourseEntity_.PROVIDER)).stream()
 				.filter(Objects::nonNull)
 				.map(ProviderProjection::getProvider)
 				.toList();
-			case LEVEL -> courseRepository.findDistinctBy(LevelProjection.class, Sort.by(LEVEL)).stream()
+			case LEVEL -> courseRepository.findDistinctBy(LevelProjection.class, Sort.by(CourseEntity_.LEVEL)).stream()
 				.filter(Objects::nonNull)
 				.map(LevelProjection::getLevel)
 				.toList();
-			case SCOPE -> courseRepository.findDistinctBy(ScopeProjection.class, Sort.by(SCOPE)).stream()
+			case SCOPE -> courseRepository.findDistinctBy(ScopeProjection.class, Sort.by(CourseEntity_.SCOPE)).stream()
 				.filter(Objects::nonNull)
 				.map(ScopeProjection::getScope)
 				.toList();
-			case CREDITS -> courseRepository.findDistinctBy(CreditsProjection.class, Sort.by(CREDITS)).stream()
+			case CREDITS -> courseRepository.findDistinctBy(CreditsProjection.class, Sort.by(CourseEntity_.CREDITS)).stream()
 				.filter(Objects::nonNull)
 				.map(CreditsProjection::getCredits)
 				.toList();
+			default -> List.of();
 		};
 	}
 }

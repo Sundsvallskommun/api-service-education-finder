@@ -39,8 +39,8 @@ class CourseParametersTest {
 	void testBuilderMethods() {
 
 		var code = "code";
-		var category = "category";
-		var subcategory = "subcategory";
+		var categories = List.of("category");
+		var subcategories = List.of("subcategory");
 		var name = "name";
 		var provider = "provider";
 		var credits = "credits";
@@ -53,12 +53,12 @@ class CourseParametersTest {
 		var latestApplication = LocalDate.now().plusDays(4);
 		var levels = List.of("level");
 		var studyLocations = List.of("studyLocation");
-		var scopes = List.of("scope");
+		var scopes = List.of(100);
 
 		var bean = CourseParameters.create()
 			.withCode(code)
-			.withCategory(category)
-			.withSubcategory(subcategory)
+			.withCategories(categories)
+			.withSubcategories(subcategories)
 			.withName(name)
 			.withProvider(provider)
 			.withCredits(credits)
@@ -83,8 +83,8 @@ class CourseParametersTest {
 
 		Assertions.assertThat(bean).isNotNull().hasNoNullFieldsOrPropertiesExcept("sortDirection", "page", "limit", "sortBy");
 		Assertions.assertThat(bean.getCode()).isEqualTo(code);
-		Assertions.assertThat(bean.getCategory()).isEqualTo(category);
-		Assertions.assertThat(bean.getSubcategory()).isEqualTo(subcategory);
+		Assertions.assertThat(bean.getCategories()).isEqualTo(categories);
+		Assertions.assertThat(bean.getSubcategories()).isEqualTo(subcategories);
 		Assertions.assertThat(bean.getName()).isEqualTo(name);
 		Assertions.assertThat(bean.getProvider()).isEqualTo(provider);
 		Assertions.assertThat(bean.getCredits()).isEqualTo(credits);
