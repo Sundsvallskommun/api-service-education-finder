@@ -10,15 +10,12 @@ public class ValidFilterConstraintValidator implements ConstraintValidator<Valid
 	private static final String ERROR_MESSAGE_TEMPLATE = "Given value %s is not valid, valid values are %s";
 	private static final List<String> VALID_COURSE_VALUES = List.of("credits", "category", "subcategory", "provider", "level", "scope", "studyLocation");
 	private static final List<String> VALID_STATISTICS_VALUES = List.of("level", "scope", "category", "subcategory", "studyLocation", "startDate", "endDate");
-	private List<String> VALID_VALUES;
+	private List<String> validValues;
 
 	@Override
 	public void initialize(final ValidFilter constraintAnnotation) {
 		ConstraintValidator.super.initialize(constraintAnnotation);
-		switch (constraintAnnotation.type()) {
-			case COURSE -> VALID_VALUES = VALID_COURSE_VALUES;
-			case STATISTICS -> VALID_VALUES = VALID_STATISTICS_VALUES;
-		}
+		validValues = constraintAnnotation.type() == FilterType.COURSE ? VALID_COURSE_VALUES : VALID_STATISTICS_VALUES;
 	}
 
 	@Override
@@ -26,10 +23,10 @@ public class ValidFilterConstraintValidator implements ConstraintValidator<Valid
 		if (value == null) {
 			return false;
 		}
-		var valid = VALID_VALUES.contains(value);
+		var valid = validValues.contains(value);
 
 		if (!valid) {
-			useCustomMessageForValidation(context, ERROR_MESSAGE_TEMPLATE.formatted(value, VALID_VALUES));
+			useCustomMessageForValidation(context, ERROR_MESSAGE_TEMPLATE.formatted(value, validValues));
 		}
 
 		return valid;

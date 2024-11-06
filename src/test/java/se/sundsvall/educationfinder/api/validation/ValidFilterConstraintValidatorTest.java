@@ -33,7 +33,7 @@ class ValidFilterConstraintValidatorTest {
 		"credits", "category", "subcategory", "provider", "level", "scope", "studyLocation"
 	})
 	void validCourseFilter(final String courseFilter) {
-		ReflectionTestUtils.setField(validator, "VALID_VALUES", List.of("credits", "category", "subcategory", "provider", "level", "scope", "studyLocation"));
+		ReflectionTestUtils.setField(validator, "validValues", List.of("credits", "category", "subcategory", "provider", "level", "scope", "studyLocation"));
 		var valid = validator.isValid(courseFilter, constraintValidatorContextMock);
 		assertThat(valid).isTrue();
 	}
@@ -43,14 +43,14 @@ class ValidFilterConstraintValidatorTest {
 		"Invalid", "not-valid", "valid? naaah"
 	})
 	void invalidCourseFilter(final String courseFilter) {
-		ReflectionTestUtils.setField(validator, "VALID_VALUES", List.of("credits", "category", "subcategory", "provider", "level", "scope", "studyLocation"));
+		ReflectionTestUtils.setField(validator, "validValues", List.of("credits", "category", "subcategory", "provider", "level", "scope", "studyLocation"));
 		when(constraintValidatorContextMock.buildConstraintViolationWithTemplate(any())).thenReturn(constraintViolationBuilderMock);
 
 		var valid = validator.isValid(courseFilter, constraintValidatorContextMock);
 		assertThat(valid).isFalse();
 
 		verify(constraintValidatorContextMock).disableDefaultConstraintViolation();
-		verify(constraintValidatorContextMock).buildConstraintViolationWithTemplate("Given value %s is not valid, valid values are %s".formatted(courseFilter, ReflectionTestUtils.getField(validator, "VALID_VALUES")));
+		verify(constraintValidatorContextMock).buildConstraintViolationWithTemplate("Given value %s is not valid, valid values are %s".formatted(courseFilter, ReflectionTestUtils.getField(validator, "validValues")));
 		verify(constraintViolationBuilderMock).addConstraintViolation();
 	}
 
@@ -59,7 +59,7 @@ class ValidFilterConstraintValidatorTest {
 		"level", "scope", "category", "subcategory", "studyLocation", "startDate", "endDate"
 	})
 	void validStatisticsFilter(final String statisticsFilter) {
-		ReflectionTestUtils.setField(validator, "VALID_VALUES", List.of("level", "scope", "category", "subcategory", "studyLocation", "startDate", "endDate"));
+		ReflectionTestUtils.setField(validator, "validValues", List.of("level", "scope", "category", "subcategory", "studyLocation", "startDate", "endDate"));
 		var valid = validator.isValid(statisticsFilter, constraintValidatorContextMock);
 		assertThat(valid).isTrue();
 	}
@@ -69,14 +69,14 @@ class ValidFilterConstraintValidatorTest {
 		"Invalid", "not-valid", "valid? naaah"
 	})
 	void invalidStatisticsFilter(final String statisticsFilter) {
-		ReflectionTestUtils.setField(validator, "VALID_VALUES", List.of("level", "scope", "category", "subcategory", "studyLocation", "startDate", "endDate"));
+		ReflectionTestUtils.setField(validator, "validValues", List.of("level", "scope", "category", "subcategory", "studyLocation", "startDate", "endDate"));
 		when(constraintValidatorContextMock.buildConstraintViolationWithTemplate(any())).thenReturn(constraintViolationBuilderMock);
 
 		var valid = validator.isValid(statisticsFilter, constraintValidatorContextMock);
 		assertThat(valid).isFalse();
 
 		verify(constraintValidatorContextMock).disableDefaultConstraintViolation();
-		verify(constraintValidatorContextMock).buildConstraintViolationWithTemplate("Given value %s is not valid, valid values are %s".formatted(statisticsFilter, ReflectionTestUtils.getField(validator, "VALID_VALUES")));
+		verify(constraintValidatorContextMock).buildConstraintViolationWithTemplate("Given value %s is not valid, valid values are %s".formatted(statisticsFilter, ReflectionTestUtils.getField(validator, "validValues")));
 		verify(constraintViolationBuilderMock).addConstraintViolation();
 	}
 
