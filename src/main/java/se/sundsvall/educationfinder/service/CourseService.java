@@ -94,6 +94,7 @@ public class CourseService {
 			case SCOPE -> courseRepository.findDistinctBy(ScopeProjection.class, Sort.by(CourseEntity_.SCOPE)).stream()
 				.filter(Objects::nonNull)
 				.map(ScopeProjection::getScope)
+				.map(Objects::toString)
 				.toList();
 			case CREDITS -> courseRepository.findDistinctBy(CreditsProjection.class, Sort.by(CourseEntity_.CREDITS)).stream()
 				.filter(Objects::nonNull)

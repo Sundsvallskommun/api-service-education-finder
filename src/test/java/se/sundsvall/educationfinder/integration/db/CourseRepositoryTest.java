@@ -1,18 +1,5 @@
 package se.sundsvall.educationfinder.integration.db;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.CREDITS;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.LEVEL;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.PROVIDER;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.SCOPE;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.STUDY_LOCATION;
-
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Stream;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -24,7 +11,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
-
 import se.sundsvall.educationfinder.api.model.StatisticsParameters;
 import se.sundsvall.educationfinder.integration.db.model.CourseEntity;
 import se.sundsvall.educationfinder.integration.db.model.projection.CreditsProjection;
@@ -32,6 +18,19 @@ import se.sundsvall.educationfinder.integration.db.model.projection.LevelProject
 import se.sundsvall.educationfinder.integration.db.model.projection.ProviderProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.ScopeProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.StudyLocationProjection;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.CREDITS;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.LEVEL;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.PROVIDER;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.SCOPE;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.STUDY_LOCATION;
 
 /**
  * CourseRepository tests.
@@ -130,10 +129,12 @@ class CourseRepositoryTest {
 		final var result = courseRepository.findDistinctBy(ScopeProjection.class, Sort.by(SCOPE));
 
 		// Assert
-		var filteredResult = result.stream().filter(Objects::nonNull).toList();
+		var filteredResult = result.stream()
+			.filter(Objects::nonNull)
+			.toList();
 		assertThat(filteredResult)
 			.extracting(ScopeProjection::getScope)
-			.containsExactly("25.0", "50.0", "75.0", "100.0");
+			.containsExactly(25, 50, 75, 100);
 	}
 
 	@Test
