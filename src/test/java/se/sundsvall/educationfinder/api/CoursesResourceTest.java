@@ -484,7 +484,7 @@ class CoursesResourceTest {
 		// Assert
 		assertThat(response)
 			.hasSize(4)
-			.containsExactly("25.0", "50.0", "75.0", "100.0");
+			.containsExactly("25", "50", "75", "100");
 	}
 
 	@Test

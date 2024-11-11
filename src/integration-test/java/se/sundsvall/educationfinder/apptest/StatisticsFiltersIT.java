@@ -8,17 +8,17 @@ import se.sundsvall.educationfinder.Application;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpStatus.OK;
 
-@WireMockAppTestSuite(files = "classpath:/StatisticsIT/", classes = Application.class)
-class StatisticsIT extends AbstractAppTest {
+@WireMockAppTestSuite(files = "classpath:/StatisticsFiltersIT/", classes = Application.class)
+public class StatisticsFiltersIT extends AbstractAppTest {
 
 	private static final String RESPONSE_FILE = "response.json";
 
 	private static final String PATH = "/2281/statistics";
 
 	@Test
-	void test01_getStatisticsByCategory() {
+	void test01_findLevelValues() {
 		setupCall()
-			.withServicePath(PATH + "?categories=FÖRBEREDANDE UTBILDNINGAR&startDate=2023-01-01&endDate=2023-12-30&limit=3")
+			.withServicePath(PATH + "/filters/level/values")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -26,9 +26,9 @@ class StatisticsIT extends AbstractAppTest {
 	}
 
 	@Test
-	void test02_getStatisticsBySubCategory() {
+	void test02_findScopeValues() {
 		setupCall()
-			.withServicePath(PATH + "?subCategories=HÄLSO- OCH SJUKVÅRDADMINISTRATION&startDate=2023-01-01&endDate=2023-12-30&limit=3")
+			.withServicePath(PATH + "/filters/scope/values")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -36,9 +36,9 @@ class StatisticsIT extends AbstractAppTest {
 	}
 
 	@Test
-	void test03_getStatisticsByScope() {
+	void test03_findCategoryValues() {
 		setupCall()
-			.withServicePath(PATH + "?scopes=75&startDate=2023-01-01&endDate=2023-12-30&limit=3")
+			.withServicePath(PATH + "/filters/category/values")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -46,9 +46,9 @@ class StatisticsIT extends AbstractAppTest {
 	}
 
 	@Test
-	void test04_getStatisticsByLevel() {
+	void test04_findStudyLocationValues() {
 		setupCall()
-			.withServicePath(PATH + "?levels=GYMNASIAL VUXENUTBILDNING&startDate=2023-01-01&endDate=2023-12-30&limit=3")
+			.withServicePath(PATH + "/filters/studyLocation/values")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
@@ -56,13 +56,32 @@ class StatisticsIT extends AbstractAppTest {
 	}
 
 	@Test
-	void test05_getStatisticsByStudyLocation() {
+	void test05_findStartDateValues() {
 		setupCall()
-			.withServicePath(PATH + "?studyLocations=ÖRNSKÖLDSVIK&startDate=2023-01-01&endDate=2023-12-30&limit=3")
+			.withServicePath(PATH + "/filters/startDate/values")
 			.withHttpMethod(GET)
 			.withExpectedResponseStatus(OK)
 			.withExpectedResponse(RESPONSE_FILE)
 			.sendRequestAndVerifyResponse();
 	}
 
+	@Test
+	void test06_findEndDateValues() {
+		setupCall()
+			.withServicePath(PATH + "/filters/endDate/values")
+			.withHttpMethod(GET)
+			.withExpectedResponseStatus(OK)
+			.withExpectedResponse(RESPONSE_FILE)
+			.sendRequestAndVerifyResponse();
+	}
+
+	@Test
+	void test07_findSubCategoryValues() {
+		setupCall()
+			.withServicePath(PATH + "/filters/subcategory/values")
+			.withHttpMethod(GET)
+			.withExpectedResponseStatus(OK)
+			.withExpectedResponse(RESPONSE_FILE)
+			.sendRequestAndVerifyResponse();
+	}
 }

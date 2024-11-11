@@ -105,8 +105,7 @@ public class StatisticsService {
 			case SCOPE -> courseRepository.findDistinctBy(ScopeProjection.class, Sort.by(CourseEntity_.SCOPE)).stream()
 				.filter(Objects::nonNull)
 				.map(ScopeProjection::getScope)
-				.filter(StringUtils::isNotEmpty)
-				.map(StringUtils::upperCase)
+				.map(Objects::toString)
 				.toList();
 			case LEVEL -> courseRepository.findDistinctBy(LevelProjection.class, Sort.by(CourseEntity_.LEVEL)).stream()
 				.filter(Objects::nonNull)
