@@ -4,7 +4,9 @@
 	"availableSeats": 0,
 	"totalCapacity": 0,
 	"onGoingCourses": 0,
-	"categories": ["FÖRBEREDANDE UTBILDNINGAR"],
+	"categories": [
+		"FÖRBEREDANDE UTBILDNINGAR"
+	],
 	"plannedCourses": 50,
 	"startDate": "2023-01-01"
 }

@@ -1,5 +1,7 @@
 package se.sundsvall.educationfinder.service;
 
+import java.util.List;
+import java.util.Objects;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
@@ -13,9 +15,6 @@ import se.sundsvall.educationfinder.integration.db.model.projection.CategoryProj
 import se.sundsvall.educationfinder.integration.db.model.projection.LevelProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.ScopeProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.StudyLocationProjection;
-
-import java.util.List;
-import java.util.Objects;
 
 @Service
 public class StatisticsService {

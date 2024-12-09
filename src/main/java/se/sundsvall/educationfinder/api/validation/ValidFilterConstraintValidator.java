@@ -2,7 +2,6 @@ package se.sundsvall.educationfinder.api.validation;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-
 import java.util.List;
 
 public class ValidFilterConstraintValidator implements ConstraintValidator<ValidFilter, String> {

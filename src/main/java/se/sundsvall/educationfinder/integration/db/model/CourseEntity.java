@@ -5,11 +5,10 @@ import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 @Entity
 @Table(schema = "api_vuxenutb", name = "KurserVuxenutbildning")

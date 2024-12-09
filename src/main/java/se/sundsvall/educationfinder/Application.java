@@ -3,7 +3,6 @@ package se.sundsvall.educationfinder;
 import static org.springframework.boot.SpringApplication.run;
 
 import org.springframework.cache.annotation.EnableCaching;
-
 import se.sundsvall.dept44.ServiceApplication;
 import se.sundsvall.dept44.util.jacoco.ExcludeFromJacocoGeneratedCoverageReport;
 

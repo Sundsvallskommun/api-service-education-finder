@@ -1,12 +1,11 @@
 package se.sundsvall.educationfinder.api.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.springframework.data.domain.Sort;
-import se.sundsvall.dept44.models.api.paging.AbstractParameterPagingAndSortingBase;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
+import org.springframework.data.domain.Sort;
+import se.sundsvall.dept44.models.api.paging.AbstractParameterPagingAndSortingBase;
 
 public class CourseParameters extends AbstractParameterPagingAndSortingBase {
 

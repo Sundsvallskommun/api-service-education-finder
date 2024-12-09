@@ -1,14 +1,13 @@
 package se.sundsvall.educationfinder.integration.db.specification;
 
-import jakarta.persistence.criteria.Predicate;
-import org.springframework.data.jpa.domain.Specification;
+import static java.util.Objects.nonNull;
 
+import jakarta.persistence.criteria.Predicate;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import static java.util.Objects.nonNull;
+import org.springframework.data.jpa.domain.Specification;
 
 public class SpecificationBuilder<T> {
 

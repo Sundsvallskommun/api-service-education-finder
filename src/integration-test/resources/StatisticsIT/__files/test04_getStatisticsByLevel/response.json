@@ -5,6 +5,8 @@
 	"totalCapacity": 0,
 	"onGoingCourses": 0,
 	"plannedCourses": 370,
-	"levels": ["GYMNASIAL VUXENUTBILDNING"],
+	"levels": [
+		"GYMNASIAL VUXENUTBILDNING"
+	],
 	"startDate": "2023-01-01"
 }
