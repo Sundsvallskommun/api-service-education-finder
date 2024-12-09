@@ -1,20 +1,5 @@
 package se.sundsvall.educationfinder.integration.db;
 
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.transaction.annotation.Transactional;
-import se.sundsvall.educationfinder.api.model.CourseParameters;
-import se.sundsvall.educationfinder.api.model.StatisticsParameters;
-import se.sundsvall.educationfinder.integration.db.model.CourseEntity;
-
-import java.util.List;
-import java.util.Optional;
-
 import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.distinct;
 import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withCategories;
 import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withCode;
@@ -41,6 +26,20 @@ import static se.sundsvall.educationfinder.integration.db.specification.CourseSp
 import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withStudyLocations;
 import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withSubCategories;
 import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withinPeriod;
+
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.transaction.annotation.Transactional;
+import se.sundsvall.educationfinder.api.model.CourseParameters;
+import se.sundsvall.educationfinder.api.model.StatisticsParameters;
+import se.sundsvall.educationfinder.integration.db.model.CourseEntity;
 
 @Transactional(readOnly = true)
 @CircuitBreaker(name = "courseRepository")

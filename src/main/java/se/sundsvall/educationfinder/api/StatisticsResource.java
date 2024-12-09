@@ -1,5 +1,10 @@
 package se.sundsvall.educationfinder.api;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.http.MediaType.APPLICATION_PROBLEM_JSON_VALUE;
+import static org.springframework.http.ResponseEntity.ok;
+import static se.sundsvall.educationfinder.api.model.ApiConstants.GET_STATISTICS_DESCRIPTION;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -7,6 +12,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import java.util.List;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -22,13 +28,6 @@ import se.sundsvall.educationfinder.api.model.StatisticsParameters;
 import se.sundsvall.educationfinder.api.validation.FilterType;
 import se.sundsvall.educationfinder.api.validation.ValidFilter;
 import se.sundsvall.educationfinder.service.StatisticsService;
-
-import java.util.List;
-
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.http.MediaType.APPLICATION_PROBLEM_JSON_VALUE;
-import static org.springframework.http.ResponseEntity.ok;
-import static se.sundsvall.educationfinder.api.model.ApiConstants.GET_STATISTICS_DESCRIPTION;
 
 @RestController
 @Validated
