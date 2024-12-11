@@ -7,7 +7,7 @@ info:
     url: https://opensource.org/licenses/MIT
   version: "3.0"
 servers:
-  - url: http://localhost:56187
+  - url: http://localhost:54903
     description: Generated server url
 tags:
   - name: Courses
@@ -58,45 +58,65 @@ paths:
           description: List of categories
           required: false
           schema:
-            type: string
+            type: array
             description: List of categories
             example: Medicin och vård
+            items:
+              type: string
+              description: List of categories
+              example: Medicin och vård
           example: Medicin och vård
         - name: subCategories
           in: query
           description: List of sub categories
           required: false
           schema:
-            type: string
+            type: array
             description: List of sub categories
             example: PSYKOTERAPI
+            items:
+              type: string
+              description: List of sub categories
+              example: PSYKOTERAPI
           example: PSYKOTERAPI
         - name: levels
           in: query
           description: List of levels
           required: false
           schema:
-            type: string
+            type: array
             description: List of levels
             example: gymnasial vuxenutbildning
+            items:
+              type: string
+              description: List of levels
+              example: gymnasial vuxenutbildning
           example: gymnasial vuxenutbildning
         - name: studyLocations
           in: query
           description: List of study locations
           required: false
           schema:
-            type: string
+            type: array
             description: List of study locations
             example: Sundsvall
+            items:
+              type: string
+              description: List of study locations
+              example: Sundsvall
           example: Sundsvall
         - name: scopes
           in: query
           description: List of scopes
           required: false
           schema:
-            type: string
+            type: array
             description: List of scopes
             example: "25, 50, 75"
+            items:
+              type: integer
+              description: List of scopes
+              format: int32
           example: "25, 50, 75"
         - name: startDate
           in: query
@@ -105,6 +125,7 @@ paths:
           schema:
             type: string
             description: Start date
+            format: date
             example: 2024-01-01
           example: 2024-01-01
         - name: endDate
@@ -114,17 +135,10 @@ paths:
           schema:
             type: string
             description: End date
+            format: date
             example: 2024-12-31
           example: 2024-12-31
       responses:
-        "400":
-          description: Bad request
-          content:
-            application/problem+json:
-              schema:
-                oneOf:
-                  - $ref: "#/components/schemas/Problem"
-                  - $ref: "#/components/schemas/ConstraintViolationProblem"
         "200":
           description: Successful operation
           content:
@@ -146,6 +160,14 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+        "400":
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Problem"
+                  - $ref: "#/components/schemas/ConstraintViolationProblem"
   /{municipalityId}/statistics/filters/{filterAttribute}/values:
     get:
       tags:
@@ -167,14 +189,6 @@ paths:
           schema:
             type: string
       responses:
-        "400":
-          description: Bad request
-          content:
-            application/problem+json:
-              schema:
-                oneOf:
-                  - $ref: "#/components/schemas/Problem"
-                  - $ref: "#/components/schemas/ConstraintViolationProblem"
         "200":
           description: Successful operation
           content:
@@ -200,6 +214,14 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+        "400":
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Problem"
+                  - $ref: "#/components/schemas/ConstraintViolationProblem"
   /{municipalityId}/courses:
     get:
       tags:
@@ -265,14 +287,6 @@ paths:
           schema:
             $ref: "#/components/schemas/CourseParameters"
       responses:
-        "400":
-          description: Bad request
-          content:
-            application/problem+json:
-              schema:
-                oneOf:
-                  - $ref: "#/components/schemas/Problem"
-                  - $ref: "#/components/schemas/ConstraintViolationProblem"
         "200":
           description: Successful operation
           content:
@@ -294,6 +308,14 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+        "400":
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Problem"
+                  - $ref: "#/components/schemas/ConstraintViolationProblem"
   /{municipalityId}/courses/{courseId}:
     get:
       tags:
@@ -317,14 +339,6 @@ paths:
             format: int64
           example: 1234
       responses:
-        "400":
-          description: Bad request
-          content:
-            application/problem+json:
-              schema:
-                oneOf:
-                  - $ref: "#/components/schemas/Problem"
-                  - $ref: "#/components/schemas/ConstraintViolationProblem"
         "200":
           description: Successful operation
           content:
@@ -346,6 +360,14 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+        "400":
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Problem"
+                  - $ref: "#/components/schemas/ConstraintViolationProblem"
   /{municipalityId}/courses/filters/{filterAttribute}/values:
     get:
       tags:
@@ -368,14 +390,6 @@ paths:
           schema:
             type: string
       responses:
-        "400":
-          description: Bad request
-          content:
-            application/problem+json:
-              schema:
-                oneOf:
-                  - $ref: "#/components/schemas/Problem"
-                  - $ref: "#/components/schemas/ConstraintViolationProblem"
         "200":
           description: Successful operation
           content:
@@ -401,6 +415,14 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Problem"
+        "400":
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Problem"
+                  - $ref: "#/components/schemas/ConstraintViolationProblem"
   /api-docs:
     get:
       tags:
