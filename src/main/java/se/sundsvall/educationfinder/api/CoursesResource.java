@@ -34,7 +34,7 @@ import se.sundsvall.educationfinder.service.CourseService;
 	APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE
 })
 @Tag(name = "Courses", description = "Find courses")
-@ApiResponse(responseCode = "200", description = "Successful operation", useReturnTypeSchema = true)
+
 @ApiResponse(responseCode = "400", description = "Bad request", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(oneOf = {
 	Problem.class, ConstraintViolationProblem.class
 })))
@@ -49,7 +49,9 @@ class CoursesResource {
 	}
 
 	@GetMapping
-	@Operation(summary = "Find course", description = FIND_COURSE_DESCRIPTION)
+	@Operation(summary = "Find course", description = FIND_COURSE_DESCRIPTION, responses = {
+		@ApiResponse(responseCode = "200", description = "Successful operation", useReturnTypeSchema = true)
+	})
 	ResponseEntity<PagedCoursesResponse> find(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @ValidMunicipalityId @PathVariable final String municipalityId,
 		final CourseParameters parameters) {
@@ -57,7 +59,9 @@ class CoursesResource {
 	}
 
 	@GetMapping(path = "/{courseId}")
-	@Operation(summary = "Find course by id")
+	@Operation(summary = "Find course by id", responses = {
+		@ApiResponse(responseCode = "200", description = "Successful operation", useReturnTypeSchema = true)
+	})
 	ResponseEntity<Course> findCourseById(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @ValidMunicipalityId @PathVariable final String municipalityId,
 		@Parameter(name = "courseId", description = "The id of the course", example = "1234") @PathVariable final Long courseId) {
@@ -65,7 +69,9 @@ class CoursesResource {
 	}
 
 	@GetMapping(path = "/filters/{filterAttribute}/values")
-	@Operation(summary = "Find available filter values", description = "Find available filter values (for use in the 'find'-resource)")
+	@Operation(summary = "Find available filter values", description = "Find available filter values (for use in the 'find'-resource)", responses = {
+		@ApiResponse(responseCode = "200", description = "Successful operation", useReturnTypeSchema = true)
+	})
 	ResponseEntity<List<String>> findFilterValues(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @ValidMunicipalityId @PathVariable final String municipalityId,
 		@Parameter(description = "The attribute name to get available values from") @ValidFilter(type = FilterType.COURSE) @PathVariable final String filterAttribute) {
