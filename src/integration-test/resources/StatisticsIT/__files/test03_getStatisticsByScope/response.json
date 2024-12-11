@@ -4,7 +4,9 @@
 	"availableSeats": 0,
 	"totalCapacity": 0,
 	"onGoingCourses": 0,
-	"scopes": [75],
+	"scopes": [
+		75
+	],
 	"plannedCourses": 26,
 	"startDate": "2023-01-01"
 }

@@ -3,12 +3,10 @@ package se.sundsvall.educationfinder.api.model;
 import static io.swagger.v3.oas.annotations.media.Schema.AccessMode.READ_ONLY;
 import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDate;
 import java.util.Objects;
-
 import org.springframework.format.annotation.DateTimeFormat;
-
-import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(description = "Course model", accessMode = READ_ONLY)
 public class Course {

@@ -5,6 +5,8 @@
 	"totalCapacity": 0,
 	"onGoingCourses": 0,
 	"plannedCourses": 3,
-	"subCategories": ["HÄLSO- OCH SJUKVÅRDADMINISTRATION"],
+	"subCategories": [
+		"HÄLSO- OCH SJUKVÅRDADMINISTRATION"
+	],
 	"startDate": "2023-01-01"
 }

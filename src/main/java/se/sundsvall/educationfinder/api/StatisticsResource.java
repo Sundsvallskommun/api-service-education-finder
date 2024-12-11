@@ -1,5 +1,10 @@
 package se.sundsvall.educationfinder.api;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.http.MediaType.APPLICATION_PROBLEM_JSON_VALUE;
+import static org.springframework.http.ResponseEntity.ok;
+import static se.sundsvall.educationfinder.api.model.ApiConstants.GET_STATISTICS_DESCRIPTION;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -7,6 +12,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import java.util.List;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -23,20 +29,12 @@ import se.sundsvall.educationfinder.api.validation.FilterType;
 import se.sundsvall.educationfinder.api.validation.ValidFilter;
 import se.sundsvall.educationfinder.service.StatisticsService;
 
-import java.util.List;
-
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.http.MediaType.APPLICATION_PROBLEM_JSON_VALUE;
-import static org.springframework.http.ResponseEntity.ok;
-import static se.sundsvall.educationfinder.api.model.ApiConstants.GET_STATISTICS_DESCRIPTION;
-
 @RestController
 @Validated
 @RequestMapping(path = "/{municipalityId}/statistics", produces = {
 	APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE
 })
 @Tag(name = "Statistics", description = "Get statistics")
-@ApiResponse(responseCode = "200", description = "Successful operation", useReturnTypeSchema = true)
 @ApiResponse(responseCode = "400", description = "Bad request", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(oneOf = {
 	Problem.class, ConstraintViolationProblem.class
 })))
@@ -51,7 +49,9 @@ class StatisticsResource {
 	}
 
 	@GetMapping
-	@Operation(description = GET_STATISTICS_DESCRIPTION)
+	@Operation(description = GET_STATISTICS_DESCRIPTION, responses = {
+		@ApiResponse(responseCode = "200", description = "Successful operation", useReturnTypeSchema = true)
+	})
 	ResponseEntity<Statistics> getStatistics(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @ValidMunicipalityId @PathVariable final String municipalityId,
 		@ParameterObject @Valid final StatisticsParameters parameters) {
@@ -59,7 +59,9 @@ class StatisticsResource {
 	}
 
 	@GetMapping(path = "/filters/{filterAttribute}/values")
-	@Operation(summary = "Find available filter values")
+	@Operation(summary = "Find available filter values", responses = {
+		@ApiResponse(responseCode = "200", description = "Successful operation", useReturnTypeSchema = true)
+	})
 	ResponseEntity<List<String>> findFilterValues(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @ValidMunicipalityId @PathVariable final String municipalityId,
 		@Parameter(description = "The attribute name to get available values from") @ValidFilter(type = FilterType.STATISTICS) @PathVariable final String filterAttribute) {

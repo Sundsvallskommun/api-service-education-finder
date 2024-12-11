@@ -1,11 +1,17 @@
 package se.sundsvall.educationfinder.api;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.http.MediaType.APPLICATION_PROBLEM_JSON_VALUE;
+import static org.springframework.http.ResponseEntity.ok;
+import static se.sundsvall.educationfinder.api.model.ApiConstants.FIND_COURSE_DESCRIPTION;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,20 +28,13 @@ import se.sundsvall.educationfinder.api.validation.FilterType;
 import se.sundsvall.educationfinder.api.validation.ValidFilter;
 import se.sundsvall.educationfinder.service.CourseService;
 
-import java.util.List;
-
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.http.MediaType.APPLICATION_PROBLEM_JSON_VALUE;
-import static org.springframework.http.ResponseEntity.ok;
-import static se.sundsvall.educationfinder.api.model.ApiConstants.FIND_COURSE_DESCRIPTION;
-
 @RestController
 @Validated
 @RequestMapping(path = "/{municipalityId}/courses", produces = {
 	APPLICATION_JSON_VALUE, APPLICATION_PROBLEM_JSON_VALUE
 })
 @Tag(name = "Courses", description = "Find courses")
-@ApiResponse(responseCode = "200", description = "Successful operation", useReturnTypeSchema = true)
+
 @ApiResponse(responseCode = "400", description = "Bad request", content = @Content(mediaType = APPLICATION_PROBLEM_JSON_VALUE, schema = @Schema(oneOf = {
 	Problem.class, ConstraintViolationProblem.class
 })))
@@ -50,7 +49,9 @@ class CoursesResource {
 	}
 
 	@GetMapping
-	@Operation(summary = "Find course", description = FIND_COURSE_DESCRIPTION)
+	@Operation(summary = "Find course", description = FIND_COURSE_DESCRIPTION, responses = {
+		@ApiResponse(responseCode = "200", description = "Successful operation", useReturnTypeSchema = true)
+	})
 	ResponseEntity<PagedCoursesResponse> find(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @ValidMunicipalityId @PathVariable final String municipalityId,
 		final CourseParameters parameters) {
@@ -58,7 +59,9 @@ class CoursesResource {
 	}
 
 	@GetMapping(path = "/{courseId}")
-	@Operation(summary = "Find course by id")
+	@Operation(summary = "Find course by id", responses = {
+		@ApiResponse(responseCode = "200", description = "Successful operation", useReturnTypeSchema = true)
+	})
 	ResponseEntity<Course> findCourseById(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @ValidMunicipalityId @PathVariable final String municipalityId,
 		@Parameter(name = "courseId", description = "The id of the course", example = "1234") @PathVariable final Long courseId) {
@@ -66,7 +69,9 @@ class CoursesResource {
 	}
 
 	@GetMapping(path = "/filters/{filterAttribute}/values")
-	@Operation(summary = "Find available filter values", description = "Find available filter values (for use in the 'find'-resource)")
+	@Operation(summary = "Find available filter values", description = "Find available filter values (for use in the 'find'-resource)", responses = {
+		@ApiResponse(responseCode = "200", description = "Successful operation", useReturnTypeSchema = true)
+	})
 	ResponseEntity<List<String>> findFilterValues(
 		@Parameter(name = "municipalityId", description = "Municipality id", example = "2281") @ValidMunicipalityId @PathVariable final String municipalityId,
 		@Parameter(description = "The attribute name to get available values from") @ValidFilter(type = FilterType.COURSE) @PathVariable final String filterAttribute) {

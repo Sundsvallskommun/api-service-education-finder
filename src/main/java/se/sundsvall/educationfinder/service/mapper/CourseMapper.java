@@ -1,16 +1,15 @@
 package se.sundsvall.educationfinder.service.mapper;
 
+import static java.util.Collections.emptyList;
+
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.data.domain.Page;
 import se.sundsvall.dept44.models.api.paging.PagingMetaData;
 import se.sundsvall.educationfinder.api.model.Course;
 import se.sundsvall.educationfinder.api.model.PagedCoursesResponse;
 import se.sundsvall.educationfinder.integration.db.model.CourseEntity;
-
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.Optional;
-
-import static java.util.Collections.emptyList;
 
 public final class CourseMapper {
 
