@@ -33,19 +33,23 @@ public final class ApiConstants {
 		- earliestApplication: The course 'earliest application' date. Parameter filter strategy: 'EQUAL'. Example value: '2025-01-01'
 		- earliestApplicationBefore: A date that occurs before the course 'earliest application' date. Parameter filter strategy: 'EQUAL-OR-LESS-THAN'. Example value: '2020-01-01'
 		- earliestApplicationAfter: A date that occurs after the course 'earliest application' date. Parameter filter strategy: 'EQUAL-OR-GREATER-THAN'. Example value: '2020-12-31'
-		- latestApplication: The course 'latest application' date. Parameter filter strategy: 'EQUAL'. Example value: '2025-01-01'
-		- latestApplicationBefore: A date that occurs before the course 'latest application' date. Parameter filter strategy: 'EQUAL-OR-LESS-THAN'. Example value: '2020-01-01'
-		- latestApplicationAfter: A date that occurs after the course 'latest application' date. Parameter filter strategy: 'EQUAL-OR-GREATER-THAN'. Example value: '2020-12-31'
+		- latestApplication: The course 'latest application' date. Parameter filter strategy: 'EQUAL-OR-NULL'. Example value: '2025-01-01'
+		- latestApplicationBefore: A date that occurs before the course 'latest application' date. Parameter filter strategy: 'EQUAL-OR-LESS-THAN-OR-NULL'. Example value: '2020-01-01'
+		- latestApplicationAfter: A date that occurs after the course 'latest application' date. Parameter filter strategy: 'EQUAL-OR-GREATER-THAN-OR-NULL'. Example value: '2020-12-31'
 		- information: The course information. Parameter filter strategy: 'LIKE-IGNORE-CASE'. Example value: 'utbildning till affärsutvecklare'
 		- searchString: Search for the parameter value in code, name, category and information attributes. Parameter filter strategy: 'LIKE-IGNORE-CASE'. Example value: 'Programmering'
 
 		Parameter filter strategies:
 		- IN-IGNORE-CASE: Accepts a list of values separated by comma. The parameter value must have an exact match, case insensitive.
 		- EQUAL: The parameter must have an exact match, case sensitive.
+		- EQUAL-OR-NULL: The parameter must have an exact match, case sensitive or be null.
 		- EQUAL-IGNORE-CASE: The parameter must have an exact match, case insensitive.
 		- LIKE-IGNORE-CASE: The parameter value must occur somewhere in the searched attribute, case insensitive.
 		- EQUAL-OR-GREATER-THAN: The parameter value must be equal or greater than the searched attribute.
+		- EQUAL-OR-GREATER-THAN-OR-NULL: The parameter value must be equal or greater than the searched attribute or be null.
 		- EQUAL-OR-LESS-THAN: The parameter value must be equal or less than the searched attribute.
+		- EQUAL-OR-LESS-THAN-OR-NULL: The parameter value must be equal or less than the searched attribute or be null.
+
 
 		Important notes:
 		- All date parameters are expected to be on the format: yyyy-MM-dd (example value: '2025-01-01')
