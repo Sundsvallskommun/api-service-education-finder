@@ -24,6 +24,25 @@ public class SpecificationBuilder<T> {
 	}
 
 	/**
+	 * Method builds an equal or null filter if value is not null. If value is null, method returns an always-true predicate
+	 * (meaning no filtering will be applied for sent in attribute)
+	 *
+	 * @param  attribute name that will be used in filter
+	 * @param  value     value (or null) to compare against
+	 * @return           Specification<T> matching sent in comparison
+	 */
+	public Specification<T> buildEqualOrNullFilter(final String attribute, final Object value) {
+		return (entity, cq, cb) -> {
+			if (value != null) {
+				return cb.or(
+					cb.equal(entity.get(attribute), value),
+					cb.isNull(entity.get(attribute)));
+			}
+			return cb.and();
+		};
+	}
+
+	/**
 	 * Method builds an equal ignore case filter if value is not null. If value is null, method returns an always-true
 	 * predicate (meaning no filtering will be applied for sent in attribute)
 	 *
@@ -121,6 +140,25 @@ public class SpecificationBuilder<T> {
 	}
 
 	/**
+	 * Method builds a filter depending on sent in time stamps. Matches dates that is equal, before or null. If both values
+	 * are null, method returns an always-true predicate (meaning no filtering will be applied for sent in attribute)
+	 *
+	 * @param  attribute name that will be used in filter
+	 * @param  value     value (or null) to compare against
+	 * @return           Specification<T> matching sent in comparison
+	 */
+	public Specification<T> buildDateIsEqualOrBeforeOrNullFilter(final String attribute, final LocalDate value) {
+		return (entity, cq, cb) -> {
+			if (value != null) {
+				return cb.or(
+					cb.lessThanOrEqualTo(entity.get(attribute), value),
+					cb.isNull(entity.get(attribute)));
+			}
+			return cb.and();
+		};
+	}
+
+	/**
 	 * Method builds a filter depending on sent in time stamps. If both values are null, method returns an always-true
 	 * predicate (meaning no filtering will be applied for sent in attribute)
 	 *
@@ -130,6 +168,25 @@ public class SpecificationBuilder<T> {
 	 */
 	public Specification<T> buildDateIsEqualOrAfterFilter(final String attribute, final LocalDate value) {
 		return (entity, cq, cb) -> nonNull(value) ? cb.greaterThanOrEqualTo(entity.get(attribute), value) : cb.and();
+	}
+
+	/**
+	 * Method builds a filter depending on sent in time stamps. Matches dates that is equal, after or null. If both values
+	 * are null, method returns an always-true predicate (meaning no filtering will be applied for sent in attribute)
+	 *
+	 * @param  attribute name that will be used in filter
+	 * @param  value     value (or null) to compare against
+	 * @return           Specification<T> matching sent in comparison
+	 */
+	public Specification<T> buildDateIsEqualOrAfterOrNullFilter(final String attribute, final LocalDate value) {
+		return (entity, cq, cb) -> {
+			if (value != null) {
+				return cb.or(
+					cb.greaterThanOrEqualTo(entity.get(attribute), value),
+					cb.isNull(entity.get(attribute)));
+			}
+			return cb.and();
+		};
 	}
 
 	/**

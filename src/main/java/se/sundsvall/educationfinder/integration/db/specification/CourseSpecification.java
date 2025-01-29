@@ -64,7 +64,7 @@ public interface CourseSpecification {
 	}
 
 	static Specification<CourseEntity> withLatestApplication(final LocalDate latestApplication) {
-		return BUILDER.buildEqualFilter(LATEST_APPLICATION, latestApplication);
+		return BUILDER.buildEqualOrNullFilter(LATEST_APPLICATION, latestApplication);
 	}
 
 	// Date is equal or before filters
@@ -81,7 +81,7 @@ public interface CourseSpecification {
 	}
 
 	static Specification<CourseEntity> withLatestApplicationBefore(final LocalDate latestApplication) {
-		return BUILDER.buildDateIsEqualOrBeforeFilter(LATEST_APPLICATION, latestApplication);
+		return BUILDER.buildDateIsEqualOrBeforeOrNullFilter(LATEST_APPLICATION, latestApplication);
 	}
 
 	// Date is equal or after filters
@@ -98,7 +98,7 @@ public interface CourseSpecification {
 	}
 
 	static Specification<CourseEntity> withLatestApplicationAfter(final LocalDate latestApplication) {
-		return BUILDER.buildDateIsEqualOrAfterFilter(LATEST_APPLICATION, latestApplication);
+		return BUILDER.buildDateIsEqualOrAfterOrNullFilter(LATEST_APPLICATION, latestApplication);
 	}
 
 	static Specification<CourseEntity> withFreeTextSearch(final String searchString) {
