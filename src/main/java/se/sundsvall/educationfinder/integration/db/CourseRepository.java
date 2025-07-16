@@ -50,8 +50,8 @@ public interface CourseRepository extends PagingAndSortingRepository<CourseEntit
 	<P> List<P> findDistinctBy(Class<P> type, Sort sort);
 
 	default Page<CourseEntity> findAllByCourseParameters(final CourseParameters parameters, final Pageable pageable) {
-		return findAll(Specification
-			.where(withCode(parameters.getCode()))
+		return findAll(Specification.allOf(
+			withCode(parameters.getCode()))
 			.and(withProvider(parameters.getProvider()))
 			.and(withName(parameters.getName()))
 			.and(withCredits(parameters.getCredits()))
@@ -80,8 +80,8 @@ public interface CourseRepository extends PagingAndSortingRepository<CourseEntit
 	}
 
 	default List<CourseEntity> findAllByParameters(final StatisticsParameters parameters) {
-		return findAll(Specification
-			.where(withStudyLocations(parameters.getStudyLocations()))
+		return findAll(Specification.allOf(
+			withStudyLocations(parameters.getStudyLocations()))
 			.and(withLevels(parameters.getLevels()))
 			.and(withScopes(parameters.getScopes()))
 			.and(withCategories(parameters.getCategories()))

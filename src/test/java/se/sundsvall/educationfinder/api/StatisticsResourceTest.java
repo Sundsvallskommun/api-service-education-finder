@@ -24,7 +24,6 @@ import se.sundsvall.educationfinder.api.model.Statistics;
 class StatisticsResourceTest {
 
 	private static final String LEVEL = "level";
-	private static final String SCOPE = "scope";
 	private static final String CATEGORY = "category";
 	private static final String SUBCATEGORY = "subcategory";
 	private static final String STUDY_LOCATION = "studyLocation";
