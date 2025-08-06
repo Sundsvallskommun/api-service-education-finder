@@ -81,8 +81,41 @@ public class CourseParameters extends AbstractParameterPagingAndSortingBase {
 	@Schema(description = "Subcategory", example = "Kemi")
 	private List<String> subcategories;
 
+	@Schema(description = "Visiting address municipality ID", example = "2281")
+	private String visitingAddressMunicipalityId;
+
+	@Schema(description = "Study location municipality ID", example = "2281")
+	private String placeOfStudyMunicipalityId;
+
 	public static CourseParameters create() {
 		return new CourseParameters();
+	}
+
+	public CourseParameters withVisitingAddressMunicipalityId(String visitingAddressMunicipalityId) {
+		this.visitingAddressMunicipalityId = visitingAddressMunicipalityId;
+		return this;
+	}
+
+	public String getVisitingAddressMunicipalityId() {
+		return visitingAddressMunicipalityId;
+	}
+
+	public void setVisitingAddressMunicipalityId(String visitingAddressMunicipalityId) {
+		this.visitingAddressMunicipalityId = visitingAddressMunicipalityId;
+	}
+
+	public CourseParameters withPlaceOfStudyMunicipalityId(String placeOfStudyMunicipalityId) {
+		this.placeOfStudyMunicipalityId = placeOfStudyMunicipalityId;
+		return this;
+	}
+
+	public String getPlaceOfStudyMunicipalityId() {
+
+		return placeOfStudyMunicipalityId;
+	}
+
+	public void setPlaceOfStudyMunicipalityId(String placeOfStudyMunicipalityId) {
+		this.placeOfStudyMunicipalityId = placeOfStudyMunicipalityId;
 	}
 
 	public CourseParameters withLimit(int limit) {
@@ -444,13 +477,13 @@ public class CourseParameters extends AbstractParameterPagingAndSortingBase {
 			", levels=" + levels +
 			", categories=" + categories +
 			", subcategories=" + subcategories +
+			", visitingAddressMunicipalityId='" + visitingAddressMunicipalityId + '\'' +
+			", placeOfStudyMunicipalityId='" + placeOfStudyMunicipalityId + '\'' +
 			'}';
 	}
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
-			return true;
 		if (o == null || getClass() != o.getClass())
 			return false;
 		if (!super.equals(o))
@@ -462,13 +495,13 @@ public class CourseParameters extends AbstractParameterPagingAndSortingBase {
 			&& Objects.equals(earliestApplication, that.earliestApplication) && Objects.equals(earliestApplicationAfter, that.earliestApplicationAfter) && Objects.equals(earliestApplicationBefore, that.earliestApplicationBefore)
 			&& Objects.equals(latestApplication, that.latestApplication) && Objects.equals(latestApplicationAfter, that.latestApplicationAfter) && Objects.equals(latestApplicationBefore, that.latestApplicationBefore)
 			&& Objects.equals(scopes, that.scopes) && Objects.equals(studyLocations, that.studyLocations) && Objects.equals(levels, that.levels) && Objects.equals(categories, that.categories) && Objects.equals(
-				subcategories, that.subcategories);
+				subcategories, that.subcategories) && Objects.equals(visitingAddressMunicipalityId, that.visitingAddressMunicipalityId) && Objects.equals(placeOfStudyMunicipalityId, that.placeOfStudyMunicipalityId);
 	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(super.hashCode(), code, name, provider, credits, information, languageOfInstruction, searchString, start, startAfter, startBefore, end, endAfter, endBefore, earliestApplication, earliestApplicationAfter,
 			earliestApplicationBefore,
-			latestApplication, latestApplicationAfter, latestApplicationBefore, scopes, studyLocations, levels, categories, subcategories);
+			latestApplication, latestApplicationAfter, latestApplicationBefore, scopes, studyLocations, levels, categories, subcategories, visitingAddressMunicipalityId, placeOfStudyMunicipalityId);
 	}
 }

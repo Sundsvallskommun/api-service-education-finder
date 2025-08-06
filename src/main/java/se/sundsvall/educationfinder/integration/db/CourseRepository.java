@@ -23,8 +23,10 @@ import static se.sundsvall.educationfinder.integration.db.specification.CourseSp
 import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withStart;
 import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withStartAfter;
 import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withStartBefore;
+import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withStudyLocationMunicipalityId;
 import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withStudyLocations;
 import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withSubCategories;
+import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withVisitingAddressMunicipalityId;
 import static se.sundsvall.educationfinder.integration.db.specification.CourseSpecification.withinPeriod;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
@@ -75,6 +77,8 @@ public interface CourseRepository extends PagingAndSortingRepository<CourseEntit
 			.and(withLevels(parameters.getLevels()))
 			.and(withLikeInformation(parameters.getInformation()))
 			.and(withFreeTextSearch(parameters.getSearchString()))
+			.and(withStudyLocationMunicipalityId(parameters.getPlaceOfStudyMunicipalityId()))
+			.and(withVisitingAddressMunicipalityId(parameters.getVisitingAddressMunicipalityId()))
 			.and(distinct()),
 			pageable);
 	}

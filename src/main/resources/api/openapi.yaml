@@ -5,9 +5,9 @@ info:
   license:
     name: MIT License
     url: https://opensource.org/licenses/MIT
-  version: "3.0"
+  version: "3.1"
 servers:
-  - url: http://localhost:56527
+  - url: http://localhost:55216
     description: Generated server url
 tags:
   - name: Courses
@@ -460,9 +460,9 @@ components:
             type: object
         status:
           $ref: "#/components/schemas/StatusType"
-        title:
-          type: string
         detail:
+          type: string
+        title:
           type: string
     StatusType:
       type: object
@@ -595,9 +595,9 @@ components:
             type: object
         status:
           $ref: "#/components/schemas/StatusType"
-        title:
-          type: string
         detail:
+          type: string
+        title:
           type: string
         suppressed:
           type: array
@@ -879,6 +879,14 @@ components:
             type: string
             description: Subcategory
             example: Kemi
+        visitingAddressMunicipalityId:
+          type: string
+          description: Visiting address municipality ID
+          example: "2281"
+        placeOfStudyMunicipalityId:
+          type: string
+          description: Study location municipality ID
+          example: "2281"
     Direction:
       type: string
       description: The sort order direction
@@ -1002,6 +1010,16 @@ components:
             \ />Ditt antagningsbesked<br />Antagningsbesked skickas via e-post cirka\
             \ två veckor före kursstart.&nbsp;<a href=https://sundsvall.alvis.se/>Se\
             \ ditt antagningsbesked och följ din ansökan via Mina sidor</a>.</p> ]]>"
+        studyLocationMunicipalityId:
+          type: string
+          description: Study location municipality ID
+          readOnly: true
+          example: "2301"
+        visitingAddressMunicipalityId:
+          type: string
+          description: Visiting address municipality ID
+          readOnly: true
+          example: "2301"
       description: Course model
       readOnly: true
     PagedCoursesResponse:

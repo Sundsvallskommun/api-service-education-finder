@@ -36,25 +36,26 @@ class CourseParametersTest {
 
 	@Test
 	void testBuilderMethods() {
+		final var code = "code";
+		final var categories = List.of("category");
+		final var subcategories = List.of("subcategory");
+		final var name = "name";
+		final var provider = "provider";
+		final var credits = "credits";
+		final var information = "information";
+		final var languageOfInstruction = "languageOfInstruction";
+		final var searchString = "searchString";
+		final var start = LocalDate.now().plusDays(4);
+		final var end = LocalDate.now().plusDays(1);
+		final var earliestApplication = LocalDate.now().plusDays(2);
+		final var latestApplication = LocalDate.now().plusDays(4);
+		final var levels = List.of("level");
+		final var studyLocations = List.of("studyLocation");
+		final var scopes = List.of(100);
+		final var placeOfStudyMunicipalityId = "2281";
+		final var visitingAddressMunicipalityId = "2281";
 
-		var code = "code";
-		var categories = List.of("category");
-		var subcategories = List.of("subcategory");
-		var name = "name";
-		var provider = "provider";
-		var credits = "credits";
-		var information = "information";
-		var languageOfInstruction = "languageOfInstruction";
-		var searchString = "searchString";
-		var start = LocalDate.now().plusDays(4);
-		var end = LocalDate.now().plusDays(1);
-		var earliestApplication = LocalDate.now().plusDays(2);
-		var latestApplication = LocalDate.now().plusDays(4);
-		var levels = List.of("level");
-		var studyLocations = List.of("studyLocation");
-		var scopes = List.of(100);
-
-		var bean = CourseParameters.create()
+		final var bean = CourseParameters.create()
 			.withCode(code)
 			.withCategories(categories)
 			.withSubcategories(subcategories)
@@ -78,7 +79,9 @@ class CourseParametersTest {
 			.withLatestApplicationBefore(latestApplication)
 			.withLevels(levels)
 			.withStudyLocations(studyLocations)
-			.withScopes(scopes);
+			.withScopes(scopes)
+			.withPlaceOfStudyMunicipalityId(placeOfStudyMunicipalityId)
+			.withVisitingAddressMunicipalityId(visitingAddressMunicipalityId);
 
 		Assertions.assertThat(bean).isNotNull().hasNoNullFieldsOrPropertiesExcept("sortDirection", "page", "limit", "sortBy");
 		Assertions.assertThat(bean.getCode()).isEqualTo(code);
@@ -105,6 +108,8 @@ class CourseParametersTest {
 		Assertions.assertThat(bean.getLevels()).isEqualTo(levels);
 		Assertions.assertThat(bean.getStudyLocations()).isEqualTo(studyLocations);
 		Assertions.assertThat(bean.getScopes()).isEqualTo(scopes);
+		Assertions.assertThat(bean.getPlaceOfStudyMunicipalityId()).isEqualTo(placeOfStudyMunicipalityId);
+		Assertions.assertThat(bean.getVisitingAddressMunicipalityId()).isEqualTo(visitingAddressMunicipalityId);
 	}
 
 	@Test

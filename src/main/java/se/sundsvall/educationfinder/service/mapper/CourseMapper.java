@@ -15,13 +15,13 @@ public final class CourseMapper {
 
 	private CourseMapper() {}
 
-	public static List<Course> toCourseList(List<CourseEntity> courseEntityList) {
+	public static List<Course> toCourseList(final List<CourseEntity> courseEntityList) {
 		return Optional.ofNullable(courseEntityList).orElse(emptyList()).stream()
 			.map(CourseMapper::toCourse)
 			.toList();
 	}
 
-	public static Course toCourse(CourseEntity courseEntity) {
+	public static Course toCourse(final CourseEntity courseEntity) {
 		return Optional.ofNullable(courseEntity)
 			.map(entity -> Course.create()
 				.withCategory(Optional.ofNullable(entity.getCategory())
@@ -47,11 +47,13 @@ public final class CourseMapper {
 				.withStudyLocation(entity.getStudyLocation())
 				.withSubjectCode(entity.getSubjectCode())
 				.withLanguageOfInstruction(entity.getLanguageOfInstruction())
-				.withUrl(entity.getUrl()))
+				.withUrl(entity.getUrl())
+				.withStudyLocationMunicipalityId(entity.getPlaceOfStudyMunicipalityId())
+				.withVisitingAddressMunicipalityId(entity.getVisitingAddressMunicipalityId()))
 			.orElse(null);
 	}
 
-	public static PagedCoursesResponse toPagedCoursesResponse(Page<CourseEntity> courseEntityPage) {
+	public static PagedCoursesResponse toPagedCoursesResponse(final Page<CourseEntity> courseEntityPage) {
 		return Optional.ofNullable(courseEntityPage)
 			.map(page -> PagedCoursesResponse.create()
 				.withCourses(toCourseList(page.getContent()))
@@ -64,7 +66,7 @@ public final class CourseMapper {
 			.orElse(null);
 	}
 
-	private static Double toDouble(BigDecimal bigDecimal) {
+	private static Double toDouble(final BigDecimal bigDecimal) {
 		return Optional.ofNullable(bigDecimal)
 			.map(BigDecimal::doubleValue)
 			.orElse(null);

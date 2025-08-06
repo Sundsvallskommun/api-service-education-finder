@@ -10,10 +10,12 @@ import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.LA
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.LATEST_APPLICATION;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.LEVEL;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.NAME;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.PLACE_OF_STUDY_MUNICIPALITY_ID;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.PROVIDER;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.SCOPE;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.START;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.STUDY_LOCATION;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.VISITING_ADDRESS_MUNICIPALITY_ID;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -65,6 +67,14 @@ public interface CourseSpecification {
 
 	static Specification<CourseEntity> withLatestApplication(final LocalDate latestApplication) {
 		return BUILDER.buildEqualOrNullFilter(LATEST_APPLICATION, latestApplication);
+	}
+
+	static Specification<CourseEntity> withStudyLocationMunicipalityId(final String studyLocationMunicipalityId) {
+		return BUILDER.buildEqualFilter(PLACE_OF_STUDY_MUNICIPALITY_ID, studyLocationMunicipalityId);
+	}
+
+	static Specification<CourseEntity> withVisitingAddressMunicipalityId(final String visitingAddressMunicipalityId) {
+		return BUILDER.buildEqualFilter(VISITING_ADDRESS_MUNICIPALITY_ID, visitingAddressMunicipalityId);
 	}
 
 	// Date is equal or before filters

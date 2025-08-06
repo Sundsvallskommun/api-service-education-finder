@@ -56,6 +56,8 @@ class CourseTest {
 		final var category = "Ekonomi, marknadsföring och administration";
 		final var subcategory = "Administration";
 		final var languageOfInstruction = "Svenska";
+		final var studyLocationMunicipalityId = "2281";
+		final var visitingAddressMunicipalityId = "2281";
 
 		final var bean = Course.create()
 			.withId(id)
@@ -77,7 +79,9 @@ class CourseTest {
 			.withCategory(category)
 			.withSubcategory(subcategory)
 			.withLanguageOfInstruction(languageOfInstruction)
-			.withUrl(url);
+			.withUrl(url)
+			.withStudyLocationMunicipalityId(studyLocationMunicipalityId)
+			.withVisitingAddressMunicipalityId(visitingAddressMunicipalityId);
 
 		assertThat(bean).isNotNull().hasNoNullFieldsOrProperties();
 		assertThat(bean.getId()).isEqualTo(id);
@@ -100,6 +104,8 @@ class CourseTest {
 		assertThat(bean.getSubcategory()).isEqualTo(subcategory);
 		assertThat(bean.getLanguageOfInstruction()).isEqualTo(languageOfInstruction);
 		assertThat(bean.getUrl()).isEqualTo(url);
+		assertThat(bean.getStudyLocationMunicipalityId()).isEqualTo(studyLocationMunicipalityId);
+		assertThat(bean.getVisitingAddressMunicipalityId()).isEqualTo(visitingAddressMunicipalityId);
 	}
 
 	@Test

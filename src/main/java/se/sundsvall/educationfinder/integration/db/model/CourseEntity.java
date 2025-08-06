@@ -76,8 +76,40 @@ public class CourseEntity {
 	@Column(name = "Undervisningssprak")
 	private String languageOfInstruction;
 
+	@Column(name = "SusaKurstillfällePlatsKommunkod")
+	private String placeOfStudyMunicipalityId;
+
+	@Column(name = "BesöksadressKommunkod")
+	private String visitingAddressMunicipalityId;
+
 	public static CourseEntity create() {
 		return new CourseEntity();
+	}
+
+	public CourseEntity withPlaceOfStudyMunicipalityId(String placeOfStudyMunicipalityId) {
+		this.placeOfStudyMunicipalityId = placeOfStudyMunicipalityId;
+		return this;
+	}
+
+	public String getPlaceOfStudyMunicipalityId() {
+		return placeOfStudyMunicipalityId;
+	}
+
+	public void setPlaceOfStudyMunicipalityId(String placeOfStudyMunicipalityId) {
+		this.placeOfStudyMunicipalityId = placeOfStudyMunicipalityId;
+	}
+
+	public CourseEntity withVisitingAddressMunicipalityId(String visitingAddressMunicipalityId) {
+		this.visitingAddressMunicipalityId = visitingAddressMunicipalityId;
+		return this;
+	}
+
+	public String getVisitingAddressMunicipalityId() {
+		return visitingAddressMunicipalityId;
+	}
+
+	public void setVisitingAddressMunicipalityId(String visitingAddressMunicipalityId) {
+		this.visitingAddressMunicipalityId = visitingAddressMunicipalityId;
 	}
 
 	public Long getId() {
@@ -349,24 +381,27 @@ public class CourseEntity {
 			", information='" + information + '\'' +
 			", category='" + category + '\'' +
 			", languageOfInstruction='" + languageOfInstruction + '\'' +
+			", placeOfStudyMunicipalityId='" + placeOfStudyMunicipalityId + '\'' +
+			", visitingAddressMunicipalityId='" + visitingAddressMunicipalityId + '\'' +
 			'}';
 	}
 
 	@Override
-	public boolean equals(final Object o) {
-		if (this == o)
-			return true;
+	public boolean equals(Object o) {
 		if (o == null || getClass() != o.getClass())
 			return false;
-		final CourseEntity that = (CourseEntity) o;
-		return Objects.equals(id, that.id) && Objects.equals(code, that.code) && Objects.equals(name, that.name) && Objects.equals(provider, that.provider) && Objects.equals(providerUrl, that.providerUrl) && Objects.equals(level, that.level) && Objects
-			.equals(url, that.url) && Objects.equals(credits, that.credits) && Objects.equals(scope, that.scope) && Objects.equals(studyLocation, that.studyLocation) && Objects.equals(subjectCode, that.subjectCode) && Objects.equals(numberOfSeats,
-				that.numberOfSeats) && Objects.equals(start, that.start) && Objects.equals(end, that.end) && Objects.equals(earliestApplication, that.earliestApplication) && Objects.equals(latestApplication, that.latestApplication) && Objects.equals(
-					information, that.information) && Objects.equals(category, that.category) && Objects.equals(languageOfInstruction, that.languageOfInstruction);
+		CourseEntity that = (CourseEntity) o;
+		return Objects.equals(id, that.id) && Objects.equals(code, that.code) && Objects.equals(name, that.name) && Objects.equals(provider, that.provider) && Objects.equals(providerUrl, that.providerUrl)
+			&& Objects.equals(level, that.level) && Objects.equals(url, that.url) && Objects.equals(credits, that.credits) && Objects.equals(scope, that.scope) && Objects.equals(studyLocation,
+				that.studyLocation) && Objects.equals(subjectCode, that.subjectCode) && Objects.equals(numberOfSeats, that.numberOfSeats) && Objects.equals(start, that.start) && Objects.equals(end, that.end)
+			&& Objects.equals(earliestApplication, that.earliestApplication) && Objects.equals(latestApplication, that.latestApplication) && Objects.equals(information, that.information) && Objects.equals(category,
+				that.category) && Objects.equals(languageOfInstruction, that.languageOfInstruction) && Objects.equals(placeOfStudyMunicipalityId, that.placeOfStudyMunicipalityId) && Objects.equals(visitingAddressMunicipalityId,
+					that.visitingAddressMunicipalityId);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, code, name, provider, providerUrl, level, url, credits, scope, studyLocation, subjectCode, numberOfSeats, start, end, earliestApplication, latestApplication, information, category, languageOfInstruction);
+		return Objects.hash(id, code, name, provider, providerUrl, level, url, credits, scope, studyLocation, subjectCode, numberOfSeats, start, end, earliestApplication, latestApplication, information, category, languageOfInstruction,
+			placeOfStudyMunicipalityId, visitingAddressMunicipalityId);
 	}
 }
