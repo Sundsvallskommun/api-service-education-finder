@@ -38,7 +38,7 @@ class CourseEntityTest {
 	void testBuilderMethods() {
 
 		final var code = "code";
-		final var credits = new BigDecimal(50.0);
+		final var credits = new BigDecimal("50.0");
 		final var provider = "provider";
 		final var end = LocalDate.now().plusDays(1);
 		final var earliestApplication = LocalDate.now().plusDays(2);
@@ -49,13 +49,15 @@ class CourseEntityTest {
 		final var numberOfSeats = 1;
 		final var providerUrl = "providerUrl";
 		final var information = "information";
-		final var scope = new BigDecimal(100.0);
+		final var scope = new BigDecimal("100.0");
 		final var start = LocalDate.now().plusDays(4);
 		final var studyLocation = "studyLocation";
 		final var subjectCode = "subjectCode";
 		final var url = "url";
 		final var category = "category";
 		final var languageOfInstruction = "language";
+		final var visitingAddressMunicipalityId = "2281";
+		final var placeOfStudyMunicipalityId = "2281";
 
 		final var bean = CourseEntity.create()
 			.withCode(code)
@@ -76,7 +78,9 @@ class CourseEntityTest {
 			.withSubjectCode(subjectCode)
 			.withCategory(category)
 			.withLanguageOfInstruction(languageOfInstruction)
-			.withUrl(url);
+			.withUrl(url)
+			.withPlaceOfStudyMunicipalityId(placeOfStudyMunicipalityId)
+			.withVisitingAddressMunicipalityId(visitingAddressMunicipalityId);
 
 		assertThat(bean).isNotNull().hasNoNullFieldsOrProperties();
 		assertThat(bean.getCode()).isEqualTo(code);
@@ -98,6 +102,8 @@ class CourseEntityTest {
 		assertThat(bean.getCategory()).isEqualTo(category);
 		assertThat(bean.getLanguageOfInstruction()).isEqualTo(languageOfInstruction);
 		assertThat(bean.getUrl()).isEqualTo(url);
+		assertThat(bean.getPlaceOfStudyMunicipalityId()).isEqualTo(placeOfStudyMunicipalityId);
+		assertThat(bean.getVisitingAddressMunicipalityId()).isEqualTo(visitingAddressMunicipalityId);
 	}
 
 	@Test

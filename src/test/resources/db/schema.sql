@@ -27,5 +27,7 @@ create table api_vuxenutb.KurserVuxenutbildning
     Undervisningssprak varchar(4096) COLLATE Finnish_Swedish_CI_AS,
     DistansObligatorisk varchar(4096) COLLATE Finnish_Swedish_CI_AS,
     DistansValfritt varchar(4096) COLLATE Finnish_Swedish_CI_AS,
-    Intresseomrade_kategori varchar(8000)  COLLATE Finnish_Swedish_CI_AS
+    Intresseomrade_kategori varchar(8000)  COLLATE Finnish_Swedish_CI_AS,
+    BesöksadressKommunkod varchar(4) COLLATE Finnish_Swedish_CI_AS,
+    SusaKurstillfällePlatsKommunkod varchar(4) COLLATE Finnish_Swedish_CI_AS
 );
