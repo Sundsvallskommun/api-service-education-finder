@@ -9,27 +9,27 @@ import java.util.Objects;
 @Schema(description = "Statistics parameters model")
 public class StatisticsParameters {
 
-	@Schema(description = "List of categories", example = "Medicin och vård")
+	@Schema(description = "List of categories", examples = "Medicin och vård")
 	private List<String> categories;
 
-	@Schema(description = "List of sub categories", example = "PSYKOTERAPI")
+	@Schema(description = "List of sub categories", examples = "PSYKOTERAPI")
 	private List<String> subCategories;
 
-	@Schema(description = "List of levels", example = "gymnasial vuxenutbildning")
+	@Schema(description = "List of levels", examples = "gymnasial vuxenutbildning")
 	private List<String> levels;
 
-	@Schema(description = "List of study locations", example = "Sundsvall")
+	@Schema(description = "List of study locations", examples = "Sundsvall")
 	private List<String> studyLocations;
 
-	@Schema(description = "List of scopes", example = "25, 50, 75")
+	@Schema(description = "List of scopes", examples = "25, 50, 75")
 	private List<Integer> scopes;
 
 	@NotNull
-	@Schema(description = "Start date", example = "2024-01-01", requiredMode = Schema.RequiredMode.REQUIRED)
+	@Schema(description = "Start date", examples = "2024-01-01", requiredMode = Schema.RequiredMode.REQUIRED)
 	private LocalDate startDate;
 
 	@NotNull
-	@Schema(description = "End date", example = "2024-12-31", requiredMode = Schema.RequiredMode.REQUIRED)
+	@Schema(description = "End date", examples = "2024-12-31", requiredMode = Schema.RequiredMode.REQUIRED)
 	private LocalDate endDate;
 
 	public static StatisticsParameters create() {

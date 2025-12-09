@@ -11,19 +11,19 @@ import java.util.Objects;
 @Schema(description = "Statistics model", accessMode = READ_ONLY)
 public class Statistics {
 
-	@Schema(description = "Number of on-going courses", example = "10", accessMode = READ_ONLY)
+	@Schema(description = "Number of on-going courses", examples = "10", accessMode = READ_ONLY)
 	private int onGoingCourses;
 
-	@Schema(description = "Number of planned courses", example = "10", accessMode = READ_ONLY)
+	@Schema(description = "Number of planned courses", examples = "10", accessMode = READ_ONLY)
 	private int plannedCourses;
 
-	@Schema(description = "Number of finished courses", example = "10", accessMode = READ_ONLY)
+	@Schema(description = "Number of finished courses", examples = "10", accessMode = READ_ONLY)
 	private int finishedCourses;
 
-	@Schema(description = "Number of available seats", example = "10", accessMode = READ_ONLY)
+	@Schema(description = "Number of available seats", examples = "10", accessMode = READ_ONLY)
 	private int availableSeats;
 
-	@Schema(description = "Total capacity", example = "10", accessMode = READ_ONLY)
+	@Schema(description = "Total capacity", examples = "10", accessMode = READ_ONLY)
 	private int totalCapacity;
 
 	@Schema(description = "Study locations used for filtering", accessMode = READ_ONLY)

@@ -1,12 +1,13 @@
 # EducationFinder
 
-_The service serves as a proxy to a third party database and provides information and statistics for courses and educations offered within a municipality._
+_The service serves as a proxy to a third party database and provides information and statistics for courses and
+educations offered within a municipality._
 
 ## Getting Started
 
 ### Prerequisites
 
-- **Java 21 or higher**
+- **Java 25 or higher**
 - **Maven**
 - **Git**
 
@@ -74,7 +75,8 @@ curl -X 'GET' 'http://localhost:8080/2281/courses?startAfter=2025-07-16&studyLoc
 
 ## Configuration
 
-Configuration is crucial for the application to run successfully. Ensure all necessary settings are configured in `application.yml`.
+Configuration is crucial for the application to run successfully. Ensure all necessary settings are configured in
+`application.yml`.
 
 ### Key Configuration Parameters
 
@@ -111,7 +113,8 @@ spring:
 
 ## Contributing
 
-Contributions are welcome! Please see [CONTRIBUTING.md](https://github.com/Sundsvallskommun/.github/blob/main/.github/CONTRIBUTING.md) for guidelines.
+Contributions are welcome! Please
+see [CONTRIBUTING.md](https://github.com/Sundsvallskommun/.github/blob/main/.github/CONTRIBUTING.md) for guidelines.
 
 ## License
 
