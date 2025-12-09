@@ -9,82 +9,82 @@ import se.sundsvall.dept44.models.api.paging.AbstractParameterPagingAndSortingBa
 
 public class CourseParameters extends AbstractParameterPagingAndSortingBase {
 
-	@Schema(description = "Course code", example = "KEMKEM02")
+	@Schema(description = "Course code", examples = "KEMKEM02")
 	private String code;
 
-	@Schema(description = "Name of the course", example = "Etnicitet och kulturmöten")
+	@Schema(description = "Name of the course", examples = "Etnicitet och kulturmöten")
 	private String name;
 
-	@Schema(description = "Provider of the course", example = "Sundsvalls Kommun")
+	@Schema(description = "Provider of the course", examples = "Sundsvalls Kommun")
 	private String provider;
 
-	@Schema(description = "Course credits", example = "100")
+	@Schema(description = "Course credits", examples = "100")
 	private String credits;
 
-	@Schema(description = "Information about the course", example = "This is course information")
+	@Schema(description = "Information about the course", examples = "This is course information")
 	private String information;
 
-	@Schema(description = "Language of instruction", example = "Swedish")
+	@Schema(description = "Language of instruction", examples = "Swedish")
 	private String languageOfInstruction;
 
-	@Schema(description = "Search string", example = "searchString")
+	@Schema(description = "Search string", examples = "searchString")
 	private String searchString;
 
-	@Schema(description = "Start date of the course", example = "2022-12-31")
+	@Schema(description = "Start date of the course", examples = "2022-12-31")
 	private LocalDate start;
 
-	@Schema(description = "Start date of the course is after", example = "2022-12-31")
+	@Schema(description = "Start date of the course is after", examples = "2022-12-31")
 	private LocalDate startAfter;
 
-	@Schema(description = "Start date of the course is before", example = "2022-12-31")
+	@Schema(description = "Start date of the course is before", examples = "2022-12-31")
 	private LocalDate startBefore;
 
-	@Schema(description = "End date of the course", example = "2022-12-31")
+	@Schema(description = "End date of the course", examples = "2022-12-31")
 	private LocalDate end;
 
-	@Schema(description = "End date of the course is after", example = "2022-12-31")
+	@Schema(description = "End date of the course is after", examples = "2022-12-31")
 	private LocalDate endAfter;
 
-	@Schema(description = "End date of the course is before", example = "2022-12-31")
+	@Schema(description = "End date of the course is before", examples = "2022-12-31")
 	private LocalDate endBefore;
 
-	@Schema(description = "Earliest application date", example = "2022-12-31")
+	@Schema(description = "Earliest application date", examples = "2022-12-31")
 	private LocalDate earliestApplication;
 
-	@Schema(description = "Earliest application date is after", example = "2022-12-31")
+	@Schema(description = "Earliest application date is after", examples = "2022-12-31")
 	private LocalDate earliestApplicationAfter;
 
-	@Schema(description = "Earliest application date is before", example = "2022-12-31")
+	@Schema(description = "Earliest application date is before", examples = "2022-12-31")
 	private LocalDate earliestApplicationBefore;
 
-	@Schema(description = "Latest application date", example = "2022-12-31")
+	@Schema(description = "Latest application date", examples = "2022-12-31")
 	private LocalDate latestApplication;
 
-	@Schema(description = "Latest application date is after", example = "2022-12-31")
+	@Schema(description = "Latest application date is after", examples = "2022-12-31")
 	private LocalDate latestApplicationAfter;
 
-	@Schema(description = "Latest application date is before", example = "2022-12-31")
+	@Schema(description = "Latest application date is before", examples = "2022-12-31")
 	private LocalDate latestApplicationBefore;
 
-	@Schema(description = "Scope of the course", example = "75")
+	@Schema(description = "Scope of the course", examples = "75")
 	private List<Integer> scopes;
 
-	@Schema(description = "Study location", example = "Sundsvall")
+	@Schema(description = "Study location", examples = "Sundsvall")
 	private List<String> studyLocations;
 
-	@Schema(description = "Level of the course", example = "gymnasial vuxenutbildning")
+	@Schema(description = "Level of the course", examples = "gymnasial vuxenutbildning")
 	private List<String> levels;
 
-	@Schema(description = "Category", example = "Naturvetenskap")
+	@Schema(description = "Category", examples = "Naturvetenskap")
 	private List<String> categories;
 
-	@Schema(description = "Subcategory", example = "Kemi")
+	@Schema(description = "Subcategory", examples = "Kemi")
 	private List<String> subcategories;
 
-	@Schema(description = "Visiting address municipality ID", example = "2281")
+	@Schema(description = "Visiting address municipality ID", examples = "2281")
 	private String visitingAddressMunicipalityId;
 
-	@Schema(description = "Study location municipality ID", example = "2281")
+	@Schema(description = "Study location municipality ID", examples = "2281")
 	private String placeOfStudyMunicipalityId;
 
 	public static CourseParameters create() {

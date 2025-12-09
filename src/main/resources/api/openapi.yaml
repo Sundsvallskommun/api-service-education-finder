@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.1.0
 info:
   title: api-education-finder
   contact: { }
@@ -7,7 +7,7 @@ info:
     url: https://opensource.org/licenses/MIT
   version: "3.1"
 servers:
-  - url: http://localhost:55216
+  - url: http://localhost:65105
     description: Generated server url
 tags:
   - name: Courses
@@ -60,12 +60,13 @@ paths:
           schema:
             type: array
             description: List of categories
-            example: Medicin och vård
+            examples:
+              - Medicin och vård
             items:
               type: string
               description: List of categories
-              example: Medicin och vård
-          example: Medicin och vård
+              examples:
+                - Medicin och vård
         - name: subCategories
           in: query
           description: List of sub categories
@@ -73,12 +74,13 @@ paths:
           schema:
             type: array
             description: List of sub categories
-            example: PSYKOTERAPI
+            examples:
+              - PSYKOTERAPI
             items:
               type: string
               description: List of sub categories
-              example: PSYKOTERAPI
-          example: PSYKOTERAPI
+              examples:
+                - PSYKOTERAPI
         - name: levels
           in: query
           description: List of levels
@@ -86,12 +88,13 @@ paths:
           schema:
             type: array
             description: List of levels
-            example: gymnasial vuxenutbildning
+            examples:
+              - gymnasial vuxenutbildning
             items:
               type: string
               description: List of levels
-              example: gymnasial vuxenutbildning
-          example: gymnasial vuxenutbildning
+              examples:
+                - gymnasial vuxenutbildning
         - name: studyLocations
           in: query
           description: List of study locations
@@ -99,12 +102,13 @@ paths:
           schema:
             type: array
             description: List of study locations
-            example: Sundsvall
+            examples:
+              - Sundsvall
             items:
               type: string
               description: List of study locations
-              example: Sundsvall
-          example: Sundsvall
+              examples:
+                - Sundsvall
         - name: scopes
           in: query
           description: List of scopes
@@ -112,32 +116,34 @@ paths:
           schema:
             type: array
             description: List of scopes
-            example: "25, 50, 75"
+            examples:
+              - "25, 50, 75"
             items:
               type: integer
-              description: List of scopes
               format: int32
-          example: "25, 50, 75"
+              description: List of scopes
+              examples:
+                - "25, 50, 75"
         - name: startDate
           in: query
           description: Start date
           required: true
           schema:
             type: string
-            description: Start date
             format: date
-            example: 2024-01-01
-          example: 2024-01-01
+            description: Start date
+            examples:
+              - 2024-01-01
         - name: endDate
           in: query
           description: End date
           required: true
           schema:
             type: string
-            description: End date
             format: date
-            example: 2024-12-31
-          example: 2024-12-31
+            description: End date
+            examples:
+              - 2024-12-31
       responses:
         "200":
           description: Successful operation
@@ -448,6 +454,12 @@ components:
     Problem:
       type: object
       properties:
+        status:
+          $ref: "#/components/schemas/StatusType"
+        title:
+          type: string
+        detail:
+          type: string
         instance:
           type: string
           format: uri
@@ -456,14 +468,7 @@ components:
           format: uri
         parameters:
           type: object
-          additionalProperties:
-            type: object
-        status:
-          $ref: "#/components/schemas/StatusType"
-        detail:
-          type: string
-        title:
-          type: string
+          additionalProperties: { }
     StatusType:
       type: object
       properties:
@@ -512,15 +517,14 @@ components:
           type: string
         message:
           type: string
+        detail:
+          type: string
         instance:
           type: string
           format: uri
         parameters:
           type: object
-          additionalProperties:
-            type: object
-        detail:
-          type: string
+          additionalProperties: { }
         suppressed:
           type: array
           items:
@@ -557,8 +561,7 @@ components:
     ThrowableProblem:
       type: object
       properties:
-        cause:
-          $ref: "#/components/schemas/ThrowableProblem"
+        cause: { }
         stackTrace:
           type: array
           items:
@@ -583,6 +586,12 @@ components:
                 type: boolean
         message:
           type: string
+        status:
+          $ref: "#/components/schemas/StatusType"
+        title:
+          type: string
+        detail:
+          type: string
         instance:
           type: string
           format: uri
@@ -591,14 +600,7 @@ components:
           format: uri
         parameters:
           type: object
-          additionalProperties:
-            type: object
-        status:
-          $ref: "#/components/schemas/StatusType"
-        detail:
-          type: string
-        title:
-          type: string
+          additionalProperties: { }
         suppressed:
           type: array
           items:
@@ -641,107 +643,102 @@ components:
           type: string
     Statistics:
       type: object
+      description: Statistics model
       properties:
         onGoingCourses:
           type: integer
-          description: Number of on-going courses
           format: int32
+          description: Number of on-going courses
+          examples:
+            - "10"
           readOnly: true
-          example: 10
         plannedCourses:
           type: integer
-          description: Number of planned courses
           format: int32
+          description: Number of planned courses
+          examples:
+            - "10"
           readOnly: true
-          example: 10
         finishedCourses:
           type: integer
-          description: Number of finished courses
           format: int32
+          description: Number of finished courses
+          examples:
+            - "10"
           readOnly: true
-          example: 10
         availableSeats:
           type: integer
-          description: Number of available seats
           format: int32
+          description: Number of available seats
+          examples:
+            - "10"
           readOnly: true
-          example: 10
         totalCapacity:
           type: integer
-          description: Total capacity
           format: int32
+          description: Total capacity
+          examples:
+            - "10"
           readOnly: true
-          example: 10
         studyLocations:
           type: array
           description: Study locations used for filtering
-          readOnly: true
           items:
             type: string
-            description: Study locations used for filtering
-            readOnly: true
+          readOnly: true
         scopes:
           type: array
           description: Scopes used for filtering
-          readOnly: true
           items:
             type: integer
-            description: Scopes used for filtering
             format: int32
-            readOnly: true
+          readOnly: true
         levels:
           type: array
           description: Levels used for filtering
-          readOnly: true
           items:
             type: string
-            description: Levels used for filtering
-            readOnly: true
+          readOnly: true
         categories:
           type: array
           description: Categories used for filtering
-          readOnly: true
           items:
             type: string
-            description: Categories used for filtering
-            readOnly: true
+          readOnly: true
         subCategories:
           type: array
           description: Category ids used for filtering
-          readOnly: true
           items:
             type: string
-            description: Category ids used for filtering
-            readOnly: true
+          readOnly: true
         startDate:
           type: string
-          description: Start date used for filtering
           format: date
+          description: Start date used for filtering
           readOnly: true
         endDate:
           type: string
-          description: End date used for filtering
           format: date
+          description: End date used for filtering
           readOnly: true
-      description: Statistics model
       readOnly: true
     CourseParameters:
       type: object
       properties:
         page:
-          minimum: 1
           type: integer
-          description: Page number
           format: int32
-          example: 1
           default: 1
-        limit:
+          description: Page number
+          example: 1
           minimum: 1
+        limit:
           type: integer
+          format: int32
           description: Result size per page. Maximum allowed value is dynamically
             configured
-          format: int32
           example: 15
+          minimum: 1
         sortBy:
           type: array
           items:
@@ -750,323 +747,362 @@ components:
             example: propertyName
         sortDirection:
           $ref: "#/components/schemas/Direction"
+          description: The sort order direction
+          example: ASC
         code:
           type: string
           description: Course code
-          example: KEMKEM02
+          examples:
+            - KEMKEM02
         name:
           type: string
           description: Name of the course
-          example: Etnicitet och kulturmöten
+          examples:
+            - Etnicitet och kulturmöten
         provider:
           type: string
           description: Provider of the course
-          example: Sundsvalls Kommun
+          examples:
+            - Sundsvalls Kommun
         credits:
           type: string
           description: Course credits
-          example: "100"
+          examples:
+            - "100"
         information:
           type: string
           description: Information about the course
-          example: This is course information
+          examples:
+            - This is course information
         languageOfInstruction:
           type: string
           description: Language of instruction
-          example: Swedish
+          examples:
+            - Swedish
         searchString:
           type: string
           description: Search string
-          example: searchString
+          examples:
+            - searchString
         start:
           type: string
-          description: Start date of the course
           format: date
-          example: 2022-12-31
+          description: Start date of the course
+          examples:
+            - 2022-12-31
         startAfter:
           type: string
-          description: Start date of the course is after
           format: date
-          example: 2022-12-31
+          description: Start date of the course is after
+          examples:
+            - 2022-12-31
         startBefore:
           type: string
-          description: Start date of the course is before
           format: date
-          example: 2022-12-31
+          description: Start date of the course is before
+          examples:
+            - 2022-12-31
         end:
           type: string
-          description: End date of the course
           format: date
-          example: 2022-12-31
+          description: End date of the course
+          examples:
+            - 2022-12-31
         endAfter:
           type: string
-          description: End date of the course is after
           format: date
-          example: 2022-12-31
+          description: End date of the course is after
+          examples:
+            - 2022-12-31
         endBefore:
           type: string
-          description: End date of the course is before
           format: date
-          example: 2022-12-31
+          description: End date of the course is before
+          examples:
+            - 2022-12-31
         earliestApplication:
           type: string
-          description: Earliest application date
           format: date
-          example: 2022-12-31
+          description: Earliest application date
+          examples:
+            - 2022-12-31
         earliestApplicationAfter:
           type: string
-          description: Earliest application date is after
           format: date
-          example: 2022-12-31
+          description: Earliest application date is after
+          examples:
+            - 2022-12-31
         earliestApplicationBefore:
           type: string
-          description: Earliest application date is before
           format: date
-          example: 2022-12-31
+          description: Earliest application date is before
+          examples:
+            - 2022-12-31
         latestApplication:
           type: string
-          description: Latest application date
           format: date
-          example: 2022-12-31
+          description: Latest application date
+          examples:
+            - 2022-12-31
         latestApplicationAfter:
           type: string
-          description: Latest application date is after
           format: date
-          example: 2022-12-31
+          description: Latest application date is after
+          examples:
+            - 2022-12-31
         latestApplicationBefore:
           type: string
-          description: Latest application date is before
           format: date
-          example: 2022-12-31
+          description: Latest application date is before
+          examples:
+            - 2022-12-31
         scopes:
           type: array
           description: Scope of the course
-          example: 75
+          examples:
+            - "75"
           items:
             type: integer
-            description: Scope of the course
             format: int32
-            example: 75
         studyLocations:
           type: array
           description: Study location
-          example: Sundsvall
+          examples:
+            - Sundsvall
           items:
             type: string
-            description: Study location
-            example: Sundsvall
         levels:
           type: array
           description: Level of the course
-          example: gymnasial vuxenutbildning
+          examples:
+            - gymnasial vuxenutbildning
           items:
             type: string
-            description: Level of the course
-            example: gymnasial vuxenutbildning
         categories:
           type: array
           description: Category
-          example: Naturvetenskap
+          examples:
+            - Naturvetenskap
           items:
             type: string
-            description: Category
-            example: Naturvetenskap
         subcategories:
           type: array
           description: Subcategory
-          example: Kemi
+          examples:
+            - Kemi
           items:
             type: string
-            description: Subcategory
-            example: Kemi
         visitingAddressMunicipalityId:
           type: string
           description: Visiting address municipality ID
-          example: "2281"
+          examples:
+            - "2281"
         placeOfStudyMunicipalityId:
           type: string
           description: Study location municipality ID
-          example: "2281"
+          examples:
+            - "2281"
     Direction:
       type: string
-      description: The sort order direction
-      example: ASC
       enum:
         - ASC
         - DESC
     Course:
       type: object
+      description: Course model
       properties:
         id:
           type: integer
-          description: Course ID
           format: int64
+          description: Course ID
+          examples:
+            - "1"
           readOnly: true
-          example: 1
         code:
           type: string
           description: Course code
+          examples:
+            - PRRPRR02
           readOnly: true
-          example: PRRPRR02
         name:
           type: string
           description: Course name
+          examples:
+            - Programmering 2
           readOnly: true
-          example: Programmering 2
         provider:
           type: string
           description: Course provider
+          examples:
+            - Sundsvalls Kommun
           readOnly: true
-          example: Sundsvalls Kommun
         providerUrl:
           type: string
           description: Course provider URL
+          examples:
+            - http://sundsvall.se/vuxenutbildning
           readOnly: true
-          example: http://sundsvall.se/vuxenutbildning
         level:
           type: string
           description: Course level
+          examples:
+            - gymnasial vuxenutbildning
           readOnly: true
-          example: gymnasial vuxenutbildning
         url:
           type: string
           description: Course URL
+          examples:
+            - https://sundsvall.alvis.se/hittakurser/kurs/38837
           readOnly: true
-          example: https://sundsvall.alvis.se/hittakurser/kurs/38837
         credits:
           type: number
-          description: Course credits
           format: double
+          description: Course credits
+          examples:
+            - "150"
           readOnly: true
-          example: 150
         scope:
           type: number
-          description: Course scope in percent
           format: double
+          description: Course scope in percent
+          examples:
+            - "100"
           readOnly: true
-          example: 100
         studyLocation:
           type: string
           description: Study location
+          examples:
+            - Sundsvall
           readOnly: true
-          example: Sundsvall
         subjectCode:
           type: string
           description: Subject code
+          examples:
+            - PRRPRR02
           readOnly: true
-          example: PRRPRR02
         numberOfSeats:
           type: integer
-          description: Number of seats
           format: int32
+          description: Number of seats
+          examples:
+            - "10"
           readOnly: true
-          example: 10
         category:
           type: string
           description: Course category
+          examples:
+            - "Ekonomi, marknadsföring och administration"
           readOnly: true
-          example: "Ekonomi, marknadsföring och administration"
         subcategory:
           type: string
           description: Course subcategory
+          examples:
+            - Administration
           readOnly: true
-          example: Administration
         languageOfInstruction:
           type: string
           description: Language of instruction
+          examples:
+            - Swedish
           readOnly: true
-          example: Swedish
         start:
           type: string
-          description: Course start date
           format: date
+          description: Course start date
+          examples:
+            - 2020-08-31
           readOnly: true
-          example: 2020-08-31
         end:
           type: string
-          description: Course end date
           format: date
+          description: Course end date
+          examples:
+            - 2020-12-20
           readOnly: true
-          example: 2020-12-20
         earliestApplication:
           type: string
-          description: Earliest application date
           format: date
+          description: Earliest application date
+          examples:
+            - 2020-01-01
           readOnly: true
-          example: 2020-01-01
         latestApplication:
           type: string
-          description: Latest application date
           format: date
+          description: Latest application date
+          examples:
+            - 2020-04-15
           readOnly: true
-          example: 2020-04-15
         information:
           type: string
           description: Course information
-          readOnly: true
-          example: "<![CDATA[ <p><a href=https://sundsvall.se/utbildning-och-forskola/vuxenutbildning/gymnasial--niva/studieformer-och-schema\
+          examples:
+            - "<![CDATA[ <p><a href=https://sundsvall.se/utbildning-och-forskola/vuxenutbildning/gymnasial--niva/studieformer-och-schema\
             \ target=_blank>Läs&nbsp;om våra studieformer</a></p><p><br /><a href=https://www.csn.se/\
             \ target=_blank>Läs om studiemedel på&nbsp;www.csn.se</a><br />&nbsp;<br\
             \ />Ditt antagningsbesked<br />Antagningsbesked skickas via e-post cirka\
             \ två veckor före kursstart.&nbsp;<a href=https://sundsvall.alvis.se/>Se\
             \ ditt antagningsbesked och följ din ansökan via Mina sidor</a>.</p> ]]>"
+          readOnly: true
         studyLocationMunicipalityId:
           type: string
           description: Study location municipality ID
+          examples:
+            - "2301"
           readOnly: true
-          example: "2301"
         visitingAddressMunicipalityId:
           type: string
           description: Visiting address municipality ID
+          examples:
+            - "2301"
           readOnly: true
-          example: "2301"
-      description: Course model
       readOnly: true
     PagedCoursesResponse:
       type: object
+      description: Paged course response model
       properties:
         courses:
           type: array
-          readOnly: true
           items:
             $ref: "#/components/schemas/Course"
+            readOnly: true
+          readOnly: true
         _meta:
           $ref: "#/components/schemas/PagingMetaData"
-      description: Paged course response model
+          readOnly: true
       readOnly: true
     PagingMetaData:
       type: object
+      description: PagingMetaData model
       properties:
         page:
           type: integer
-          description: Current page
           format: int32
-          readOnly: true
+          description: Current page
           example: 5
+          readOnly: true
         limit:
           type: integer
-          description: Displayed objects per page
           format: int32
-          readOnly: true
+          description: Displayed objects per page
           example: 20
+          readOnly: true
         count:
           type: integer
-          description: Displayed objects on current page
           format: int32
-          readOnly: true
+          description: Displayed objects on current page
           example: 13
+          readOnly: true
         totalRecords:
           type: integer
-          description: Total amount of hits based on provided search parameters
           format: int64
-          readOnly: true
+          description: Total amount of hits based on provided search parameters
           example: 98
+          readOnly: true
         totalPages:
           type: integer
-          description: Total amount of pages based on provided search parameters
           format: int32
-          readOnly: true
+          description: Total amount of pages based on provided search parameters
           example: 23
-      description: PagingMetaData model
-      readOnly: true
+          readOnly: true
   securitySchemes: { }

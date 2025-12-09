@@ -11,76 +11,76 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Schema(description = "Course model", accessMode = READ_ONLY)
 public class Course {
 
-	@Schema(description = "Course ID", example = "1", accessMode = READ_ONLY)
+	@Schema(description = "Course ID", examples = "1", accessMode = READ_ONLY)
 	private Long id;
 
-	@Schema(description = "Course code", example = "PRRPRR02", accessMode = READ_ONLY)
+	@Schema(description = "Course code", examples = "PRRPRR02", accessMode = READ_ONLY)
 	private String code;
 
-	@Schema(description = "Course name", example = "Programmering 2", accessMode = READ_ONLY)
+	@Schema(description = "Course name", examples = "Programmering 2", accessMode = READ_ONLY)
 	private String name;
 
-	@Schema(description = "Course provider", example = "Sundsvalls Kommun", accessMode = READ_ONLY)
+	@Schema(description = "Course provider", examples = "Sundsvalls Kommun", accessMode = READ_ONLY)
 	private String provider;
 
-	@Schema(description = "Course provider URL", example = "http://sundsvall.se/vuxenutbildning", accessMode = READ_ONLY)
+	@Schema(description = "Course provider URL", examples = "http://sundsvall.se/vuxenutbildning", accessMode = READ_ONLY)
 	private String providerUrl;
 
-	@Schema(description = "Course level", example = "gymnasial vuxenutbildning", accessMode = READ_ONLY)
+	@Schema(description = "Course level", examples = "gymnasial vuxenutbildning", accessMode = READ_ONLY)
 	private String level;
 
-	@Schema(description = "Course URL", example = "https://sundsvall.alvis.se/hittakurser/kurs/38837", accessMode = READ_ONLY)
+	@Schema(description = "Course URL", examples = "https://sundsvall.alvis.se/hittakurser/kurs/38837", accessMode = READ_ONLY)
 	private String url;
 
-	@Schema(description = "Course credits", example = "150", accessMode = READ_ONLY)
+	@Schema(description = "Course credits", examples = "150", accessMode = READ_ONLY)
 	private Double credits;
 
-	@Schema(description = "Course scope in percent", example = "100", accessMode = READ_ONLY)
+	@Schema(description = "Course scope in percent", examples = "100", accessMode = READ_ONLY)
 	private Double scope;
 
-	@Schema(description = "Study location", example = "Sundsvall", accessMode = READ_ONLY)
+	@Schema(description = "Study location", examples = "Sundsvall", accessMode = READ_ONLY)
 	private String studyLocation;
 
-	@Schema(description = "Subject code", example = "PRRPRR02", accessMode = READ_ONLY)
+	@Schema(description = "Subject code", examples = "PRRPRR02", accessMode = READ_ONLY)
 	private String subjectCode;
 
-	@Schema(description = "Number of seats", example = "10", accessMode = READ_ONLY)
+	@Schema(description = "Number of seats", examples = "10", accessMode = READ_ONLY)
 	private Integer numberOfSeats;
 
-	@Schema(description = "Course category", example = "Ekonomi, marknadsföring och administration", accessMode = READ_ONLY)
+	@Schema(description = "Course category", examples = "Ekonomi, marknadsföring och administration", accessMode = READ_ONLY)
 	private String category;
 
-	@Schema(description = "Course subcategory", example = "Administration", accessMode = READ_ONLY)
+	@Schema(description = "Course subcategory", examples = "Administration", accessMode = READ_ONLY)
 	private String subcategory;
 
-	@Schema(description = "Language of instruction", example = "Swedish", accessMode = READ_ONLY)
+	@Schema(description = "Language of instruction", examples = "Swedish", accessMode = READ_ONLY)
 	private String languageOfInstruction;
 
-	@Schema(description = "Course start date", example = "2020-08-31", accessMode = READ_ONLY)
+	@Schema(description = "Course start date", examples = "2020-08-31", accessMode = READ_ONLY)
 	@DateTimeFormat(iso = DATE)
 	private LocalDate start;
 
-	@Schema(description = "Course end date", example = "2020-12-20", accessMode = READ_ONLY)
+	@Schema(description = "Course end date", examples = "2020-12-20", accessMode = READ_ONLY)
 	@DateTimeFormat(iso = DATE)
 	private LocalDate end;
 
-	@Schema(description = "Earliest application date", example = "2020-01-01", accessMode = READ_ONLY)
+	@Schema(description = "Earliest application date", examples = "2020-01-01", accessMode = READ_ONLY)
 	@DateTimeFormat(iso = DATE)
 	private LocalDate earliestApplication;
 
-	@Schema(description = "Latest application date", example = "2020-04-15", accessMode = READ_ONLY)
+	@Schema(description = "Latest application date", examples = "2020-04-15", accessMode = READ_ONLY)
 	@DateTimeFormat(iso = DATE)
 	private LocalDate latestApplication;
 
 	@Schema(description = "Course information",
-		example = "<![CDATA[ <p><a href=https://sundsvall.se/utbildning-och-forskola/vuxenutbildning/gymnasial--niva/studieformer-och-schema target=_blank>Läs&nbsp;om våra studieformer</a></p><p><br /><a href=https://www.csn.se/ target=_blank>Läs om studiemedel på&nbsp;www.csn.se</a><br />&nbsp;<br />Ditt antagningsbesked<br />Antagningsbesked skickas via e-post cirka två veckor före kursstart.&nbsp;<a href=https://sundsvall.alvis.se/>Se ditt antagningsbesked och följ din ansökan via Mina sidor</a>.</p> ]]>",
+		examples = "<![CDATA[ <p><a href=https://sundsvall.se/utbildning-och-forskola/vuxenutbildning/gymnasial--niva/studieformer-och-schema target=_blank>Läs&nbsp;om våra studieformer</a></p><p><br /><a href=https://www.csn.se/ target=_blank>Läs om studiemedel på&nbsp;www.csn.se</a><br />&nbsp;<br />Ditt antagningsbesked<br />Antagningsbesked skickas via e-post cirka två veckor före kursstart.&nbsp;<a href=https://sundsvall.alvis.se/>Se ditt antagningsbesked och följ din ansökan via Mina sidor</a>.</p> ]]>",
 		accessMode = READ_ONLY)
 	private String information;
 
-	@Schema(description = "Study location municipality ID", example = "2301", accessMode = READ_ONLY)
+	@Schema(description = "Study location municipality ID", examples = "2301", accessMode = READ_ONLY)
 	private String studyLocationMunicipalityId;
 
-	@Schema(description = "Visiting address municipality ID", example = "2301", accessMode = READ_ONLY)
+	@Schema(description = "Visiting address municipality ID", examples = "2301", accessMode = READ_ONLY)
 	private String visitingAddressMunicipalityId;
 
 	public static Course create() {

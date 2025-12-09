@@ -14,8 +14,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 import se.sundsvall.dept44.util.ResourceUtils;
 import se.sundsvall.educationfinder.Application;
 
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 
+import static java.nio.file.Files.writeString;
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 
 @ActiveProfiles("it")
@@ -45,9 +48,11 @@ class OpenApiSpecificationIT {
 	private TestRestTemplate restTemplate;
 
 	@Test
-	void compareOpenApiSpecifications() {
+	void compareOpenApiSpecifications() throws IOException {
 		String existingOpenApiSpecification = ResourceUtils.asString(openApiResource);
 		String currentOpenApiSpecification = getCurrentOpenApiSpecification();
+
+		writeString(Path.of("target/openapi.yml"), currentOpenApiSpecification);
 
 		assertThatJson(toJson(existingOpenApiSpecification))
 			.withOptions(List.of(Option.IGNORING_ARRAY_ORDER))
