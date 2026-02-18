@@ -1,10 +1,5 @@
 package se.sundsvall.educationfinder.api;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.http.MediaType.APPLICATION_PROBLEM_JSON_VALUE;
-import static org.springframework.http.ResponseEntity.ok;
-import static se.sundsvall.educationfinder.api.model.ApiConstants.FIND_COURSE_DESCRIPTION;
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -27,6 +22,11 @@ import se.sundsvall.educationfinder.api.model.PagedCoursesResponse;
 import se.sundsvall.educationfinder.api.validation.FilterType;
 import se.sundsvall.educationfinder.api.validation.ValidFilter;
 import se.sundsvall.educationfinder.service.CourseService;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.http.MediaType.APPLICATION_PROBLEM_JSON_VALUE;
+import static org.springframework.http.ResponseEntity.ok;
+import static se.sundsvall.educationfinder.api.model.ApiConstants.FIND_COURSE_DESCRIPTION;
 
 @RestController
 @Validated

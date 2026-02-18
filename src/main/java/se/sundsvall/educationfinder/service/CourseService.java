@@ -1,9 +1,5 @@
 package se.sundsvall.educationfinder.service;
 
-import static org.zalando.problem.Status.NOT_FOUND;
-import static se.sundsvall.educationfinder.service.mapper.CourseMapper.toCourse;
-import static se.sundsvall.educationfinder.service.mapper.CourseMapper.toPagedCoursesResponse;
-
 import java.util.List;
 import java.util.Objects;
 import org.apache.commons.lang3.StringUtils;
@@ -23,6 +19,10 @@ import se.sundsvall.educationfinder.integration.db.model.projection.LevelProject
 import se.sundsvall.educationfinder.integration.db.model.projection.ProviderProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.ScopeProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.StudyLocationProjection;
+
+import static org.zalando.problem.Status.NOT_FOUND;
+import static se.sundsvall.educationfinder.service.mapper.CourseMapper.toCourse;
+import static se.sundsvall.educationfinder.service.mapper.CourseMapper.toPagedCoursesResponse;
 
 @Service
 public class CourseService {
