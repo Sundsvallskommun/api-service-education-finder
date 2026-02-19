@@ -1,11 +1,5 @@
 package se.sundsvall.educationfinder.service;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.LEVEL;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.SCOPE;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.STUDY_LOCATION;
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -30,6 +24,12 @@ import se.sundsvall.educationfinder.integration.db.model.CourseEntity;
 import se.sundsvall.educationfinder.integration.db.model.projection.LevelProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.ScopeProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.StudyLocationProjection;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.LEVEL;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.SCOPE;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.STUDY_LOCATION;
 
 @ExtendWith(value = {
 	MockitoExtension.class, ResourceLoaderExtension.class

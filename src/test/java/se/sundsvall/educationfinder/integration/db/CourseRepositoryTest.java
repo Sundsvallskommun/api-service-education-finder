@@ -1,13 +1,5 @@
 package se.sundsvall.educationfinder.integration.db;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.CREDITS;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.LEVEL;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.PROVIDER;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.SCOPE;
-import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.STUDY_LOCATION;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -30,6 +22,14 @@ import se.sundsvall.educationfinder.integration.db.model.projection.LevelProject
 import se.sundsvall.educationfinder.integration.db.model.projection.ProviderProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.ScopeProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.StudyLocationProjection;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.CREDITS;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.LEVEL;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.PROVIDER;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.SCOPE;
+import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.STUDY_LOCATION;
 
 /**
  * CourseRepository tests.

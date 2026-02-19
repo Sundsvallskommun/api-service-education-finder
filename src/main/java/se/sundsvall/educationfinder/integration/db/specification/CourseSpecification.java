@@ -1,5 +1,10 @@
 package se.sundsvall.educationfinder.integration.db.specification;
 
+import java.time.LocalDate;
+import java.util.List;
+import org.springframework.data.jpa.domain.Specification;
+import se.sundsvall.educationfinder.integration.db.model.CourseEntity;
+
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.CATEGORY;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.CODE;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.CREDITS;
@@ -16,11 +21,6 @@ import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.SC
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.START;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.STUDY_LOCATION;
 import static se.sundsvall.educationfinder.integration.db.model.CourseEntity_.VISITING_ADDRESS_MUNICIPALITY_ID;
-
-import java.time.LocalDate;
-import java.util.List;
-import org.springframework.data.jpa.domain.Specification;
-import se.sundsvall.educationfinder.integration.db.model.CourseEntity;
 
 public interface CourseSpecification {
 

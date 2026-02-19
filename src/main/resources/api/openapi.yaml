@@ -1,24 +1,24 @@
 openapi: 3.1.0
 info:
   title: api-education-finder
-  contact: { }
+  contact: {}
   license:
     name: MIT License
     url: https://opensource.org/licenses/MIT
   version: "3.1"
 servers:
-  - url: http://localhost:65105
-    description: Generated server url
+- url: http://localhost:56239
+  description: Generated server url
 tags:
-  - name: Courses
-    description: Find courses
-  - name: Statistics
-    description: Get statistics
+- name: Courses
+  description: Find courses
+- name: Statistics
+  description: Get statistics
 paths:
   /{municipalityId}/statistics:
     get:
       tags:
-        - Statistics
+      - Statistics
       description: |
         Find statistics based on the provided parameters.
 
@@ -46,104 +46,104 @@ paths:
         - All date parameters are expected to be on the format: yyyy-MM-dd (example value: '2025-01-01')
       operationId: getStatistics
       parameters:
-        - name: municipalityId
-          in: path
-          description: Municipality id
-          required: true
-          schema:
-            type: string
-          example: 2281
-        - name: categories
-          in: query
+      - name: municipalityId
+        in: path
+        description: Municipality id
+        required: true
+        schema:
+          type: string
+        example: 2281
+      - name: categories
+        in: query
+        description: List of categories
+        required: false
+        schema:
+          type: array
           description: List of categories
-          required: false
-          schema:
-            type: array
+          examples:
+          - Medicin och vård
+          items:
+            type: string
             description: List of categories
             examples:
-              - Medicin och vård
-            items:
-              type: string
-              description: List of categories
-              examples:
-                - Medicin och vård
-        - name: subCategories
-          in: query
+            - Medicin och vård
+      - name: subCategories
+        in: query
+        description: List of sub categories
+        required: false
+        schema:
+          type: array
           description: List of sub categories
-          required: false
-          schema:
-            type: array
+          examples:
+          - PSYKOTERAPI
+          items:
+            type: string
             description: List of sub categories
             examples:
-              - PSYKOTERAPI
-            items:
-              type: string
-              description: List of sub categories
-              examples:
-                - PSYKOTERAPI
-        - name: levels
-          in: query
+            - PSYKOTERAPI
+      - name: levels
+        in: query
+        description: List of levels
+        required: false
+        schema:
+          type: array
           description: List of levels
-          required: false
-          schema:
-            type: array
+          examples:
+          - gymnasial vuxenutbildning
+          items:
+            type: string
             description: List of levels
             examples:
-              - gymnasial vuxenutbildning
-            items:
-              type: string
-              description: List of levels
-              examples:
-                - gymnasial vuxenutbildning
-        - name: studyLocations
-          in: query
+            - gymnasial vuxenutbildning
+      - name: studyLocations
+        in: query
+        description: List of study locations
+        required: false
+        schema:
+          type: array
           description: List of study locations
-          required: false
-          schema:
-            type: array
+          examples:
+          - Sundsvall
+          items:
+            type: string
             description: List of study locations
             examples:
-              - Sundsvall
-            items:
-              type: string
-              description: List of study locations
-              examples:
-                - Sundsvall
-        - name: scopes
-          in: query
+            - Sundsvall
+      - name: scopes
+        in: query
+        description: List of scopes
+        required: false
+        schema:
+          type: array
           description: List of scopes
-          required: false
-          schema:
-            type: array
+          examples:
+          - "25, 50, 75"
+          items:
+            type: integer
+            format: int32
             description: List of scopes
             examples:
-              - "25, 50, 75"
-            items:
-              type: integer
-              format: int32
-              description: List of scopes
-              examples:
-                - "25, 50, 75"
-        - name: startDate
-          in: query
+            - "25, 50, 75"
+      - name: startDate
+        in: query
+        description: Start date
+        required: true
+        schema:
+          type: string
+          format: date
           description: Start date
-          required: true
-          schema:
-            type: string
-            format: date
-            description: Start date
-            examples:
-              - 2024-01-01
-        - name: endDate
-          in: query
+          examples:
+          - 2024-01-01
+      - name: endDate
+        in: query
+        description: End date
+        required: true
+        schema:
+          type: string
+          format: date
           description: End date
-          required: true
-          schema:
-            type: string
-            format: date
-            description: End date
-            examples:
-              - 2024-12-31
+          examples:
+          - 2024-12-31
       responses:
         "200":
           description: Successful operation
@@ -160,8 +160,8 @@ paths:
             application/problem+json:
               schema:
                 oneOf:
-                  - $ref: "#/components/schemas/Problem"
-                  - $ref: "#/components/schemas/ConstraintViolationProblem"
+                - $ref: "#/components/schemas/Problem"
+                - $ref: "#/components/schemas/ConstraintViolationProblem"
         "404":
           description: Not found
           content:
@@ -177,23 +177,23 @@ paths:
   /{municipalityId}/statistics/filters/{filterAttribute}/values:
     get:
       tags:
-        - Statistics
+      - Statistics
       summary: Find available filter values
       operationId: findFilterValues
       parameters:
-        - name: municipalityId
-          in: path
-          description: Municipality id
-          required: true
-          schema:
-            type: string
-          example: 2281
-        - name: filterAttribute
-          in: path
-          description: The attribute name to get available values from
-          required: true
-          schema:
-            type: string
+      - name: municipalityId
+        in: path
+        description: Municipality id
+        required: true
+        schema:
+          type: string
+        example: 2281
+      - name: filterAttribute
+        in: path
+        description: The attribute name to get available values from
+        required: true
+        schema:
+          type: string
       responses:
         "200":
           description: Successful operation
@@ -214,8 +214,8 @@ paths:
             application/problem+json:
               schema:
                 oneOf:
-                  - $ref: "#/components/schemas/Problem"
-                  - $ref: "#/components/schemas/ConstraintViolationProblem"
+                - $ref: "#/components/schemas/Problem"
+                - $ref: "#/components/schemas/ConstraintViolationProblem"
         "404":
           description: Not found
           content:
@@ -231,7 +231,7 @@ paths:
   /{municipalityId}/courses:
     get:
       tags:
-        - Courses
+      - Courses
       summary: Find course
       description: |
         Find courses and apply filters to narrow the result.
@@ -284,18 +284,18 @@ paths:
         - All date parameters are expected to be on the format: yyyy-MM-dd (example value: '2025-01-01')
       operationId: find
       parameters:
-        - name: municipalityId
-          in: path
-          description: Municipality id
-          required: true
-          schema:
-            type: string
-          example: 2281
-        - name: parameters
-          in: query
-          required: true
-          schema:
-            $ref: "#/components/schemas/CourseParameters"
+      - name: municipalityId
+        in: path
+        description: Municipality id
+        required: true
+        schema:
+          type: string
+        example: 2281
+      - name: parameters
+        in: query
+        required: true
+        schema:
+          $ref: "#/components/schemas/CourseParameters"
       responses:
         "200":
           description: Successful operation
@@ -312,8 +312,8 @@ paths:
             application/problem+json:
               schema:
                 oneOf:
-                  - $ref: "#/components/schemas/Problem"
-                  - $ref: "#/components/schemas/ConstraintViolationProblem"
+                - $ref: "#/components/schemas/Problem"
+                - $ref: "#/components/schemas/ConstraintViolationProblem"
         "404":
           description: Not found
           content:
@@ -329,25 +329,25 @@ paths:
   /{municipalityId}/courses/{courseId}:
     get:
       tags:
-        - Courses
+      - Courses
       summary: Find course by id
       operationId: findCourseById
       parameters:
-        - name: municipalityId
-          in: path
-          description: Municipality id
-          required: true
-          schema:
-            type: string
-          example: 2281
-        - name: courseId
-          in: path
-          description: The id of the course
-          required: true
-          schema:
-            type: integer
-            format: int64
-          example: 1234
+      - name: municipalityId
+        in: path
+        description: Municipality id
+        required: true
+        schema:
+          type: string
+        example: 2281
+      - name: courseId
+        in: path
+        description: The id of the course
+        required: true
+        schema:
+          type: integer
+          format: int64
+        example: 1234
       responses:
         "200":
           description: Successful operation
@@ -364,8 +364,8 @@ paths:
             application/problem+json:
               schema:
                 oneOf:
-                  - $ref: "#/components/schemas/Problem"
-                  - $ref: "#/components/schemas/ConstraintViolationProblem"
+                - $ref: "#/components/schemas/Problem"
+                - $ref: "#/components/schemas/ConstraintViolationProblem"
         "404":
           description: Not found
           content:
@@ -381,24 +381,24 @@ paths:
   /{municipalityId}/courses/filters/{filterAttribute}/values:
     get:
       tags:
-        - Courses
+      - Courses
       summary: Find available filter values
       description: Find available filter values (for use in the 'find'-resource)
       operationId: findFilterValues_1
       parameters:
-        - name: municipalityId
-          in: path
-          description: Municipality id
-          required: true
-          schema:
-            type: string
-          example: 2281
-        - name: filterAttribute
-          in: path
-          description: The attribute name to get available values from
-          required: true
-          schema:
-            type: string
+      - name: municipalityId
+        in: path
+        description: Municipality id
+        required: true
+        schema:
+          type: string
+        example: 2281
+      - name: filterAttribute
+        in: path
+        description: The attribute name to get available values from
+        required: true
+        schema:
+          type: string
       responses:
         "200":
           description: Successful operation
@@ -419,8 +419,8 @@ paths:
             application/problem+json:
               schema:
                 oneOf:
-                  - $ref: "#/components/schemas/Problem"
-                  - $ref: "#/components/schemas/ConstraintViolationProblem"
+                - $ref: "#/components/schemas/Problem"
+                - $ref: "#/components/schemas/ConstraintViolationProblem"
         "404":
           description: Not found
           content:
@@ -436,7 +436,7 @@ paths:
   /api-docs:
     get:
       tags:
-        - API
+      - API
       summary: OpenAPI
       operationId: getApiDocs
       responses:
@@ -468,7 +468,7 @@ components:
           format: uri
         parameters:
           type: object
-          additionalProperties: { }
+          additionalProperties: {}
     StatusType:
       type: object
       properties:
@@ -524,7 +524,7 @@ components:
           format: uri
         parameters:
           type: object
-          additionalProperties: { }
+          additionalProperties: {}
         suppressed:
           type: array
           items:
@@ -561,7 +561,7 @@ components:
     ThrowableProblem:
       type: object
       properties:
-        cause: { }
+        cause: {}
         stackTrace:
           type: array
           items:
@@ -600,7 +600,7 @@ components:
           format: uri
         parameters:
           type: object
-          additionalProperties: { }
+          additionalProperties: {}
         suppressed:
           type: array
           items:
@@ -650,35 +650,35 @@ components:
           format: int32
           description: Number of on-going courses
           examples:
-            - "10"
+          - "10"
           readOnly: true
         plannedCourses:
           type: integer
           format: int32
           description: Number of planned courses
           examples:
-            - "10"
+          - "10"
           readOnly: true
         finishedCourses:
           type: integer
           format: int32
           description: Number of finished courses
           examples:
-            - "10"
+          - "10"
           readOnly: true
         availableSeats:
           type: integer
           format: int32
           description: Number of available seats
           examples:
-            - "10"
+          - "10"
           readOnly: true
         totalCapacity:
           type: integer
           format: int32
           description: Total capacity
           examples:
-            - "10"
+          - "10"
           readOnly: true
         studyLocations:
           type: array
@@ -730,137 +730,141 @@ components:
           format: int32
           default: 1
           description: Page number
-          example: 1
+          examples:
+          - "1"
           minimum: 1
         limit:
           type: integer
           format: int32
           description: Result size per page. Maximum allowed value is dynamically
             configured
-          example: 15
+          examples:
+          - "15"
           minimum: 1
         sortBy:
           type: array
           items:
             type: string
             description: The properties to sort on
-            example: propertyName
+            examples:
+            - propertyName
         sortDirection:
           $ref: "#/components/schemas/Direction"
           description: The sort order direction
-          example: ASC
+          examples:
+          - ASC
         code:
           type: string
           description: Course code
           examples:
-            - KEMKEM02
+          - KEMKEM02
         name:
           type: string
           description: Name of the course
           examples:
-            - Etnicitet och kulturmöten
+          - Etnicitet och kulturmöten
         provider:
           type: string
           description: Provider of the course
           examples:
-            - Sundsvalls Kommun
+          - Sundsvalls Kommun
         credits:
           type: string
           description: Course credits
           examples:
-            - "100"
+          - "100"
         information:
           type: string
           description: Information about the course
           examples:
-            - This is course information
+          - This is course information
         languageOfInstruction:
           type: string
           description: Language of instruction
           examples:
-            - Swedish
+          - Swedish
         searchString:
           type: string
           description: Search string
           examples:
-            - searchString
+          - searchString
         start:
           type: string
           format: date
           description: Start date of the course
           examples:
-            - 2022-12-31
+          - 2022-12-31
         startAfter:
           type: string
           format: date
           description: Start date of the course is after
           examples:
-            - 2022-12-31
+          - 2022-12-31
         startBefore:
           type: string
           format: date
           description: Start date of the course is before
           examples:
-            - 2022-12-31
+          - 2022-12-31
         end:
           type: string
           format: date
           description: End date of the course
           examples:
-            - 2022-12-31
+          - 2022-12-31
         endAfter:
           type: string
           format: date
           description: End date of the course is after
           examples:
-            - 2022-12-31
+          - 2022-12-31
         endBefore:
           type: string
           format: date
           description: End date of the course is before
           examples:
-            - 2022-12-31
+          - 2022-12-31
         earliestApplication:
           type: string
           format: date
           description: Earliest application date
           examples:
-            - 2022-12-31
+          - 2022-12-31
         earliestApplicationAfter:
           type: string
           format: date
           description: Earliest application date is after
           examples:
-            - 2022-12-31
+          - 2022-12-31
         earliestApplicationBefore:
           type: string
           format: date
           description: Earliest application date is before
           examples:
-            - 2022-12-31
+          - 2022-12-31
         latestApplication:
           type: string
           format: date
           description: Latest application date
           examples:
-            - 2022-12-31
+          - 2022-12-31
         latestApplicationAfter:
           type: string
           format: date
           description: Latest application date is after
           examples:
-            - 2022-12-31
+          - 2022-12-31
         latestApplicationBefore:
           type: string
           format: date
           description: Latest application date is before
           examples:
-            - 2022-12-31
+          - 2022-12-31
         scopes:
           type: array
           description: Scope of the course
           examples:
-            - "75"
+          - "75"
           items:
             type: integer
             format: int32
@@ -868,45 +872,45 @@ components:
           type: array
           description: Study location
           examples:
-            - Sundsvall
+          - Sundsvall
           items:
             type: string
         levels:
           type: array
           description: Level of the course
           examples:
-            - gymnasial vuxenutbildning
+          - gymnasial vuxenutbildning
           items:
             type: string
         categories:
           type: array
           description: Category
           examples:
-            - Naturvetenskap
+          - Naturvetenskap
           items:
             type: string
         subcategories:
           type: array
           description: Subcategory
           examples:
-            - Kemi
+          - Kemi
           items:
             type: string
         visitingAddressMunicipalityId:
           type: string
           description: Visiting address municipality ID
           examples:
-            - "2281"
+          - "2281"
         placeOfStudyMunicipalityId:
           type: string
           description: Study location municipality ID
           examples:
-            - "2281"
+          - "2281"
     Direction:
       type: string
       enum:
-        - ASC
-        - DESC
+      - ASC
+      - DESC
     Course:
       type: object
       description: Course model
@@ -916,128 +920,128 @@ components:
           format: int64
           description: Course ID
           examples:
-            - "1"
+          - "1"
           readOnly: true
         code:
           type: string
           description: Course code
           examples:
-            - PRRPRR02
+          - PRRPRR02
           readOnly: true
         name:
           type: string
           description: Course name
           examples:
-            - Programmering 2
+          - Programmering 2
           readOnly: true
         provider:
           type: string
           description: Course provider
           examples:
-            - Sundsvalls Kommun
+          - Sundsvalls Kommun
           readOnly: true
         providerUrl:
           type: string
           description: Course provider URL
           examples:
-            - http://sundsvall.se/vuxenutbildning
+          - http://sundsvall.se/vuxenutbildning
           readOnly: true
         level:
           type: string
           description: Course level
           examples:
-            - gymnasial vuxenutbildning
+          - gymnasial vuxenutbildning
           readOnly: true
         url:
           type: string
           description: Course URL
           examples:
-            - https://sundsvall.alvis.se/hittakurser/kurs/38837
+          - https://sundsvall.alvis.se/hittakurser/kurs/38837
           readOnly: true
         credits:
           type: number
           format: double
           description: Course credits
           examples:
-            - "150"
+          - "150"
           readOnly: true
         scope:
           type: number
           format: double
           description: Course scope in percent
           examples:
-            - "100"
+          - "100"
           readOnly: true
         studyLocation:
           type: string
           description: Study location
           examples:
-            - Sundsvall
+          - Sundsvall
           readOnly: true
         subjectCode:
           type: string
           description: Subject code
           examples:
-            - PRRPRR02
+          - PRRPRR02
           readOnly: true
         numberOfSeats:
           type: integer
           format: int32
           description: Number of seats
           examples:
-            - "10"
+          - "10"
           readOnly: true
         category:
           type: string
           description: Course category
           examples:
-            - "Ekonomi, marknadsföring och administration"
+          - "Ekonomi, marknadsföring och administration"
           readOnly: true
         subcategory:
           type: string
           description: Course subcategory
           examples:
-            - Administration
+          - Administration
           readOnly: true
         languageOfInstruction:
           type: string
           description: Language of instruction
           examples:
-            - Swedish
+          - Swedish
           readOnly: true
         start:
           type: string
           format: date
           description: Course start date
           examples:
-            - 2020-08-31
+          - 2020-08-31
           readOnly: true
         end:
           type: string
           format: date
           description: Course end date
           examples:
-            - 2020-12-20
+          - 2020-12-20
           readOnly: true
         earliestApplication:
           type: string
           format: date
           description: Earliest application date
           examples:
-            - 2020-01-01
+          - 2020-01-01
           readOnly: true
         latestApplication:
           type: string
           format: date
           description: Latest application date
           examples:
-            - 2020-04-15
+          - 2020-04-15
           readOnly: true
         information:
           type: string
           description: Course information
           examples:
-            - "<![CDATA[ <p><a href=https://sundsvall.se/utbildning-och-forskola/vuxenutbildning/gymnasial--niva/studieformer-och-schema\
+          - "<![CDATA[ <p><a href=https://sundsvall.se/utbildning-och-forskola/vuxenutbildning/gymnasial--niva/studieformer-och-schema\
             \ target=_blank>Läs&nbsp;om våra studieformer</a></p><p><br /><a href=https://www.csn.se/\
             \ target=_blank>Läs om studiemedel på&nbsp;www.csn.se</a><br />&nbsp;<br\
             \ />Ditt antagningsbesked<br />Antagningsbesked skickas via e-post cirka\
@@ -1048,13 +1052,13 @@ components:
           type: string
           description: Study location municipality ID
           examples:
-            - "2301"
+          - "2301"
           readOnly: true
         visitingAddressMunicipalityId:
           type: string
           description: Visiting address municipality ID
           examples:
-            - "2301"
+          - "2301"
           readOnly: true
       readOnly: true
     PagedCoursesResponse:
@@ -1079,30 +1083,35 @@ components:
           type: integer
           format: int32
           description: Current page
-          example: 5
+          examples:
+          - "5"
           readOnly: true
         limit:
           type: integer
           format: int32
           description: Displayed objects per page
-          example: 20
+          examples:
+          - "20"
           readOnly: true
         count:
           type: integer
           format: int32
           description: Displayed objects on current page
-          example: 13
+          examples:
+          - "13"
           readOnly: true
         totalRecords:
           type: integer
           format: int64
           description: Total amount of hits based on provided search parameters
-          example: 98
+          examples:
+          - "98"
           readOnly: true
         totalPages:
           type: integer
           format: int32
           description: Total amount of pages based on provided search parameters
-          example: 23
+          examples:
+          - "23"
           readOnly: true
-  securitySchemes: { }
+  securitySchemes: {}
