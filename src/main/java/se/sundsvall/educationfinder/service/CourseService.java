@@ -7,7 +7,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.zalando.problem.Problem;
+import se.sundsvall.dept44.problem.Problem;
 import se.sundsvall.educationfinder.api.model.Course;
 import se.sundsvall.educationfinder.api.model.CourseParameters;
 import se.sundsvall.educationfinder.api.model.PagedCoursesResponse;
@@ -20,7 +20,7 @@ import se.sundsvall.educationfinder.integration.db.model.projection.ProviderProj
 import se.sundsvall.educationfinder.integration.db.model.projection.ScopeProjection;
 import se.sundsvall.educationfinder.integration.db.model.projection.StudyLocationProjection;
 
-import static org.zalando.problem.Status.NOT_FOUND;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static se.sundsvall.educationfinder.service.mapper.CourseMapper.toCourse;
 import static se.sundsvall.educationfinder.service.mapper.CourseMapper.toPagedCoursesResponse;
 
