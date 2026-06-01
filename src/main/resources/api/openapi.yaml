@@ -7,7 +7,7 @@ info:
     url: https://opensource.org/licenses/MIT
   version: "3.1"
 servers:
-- url: http://localhost:63170
+- url: http://localhost:54005
   description: Generated server url
 tags:
 - name: Courses
@@ -482,10 +482,10 @@ components:
             $ref: "#/components/schemas/Violation"
         title:
           type: string
-        detail:
-          type: string
         causeAsProblem:
           $ref: "#/components/schemas/ThrowableProblem"
+        detail:
+          type: string
         instance:
           type: string
           format: uri
@@ -522,35 +522,35 @@ components:
           format: int32
           description: Number of on-going courses
           examples:
-          - "10"
+          - 10
           readOnly: true
         plannedCourses:
           type: integer
           format: int32
           description: Number of planned courses
           examples:
-          - "10"
+          - 10
           readOnly: true
         finishedCourses:
           type: integer
           format: int32
           description: Number of finished courses
           examples:
-          - "10"
+          - 10
           readOnly: true
         availableSeats:
           type: integer
           format: int32
           description: Number of available seats
           examples:
-          - "10"
+          - 10
           readOnly: true
         totalCapacity:
           type: integer
           format: int32
           description: Total capacity
           examples:
-          - "10"
+          - 10
           readOnly: true
         studyLocations:
           type: array
@@ -603,7 +603,7 @@ components:
           default: 1
           description: Page number
           examples:
-          - "1"
+          - 1
           minimum: 1
         limit:
           type: integer
@@ -611,7 +611,7 @@ components:
           description: Result size per page. Maximum allowed value is dynamically
             configured
           examples:
-          - "15"
+          - 15
           minimum: 1
         sortBy:
           type: array
@@ -736,7 +736,7 @@ components:
           type: array
           description: Scope of the course
           examples:
-          - "75"
+          - 75
           items:
             type: integer
             format: int32
@@ -792,7 +792,7 @@ components:
           format: int64
           description: Course ID
           examples:
-          - "1"
+          - 1
           readOnly: true
         code:
           type: string
@@ -835,14 +835,14 @@ components:
           format: double
           description: Course credits
           examples:
-          - "150"
+          - 150
           readOnly: true
         scope:
           type: number
           format: double
           description: Course scope in percent
           examples:
-          - "100"
+          - 100
           readOnly: true
         studyLocation:
           type: string
@@ -861,7 +861,7 @@ components:
           format: int32
           description: Number of seats
           examples:
-          - "10"
+          - 10
           readOnly: true
         category:
           type: string
@@ -955,34 +955,34 @@ components:
           format: int32
           description: Current page
           examples:
-          - "5"
+          - 5
           readOnly: true
         limit:
           type: integer
           format: int32
           description: Displayed objects per page
           examples:
-          - "20"
+          - 20
           readOnly: true
         count:
           type: integer
           format: int32
           description: Displayed objects on current page
           examples:
-          - "13"
+          - 13
           readOnly: true
         totalRecords:
           type: integer
           format: int64
           description: Total amount of hits based on provided search parameters
           examples:
-          - "98"
+          - 98
           readOnly: true
         totalPages:
           type: integer
           format: int32
           description: Total amount of pages based on provided search parameters
           examples:
-          - "23"
+          - 23
           readOnly: true
   securitySchemes: {}
