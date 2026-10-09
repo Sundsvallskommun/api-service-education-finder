@@ -1,13 +1,12 @@
 package se.sundsvall.educationfinder.apptest;
 
-import static org.springframework.http.HttpMethod.GET;
-import static org.springframework.http.HttpStatus.OK;
-
 import org.junit.jupiter.api.Test;
-
 import se.sundsvall.dept44.test.AbstractAppTest;
 import se.sundsvall.dept44.test.annotation.wiremock.WireMockAppTestSuite;
 import se.sundsvall.educationfinder.Application;
+
+import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpStatus.OK;
 
 @WireMockAppTestSuite(files = "classpath:/CoursesFiltersIT/", classes = Application.class)
 class CoursesFiltersIT extends AbstractAppTest {
